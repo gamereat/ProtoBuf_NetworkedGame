@@ -166,11 +166,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClientController.cpp" />
+    <ClCompile Include="GameLogging.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GhostPlayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapPoint.cpp" />
+    <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="PacManPlayer.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PointObject.cpp" />
@@ -179,10 +181,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientController.h" />
+    <ClInclude Include="GameLogging.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GhostPlayer.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapPoint.h" />
+    <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="PacManPlayer.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PointObject.h" />

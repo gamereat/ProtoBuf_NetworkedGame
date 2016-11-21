@@ -6,5 +6,9 @@ class PacManPlayer :
 public:
 	PacManPlayer();
 	~PacManPlayer();
+
+private:
+
+	int score;
 };
 

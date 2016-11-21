@@ -1,31 +1,62 @@
 #include "SFML\Graphics.hpp"
-
-
+#include "ClientController.h"
+#include <iostream>
+#include "GameLogging.h"
 int main()
 {
 
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	ClientController clientController;
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Pac Man client");
 
-	sf::CircleShape shape(100.0f);
+	GameLogging::Log("----------- INIT STATED ----------");
 
-	shape.setFillColor(sf::Color::Green);
-
-
-	while (window.isOpen())
-
+ 
+ 
+	if (!clientController.Init())
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
+		GameLogging::LogError(" INIT FAILED   " );
+
+	}
+	else
+	{
+		GameLogging::Log("----------- INIT COMPLETE ----------");
+
+ 
+		GameLogging::Log("----------- UPDATE LOOP STARTED ----------");
+ 
+		while (window.isOpen())
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+ 
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					window.close();
+			}
+
+			window.clear();
+
+			if (clientController.Update())
+			{
+				clientController.Render(&window);
+			}
+			else
+			{
+
+				GameLogging::Log("----------- UPDATE FAILED ----------\n");
+ 				window.close();
+
+			}
+
+ 
+			window.display();
 		}
 
-		window.clear();
-		window.draw(shape);
-		window.display();
-	}
+		GameLogging::Log("----------- APPLICATION ENDING ----------");
 
+ 	}
+	// Holds so log's can be looked at 
+	std::cin.get();
 	return 0;
 }
  
