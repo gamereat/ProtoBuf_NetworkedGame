@@ -14,7 +14,7 @@ ClientController::~ClientController()
 
 bool ClientController::Init()
 {
-	if (!standardFont.loadFromFile("arial.ttf"))
+	if (!standardFont.loadFromFile("../res/font/Politik.otf"))
 	{
 		GameLogging::LogError("Standard font faile to load");
 		return false;

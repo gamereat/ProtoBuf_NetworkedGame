@@ -6,9 +6,21 @@ class NetworkManager
 public:
 	NetworkManager();
 	~NetworkManager();
+	
 	void Init();
 
+	/*
+	Works out when to start the game clock based off server timing 
+	*/
+	void WorkOutSyncTiming();
+	
+	void GetPlayerTypeFromServer();
 private:
+
+	/*
+	clock that is sycned up with other clients 
+	*/
+	sf::Clock sycnClock;
 
 	/*
 	Port number being used currently
