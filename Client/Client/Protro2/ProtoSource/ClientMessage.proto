@@ -1,0 +1,34 @@
+package ClientMessage;
+
+message ClientInformation {
+       
+  required int32 clientVersion = 1;
+  required int64 messageNumber = 2;
+  
+}
+
+message playerPos{
+    required float posY = 0;
+    required float posX = 1;
+
+}
+
+message Playerinfromation {
+    enum PlayerType {
+    PacMan = 0;
+    Ghost = 1;
+    Unassigned = 2;
+  }
+
+  required int32 playerNumber = 0;
+  required PlayerType player = 1 [default = Unassigned];
+  required playerPos pos = 2;
+  
+}
+
+message ClientMessage{
+     
+    required ClientInformation clientinfo = 1;
+    required Playerinfromation playerinfo = 2;
+
+}
