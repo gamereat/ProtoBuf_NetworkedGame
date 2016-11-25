@@ -1,7 +1,6 @@
 #include "ClientController.h"
 
 
-
 ClientController::ClientController()
 {
 	currentClientGameState = ClientGameState::Init;
@@ -20,24 +19,38 @@ bool ClientController::Init()
 		return false;
 	}
 
-	versionNumberText.setFont(standardFont);
+	clientVersionNumberText.setFont(standardFont);
 
 	//TODO: load version number from file
 	//HACK: CURRENT HARD CODED V NUMBER
-	versionNumberText.setString("(0.0.1)");
+	clientVersionNumberText.setString("(0.0.1)");
 
-	versionNumberText.setPosition(715,0);
-	versionNumberText.setCharacterSize(24);
+	clientVersionNumberText.setPosition(715,0);
+	clientVersionNumberText.setCharacterSize(24);
 
-	versionNumberText.setFillColor(sf::Color::Red);
+	clientVersionNumberText.setFillColor(sf::Color::Red);
 
+	networkManager.Init();
+
+	ClientMessage::ClientInformation* client = new ClientMessage::ClientInformation();
+	ClientMessage::Playerinfromation* player = new ClientMessage::Playerinfromation();
+	ClientMessage::playerPos* pos = new ClientMessage::playerPos();
+	pos->set_posx(0);
+	pos->set_posy(0);
+	player->set_playernumber(0);
+	player->set_type(ClientMessage::Playerinfromation_PlayerType_Ghost);
+	player->set_allocated_pos(pos); 
+	
+
+
+	networkManager.SentMessageToServer(1, player);
 	return true;
 }
 
 bool ClientController::Update()
 {
 	deltaTime = deltaTimeClock.restart().asMicroseconds();
-
+	
 	switch (currentClientGameState)
 	{
 	case ClientController::ClientGameState::Init:
@@ -65,5 +78,5 @@ bool ClientController::Update()
 
 void ClientController::Render(sf::RenderWindow* renderWindow)
 {
-	renderWindow->draw(versionNumberText);
+	renderWindow->draw(clientVersionNumberText);
 }

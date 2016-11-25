@@ -16,8 +16,8 @@ Global
 		RelWithDebInfo|x86 = RelWithDebInfo|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{09ABAF1B-1C55-49C3-B22D-CEE0B415EDAD}.Debug|x64.ActiveCfg = Debug|x64
-		{09ABAF1B-1C55-49C3-B22D-CEE0B415EDAD}.Debug|x64.Build.0 = Debug|x64
+		{09ABAF1B-1C55-49C3-B22D-CEE0B415EDAD}.Debug|x64.ActiveCfg = Debug|Win32
+		{09ABAF1B-1C55-49C3-B22D-CEE0B415EDAD}.Debug|x64.Build.0 = Debug|Win32
 		{09ABAF1B-1C55-49C3-B22D-CEE0B415EDAD}.Debug|x86.ActiveCfg = Debug|Win32
 		{09ABAF1B-1C55-49C3-B22D-CEE0B415EDAD}.Debug|x86.Build.0 = Debug|Win32
 		{09ABAF1B-1C55-49C3-B22D-CEE0B415EDAD}.MinSizeRel|x64.ActiveCfg = Release|x64

@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML/Network.hpp"
-
+#include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 class NetworkManager
 {
 public:
@@ -15,8 +15,12 @@ public:
 	void WorkOutSyncTiming();
 	
 	void GetPlayerTypeFromServer();
+
+
+	void SentMessageToServer(int clientVersion , ClientMessage::Playerinfromation* playerInfo);
 private:
 
+	void SendMessage(std::string );
 	/*
 	clock that is sycned up with other clients 
 	*/
@@ -31,7 +35,7 @@ private:
 	Socked used to communicate with the server
 	Using UPD to connect with the server
 	*/
-	sf::UdpSocket upSocket;
+	sf::UdpSocket updSocket;
 
 	/*
 	The number of messages that have been sent to the server

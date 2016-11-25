@@ -5,6 +5,7 @@
 #include "SFML/Window.hpp"
 #include <iostream>
 #include "GameLogging.h"
+#include "NetworkManager.h"
  /**
 *	Controls the client interaction though the game 
 *	
@@ -54,11 +55,14 @@ public:
 	*/
 	void Render(sf::RenderWindow* renderWindow);
 
-	void setPlayerType();
+//	void setPlayerType();
 
 private: 
 
-
+	/*
+	Controls network connections for game
+	*/
+	NetworkManager networkManager;
 	/*
 	Font used thought the game
 	*/
@@ -67,8 +71,13 @@ private:
 	/*
 	Contains the version number of the build to be displayed on screen
 	*/
-	sf::Text versionNumberText;
-	
+	sf::Text clientVersionNumberText;
+
+	/*
+	Contains the version number of the server to be displayed on screen
+	*/
+	sf::Text severVersionNumberText;
+
 	/*
 	The current client game state thoughout the users play though 
 	*/

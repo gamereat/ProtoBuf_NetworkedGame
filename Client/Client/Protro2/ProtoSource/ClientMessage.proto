@@ -8,21 +8,21 @@ message ClientInformation {
 }
 
 message playerPos{
-    required float posY = 0;
-    required float posX = 1;
+    required float posY = 1;
+    required float posX = 2;
 
 }
 
 message Playerinfromation {
     enum PlayerType {
-    PacMan = 0;
-    Ghost = 1;
-    Unassigned = 2;
+    PacMan = 1;
+    Ghost = 2;
+    Unassigned = 3;
   }
 
-  required int32 playerNumber = 0;
-  required PlayerType player = 1 [default = Unassigned];
-  required playerPos pos = 2;
+  required int32 playerNumber = 1;
+  required PlayerType type = 2 [default = Unassigned];
+  required playerPos pos = 3;
   
 }
 

@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ProroBuferFiles\ProtoSource\add_person.cc" />
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\addressbook.pb.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\addressbook.pb.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E28F5B02-D2F8-494D-A0FD-E932CFE0AFA3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -89,13 +96,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\Source\Repos\Networking-CourseWork\Client\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Source\Repos\GameNetworking\Client\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\Source\Repos\Networking-CourseWork\Client\protobuf\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\Source\Repos\GameNetworking\Client\protobuf\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -152,17 +159,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\ProroBuferFiles\Des\addressbook.pb.cc">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="..\..\ProroBuferFiles\Source\add_person.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\ProroBuferFiles\Des\addressbook.pb.h">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
-    </ClInclude>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

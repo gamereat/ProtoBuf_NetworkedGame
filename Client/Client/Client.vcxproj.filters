@@ -40,9 +40,11 @@
     <ClCompile Include="WallBlock.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc">
+      <Filter>Protobuf\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="WallBlock.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -79,12 +81,9 @@
     <ClInclude Include="ClientController.h">
       <Filter>Header</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Client.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h">
+      <Filter>Protobuf\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
@@ -92,6 +91,15 @@
     </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{7c0f7e22-0534-44ff-8c17-039771028642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protobuf">
+      <UniqueIdentifier>{a5819021-3532-46b7-8fd9-730b4f4f56ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protobuf\Header">
+      <UniqueIdentifier>{2960af04-2b51-4360-8f1a-c084e2bad047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protobuf\Source">
+      <UniqueIdentifier>{3aec3ddd-4987-4e31-b2ce-c339389454bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
