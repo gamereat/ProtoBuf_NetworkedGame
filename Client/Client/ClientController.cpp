@@ -73,6 +73,8 @@ bool ClientController::Update()
 	default:
 		break;
 	}
+
+	networkManager.Update();
 	return true;
 }
 

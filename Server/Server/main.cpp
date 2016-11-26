@@ -1,14 +1,15 @@
 #include "SFML\Graphics.hpp"
 #include "NetworkManager.h"
 #include <iostream>
+#include "ServerController.h";
 #include "GameLogging.h"
 void main()
 {
  	sf::RenderWindow window(sf::VideoMode(800, 600), "Pac Man Server");
-	NetworkManager NetworkManager;
+	ServerController serverController;
 	GameLogging::Log("----------- INIT STATED ----------");
 
-	NetworkManager.Init();
+	serverController.Init();
 
 
 
@@ -29,7 +30,7 @@ void main()
 
 			window.clear();
  
-			NetworkManager.Update();
+			serverController.Update();
 
 			window.display();
 		}

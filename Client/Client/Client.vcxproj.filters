@@ -43,6 +43,9 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc">
       <Filter>Protobuf\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc">
+      <Filter>Protobuf</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WallBlock.h">
@@ -83,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h">
       <Filter>Protobuf\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h">
+      <Filter>Protobuf</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

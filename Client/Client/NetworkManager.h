@@ -14,9 +14,11 @@ public:
 	*/
 	void WorkOutSyncTiming();
 	
+	void Update();
+
 	void GetPlayerTypeFromServer();
 
-
+	void ReciveMessageToServer();
 	void SentMessageToServer(int clientVersion , ClientMessage::Playerinfromation* playerInfo);
 private:
 

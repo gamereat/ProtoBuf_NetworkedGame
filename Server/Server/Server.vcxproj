@@ -20,15 +20,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc" />
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc" />
     <ClCompile Include="GameLogging.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ServerController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h" />
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h" />
     <ClInclude Include="GameLogging.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MapObject.h" />
     <ClInclude Include="NetworkManager.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="ServerController.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

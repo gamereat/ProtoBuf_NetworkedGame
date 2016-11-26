@@ -1,7 +1,9 @@
 #pragma once
 #include "SFML/Network.hpp"
 #include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
-
+#include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
+#include "Player.h"
+#include "Map.h"
 class NetworkManager
 {
 public:
@@ -17,14 +19,22 @@ public:
 
 
 	void Update();
+	void SendServerMessage(int serverVersionNum, Player players[4], Map map, int numConnectedPlayers);
 
-	/*
-	Send information to client to sync up timings 
-	*/
-	void WorkOutSyncTimingForClient();
+
+	void SendMessage(std::string data);
 
 private:
 	
+
+	/*
+	Send information to client to sync up timings
+	*/
+	void WorkOutSyncTimingForClient();
+	/*
+	Number of messages sent
+	*/
+	int numOfMessageSend;
 	/*
 	UDP socket used to conect to clients
 	*/
@@ -35,6 +45,5 @@ private:
 	*/
 	int portNumber;
 
-	char buffer[1024];
 };
 

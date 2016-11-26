@@ -1,7 +1,7 @@
 #include "NetworkManager.h"
 #include "GameLogging.h"
 #include <google\protobuf\message.h>
-
+#include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 
 NetworkManager::NetworkManager()
 {
@@ -22,7 +22,8 @@ void NetworkManager::Init()
 	{
 		// error...
 	}
- 
+	updSocket.setBlocking(false);
+
 }
 
 void NetworkManager::WorkOutSyncTiming()
@@ -32,6 +33,36 @@ void NetworkManager::WorkOutSyncTiming()
 	// 2. Get timestamp from server 
 
 
+
+}
+
+void NetworkManager::Update()
+{
+	ReciveMessageToServer();
+}
+
+void NetworkManager::GetPlayerTypeFromServer()
+{
+}
+
+void NetworkManager::ReciveMessageToServer()
+{
+	sf::IpAddress sender;;
+	std::size_t received = 0;
+	unsigned short port;
+	char buffer[1024];
+	updSocket.receive(buffer, 1024, received, sender, port);
+
+	if (received > 0)
+	{
+		std::string f = buffer;
+		std::cout << "Received " << received << " bytes from " << sender << " on port " << port << std::endl;
+		ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage();
+
+		newMessage->ParseFromArray(buffer, sizeof(buffer));
+		// Send a debug log of message to logging system when in debug mode 
+		GameLogging::Log(newMessage->DebugString());
+	}
 
 }
 
@@ -56,15 +87,11 @@ void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playe
 	newMessage->CheckInitialized();
 
  	
-
  
-	std::string f; 
-	
-	int size = newMessage->ByteSize();
-	;
-GameLogging::Log("Message Length " + std::to_string(size));
-newMessage->SerializeToString(&f);
-	SendMessage(f);
+	std::string messageData; 
+	newMessage->SerializeToString(&messageData);
+
+ 	SendMessage(messageData);
 	 
  }
 
@@ -73,15 +100,25 @@ void NetworkManager::SendMessage(std::string data)
 	ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
 	newMessage->ParseFromString(data);
 	// Send a debug log of message to logging system when in debug mode 
-		GameLogging::Log(newMessage->DebugString());
-
-	sf::IpAddress recipient = "127.0.0.1";
+	GameLogging::Log(newMessage->DebugString());
+ 	sf::IpAddress recipient = "127.0.0.1";
 	unsigned short port = 7777;
-	const char* output = data.c_str();
-	sf::Packet p ;
-p.
-	if (updSocket.send(output, 1024, recipient, port) != sf::Socket::Done)
+
+ 	int size = newMessage->ByteSize();
+	GameLogging::Log("Message Length " + std::to_string(size));
+
+	void *buffer = malloc(size);
+	newMessage->SerializeToArray(buffer, size);
+
+
+	if (updSocket.send(buffer, 24, recipient, port) != sf::Socket::Done)
 	{
 		// error...
+	}
+	else {
+		ClientMessage::ClientMessage* newMessages = new ClientMessage::ClientMessage();
+		newMessages->ParseFromArray(buffer, size);
+		GameLogging::Log(newMessages->DebugString());
+
 	}
 }

@@ -172,6 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc" />
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc" />
     <ClCompile Include="ClientController.cpp" />
     <ClCompile Include="GameLogging.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -188,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h" />
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h" />
     <ClInclude Include="ClientController.h" />
     <ClInclude Include="GameLogging.h" />
     <ClInclude Include="GameObject.h" />

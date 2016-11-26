@@ -3,6 +3,13 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
+#include "NetworkManager.h"
+#include "Player.h"
+#include "Map.h"
+/*
+Number of players within a game
+*/
+const int NUM_PLAYERS = 4;
 class ServerController
 {
 public:
@@ -26,6 +33,17 @@ public:
 	bool Update();
 private:
 	
+	/*
+	Synced up map used to dispaly to players
+	*/
+	Map gameMap;
+
+	/*
+	Manages all the nwtwork conections
+	*/
+	NetworkManager networkManger;
+
+
 	/*
 	The version number of the server
 	*/

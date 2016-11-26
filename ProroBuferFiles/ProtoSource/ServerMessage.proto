@@ -1,19 +1,15 @@
 package ServerMessage;
 
 message ServerInformation {
-
-    enum GameState
-    {
-        
-    }
+ 
   required int32 serverInformation = 1;
   required int64 messageNumber = 2;
   
 }
 
 message playerPos{
-    required float posY = 0;
-    required float posX = 1;
+    required float posY = 1;
+    required float posX = 2;
 
 }
 
@@ -24,15 +20,39 @@ message Playerinfromation {
     Unassigned = 2;
   }
 
-  required int32 playerNumber = 0;
-  required PlayerType player = 1 [default = Unassigned];
-  required playerPos pos = 2;
-  required playerScore = 3;
+  required int32 playerNumber = 1;
+  required PlayerType player = 2 [default = Unassigned];
+  required playerPos pos = 3;
+  required int32 playerScore = 4;
 }
 
 message ServerMessage{
      
-    required ClientInformation clientinfo = 1;
-    repeated Playerinfromation playerinfo = 2;
+
+    required int32 numOfPlayer = 1;
+
+    required ServerInformation serverinfo = 2;
+    required Playerinfromation playerOne = 3;
+    required Playerinfromation playerTwo = 4;
+    required Playerinfromation playerThree = 5;
+    required Playerinfromation playerFour = 6;
+
+    required MapData mapInfo = 7;
+
+}
+
+message MapData{
+    enum MapTile
+    {
+        Empty = 1;
+        Wall = 2;
+        Point = 3;
+    }
+    message row{ 
+         repeated MapTile tile = 1  [packed=true];;
+
+    }
+
+    repeated row col = 1 ;
 
 }
