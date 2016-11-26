@@ -33,6 +33,7 @@ const ::google::protobuf::EnumDescriptor* Playerinfromation_PlayerType_descripto
 const ::google::protobuf::Descriptor* ClientMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ClientMessage_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* ClientMessage_AdditioanlRequests_descriptor_ = NULL;
 
 }  // namespace
 
@@ -94,9 +95,10 @@ void protobuf_AssignDesc_ClientMessage_2eproto() {
       sizeof(Playerinfromation));
   Playerinfromation_PlayerType_descriptor_ = Playerinfromation_descriptor_->enum_type(0);
   ClientMessage_descriptor_ = file->message_type(3);
-  static const int ClientMessage_offsets_[2] = {
+  static const int ClientMessage_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientMessage, clientinfo_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientMessage, playerinfo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientMessage, addiontalinfo_),
   };
   ClientMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -109,6 +111,7 @@ void protobuf_AssignDesc_ClientMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ClientMessage));
+  ClientMessage_AdditioanlRequests_descriptor_ = ClientMessage_descriptor_->enum_type(0);
 }
 
 namespace {
@@ -159,10 +162,14 @@ void protobuf_AddDesc_ClientMessage_2eproto() {
     "(\0162+.ClientMessage.Playerinfromation.Pla"
     "yerType:\nUnassigned\022%\n\003pos\030\003 \002(\0132\030.Clien"
     "tMessage.playerPos\"3\n\nPlayerType\022\n\n\006PacM"
-    "an\020\001\022\t\n\005Ghost\020\002\022\016\n\nUnassigned\020\003\"{\n\rClien"
-    "tMessage\0224\n\nclientinfo\030\001 \002(\0132 .ClientMes"
-    "sage.ClientInformation\0224\n\nplayerinfo\030\002 \002"
-    "(\0132 .ClientMessage.Playerinfromation", 476);
+    "an\020\001\022\t\n\005Ghost\020\002\022\016\n\nUnassigned\020\003\"\224\002\n\rClie"
+    "ntMessage\0224\n\nclientinfo\030\001 \002(\0132 .ClientMe"
+    "ssage.ClientInformation\0224\n\nplayerinfo\030\002 "
+    "\002(\0132 .ClientMessage.Playerinfromation\022F\n"
+    "\raddiontalInfo\030\003 \002(\0162/.ClientMessage.Cli"
+    "entMessage.AdditioanlRequests\"O\n\022Additio"
+    "anlRequests\022\010\n\004None\020\001\022\020\n\014FirstConnect\020\002\022"
+    "\r\n\tReconnect\020\003\022\016\n\nDisconnect\020\004", 630);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ClientMessage.proto", &protobuf_RegisterTypes);
   ClientInformation::default_instance_ = new ClientInformation();
@@ -1071,9 +1078,35 @@ void Playerinfromation::Swap(Playerinfromation* other) {
 
 // ===================================================================
 
+const ::google::protobuf::EnumDescriptor* ClientMessage_AdditioanlRequests_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ClientMessage_AdditioanlRequests_descriptor_;
+}
+bool ClientMessage_AdditioanlRequests_IsValid(int value) {
+  switch(value) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const ClientMessage_AdditioanlRequests ClientMessage::None;
+const ClientMessage_AdditioanlRequests ClientMessage::FirstConnect;
+const ClientMessage_AdditioanlRequests ClientMessage::Reconnect;
+const ClientMessage_AdditioanlRequests ClientMessage::Disconnect;
+const ClientMessage_AdditioanlRequests ClientMessage::AdditioanlRequests_MIN;
+const ClientMessage_AdditioanlRequests ClientMessage::AdditioanlRequests_MAX;
+const int ClientMessage::AdditioanlRequests_ARRAYSIZE;
+#endif  // _MSC_VER
 #ifndef _MSC_VER
 const int ClientMessage::kClientinfoFieldNumber;
 const int ClientMessage::kPlayerinfoFieldNumber;
+const int ClientMessage::kAddiontalInfoFieldNumber;
 #endif  // !_MSC_VER
 
 ClientMessage::ClientMessage()
@@ -1098,6 +1131,7 @@ void ClientMessage::SharedCtor() {
   _cached_size_ = 0;
   clientinfo_ = NULL;
   playerinfo_ = NULL;
+  addiontalinfo_ = 1;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1135,13 +1169,14 @@ ClientMessage* ClientMessage::New() const {
 }
 
 void ClientMessage::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
+  if (_has_bits_[0 / 32] & 7) {
     if (has_clientinfo()) {
       if (clientinfo_ != NULL) clientinfo_->::ClientMessage::ClientInformation::Clear();
     }
     if (has_playerinfo()) {
       if (playerinfo_ != NULL) playerinfo_->::ClientMessage::Playerinfromation::Clear();
     }
+    addiontalinfo_ = 1;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1175,6 +1210,26 @@ bool ClientMessage::MergePartialFromCodedStream(
          parse_playerinfo:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_playerinfo()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_addiontalInfo;
+        break;
+      }
+
+      // required .ClientMessage.ClientMessage.AdditioanlRequests addiontalInfo = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_addiontalInfo:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::ClientMessage::ClientMessage_AdditioanlRequests_IsValid(value)) {
+            set_addiontalinfo(static_cast< ::ClientMessage::ClientMessage_AdditioanlRequests >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(3, value);
+          }
         } else {
           goto handle_unusual;
         }
@@ -1219,6 +1274,12 @@ void ClientMessage::SerializeWithCachedSizes(
       2, this->playerinfo(), output);
   }
 
+  // required .ClientMessage.ClientMessage.AdditioanlRequests addiontalInfo = 3;
+  if (has_addiontalinfo()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->addiontalinfo(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1241,6 +1302,12 @@ void ClientMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->playerinfo(), target);
+  }
+
+  // required .ClientMessage.ClientMessage.AdditioanlRequests addiontalInfo = 3;
+  if (has_addiontalinfo()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->addiontalinfo(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1267,6 +1334,12 @@ int ClientMessage::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->playerinfo());
+    }
+
+    // required .ClientMessage.ClientMessage.AdditioanlRequests addiontalInfo = 3;
+    if (has_addiontalinfo()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->addiontalinfo());
     }
 
   }
@@ -1302,6 +1375,9 @@ void ClientMessage::MergeFrom(const ClientMessage& from) {
     if (from.has_playerinfo()) {
       mutable_playerinfo()->::ClientMessage::Playerinfromation::MergeFrom(from.playerinfo());
     }
+    if (from.has_addiontalinfo()) {
+      set_addiontalinfo(from.addiontalinfo());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -1319,7 +1395,7 @@ void ClientMessage::CopyFrom(const ClientMessage& from) {
 }
 
 bool ClientMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   if (has_clientinfo()) {
     if (!this->clientinfo().IsInitialized()) return false;
@@ -1334,6 +1410,7 @@ void ClientMessage::Swap(ClientMessage* other) {
   if (other != this) {
     std::swap(clientinfo_, other->clientinfo_);
     std::swap(playerinfo_, other->playerinfo_);
+    std::swap(addiontalinfo_, other->addiontalinfo_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

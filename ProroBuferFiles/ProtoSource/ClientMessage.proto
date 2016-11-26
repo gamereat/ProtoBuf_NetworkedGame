@@ -23,12 +23,22 @@ message Playerinfromation {
   required int32 playerNumber = 1;
   required PlayerType type = 2 [default = Unassigned];
   required playerPos pos = 3;
+
+
   
 }
 
 message ClientMessage{
-     
+    enum AdditioanlRequests{
+        None = 1;
+        FirstConnect = 2;
+        Reconnect = 3;
+        Disconnect = 4;
+    }
+
     required ClientInformation clientinfo = 1;
     required Playerinfromation playerinfo = 2;
+    required AdditioanlRequests addiontalInfo = 3;
 
 }
+

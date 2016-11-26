@@ -13,6 +13,7 @@ Map::Map()
 		{
 			
 			MapObject obj;
+			obj.setTileType(ServerMessage::MapData_MapTile::MapData_MapTile_Wall);
 			col.push_back(obj);
 		}
 		map.push_back(col);

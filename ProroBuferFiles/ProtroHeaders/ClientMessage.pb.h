@@ -59,6 +59,27 @@ inline bool Playerinfromation_PlayerType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<Playerinfromation_PlayerType>(
     Playerinfromation_PlayerType_descriptor(), name, value);
 }
+enum ClientMessage_AdditioanlRequests {
+  ClientMessage_AdditioanlRequests_None = 1,
+  ClientMessage_AdditioanlRequests_FirstConnect = 2,
+  ClientMessage_AdditioanlRequests_Reconnect = 3,
+  ClientMessage_AdditioanlRequests_Disconnect = 4
+};
+bool ClientMessage_AdditioanlRequests_IsValid(int value);
+const ClientMessage_AdditioanlRequests ClientMessage_AdditioanlRequests_AdditioanlRequests_MIN = ClientMessage_AdditioanlRequests_None;
+const ClientMessage_AdditioanlRequests ClientMessage_AdditioanlRequests_AdditioanlRequests_MAX = ClientMessage_AdditioanlRequests_Disconnect;
+const int ClientMessage_AdditioanlRequests_AdditioanlRequests_ARRAYSIZE = ClientMessage_AdditioanlRequests_AdditioanlRequests_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ClientMessage_AdditioanlRequests_descriptor();
+inline const ::std::string& ClientMessage_AdditioanlRequests_Name(ClientMessage_AdditioanlRequests value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ClientMessage_AdditioanlRequests_descriptor(), value);
+}
+inline bool ClientMessage_AdditioanlRequests_Parse(
+    const ::std::string& name, ClientMessage_AdditioanlRequests* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ClientMessage_AdditioanlRequests>(
+    ClientMessage_AdditioanlRequests_descriptor(), name, value);
+}
 // ===================================================================
 
 class ClientInformation : public ::google::protobuf::Message {
@@ -416,6 +437,32 @@ class ClientMessage : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
+  typedef ClientMessage_AdditioanlRequests AdditioanlRequests;
+  static const AdditioanlRequests None = ClientMessage_AdditioanlRequests_None;
+  static const AdditioanlRequests FirstConnect = ClientMessage_AdditioanlRequests_FirstConnect;
+  static const AdditioanlRequests Reconnect = ClientMessage_AdditioanlRequests_Reconnect;
+  static const AdditioanlRequests Disconnect = ClientMessage_AdditioanlRequests_Disconnect;
+  static inline bool AdditioanlRequests_IsValid(int value) {
+    return ClientMessage_AdditioanlRequests_IsValid(value);
+  }
+  static const AdditioanlRequests AdditioanlRequests_MIN =
+    ClientMessage_AdditioanlRequests_AdditioanlRequests_MIN;
+  static const AdditioanlRequests AdditioanlRequests_MAX =
+    ClientMessage_AdditioanlRequests_AdditioanlRequests_MAX;
+  static const int AdditioanlRequests_ARRAYSIZE =
+    ClientMessage_AdditioanlRequests_AdditioanlRequests_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  AdditioanlRequests_descriptor() {
+    return ClientMessage_AdditioanlRequests_descriptor();
+  }
+  static inline const ::std::string& AdditioanlRequests_Name(AdditioanlRequests value) {
+    return ClientMessage_AdditioanlRequests_Name(value);
+  }
+  static inline bool AdditioanlRequests_Parse(const ::std::string& name,
+      AdditioanlRequests* value) {
+    return ClientMessage_AdditioanlRequests_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
   // required .ClientMessage.ClientInformation clientinfo = 1;
@@ -436,12 +483,21 @@ class ClientMessage : public ::google::protobuf::Message {
   inline ::ClientMessage::Playerinfromation* release_playerinfo();
   inline void set_allocated_playerinfo(::ClientMessage::Playerinfromation* playerinfo);
 
+  // required .ClientMessage.ClientMessage.AdditioanlRequests addiontalInfo = 3;
+  inline bool has_addiontalinfo() const;
+  inline void clear_addiontalinfo();
+  static const int kAddiontalInfoFieldNumber = 3;
+  inline ::ClientMessage::ClientMessage_AdditioanlRequests addiontalinfo() const;
+  inline void set_addiontalinfo(::ClientMessage::ClientMessage_AdditioanlRequests value);
+
   // @@protoc_insertion_point(class_scope:ClientMessage.ClientMessage)
  private:
   inline void set_has_clientinfo();
   inline void clear_has_clientinfo();
   inline void set_has_playerinfo();
   inline void clear_has_playerinfo();
+  inline void set_has_addiontalinfo();
+  inline void clear_has_addiontalinfo();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -449,6 +505,7 @@ class ClientMessage : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::ClientMessage::ClientInformation* clientinfo_;
   ::ClientMessage::Playerinfromation* playerinfo_;
+  int addiontalinfo_;
   friend void  protobuf_AddDesc_ClientMessage_2eproto();
   friend void protobuf_AssignDesc_ClientMessage_2eproto();
   friend void protobuf_ShutdownFile_ClientMessage_2eproto();
@@ -743,6 +800,31 @@ inline void ClientMessage::set_allocated_playerinfo(::ClientMessage::Playerinfro
   // @@protoc_insertion_point(field_set_allocated:ClientMessage.ClientMessage.playerinfo)
 }
 
+// required .ClientMessage.ClientMessage.AdditioanlRequests addiontalInfo = 3;
+inline bool ClientMessage::has_addiontalinfo() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ClientMessage::set_has_addiontalinfo() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ClientMessage::clear_has_addiontalinfo() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ClientMessage::clear_addiontalinfo() {
+  addiontalinfo_ = 1;
+  clear_has_addiontalinfo();
+}
+inline ::ClientMessage::ClientMessage_AdditioanlRequests ClientMessage::addiontalinfo() const {
+  // @@protoc_insertion_point(field_get:ClientMessage.ClientMessage.addiontalInfo)
+  return static_cast< ::ClientMessage::ClientMessage_AdditioanlRequests >(addiontalinfo_);
+}
+inline void ClientMessage::set_addiontalinfo(::ClientMessage::ClientMessage_AdditioanlRequests value) {
+  assert(::ClientMessage::ClientMessage_AdditioanlRequests_IsValid(value));
+  set_has_addiontalinfo();
+  addiontalinfo_ = value;
+  // @@protoc_insertion_point(field_set:ClientMessage.ClientMessage.addiontalInfo)
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -756,6 +838,11 @@ template <> struct is_proto_enum< ::ClientMessage::Playerinfromation_PlayerType>
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::ClientMessage::Playerinfromation_PlayerType>() {
   return ::ClientMessage::Playerinfromation_PlayerType_descriptor();
+}
+template <> struct is_proto_enum< ::ClientMessage::ClientMessage_AdditioanlRequests> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::ClientMessage::ClientMessage_AdditioanlRequests>() {
+  return ::ClientMessage::ClientMessage_AdditioanlRequests_descriptor();
 }
 
 }  // namespace google

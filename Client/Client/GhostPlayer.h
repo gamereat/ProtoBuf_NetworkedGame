@@ -6,5 +6,12 @@ class GhostPlayer :
 public:
 	GhostPlayer();
 	~GhostPlayer();
+
+private:
+
+	/*
+	Texture used for pacman sprite
+	*/
+	sf::Texture ghostTexture;
 };
 

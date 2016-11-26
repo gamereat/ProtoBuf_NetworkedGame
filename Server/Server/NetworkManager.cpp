@@ -26,23 +26,7 @@ void NetworkManager::Init()
 
 void NetworkManager::Update()
 {
-	sf::IpAddress sender;;
-	std::size_t received = 0;
-	unsigned short port;
-	char buffer[24];
-	udpSocket.receive(buffer, 24, received, sender, port);
 
-	if (received > 0)
-	{
-		std::string f = buffer;
-		std::cout << "Received " << received << " bytes from " << sender << " on port " << port << std::endl;
-		ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
-
-		newMessage->ParseFromArray(buffer, sizeof(buffer));
-		// Send a debug log of message to logging system when in debug mode 
-		GameLogging::Log(newMessage->DebugString());
-	}
-	
  
 }
 void NetworkManager::SendServerMessage(int serverVersionNum, Player players[4], Map map, int numConnectedPlayers)
@@ -69,7 +53,7 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Player players[4], 
 		// Get the pos of the player
 		ServerMessage::playerPos* playerPos = new ServerMessage::playerPos();
 		playerPos->New();
-		sf::Vector2<float> pos = players[player].getPosition();
+		sf::Vector2f pos = players[player].getPosition();
 		playerPos->set_posx(0);
 		playerPos->set_posy(0);
 	
@@ -130,27 +114,58 @@ void NetworkManager::WorkOutSyncTimingForClient()
 
 void NetworkManager::SendMessage(std::string data)
 {
-	ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage;
-	newMessage->ParseFromString(data);
-	// Send a debug log of message to logging system when in debug mode 
-	sf::IpAddress recipient = "127.0.0.1";
-	unsigned short port = 54000;
-
-	int size = newMessage->ByteSize();
-	void *buffer = malloc(size);
-	newMessage->SerializeToArray(buffer, size);
-	GameLogging::Log("Message Length " + std::to_string(size));
-
-
-	if (udpSocket.send(buffer,256, recipient, port) != sf::Socket::Done)
+	for each (auto client in clientsIPInfo)
 	{
-		// error...
-	}
-	else
-	{
-		ServerMessage::ServerMessage* newMessages = new ServerMessage::ServerMessage();
-		newMessages->ParseFromArray(buffer, size);
-		GameLogging::Log(newMessages->DebugString());
 
+	
+		ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage;
+		newMessage->ParseFromString(data);
+		// Send a debug log of message to logging system when in debug mode 
+		sf::IpAddress recipient = client.ip;
+		unsigned short port = client.port;
+
+		int size = newMessage->ByteSize();
+		void *buffer = malloc(size);
+		newMessage->SerializeToArray(buffer, size);
+		GameLogging::Log("Message Length " + std::to_string(size));
+
+
+		if (udpSocket.send(buffer,256, recipient, port) != sf::Socket::Done)
+		{
+			// error...
+		}
+		else
+		{
+			ServerMessage::ServerMessage* newMessages = new ServerMessage::ServerMessage();
+			newMessages->ParseFromArray(buffer, size);
+			GameLogging::Log(newMessages->DebugString());
+
+		}
 	}
+}
+
+void NetworkManager::ReciveClientInfo()
+{
+	sf::IpAddress sender;;
+	std::size_t received = 0;
+	unsigned short port;
+	char buffer[100];
+	udpSocket.receive(buffer, 100, received, sender, port);
+
+	if (received > 0)
+	{
+		std::string f = buffer;
+		std::cout << "Received " << received << " bytes from " << sender << " on port " << port << std::endl;
+		ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
+
+		newMessage->ParseFromArray(buffer, sizeof(buffer));
+		// Send a debug log of message to logging system when in debug mode 
+		GameLogging::Log(newMessage->DebugString());
+	
+		if (newMessage->addiontalinfo == ClientMessage::ClientMessage_AdditioanlRequests::ClientMessage_AdditioanlRequests_FirstConnect)
+		{
+			clientsIPInfo.push_back(clientUDPInfo(sender, port));
+		}
+	}
+
 }

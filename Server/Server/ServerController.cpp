@@ -43,6 +43,9 @@ bool ServerController::Init()
 	}
 	networkManger.SendServerMessage(2, *players, *map, 4);
 
+	networkManger.SendServerMessage(2, *players, *map, 4);
+
+
 	return true;
 }
 

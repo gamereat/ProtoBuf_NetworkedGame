@@ -11,10 +11,17 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render(sf::RenderWindow*) = 0;
 
+	sf::Vector2f  getPosition();
+	void setPosition(sf::Vector2f);
 	
+	void setSprite(sf::Sprite);
 
+
+	void SetTexture(sf::Texture);
 protected:
 	virtual void HandleInput(float deltaTime) = 0;
+
+
 
 
 	/*
@@ -22,11 +29,6 @@ protected:
 	*/
 	sf::Sprite sprite;
 
-	/*
-	Holds the position of the object
-	*/
-	sf::Vector3<float> position;
-	
-
+ 
 };
 

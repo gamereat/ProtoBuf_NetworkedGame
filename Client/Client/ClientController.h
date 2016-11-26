@@ -6,6 +6,12 @@
 #include <iostream>
 #include "GameLogging.h"
 #include "NetworkManager.h"
+#include "PacManPlayer.h"
+#include "Map.h"
+#include "GhostPlayer.h"
+#include ".././../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
+#include ".././../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
+
  /**
 *	Controls the client interaction though the game 
 *	
@@ -55,9 +61,38 @@ public:
 	*/
 	void Render(sf::RenderWindow* renderWindow);
 
-//	void setPlayerType();
+
 
 private: 
+	
+	/*
+	Gathers current player infromation into message able to send to server
+	
+	@returns the current player information
+	*/
+	ClientMessage::Playerinfromation GetPlayerInfo();
+
+
+	/*
+	Gathers information form client and sends it to the server 
+	*/
+	void UpdateGameToServer();
+	/*
+	Called to update game information from the server messages
+	*/
+	void UpdateGameFromServer();
+	/*
+	Updates the map to latest version from the server
+
+	@param mapData	The updated map data from the server
+	*/
+	void UpdateMap(ServerMessage::MapData mapData);
+
+
+	/*
+	Update player location and data from the server
+	*/
+	void UpdatePlayers(ServerMessage::Playerinfromation players[4]);
 
 	/*
 	Controls network connections for game
@@ -98,6 +133,29 @@ private:
 	*/
 	float deltaTime;
 
+	/*
+	Pointer to the player that the client is controlling
+	*/
+	PlayerObject* controllingPlayer;
 	
+	/*
+	Pac man player which tries to 
+	*/
+	PacManPlayer* pacManPlayer;
+
+	/*
+	Ghost players that will try and chase the pac
+	*/
+	GhostPlayer* ghosts[3];
+
+	/*
+	Map from the game
+	*/
+	Map map;
+
+	/*
+	The message number from the server last recived
+	*/
+	int lastSeverMessageRecived;
 };
 

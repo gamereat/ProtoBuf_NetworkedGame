@@ -46,6 +46,9 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc">
       <Filter>Protobuf</Filter>
     </ClCompile>
+    <ClCompile Include="MapObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WallBlock.h">
@@ -89,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h">
       <Filter>Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject.h">
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

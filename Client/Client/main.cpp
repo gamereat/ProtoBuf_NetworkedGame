@@ -51,7 +51,7 @@ int main()
 					window.close();
 			}
 
-			window.clear();
+			window.clear(sf::Color(0, 0, 124, 255));
 
 			if (clientController.Update())
 			{
@@ -64,8 +64,7 @@ int main()
  				window.close();
 
 			}
-
- 
+  
 			window.display();
 		}
 

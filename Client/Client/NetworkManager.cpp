@@ -1,10 +1,11 @@
 #include "NetworkManager.h"
 #include "GameLogging.h"
 #include <google\protobuf\message.h>
-#include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
-
+ 
 NetworkManager::NetworkManager()
 {
+
+	// Varify protobuf settings
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 }
@@ -24,6 +25,10 @@ void NetworkManager::Init()
 	}
 	updSocket.setBlocking(false);
 
+}
+
+void NetworkManager::ConnectToServer()
+{
 }
 
 void NetworkManager::WorkOutSyncTiming()
@@ -60,6 +65,8 @@ void NetworkManager::ReciveMessageToServer()
 		ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage();
 
 		newMessage->ParseFromArray(buffer, sizeof(buffer));
+
+		lastServerMessage = *newMessage;
 		// Send a debug log of message to logging system when in debug mode 
 		GameLogging::Log(newMessage->DebugString());
 	}
@@ -94,6 +101,11 @@ void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playe
  	SendMessage(messageData);
 	 
  }
+
+ServerMessage::ServerMessage NetworkManager::getLastServerMessage()
+{
+	return lastServerMessage;
+}
 
 void NetworkManager::SendMessage(std::string data)
 {

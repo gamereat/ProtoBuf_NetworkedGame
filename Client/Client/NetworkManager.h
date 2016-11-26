@@ -1,6 +1,8 @@
 #pragma once
 #include "SFML/Network.hpp"
 #include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
+#include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
+
 class NetworkManager
 {
 public:
@@ -8,6 +10,11 @@ public:
 	~NetworkManager();
 	
 	void Init();
+
+	/*
+	Will connect user to the server and get init Message
+	*/
+	void ConnectToServer();
 
 	/*
 	Works out when to start the game clock based off server timing 
@@ -20,7 +27,16 @@ public:
 
 	void ReciveMessageToServer();
 	void SentMessageToServer(int clientVersion , ClientMessage::Playerinfromation* playerInfo);
+
+
+	ServerMessage::ServerMessage getLastServerMessage();
 private:
+
+	/*
+	Holds the last server message recived from the server
+	*/
+	ServerMessage::ServerMessage lastServerMessage;
+
 
 	void SendMessage(std::string );
 	/*

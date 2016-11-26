@@ -9,11 +9,7 @@ public:
 
 	static void Log(std::string output);
 
-	static void LogError(std::string output);
-
-	//	static void Log(char*);
-
-	//static void LogError(char* output);
+	static void LogError(std::string output); 
 
 	static void LogWarning(char* output);
 

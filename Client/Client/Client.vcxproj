@@ -95,7 +95,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\SFML-2.4.1\include;E:\Source\Repos\GameNetworking\Client\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\SFML-2.4.1\include;E:\Source\Repos\GameNetworking\Client\protobuf\include;E:\Source\Repos\GameNetworking\ProroBuferFiles\ProtoSource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\SFML-2.4.1\include;E:\Source\Repos\GameNetworking\Client\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\SFML-2.4.1\include;E:\Source\Repos\GameNetworking\Client\protobuf\include;E:\Source\Repos\GameNetworking\ProroBuferFiles\ProtoSource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -179,6 +179,7 @@
     <ClCompile Include="GhostPlayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="MapPoint.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="PacManPlayer.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GhostPlayer.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapObject.h" />
     <ClInclude Include="MapPoint.h" />
     <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="PacManPlayer.h" />

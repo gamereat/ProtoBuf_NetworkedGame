@@ -6,9 +6,13 @@ class PacManPlayer :
 public:
 	PacManPlayer();
 	~PacManPlayer();
-
+	 
 private:
 
-	int score;
+
+	/*
+	Texture used for pacman sprite
+	*/
+	sf::Texture pacManTexture;
 };
 
