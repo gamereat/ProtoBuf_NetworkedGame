@@ -5,7 +5,7 @@
 NetworkManager::NetworkManager()
 {
 	portNumber = 7777;
-
+	playerConnected = 0;
 }
 
 
@@ -26,122 +26,152 @@ void NetworkManager::Init()
 
 void NetworkManager::Update()
 {
-
+	ReciveClientInfo();
  
 }
-void NetworkManager::SendServerMessage(int serverVersionNum, Player players[4], Map map, int numConnectedPlayers)
+void NetworkManager::SendServerMessage(int serverVersionNum, Player playerData[4], Map map, int numConnectedPlayers)
 {
-	// new server message to be sent to clients
-	ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage();
-	newMessage->New();
-	ServerMessage::ServerInformation* serverInfo = new ServerMessage::ServerInformation();
-
-	serverInfo->set_messagenumber(numOfMessageSend);
-	serverInfo->set_serverinformation(serverVersionNum);
-	newMessage->set_allocated_serverinfo(serverInfo);
-
-	ServerMessage::Playerinfromation* gamePlayers[NUM_PLAYERS] ;
-	for (int player = 0; player < NUM_PLAYERS; player++)
+	for (int client = 0; client < numConnectedPlayers; client++)
 	{
-		gamePlayers[player] = new ServerMessage::Playerinfromation();
-	}
-	// loop for each player
-	for (int player = 0; player < NUM_PLAYERS; player++)
-	{
-		ServerMessage::Playerinfromation* playerInfo = new ServerMessage::Playerinfromation();
-		playerInfo->New();
-		// Get the pos of the player
-		ServerMessage::playerPos* playerPos = new ServerMessage::playerPos();
-		playerPos->New();
-		sf::Vector2f pos = players[player].getPosition();
-		playerPos->set_posx(0);
-		playerPos->set_posy(0);
-	
-		playerInfo->set_allocated_pos(playerPos);
 
-		//get other data for the player
-		playerInfo->set_playernumber(player);
-		playerInfo->set_playerscore(players[player].getScore());
-		playerInfo->set_player(players[player].getPlayerType());
+		// new server message to be sent to clients
+		ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage();
+		newMessage->New();
+		ServerMessage::ServerInformation* serverInfo = new ServerMessage::ServerInformation();
 
-		gamePlayers[player] = playerInfo;
 
-	}
-	// add player data
-	// NOTE: due to wanting to keep a constant message size and restrictions with Proto Buffer 
-	// Array could not be used thus Hack to send multiplayers
-	newMessage->set_allocated_playerone(gamePlayers[0]);
-	newMessage->set_allocated_playertwo(gamePlayers[1]);
-	newMessage->set_allocated_playerthree(gamePlayers[2]);
-	newMessage->set_allocated_playerfour(gamePlayers[3]);
+		ServerMessage::AdditionalInformation* additionalInfo = new ServerMessage::AdditionalInformation();
 
-	ServerMessage::MapData* mapData = new ServerMessage::MapData();
+		additionalInfo->set_clientplayernumber(clientsIPInfo[client].playerNum);
 
-	for (int mapCol = 0; mapCol < MAP_LENGTH; mapCol++)
-	{
-		ServerMessage::MapData::row* newRow = mapData->add_col();
+		newMessage->set_allocated_additioanlinfo(additionalInfo);
 
-		for (int mapRow = 0; mapRow < MAP_HIGHT; mapRow++)
+		serverInfo->set_messagenumber(numOfMessageSend);
+		serverInfo->set_serverinformation(serverVersionNum);
+		newMessage->set_allocated_serverinfo(serverInfo);
+
+		ServerMessage::Playerinfromation* gamePlayers[NUM_PLAYERS];
+		for (int player = 0; player < NUM_PLAYERS; player++)
 		{
+			gamePlayers[player] = new ServerMessage::Playerinfromation();
+		}
+		// loop for each player
+		for (int player = 0; player < NUM_PLAYERS; player++)
+		{
+			ServerMessage::Playerinfromation* playerInfo = gamePlayers[player];
+			playerInfo->New();
+			// Get the pos of the player
+			ServerMessage::playerPos* playerPos = new ServerMessage::playerPos();
+			playerPos->New();
+			sf::Vector2f pos = playerData[player].getPosition();
+			playerPos->set_posx(0);
+			playerPos->set_posy(0);
+
+			playerInfo->set_allocated_pos(playerPos);
+
+			//get other data for the player
+			playerInfo->set_playernumber(player);
+			playerInfo->set_playerscore(playerData[player].getScore());
+			playerInfo->set_player(playerData[player].getPlayerType());
 			
-			// Get tile info from the map 
-			newRow->add_tile(map.getMap().at(mapCol).at(mapRow).getTileType());
+			std::vector<std::string> f;
+
+			playerInfo->FindInitializationErrors(&f);
+
+			if (f.size() > 0)
+			{
+				std::cin.get();
+			}
+			playerInfo->CheckInitialized();
+
+ 			gamePlayers[player] = playerInfo;
+
+		}
+		// add player data
+		// NOTE: due to wanting to keep a constant message size and restrictions with Proto Buffer 
+		// Array could not be used thus Hack to send multiplayers
+		newMessage->set_allocated_playerone(gamePlayers[0]);
+		newMessage->set_allocated_playertwo(gamePlayers[1]);
+		newMessage->set_allocated_playerthree(gamePlayers[2]);
+		newMessage->set_allocated_playerfour(gamePlayers[3]);
+
+		ServerMessage::MapData* mapData = new ServerMessage::MapData();
+
+		for (int mapCol = 0; mapCol < MAP_LENGTH; mapCol++)
+		{
+			ServerMessage::MapData::row* newRow = mapData->add_col();
+
+			for (int mapRow = 0; mapRow < MAP_HIGHT; mapRow++)
+			{
+
+				// Get tile info from the map 
+				newRow->add_tile(map.getMap().at(mapCol).at(mapRow).getTileType());
+			}
+
 		}
 
+		newMessage->set_allocated_mapinfo(mapData);
+
+		newMessage->set_numofplayer(numConnectedPlayers);
+
+		// increase the number of messaage sent
+		numOfMessageSend++;
+
+		std::vector<std::string> f;
+		newMessage->FindInitializationErrors(&f);
+		// Make sure message has got all valid feilds
+		newMessage->CheckInitialized();
+
+		std::string messageData;
+		newMessage->SerializeToString(&messageData);
+
+		SendMessage(messageData, clientsIPInfo[client]);
 	}
-	
-	newMessage->set_allocated_mapinfo(mapData);
-
-	newMessage->set_numofplayer(numConnectedPlayers);
-
-	// increase the number of messaage sent
-	numOfMessageSend++; 
-
-	std::vector<std::string> f;
-	newMessage->FindInitializationErrors(&f);
-	// Make sure message has got all valid feilds
-	newMessage->CheckInitialized();
-
-	std::string messageData;
-	newMessage->SerializeToString(&messageData);
-
-	SendMessage(messageData);
 
  }
+
 void NetworkManager::WorkOutSyncTimingForClient()
 {
 }
 
-void NetworkManager::SendMessage(std::string data)
+void NetworkManager::SendMessage(std::string data, clientUDPInfo clientUDPInfo)
 {
-	for each (auto client in clientsIPInfo)
-	{
-
+ 
 	
-		ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage;
-		newMessage->ParseFromString(data);
-		// Send a debug log of message to logging system when in debug mode 
-		sf::IpAddress recipient = client.ip;
-		unsigned short port = client.port;
+	ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage;
+	newMessage->ParseFromString(data);
+	// Send a debug log of message to logging system when in debug mode 
+	sf::IpAddress recipient = clientUDPInfo.ip;
+	unsigned short port = clientUDPInfo.port;
 
-		int size = newMessage->ByteSize();
-		void *buffer = malloc(size);
-		newMessage->SerializeToArray(buffer, size);
-		GameLogging::Log("Message Length " + std::to_string(size));
+	int size = newMessage->ByteSize();
+	void *buffer = malloc(size);
+	newMessage->SerializeToArray(buffer, size);
+	GameLogging::Log("Message Length " + std::to_string(size));
 
 
-		if (udpSocket.send(buffer,256, recipient, port) != sf::Socket::Done)
-		{
-			// error...
-		}
-		else
-		{
-			ServerMessage::ServerMessage* newMessages = new ServerMessage::ServerMessage();
-			newMessages->ParseFromArray(buffer, size);
-			GameLogging::Log(newMessages->DebugString());
-
-		}
+	if (udpSocket.send(buffer,256, recipient, port) != sf::Socket::Done)
+	{
+		// error...
 	}
+	else
+	{
+		ServerMessage::ServerMessage* newMessages = new ServerMessage::ServerMessage();
+		newMessages->ParseFromArray(buffer, size);
+		GameLogging::Log(newMessages->DebugString());
+
+	}
+}
+
+int NetworkManager::getPlayersConnected()
+{
+	return playerConnected;
+}
+
+void NetworkManager::SendInitConnectionInformation(clientUDPInfo newClient)
+{
+
+
 }
 
 void NetworkManager::ReciveClientInfo()
@@ -162,9 +192,55 @@ void NetworkManager::ReciveClientInfo()
 		// Send a debug log of message to logging system when in debug mode 
 		GameLogging::Log(newMessage->DebugString());
 	
-		if (newMessage->addiontalinfo == ClientMessage::ClientMessage_AdditioanlRequests::ClientMessage_AdditioanlRequests_FirstConnect)
+		clientUDPInfo clientRecived = clientUDPInfo(sender, port, clientsIPInfo.size());
+
+		bool clientAlreadyFounds = false;
+		for each (auto client in clientsIPInfo)
 		{
-			clientsIPInfo.push_back(clientUDPInfo(sender, port));
+			if (client.port == clientRecived.port && client.ip == clientRecived.ip)
+			{
+				clientAlreadyFounds = true;
+			}
+		}
+
+		// Check if the client is requesting a first connectin
+		if (newMessage->addiontalinfo() == ClientMessage::ClientMessage_AdditioanlRequests::ClientMessage_AdditioanlRequests_FirstConnect)
+		{
+
+			if (!clientAlreadyFounds)
+			{
+				// if not already reached the max number of players connected 
+				if (playerConnected < NUM_PLAYERS)
+				{
+
+					// add the client to list of clients sending data to 
+					clientsIPInfo.push_back(clientRecived);
+
+					// sends data to a client so they know what player tehy will be 
+					SendInitConnectionInformation(clientRecived);
+					playerConnected++;
+				}
+			}
+		}
+		else if (newMessage->addiontalinfo() == ClientMessage::ClientMessage_AdditioanlRequests::ClientMessage_AdditioanlRequests_Disconnect)
+		{
+			if (clientAlreadyFounds)
+			{
+		 
+				int clientIndex = 0;
+				for (; clientIndex < clientsIPInfo.size(); clientIndex++)
+				{
+					if (clientsIPInfo[clientIndex].port == clientRecived.port && clientsIPInfo[clientIndex].ip == clientRecived.ip)
+					{
+						clientsIPInfo.erase(clientsIPInfo.begin() + clientIndex);
+
+						break;
+					}
+
+				} 
+				playerConnected--;
+			 
+			}
 		}
 	}
 

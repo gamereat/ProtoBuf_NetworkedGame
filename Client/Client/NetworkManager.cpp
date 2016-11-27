@@ -7,7 +7,6 @@ NetworkManager::NetworkManager()
 
 	// Varify protobuf settings
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
-
 }
 
 
@@ -19,12 +18,14 @@ NetworkManager::~NetworkManager()
 void NetworkManager::Init()
 {
 	numOfMessageSend = 0;
+	numOfMessageRecived = 0;
+
 	if (updSocket.bind(54000) != sf::Socket::Done)
 	{
 		// error...
 	}
 	updSocket.setBlocking(false);
-
+	lastServerMessage = nullptr;
 }
 
 void NetworkManager::ConnectToServer()
@@ -66,14 +67,18 @@ void NetworkManager::ReciveMessageToServer()
 
 		newMessage->ParseFromArray(buffer, sizeof(buffer));
 
-		lastServerMessage = *newMessage;
+		lastServerMessage = newMessage;
+
+		numOfMessageRecived++;
+	 
+
 		// Send a debug log of message to logging system when in debug mode 
 		GameLogging::Log(newMessage->DebugString());
 	}
 
 }
 
-void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playerinfromation* playerInfo)
+void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playerinfromation* playerInfo, ClientMessage::ClientMessage_AdditioanlRequests additionalRequests)
 {
 	// new client message to be sent to server
 	ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage() ;
@@ -90,6 +95,9 @@ void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playe
 	newMessage->set_allocated_clientinfo(&clientInfo);
 	newMessage->set_allocated_playerinfo(playerInfo); 
 
+
+	newMessage->set_addiontalinfo(additionalRequests);
+
 	// Make sure message has got all valid feilds
 	newMessage->CheckInitialized();
 
@@ -99,12 +107,104 @@ void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playe
 	newMessage->SerializeToString(&messageData);
 
  	SendMessage(messageData);
-	 
- }
+}
 
-ServerMessage::ServerMessage NetworkManager::getLastServerMessage()
+void NetworkManager::SendDissconectMessage()
+{
+	// new client message to be sent to server
+	ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
+	newMessage->New();
+
+	// Get the client information
+	ClientMessage::ClientInformation clientInfo;
+	clientInfo.set_clientversion(-1);
+	clientInfo.set_messagenumber(numOfMessageSend);
+
+	// increase the number of messaage sent
+	numOfMessageSend++;
+
+	newMessage->set_allocated_clientinfo(&clientInfo);
+
+	ClientMessage::Playerinfromation playerInfo = ClientMessage::Playerinfromation();
+	ClientMessage::playerPos* playerPos = new ClientMessage::playerPos();
+
+	playerInfo.set_type(ClientMessage::Playerinfromation_PlayerType_PacMan);
+	playerPos->set_posx(0);
+	playerPos->set_posy(0);
+	playerInfo.set_allocated_pos(playerPos);
+
+	//Setting to -1 due to not knowing what player number this client will be yet
+	//will find out from first responce message
+	playerInfo.set_playernumber(-1);
+
+	newMessage->set_allocated_playerinfo(&playerInfo);
+
+	// Send a connect message
+	newMessage->set_addiontalinfo(ClientMessage::ClientMessage_AdditioanlRequests_Disconnect);
+
+
+
+
+	// Make sure message has got all valid feilds
+	newMessage->CheckInitialized();
+	std::string messageData;
+	newMessage->SerializeToString(&messageData);
+
+	SendMessage(messageData);
+}
+
+void NetworkManager::SentConnectionMessage(int clientVersion)
+{
+	// new client message to be sent to server
+	ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
+	newMessage->New();
+
+	// Get the client information
+	ClientMessage::ClientInformation clientInfo;
+	clientInfo.set_clientversion(clientVersion);
+	clientInfo.set_messagenumber(numOfMessageSend);
+
+	// increase the number of messaage sent
+	numOfMessageSend++;
+
+	newMessage->set_allocated_clientinfo(&clientInfo);
+
+	ClientMessage::Playerinfromation playerInfo = ClientMessage::Playerinfromation();
+	ClientMessage::playerPos* playerPos = new ClientMessage::playerPos();
+
+	playerInfo.set_type(ClientMessage::Playerinfromation_PlayerType_PacMan);
+	playerPos->set_posx(0);
+	playerPos->set_posy(0);
+	playerInfo.set_allocated_pos(playerPos);
+
+	//Setting to -1 due to not knowing what player number this client will be yet
+	//will find out from first responce message
+	playerInfo.set_playernumber(-1);
+
+	newMessage->set_allocated_playerinfo(&playerInfo);
+
+	// Send a connect message
+	newMessage->set_addiontalinfo(ClientMessage::ClientMessage_AdditioanlRequests_FirstConnect);
+
+   
+
+
+	// Make sure message has got all valid feilds
+	newMessage->CheckInitialized();
+	std::string messageData;
+	newMessage->SerializeToString(&messageData);
+
+	SendMessage(messageData);
+}
+
+ServerMessage::ServerMessage* NetworkManager::getLastServerMessage()
 {
 	return lastServerMessage;
+}
+
+int NetworkManager::getNumberMessageRecived()
+{
+	return numOfMessageRecived;
 }
 
 void NetworkManager::SendMessage(std::string data)
@@ -116,14 +216,13 @@ void NetworkManager::SendMessage(std::string data)
  	sf::IpAddress recipient = "127.0.0.1";
 	unsigned short port = 7777;
 
- 	int size = newMessage->ByteSize();
-	GameLogging::Log("Message Length " + std::to_string(size));
-
+	int size = newMessage->ByteSize();
 	void *buffer = malloc(size);
 	newMessage->SerializeToArray(buffer, size);
+	GameLogging::Log("Message Length " + std::to_string(size));
 
 
-	if (updSocket.send(buffer, 24, recipient, port) != sf::Socket::Done)
+	if (updSocket.send(buffer, size, recipient, port) != sf::Socket::Done)
 	{
 		// error...
 	}

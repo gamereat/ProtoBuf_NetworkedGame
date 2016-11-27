@@ -23,6 +23,7 @@ public:
 
 	*/
 	bool Init();
+	void Render(sf::RenderWindow * renderWindow);
 	/*
 	Updates the all the game information
 
@@ -36,7 +37,12 @@ private:
 	/*
 	Synced up map used to dispaly to players
 	*/
-	Map gameMap;
+	Map* gameMap;
+
+	/*
+	players in the game
+	*/
+	Player* players[4];
 
 	/*
 	Manages all the nwtwork conections
@@ -81,5 +87,10 @@ private:
 	Delta time from the game
 	*/
 	float deltaTime;
+
+	/*
+	Players the server is talking with
+	*/
+	int playersInGame;
 };
 

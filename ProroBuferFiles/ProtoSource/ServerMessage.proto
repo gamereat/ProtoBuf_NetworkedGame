@@ -25,22 +25,6 @@ message Playerinfromation {
   required playerPos pos = 3;
   required int32 playerScore = 4;
 }
-
-message ServerMessage{
-     
-
-    required int32 numOfPlayer = 1;
-
-    required ServerInformation serverinfo = 2;
-    required Playerinfromation playerOne = 3;
-    required Playerinfromation playerTwo = 4;
-    required Playerinfromation playerThree = 5;
-    required Playerinfromation playerFour = 6;
-
-    required MapData mapInfo = 7;
-
-}
-
 message MapData{
     enum MapTile
     {
@@ -56,3 +40,25 @@ message MapData{
     repeated row col = 1 ;
 
 }
+
+message AdditionalInformation{
+
+    // The player number of the client
+    required int32 clientPlayerNumber = 1;
+}   
+message ServerMessage{
+     
+
+    required int32 numOfPlayer = 1;
+
+    required ServerInformation serverinfo = 2;
+    required Playerinfromation playerOne = 3;
+    required Playerinfromation playerTwo = 4;
+    required Playerinfromation playerThree = 5;
+    required Playerinfromation playerFour = 6;
+
+    required MapData mapInfo = 7;
+    required AdditionalInformation additioanlInfo = 8;
+
+}
+

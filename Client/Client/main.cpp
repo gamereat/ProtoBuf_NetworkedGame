@@ -71,6 +71,8 @@ int main()
 		GameLogging::Log("----------- APPLICATION ENDING ----------");
 
  	}
+
+	clientController.Disconect();
 	// Holds so log's can be looked at 
 	std::cin.get();
 

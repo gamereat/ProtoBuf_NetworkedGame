@@ -26,16 +26,27 @@ public:
 	void GetPlayerTypeFromServer();
 
 	void ReciveMessageToServer();
-	void SentMessageToServer(int clientVersion , ClientMessage::Playerinfromation* playerInfo);
+	void SentMessageToServer(int clientVersion , ClientMessage::Playerinfromation* playerInfo, ClientMessage::ClientMessage_AdditioanlRequests additionalRequests);
+	
+	/*
+	Tell the server the client wasnts to disconnect
+	*/
+	void SendDissconectMessage();
+	/*
+	Sends a connect message to a server
+	*/
+	void SentConnectionMessage(int clientVersion);
 
+	ServerMessage::ServerMessage* getLastServerMessage();
 
-	ServerMessage::ServerMessage getLastServerMessage();
+	int getNumberMessageRecived();
 private:
+
 
 	/*
 	Holds the last server message recived from the server
 	*/
-	ServerMessage::ServerMessage lastServerMessage;
+	ServerMessage::ServerMessage* lastServerMessage;
 
 
 	void SendMessage(std::string );
@@ -72,6 +83,10 @@ private:
 	*/
 	float serverPort;
 
+	/*
+	Holds the number of message recived 
+	*/
+	int numOfMessageRecived;
 
 };
 

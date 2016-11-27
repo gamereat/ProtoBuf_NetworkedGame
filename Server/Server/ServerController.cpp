@@ -4,6 +4,10 @@
 
 ServerController::ServerController()
 {
+	playersInGame = 0;
+	versionNumber = 2;
+	gameMap = new Map();
+
 }
 
 
@@ -31,9 +35,8 @@ bool ServerController::Init()
 	severVersionNumberText.setFillColor(sf::Color::Red);
 	networkManger.Init();
 
-	Player* players[4];
+	
 	Map* map;
-	map = new Map();
 	int i = 0;
 	for each (auto player in players)
 	{
@@ -41,17 +44,29 @@ bool ServerController::Init()
 		players[i] = player;
 		i++;
 	}
-	networkManger.SendServerMessage(2, *players, *map, 4);
-
-	networkManger.SendServerMessage(2, *players, *map, 4);
+//	networkManger.SendServerMessage(2, *players, *map, 1);
+	 
 
 
 	return true;
 }
+void ServerController::Render(sf::RenderWindow* renderWindow)
+{
+ 
+	renderWindow->draw(severVersionNumberText);
+}
 
 bool ServerController::Update()
 {
-
-
+	// if there has been more players connected to the network since last frame then send data to them and other players
+	// about this new player
+	if (playersInGame < networkManger.getPlayersConnected())
+	{
+		playersInGame++;
+		networkManger.SendServerMessage(versionNumber, *players, *gameMap, playersInGame);
+	}
+		
+	networkManger.Update();
+	
 	return true;
 }

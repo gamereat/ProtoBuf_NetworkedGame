@@ -11,10 +11,21 @@ struct clientUDPInfo
 public:
 	sf::IpAddress ip;
 	unsigned short port;
-	clientUDPInfo(sf::IpAddress ip, short port)
+	int playerNum;
+	clientUDPInfo(sf::IpAddress ip, short port,int playerNum)
 	{
+		this->playerNum = playerNum;
 		this->ip = ip;
 		this->port = port;
+	}
+	inline bool operator==(const clientUDPInfo& lhs )
+	{
+		if (lhs.ip == this->ip && lhs.port == this->port)
+		{
+			return true;
+
+		}
+		return false;
 	}
 };
 class NetworkManager
@@ -35,9 +46,21 @@ public:
 	void SendServerMessage(int serverVersionNum, Player players[4], Map map, int numConnectedPlayers);
 
 
-	void SendMessage(std::string data);
+	void SendMessage(std::string data, clientUDPInfo clientIp);
 
+
+	int getPlayersConnected();
 private:
+
+	/*
+	Number of player's current connect to game server
+	*/
+	int playerConnected;
+
+	/*
+	Sends a message with extra data to the client trying to connect with which player it will be and such 
+	*/
+	void SendInitConnectionInformation(clientUDPInfo newClient);
 
 	/*
 	Holds the last server message recived from the server

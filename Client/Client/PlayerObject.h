@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include ".././../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
+#include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 
 // How the player will be able to move
 // Allows for rebuinding of keys if needed 
@@ -66,6 +67,11 @@ public:
 	virtual void Render(sf::RenderWindow* renderWindow);
 	virtual void Init();
 	virtual void Update(float deltaTime);
+
+	/*
+	Updates the given palyer with the player information
+	*/
+	void UpdatePlayerInfo(ServerMessage::Playerinfromation);
 
 	float getPlayerSpeed();
 	void setPlayerSpeed(float playerSpeed);

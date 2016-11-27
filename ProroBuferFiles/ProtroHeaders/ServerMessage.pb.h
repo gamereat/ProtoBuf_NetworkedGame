@@ -37,9 +37,10 @@ void protobuf_ShutdownFile_ServerMessage_2eproto();
 class ServerInformation;
 class playerPos;
 class Playerinfromation;
-class ServerMessage;
 class MapData;
 class MapData_row;
+class AdditionalInformation;
+class ServerMessage;
 
 enum Playerinfromation_PlayerType {
   Playerinfromation_PlayerType_PacMan = 0,
@@ -397,157 +398,6 @@ class Playerinfromation : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ServerMessage : public ::google::protobuf::Message {
- public:
-  ServerMessage();
-  virtual ~ServerMessage();
-
-  ServerMessage(const ServerMessage& from);
-
-  inline ServerMessage& operator=(const ServerMessage& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ServerMessage& default_instance();
-
-  void Swap(ServerMessage* other);
-
-  // implements Message ----------------------------------------------
-
-  ServerMessage* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ServerMessage& from);
-  void MergeFrom(const ServerMessage& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required int32 numOfPlayer = 1;
-  inline bool has_numofplayer() const;
-  inline void clear_numofplayer();
-  static const int kNumOfPlayerFieldNumber = 1;
-  inline ::google::protobuf::int32 numofplayer() const;
-  inline void set_numofplayer(::google::protobuf::int32 value);
-
-  // required .ServerMessage.ServerInformation serverinfo = 2;
-  inline bool has_serverinfo() const;
-  inline void clear_serverinfo();
-  static const int kServerinfoFieldNumber = 2;
-  inline const ::ServerMessage::ServerInformation& serverinfo() const;
-  inline ::ServerMessage::ServerInformation* mutable_serverinfo();
-  inline ::ServerMessage::ServerInformation* release_serverinfo();
-  inline void set_allocated_serverinfo(::ServerMessage::ServerInformation* serverinfo);
-
-  // required .ServerMessage.Playerinfromation playerOne = 3;
-  inline bool has_playerone() const;
-  inline void clear_playerone();
-  static const int kPlayerOneFieldNumber = 3;
-  inline const ::ServerMessage::Playerinfromation& playerone() const;
-  inline ::ServerMessage::Playerinfromation* mutable_playerone();
-  inline ::ServerMessage::Playerinfromation* release_playerone();
-  inline void set_allocated_playerone(::ServerMessage::Playerinfromation* playerone);
-
-  // required .ServerMessage.Playerinfromation playerTwo = 4;
-  inline bool has_playertwo() const;
-  inline void clear_playertwo();
-  static const int kPlayerTwoFieldNumber = 4;
-  inline const ::ServerMessage::Playerinfromation& playertwo() const;
-  inline ::ServerMessage::Playerinfromation* mutable_playertwo();
-  inline ::ServerMessage::Playerinfromation* release_playertwo();
-  inline void set_allocated_playertwo(::ServerMessage::Playerinfromation* playertwo);
-
-  // required .ServerMessage.Playerinfromation playerThree = 5;
-  inline bool has_playerthree() const;
-  inline void clear_playerthree();
-  static const int kPlayerThreeFieldNumber = 5;
-  inline const ::ServerMessage::Playerinfromation& playerthree() const;
-  inline ::ServerMessage::Playerinfromation* mutable_playerthree();
-  inline ::ServerMessage::Playerinfromation* release_playerthree();
-  inline void set_allocated_playerthree(::ServerMessage::Playerinfromation* playerthree);
-
-  // required .ServerMessage.Playerinfromation playerFour = 6;
-  inline bool has_playerfour() const;
-  inline void clear_playerfour();
-  static const int kPlayerFourFieldNumber = 6;
-  inline const ::ServerMessage::Playerinfromation& playerfour() const;
-  inline ::ServerMessage::Playerinfromation* mutable_playerfour();
-  inline ::ServerMessage::Playerinfromation* release_playerfour();
-  inline void set_allocated_playerfour(::ServerMessage::Playerinfromation* playerfour);
-
-  // required .ServerMessage.MapData mapInfo = 7;
-  inline bool has_mapinfo() const;
-  inline void clear_mapinfo();
-  static const int kMapInfoFieldNumber = 7;
-  inline const ::ServerMessage::MapData& mapinfo() const;
-  inline ::ServerMessage::MapData* mutable_mapinfo();
-  inline ::ServerMessage::MapData* release_mapinfo();
-  inline void set_allocated_mapinfo(::ServerMessage::MapData* mapinfo);
-
-  // @@protoc_insertion_point(class_scope:ServerMessage.ServerMessage)
- private:
-  inline void set_has_numofplayer();
-  inline void clear_has_numofplayer();
-  inline void set_has_serverinfo();
-  inline void clear_has_serverinfo();
-  inline void set_has_playerone();
-  inline void clear_has_playerone();
-  inline void set_has_playertwo();
-  inline void clear_has_playertwo();
-  inline void set_has_playerthree();
-  inline void clear_has_playerthree();
-  inline void set_has_playerfour();
-  inline void clear_has_playerfour();
-  inline void set_has_mapinfo();
-  inline void clear_has_mapinfo();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
-  ::ServerMessage::ServerInformation* serverinfo_;
-  ::ServerMessage::Playerinfromation* playerone_;
-  ::ServerMessage::Playerinfromation* playertwo_;
-  ::ServerMessage::Playerinfromation* playerthree_;
-  ::ServerMessage::Playerinfromation* playerfour_;
-  ::ServerMessage::MapData* mapinfo_;
-  ::google::protobuf::int32 numofplayer_;
-  friend void  protobuf_AddDesc_ServerMessage_2eproto();
-  friend void protobuf_AssignDesc_ServerMessage_2eproto();
-  friend void protobuf_ShutdownFile_ServerMessage_2eproto();
-
-  void InitAsDefaultInstance();
-  static ServerMessage* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class MapData_row : public ::google::protobuf::Message {
  public:
   MapData_row();
@@ -735,6 +585,248 @@ class MapData : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static MapData* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AdditionalInformation : public ::google::protobuf::Message {
+ public:
+  AdditionalInformation();
+  virtual ~AdditionalInformation();
+
+  AdditionalInformation(const AdditionalInformation& from);
+
+  inline AdditionalInformation& operator=(const AdditionalInformation& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AdditionalInformation& default_instance();
+
+  void Swap(AdditionalInformation* other);
+
+  // implements Message ----------------------------------------------
+
+  AdditionalInformation* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AdditionalInformation& from);
+  void MergeFrom(const AdditionalInformation& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 clientPlayerNumber = 1;
+  inline bool has_clientplayernumber() const;
+  inline void clear_clientplayernumber();
+  static const int kClientPlayerNumberFieldNumber = 1;
+  inline ::google::protobuf::int32 clientplayernumber() const;
+  inline void set_clientplayernumber(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:ServerMessage.AdditionalInformation)
+ private:
+  inline void set_has_clientplayernumber();
+  inline void clear_has_clientplayernumber();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 clientplayernumber_;
+  friend void  protobuf_AddDesc_ServerMessage_2eproto();
+  friend void protobuf_AssignDesc_ServerMessage_2eproto();
+  friend void protobuf_ShutdownFile_ServerMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static AdditionalInformation* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ServerMessage : public ::google::protobuf::Message {
+ public:
+  ServerMessage();
+  virtual ~ServerMessage();
+
+  ServerMessage(const ServerMessage& from);
+
+  inline ServerMessage& operator=(const ServerMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ServerMessage& default_instance();
+
+  void Swap(ServerMessage* other);
+
+  // implements Message ----------------------------------------------
+
+  ServerMessage* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ServerMessage& from);
+  void MergeFrom(const ServerMessage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 numOfPlayer = 1;
+  inline bool has_numofplayer() const;
+  inline void clear_numofplayer();
+  static const int kNumOfPlayerFieldNumber = 1;
+  inline ::google::protobuf::int32 numofplayer() const;
+  inline void set_numofplayer(::google::protobuf::int32 value);
+
+  // required .ServerMessage.ServerInformation serverinfo = 2;
+  inline bool has_serverinfo() const;
+  inline void clear_serverinfo();
+  static const int kServerinfoFieldNumber = 2;
+  inline const ::ServerMessage::ServerInformation& serverinfo() const;
+  inline ::ServerMessage::ServerInformation* mutable_serverinfo();
+  inline ::ServerMessage::ServerInformation* release_serverinfo();
+  inline void set_allocated_serverinfo(::ServerMessage::ServerInformation* serverinfo);
+
+  // required .ServerMessage.Playerinfromation playerOne = 3;
+  inline bool has_playerone() const;
+  inline void clear_playerone();
+  static const int kPlayerOneFieldNumber = 3;
+  inline const ::ServerMessage::Playerinfromation& playerone() const;
+  inline ::ServerMessage::Playerinfromation* mutable_playerone();
+  inline ::ServerMessage::Playerinfromation* release_playerone();
+  inline void set_allocated_playerone(::ServerMessage::Playerinfromation* playerone);
+
+  // required .ServerMessage.Playerinfromation playerTwo = 4;
+  inline bool has_playertwo() const;
+  inline void clear_playertwo();
+  static const int kPlayerTwoFieldNumber = 4;
+  inline const ::ServerMessage::Playerinfromation& playertwo() const;
+  inline ::ServerMessage::Playerinfromation* mutable_playertwo();
+  inline ::ServerMessage::Playerinfromation* release_playertwo();
+  inline void set_allocated_playertwo(::ServerMessage::Playerinfromation* playertwo);
+
+  // required .ServerMessage.Playerinfromation playerThree = 5;
+  inline bool has_playerthree() const;
+  inline void clear_playerthree();
+  static const int kPlayerThreeFieldNumber = 5;
+  inline const ::ServerMessage::Playerinfromation& playerthree() const;
+  inline ::ServerMessage::Playerinfromation* mutable_playerthree();
+  inline ::ServerMessage::Playerinfromation* release_playerthree();
+  inline void set_allocated_playerthree(::ServerMessage::Playerinfromation* playerthree);
+
+  // required .ServerMessage.Playerinfromation playerFour = 6;
+  inline bool has_playerfour() const;
+  inline void clear_playerfour();
+  static const int kPlayerFourFieldNumber = 6;
+  inline const ::ServerMessage::Playerinfromation& playerfour() const;
+  inline ::ServerMessage::Playerinfromation* mutable_playerfour();
+  inline ::ServerMessage::Playerinfromation* release_playerfour();
+  inline void set_allocated_playerfour(::ServerMessage::Playerinfromation* playerfour);
+
+  // required .ServerMessage.MapData mapInfo = 7;
+  inline bool has_mapinfo() const;
+  inline void clear_mapinfo();
+  static const int kMapInfoFieldNumber = 7;
+  inline const ::ServerMessage::MapData& mapinfo() const;
+  inline ::ServerMessage::MapData* mutable_mapinfo();
+  inline ::ServerMessage::MapData* release_mapinfo();
+  inline void set_allocated_mapinfo(::ServerMessage::MapData* mapinfo);
+
+  // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
+  inline bool has_additioanlinfo() const;
+  inline void clear_additioanlinfo();
+  static const int kAdditioanlInfoFieldNumber = 8;
+  inline const ::ServerMessage::AdditionalInformation& additioanlinfo() const;
+  inline ::ServerMessage::AdditionalInformation* mutable_additioanlinfo();
+  inline ::ServerMessage::AdditionalInformation* release_additioanlinfo();
+  inline void set_allocated_additioanlinfo(::ServerMessage::AdditionalInformation* additioanlinfo);
+
+  // @@protoc_insertion_point(class_scope:ServerMessage.ServerMessage)
+ private:
+  inline void set_has_numofplayer();
+  inline void clear_has_numofplayer();
+  inline void set_has_serverinfo();
+  inline void clear_has_serverinfo();
+  inline void set_has_playerone();
+  inline void clear_has_playerone();
+  inline void set_has_playertwo();
+  inline void clear_has_playertwo();
+  inline void set_has_playerthree();
+  inline void clear_has_playerthree();
+  inline void set_has_playerfour();
+  inline void clear_has_playerfour();
+  inline void set_has_mapinfo();
+  inline void clear_has_mapinfo();
+  inline void set_has_additioanlinfo();
+  inline void clear_has_additioanlinfo();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::ServerMessage::ServerInformation* serverinfo_;
+  ::ServerMessage::Playerinfromation* playerone_;
+  ::ServerMessage::Playerinfromation* playertwo_;
+  ::ServerMessage::Playerinfromation* playerthree_;
+  ::ServerMessage::Playerinfromation* playerfour_;
+  ::ServerMessage::MapData* mapinfo_;
+  ::ServerMessage::AdditionalInformation* additioanlinfo_;
+  ::google::protobuf::int32 numofplayer_;
+  friend void  protobuf_AddDesc_ServerMessage_2eproto();
+  friend void protobuf_AssignDesc_ServerMessage_2eproto();
+  friend void protobuf_ShutdownFile_ServerMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static ServerMessage* default_instance_;
 };
 // ===================================================================
 
@@ -959,6 +1051,104 @@ inline void Playerinfromation::set_playerscore(::google::protobuf::int32 value) 
   set_has_playerscore();
   playerscore_ = value;
   // @@protoc_insertion_point(field_set:ServerMessage.Playerinfromation.playerScore)
+}
+
+// -------------------------------------------------------------------
+
+// MapData_row
+
+// repeated .ServerMessage.MapData.MapTile tile = 1 [packed = true];
+inline int MapData_row::tile_size() const {
+  return tile_.size();
+}
+inline void MapData_row::clear_tile() {
+  tile_.Clear();
+}
+inline ::ServerMessage::MapData_MapTile MapData_row::tile(int index) const {
+  // @@protoc_insertion_point(field_get:ServerMessage.MapData.row.tile)
+  return static_cast< ::ServerMessage::MapData_MapTile >(tile_.Get(index));
+}
+inline void MapData_row::set_tile(int index, ::ServerMessage::MapData_MapTile value) {
+  assert(::ServerMessage::MapData_MapTile_IsValid(value));
+  tile_.Set(index, value);
+  // @@protoc_insertion_point(field_set:ServerMessage.MapData.row.tile)
+}
+inline void MapData_row::add_tile(::ServerMessage::MapData_MapTile value) {
+  assert(::ServerMessage::MapData_MapTile_IsValid(value));
+  tile_.Add(value);
+  // @@protoc_insertion_point(field_add:ServerMessage.MapData.row.tile)
+}
+inline const ::google::protobuf::RepeatedField<int>&
+MapData_row::tile() const {
+  // @@protoc_insertion_point(field_list:ServerMessage.MapData.row.tile)
+  return tile_;
+}
+inline ::google::protobuf::RepeatedField<int>*
+MapData_row::mutable_tile() {
+  // @@protoc_insertion_point(field_mutable_list:ServerMessage.MapData.row.tile)
+  return &tile_;
+}
+
+// -------------------------------------------------------------------
+
+// MapData
+
+// repeated .ServerMessage.MapData.row col = 1;
+inline int MapData::col_size() const {
+  return col_.size();
+}
+inline void MapData::clear_col() {
+  col_.Clear();
+}
+inline const ::ServerMessage::MapData_row& MapData::col(int index) const {
+  // @@protoc_insertion_point(field_get:ServerMessage.MapData.col)
+  return col_.Get(index);
+}
+inline ::ServerMessage::MapData_row* MapData::mutable_col(int index) {
+  // @@protoc_insertion_point(field_mutable:ServerMessage.MapData.col)
+  return col_.Mutable(index);
+}
+inline ::ServerMessage::MapData_row* MapData::add_col() {
+  // @@protoc_insertion_point(field_add:ServerMessage.MapData.col)
+  return col_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::ServerMessage::MapData_row >&
+MapData::col() const {
+  // @@protoc_insertion_point(field_list:ServerMessage.MapData.col)
+  return col_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::ServerMessage::MapData_row >*
+MapData::mutable_col() {
+  // @@protoc_insertion_point(field_mutable_list:ServerMessage.MapData.col)
+  return &col_;
+}
+
+// -------------------------------------------------------------------
+
+// AdditionalInformation
+
+// required int32 clientPlayerNumber = 1;
+inline bool AdditionalInformation::has_clientplayernumber() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AdditionalInformation::set_has_clientplayernumber() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AdditionalInformation::clear_has_clientplayernumber() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AdditionalInformation::clear_clientplayernumber() {
+  clientplayernumber_ = 0;
+  clear_has_clientplayernumber();
+}
+inline ::google::protobuf::int32 AdditionalInformation::clientplayernumber() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.AdditionalInformation.clientPlayerNumber)
+  return clientplayernumber_;
+}
+inline void AdditionalInformation::set_clientplayernumber(::google::protobuf::int32 value) {
+  set_has_clientplayernumber();
+  clientplayernumber_ = value;
+  // @@protoc_insertion_point(field_set:ServerMessage.AdditionalInformation.clientPlayerNumber)
 }
 
 // -------------------------------------------------------------------
@@ -1235,74 +1425,45 @@ inline void ServerMessage::set_allocated_mapinfo(::ServerMessage::MapData* mapin
   // @@protoc_insertion_point(field_set_allocated:ServerMessage.ServerMessage.mapInfo)
 }
 
-// -------------------------------------------------------------------
-
-// MapData_row
-
-// repeated .ServerMessage.MapData.MapTile tile = 1 [packed = true];
-inline int MapData_row::tile_size() const {
-  return tile_.size();
+// required .ServerMessage.AdditionalInformation additioanlInfo = 8;
+inline bool ServerMessage::has_additioanlinfo() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void MapData_row::clear_tile() {
-  tile_.Clear();
+inline void ServerMessage::set_has_additioanlinfo() {
+  _has_bits_[0] |= 0x00000080u;
 }
-inline ::ServerMessage::MapData_MapTile MapData_row::tile(int index) const {
-  // @@protoc_insertion_point(field_get:ServerMessage.MapData.row.tile)
-  return static_cast< ::ServerMessage::MapData_MapTile >(tile_.Get(index));
+inline void ServerMessage::clear_has_additioanlinfo() {
+  _has_bits_[0] &= ~0x00000080u;
 }
-inline void MapData_row::set_tile(int index, ::ServerMessage::MapData_MapTile value) {
-  assert(::ServerMessage::MapData_MapTile_IsValid(value));
-  tile_.Set(index, value);
-  // @@protoc_insertion_point(field_set:ServerMessage.MapData.row.tile)
+inline void ServerMessage::clear_additioanlinfo() {
+  if (additioanlinfo_ != NULL) additioanlinfo_->::ServerMessage::AdditionalInformation::Clear();
+  clear_has_additioanlinfo();
 }
-inline void MapData_row::add_tile(::ServerMessage::MapData_MapTile value) {
-  assert(::ServerMessage::MapData_MapTile_IsValid(value));
-  tile_.Add(value);
-  // @@protoc_insertion_point(field_add:ServerMessage.MapData.row.tile)
+inline const ::ServerMessage::AdditionalInformation& ServerMessage::additioanlinfo() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.ServerMessage.additioanlInfo)
+  return additioanlinfo_ != NULL ? *additioanlinfo_ : *default_instance_->additioanlinfo_;
 }
-inline const ::google::protobuf::RepeatedField<int>&
-MapData_row::tile() const {
-  // @@protoc_insertion_point(field_list:ServerMessage.MapData.row.tile)
-  return tile_;
+inline ::ServerMessage::AdditionalInformation* ServerMessage::mutable_additioanlinfo() {
+  set_has_additioanlinfo();
+  if (additioanlinfo_ == NULL) additioanlinfo_ = new ::ServerMessage::AdditionalInformation;
+  // @@protoc_insertion_point(field_mutable:ServerMessage.ServerMessage.additioanlInfo)
+  return additioanlinfo_;
 }
-inline ::google::protobuf::RepeatedField<int>*
-MapData_row::mutable_tile() {
-  // @@protoc_insertion_point(field_mutable_list:ServerMessage.MapData.row.tile)
-  return &tile_;
+inline ::ServerMessage::AdditionalInformation* ServerMessage::release_additioanlinfo() {
+  clear_has_additioanlinfo();
+  ::ServerMessage::AdditionalInformation* temp = additioanlinfo_;
+  additioanlinfo_ = NULL;
+  return temp;
 }
-
-// -------------------------------------------------------------------
-
-// MapData
-
-// repeated .ServerMessage.MapData.row col = 1;
-inline int MapData::col_size() const {
-  return col_.size();
-}
-inline void MapData::clear_col() {
-  col_.Clear();
-}
-inline const ::ServerMessage::MapData_row& MapData::col(int index) const {
-  // @@protoc_insertion_point(field_get:ServerMessage.MapData.col)
-  return col_.Get(index);
-}
-inline ::ServerMessage::MapData_row* MapData::mutable_col(int index) {
-  // @@protoc_insertion_point(field_mutable:ServerMessage.MapData.col)
-  return col_.Mutable(index);
-}
-inline ::ServerMessage::MapData_row* MapData::add_col() {
-  // @@protoc_insertion_point(field_add:ServerMessage.MapData.col)
-  return col_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::ServerMessage::MapData_row >&
-MapData::col() const {
-  // @@protoc_insertion_point(field_list:ServerMessage.MapData.col)
-  return col_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::ServerMessage::MapData_row >*
-MapData::mutable_col() {
-  // @@protoc_insertion_point(field_mutable_list:ServerMessage.MapData.col)
-  return &col_;
+inline void ServerMessage::set_allocated_additioanlinfo(::ServerMessage::AdditionalInformation* additioanlinfo) {
+  delete additioanlinfo_;
+  additioanlinfo_ = additioanlinfo;
+  if (additioanlinfo) {
+    set_has_additioanlinfo();
+  } else {
+    clear_has_additioanlinfo();
+  }
+  // @@protoc_insertion_point(field_set_allocated:ServerMessage.ServerMessage.additioanlInfo)
 }
 
 

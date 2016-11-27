@@ -17,6 +17,7 @@ void PlayerObject::Init()
 	// Set a default sprite 
 	sprite.setColor(sf::Color(255, 0, 0, 255));
 
+	playerNumber = -1;
 	playerSpeed = 100;
 }
 
@@ -35,6 +36,14 @@ void PlayerObject::HandleInput(float deltaTime)
 void PlayerObject::Update(float deltaTime)
 {
 	HandleInput(deltaTime);
+}
+
+void PlayerObject::UpdatePlayerInfo(ServerMessage::Playerinfromation playerInfo)
+{
+	currentScore = playerInfo.playerscore();
+	
+	setPosition(sf::Vector2f(playerInfo.pos().posx(), playerInfo.pos().posy()));
+
 }
 
 float PlayerObject::getPlayerSpeed()

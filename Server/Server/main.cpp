@@ -31,6 +31,7 @@ void main()
 			window.clear();
  
 			serverController.Update();
+			serverController.Render(&window);
 
 			window.display();
 		}

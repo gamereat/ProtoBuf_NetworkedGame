@@ -16,6 +16,7 @@ ClientController::ClientController()
 
 ClientController::~ClientController()
 {
+
 	// Free up memory
 
 	if (pacManPlayer)
@@ -70,6 +71,7 @@ bool ClientController::Init()
 	{
 		ghosts[i]->Init();
 	}
+	connectToGameSever();
 
 	return true;
 }
@@ -112,18 +114,98 @@ bool ClientController::Update()
 	networkManager.Update();
 	UpdateGameFromServer();
 
+
 	return true;
 }
 
 void ClientController::Render(sf::RenderWindow* renderWindow)
 {
-	//map.Render(renderWindow);
+	map.Render(renderWindow);
 	pacManPlayer->Render(renderWindow);
 	for (int i = 0; i < 4; i++)
 	{
 		ghosts[i]->Render(renderWindow);
 	}
 	renderWindow->draw(clientVersionNumberText);
+	renderWindow->draw(clientNumberText);
+}
+
+void ClientController::Disconect()
+{
+	networkManager.SendDissconectMessage();
+
+}
+
+void ClientController::connectToGameSever()
+{
+
+	// Connect to server
+	networkManager.SentConnectionMessage(clientVersionNumber);
+	// once Connected get player info
+
+	while (networkManager.getLastServerMessage() == nullptr)
+	{
+		networkManager.Update();
+
+	};
+	ServerMessage::ServerMessage serverMessage = *networkManager.getLastServerMessage();
+
+	// get the player number
+	int playerNum = serverMessage.additioanlinfo().clientplayernumber();
+
+	// Player number relates to which player the user is controlling 
+
+	switch (playerNum)
+	{
+	case 0:
+		// if if player then they are the pacman
+		pacManPlayer->setIsControllable(false);
+
+
+		controllingPlayer = pacManPlayer;
+		break;
+	case 1:
+		// if second player then they are first ghost
+		ghosts[0]->setIsControllable(false);
+
+		controllingPlayer = ghosts[0];
+
+		break;
+	case 2:
+		// if second player then they are second ghost
+		ghosts[1]->setIsControllable(false);
+
+		controllingPlayer = ghosts[1];
+
+		break;
+	case 3:
+		// if second player then they are third ghost
+		ghosts[2]->setIsControllable(false);
+		controllingPlayer = ghosts[2];
+
+		break;
+
+	default:
+		GameLogging::LogError("Incorrect player number recived from the server");
+		break;		
+	}
+
+	// set the player number of the controlling player
+	controllingPlayer->setPlayerNumber(playerNum);
+
+	clientNumberText.setFont(standardFont);
+
+	clientNumberText.setString("Client Number " + std::to_string( playerNum));
+	clientNumberText.setPosition(600, 25);
+	clientNumberText.setCharacterSize(24);
+
+	clientNumberText.setFillColor(sf::Color::Red);
+
+	controllingPlayer->setIsControllable(true);
+	// Update the game to display this info
+	UpdateGameFromServer();
+
+
 }
 
 ClientMessage::Playerinfromation ClientController::GetPlayerInfo()
@@ -154,14 +236,14 @@ ClientMessage::Playerinfromation ClientController::GetPlayerInfo()
 void ClientController::UpdateGameToServer()
 {
 
-	networkManager.SentMessageToServer(clientVersionNumber, &GetPlayerInfo());
+	networkManager.SentMessageToServer(clientVersionNumber, &GetPlayerInfo(), ClientMessage::ClientMessage_AdditioanlRequests_None);
 }
 
 void ClientController::UpdateGameFromServer()
 {
-	 ServerMessage::ServerMessage newMessage = networkManager.getLastServerMessage();
+	 ServerMessage::ServerMessage newMessage = *networkManager.getLastServerMessage();
 
-	 ServerMessage::ServerInformation serverInfo =   newMessage.serverinfo();
+	 ServerMessage::ServerInformation serverInfo = newMessage.serverinfo();
 
 	 unsigned int  messageNumber = serverInfo.messagenumber();
 	 // Check if a new message has been recived
@@ -219,4 +301,20 @@ void ClientController::UpdateMap(ServerMessage::MapData mapData)
 
 void ClientController::UpdatePlayers(ServerMessage::Playerinfromation players[4])
 {
-}
+	if (controllingPlayer != pacManPlayer)
+	{
+		pacManPlayer->UpdatePlayerInfo(players[0]);
+	}
+	if (controllingPlayer != ghosts[0])
+	{
+		ghosts[0]->UpdatePlayerInfo(players[1]);
+	}
+	if (controllingPlayer != ghosts[1])
+	{
+		ghosts[1]->UpdatePlayerInfo(players[2]);
+	}
+	if (controllingPlayer != ghosts[2])
+	{
+		ghosts[2]->UpdatePlayerInfo(players[3]);
+	} 
+ }

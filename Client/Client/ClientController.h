@@ -62,9 +62,19 @@ public:
 	void Render(sf::RenderWindow* renderWindow);
 
 
+	/*
+	Disconect from the game server
+	*/
+	void Disconect();
+
 
 private: 
 	
+	/*
+		Will connect to game server and get data from it 
+	*/
+	void connectToGameSever();
+
 	/*
 	Gathers current player infromation into message able to send to server
 	
@@ -72,7 +82,7 @@ private:
 	*/
 	ClientMessage::Playerinfromation GetPlayerInfo();
 
-
+ 
 	/*
 	Gathers information form client and sends it to the server 
 	*/
@@ -107,6 +117,11 @@ private:
 	Contains the version number of the build to be displayed on screen
 	*/
 	sf::Text clientVersionNumberText;
+
+	/*
+	Contains the version number of the build to be displayed on screen
+	*/
+	sf::Text clientNumberText;
 
 	/*
 	Contains the version number of the server to be displayed on screen

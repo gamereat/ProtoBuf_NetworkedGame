@@ -30,9 +30,6 @@ const ::google::protobuf::Descriptor* Playerinfromation_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Playerinfromation_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* Playerinfromation_PlayerType_descriptor_ = NULL;
-const ::google::protobuf::Descriptor* ServerMessage_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  ServerMessage_reflection_ = NULL;
 const ::google::protobuf::Descriptor* MapData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MapData_reflection_ = NULL;
@@ -40,6 +37,12 @@ const ::google::protobuf::Descriptor* MapData_row_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MapData_row_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* MapData_MapTile_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* AdditionalInformation_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  AdditionalInformation_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ServerMessage_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ServerMessage_reflection_ = NULL;
 
 }  // namespace
 
@@ -101,28 +104,7 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Playerinfromation));
   Playerinfromation_PlayerType_descriptor_ = Playerinfromation_descriptor_->enum_type(0);
-  ServerMessage_descriptor_ = file->message_type(3);
-  static const int ServerMessage_offsets_[7] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, numofplayer_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, serverinfo_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerone_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playertwo_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerthree_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerfour_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, mapinfo_),
-  };
-  ServerMessage_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      ServerMessage_descriptor_,
-      ServerMessage::default_instance_,
-      ServerMessage_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ServerMessage));
-  MapData_descriptor_ = file->message_type(4);
+  MapData_descriptor_ = file->message_type(3);
   static const int MapData_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapData, col_),
   };
@@ -153,6 +135,43 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MapData_row));
   MapData_MapTile_descriptor_ = MapData_descriptor_->enum_type(0);
+  AdditionalInformation_descriptor_ = file->message_type(4);
+  static const int AdditionalInformation_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AdditionalInformation, clientplayernumber_),
+  };
+  AdditionalInformation_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      AdditionalInformation_descriptor_,
+      AdditionalInformation::default_instance_,
+      AdditionalInformation_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AdditionalInformation, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AdditionalInformation, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(AdditionalInformation));
+  ServerMessage_descriptor_ = file->message_type(5);
+  static const int ServerMessage_offsets_[8] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, numofplayer_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, serverinfo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerone_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playertwo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerthree_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerfour_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, mapinfo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, additioanlinfo_),
+  };
+  ServerMessage_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ServerMessage_descriptor_,
+      ServerMessage::default_instance_,
+      ServerMessage_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ServerMessage));
 }
 
 namespace {
@@ -172,11 +191,13 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Playerinfromation_descriptor_, &Playerinfromation::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ServerMessage_descriptor_, &ServerMessage::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MapData_descriptor_, &MapData::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MapData_row_descriptor_, &MapData_row::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    AdditionalInformation_descriptor_, &AdditionalInformation::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ServerMessage_descriptor_, &ServerMessage::default_instance());
 }
 
 }  // namespace
@@ -188,12 +209,14 @@ void protobuf_ShutdownFile_ServerMessage_2eproto() {
   delete playerPos_reflection_;
   delete Playerinfromation::default_instance_;
   delete Playerinfromation_reflection_;
-  delete ServerMessage::default_instance_;
-  delete ServerMessage_reflection_;
   delete MapData::default_instance_;
   delete MapData_reflection_;
   delete MapData_row::default_instance_;
   delete MapData_row_reflection_;
+  delete AdditionalInformation::default_instance_;
+  delete AdditionalInformation_reflection_;
+  delete ServerMessage::default_instance_;
+  delete ServerMessage_reflection_;
 }
 
 void protobuf_AddDesc_ServerMessage_2eproto() {
@@ -212,33 +235,38 @@ void protobuf_AddDesc_ServerMessage_2eproto() {
     "on.PlayerType:\nUnassigned\022%\n\003pos\030\003 \002(\0132\030"
     ".ServerMessage.playerPos\022\023\n\013playerScore\030"
     "\004 \002(\005\"3\n\nPlayerType\022\n\n\006PacMan\020\000\022\t\n\005Ghost"
-    "\020\001\022\016\n\nUnassigned\020\002\"\332\002\n\rServerMessage\022\023\n\013"
-    "numOfPlayer\030\001 \002(\005\0224\n\nserverinfo\030\002 \002(\0132 ."
-    "ServerMessage.ServerInformation\0223\n\tplaye"
-    "rOne\030\003 \002(\0132 .ServerMessage.Playerinfroma"
-    "tion\0223\n\tplayerTwo\030\004 \002(\0132 .ServerMessage."
-    "Playerinfromation\0225\n\013playerThree\030\005 \002(\0132 "
-    ".ServerMessage.Playerinfromation\0224\n\nplay"
-    "erFour\030\006 \002(\0132 .ServerMessage.Playerinfro"
-    "mation\022\'\n\007mapInfo\030\007 \002(\0132\026.ServerMessage."
-    "MapData\"\226\001\n\007MapData\022\'\n\003col\030\001 \003(\0132\032.Serve"
-    "rMessage.MapData.row\0327\n\003row\0220\n\004tile\030\001 \003("
-    "\0162\036.ServerMessage.MapData.MapTileB\002\020\001\")\n"
-    "\007MapTile\022\t\n\005Empty\020\001\022\010\n\004Wall\020\002\022\t\n\005Point\020\003", 880);
+    "\020\001\022\016\n\nUnassigned\020\002\"\226\001\n\007MapData\022\'\n\003col\030\001 "
+    "\003(\0132\032.ServerMessage.MapData.row\0327\n\003row\0220"
+    "\n\004tile\030\001 \003(\0162\036.ServerMessage.MapData.Map"
+    "TileB\002\020\001\")\n\007MapTile\022\t\n\005Empty\020\001\022\010\n\004Wall\020\002"
+    "\022\t\n\005Point\020\003\"3\n\025AdditionalInformation\022\032\n\022"
+    "clientPlayerNumber\030\001 \002(\005\"\230\003\n\rServerMessa"
+    "ge\022\023\n\013numOfPlayer\030\001 \002(\005\0224\n\nserverinfo\030\002 "
+    "\002(\0132 .ServerMessage.ServerInformation\0223\n"
+    "\tplayerOne\030\003 \002(\0132 .ServerMessage.Playeri"
+    "nfromation\0223\n\tplayerTwo\030\004 \002(\0132 .ServerMe"
+    "ssage.Playerinfromation\0225\n\013playerThree\030\005"
+    " \002(\0132 .ServerMessage.Playerinfromation\0224"
+    "\n\nplayerFour\030\006 \002(\0132 .ServerMessage.Playe"
+    "rinfromation\022\'\n\007mapInfo\030\007 \002(\0132\026.ServerMe"
+    "ssage.MapData\022<\n\016additioanlInfo\030\010 \002(\0132$."
+    "ServerMessage.AdditionalInformation", 995);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ServerMessage.proto", &protobuf_RegisterTypes);
   ServerInformation::default_instance_ = new ServerInformation();
   playerPos::default_instance_ = new playerPos();
   Playerinfromation::default_instance_ = new Playerinfromation();
-  ServerMessage::default_instance_ = new ServerMessage();
   MapData::default_instance_ = new MapData();
   MapData_row::default_instance_ = new MapData_row();
+  AdditionalInformation::default_instance_ = new AdditionalInformation();
+  ServerMessage::default_instance_ = new ServerMessage();
   ServerInformation::default_instance_->InitAsDefaultInstance();
   playerPos::default_instance_->InitAsDefaultInstance();
   Playerinfromation::default_instance_->InitAsDefaultInstance();
-  ServerMessage::default_instance_->InitAsDefaultInstance();
   MapData::default_instance_->InitAsDefaultInstance();
   MapData_row::default_instance_->InitAsDefaultInstance();
+  AdditionalInformation::default_instance_->InitAsDefaultInstance();
+  ServerMessage::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_ServerMessage_2eproto);
 }
 
@@ -1176,510 +1204,6 @@ void Playerinfromation::Swap(Playerinfromation* other) {
 
 // ===================================================================
 
-#ifndef _MSC_VER
-const int ServerMessage::kNumOfPlayerFieldNumber;
-const int ServerMessage::kServerinfoFieldNumber;
-const int ServerMessage::kPlayerOneFieldNumber;
-const int ServerMessage::kPlayerTwoFieldNumber;
-const int ServerMessage::kPlayerThreeFieldNumber;
-const int ServerMessage::kPlayerFourFieldNumber;
-const int ServerMessage::kMapInfoFieldNumber;
-#endif  // !_MSC_VER
-
-ServerMessage::ServerMessage()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:ServerMessage.ServerMessage)
-}
-
-void ServerMessage::InitAsDefaultInstance() {
-  serverinfo_ = const_cast< ::ServerMessage::ServerInformation*>(&::ServerMessage::ServerInformation::default_instance());
-  playerone_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
-  playertwo_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
-  playerthree_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
-  playerfour_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
-  mapinfo_ = const_cast< ::ServerMessage::MapData*>(&::ServerMessage::MapData::default_instance());
-}
-
-ServerMessage::ServerMessage(const ServerMessage& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:ServerMessage.ServerMessage)
-}
-
-void ServerMessage::SharedCtor() {
-  _cached_size_ = 0;
-  numofplayer_ = 0;
-  serverinfo_ = NULL;
-  playerone_ = NULL;
-  playertwo_ = NULL;
-  playerthree_ = NULL;
-  playerfour_ = NULL;
-  mapinfo_ = NULL;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-ServerMessage::~ServerMessage() {
-  // @@protoc_insertion_point(destructor:ServerMessage.ServerMessage)
-  SharedDtor();
-}
-
-void ServerMessage::SharedDtor() {
-  if (this != default_instance_) {
-    delete serverinfo_;
-    delete playerone_;
-    delete playertwo_;
-    delete playerthree_;
-    delete playerfour_;
-    delete mapinfo_;
-  }
-}
-
-void ServerMessage::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* ServerMessage::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ServerMessage_descriptor_;
-}
-
-const ServerMessage& ServerMessage::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_ServerMessage_2eproto();
-  return *default_instance_;
-}
-
-ServerMessage* ServerMessage::default_instance_ = NULL;
-
-ServerMessage* ServerMessage::New() const {
-  return new ServerMessage;
-}
-
-void ServerMessage::Clear() {
-  if (_has_bits_[0 / 32] & 127) {
-    numofplayer_ = 0;
-    if (has_serverinfo()) {
-      if (serverinfo_ != NULL) serverinfo_->::ServerMessage::ServerInformation::Clear();
-    }
-    if (has_playerone()) {
-      if (playerone_ != NULL) playerone_->::ServerMessage::Playerinfromation::Clear();
-    }
-    if (has_playertwo()) {
-      if (playertwo_ != NULL) playertwo_->::ServerMessage::Playerinfromation::Clear();
-    }
-    if (has_playerthree()) {
-      if (playerthree_ != NULL) playerthree_->::ServerMessage::Playerinfromation::Clear();
-    }
-    if (has_playerfour()) {
-      if (playerfour_ != NULL) playerfour_->::ServerMessage::Playerinfromation::Clear();
-    }
-    if (has_mapinfo()) {
-      if (mapinfo_ != NULL) mapinfo_->::ServerMessage::MapData::Clear();
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool ServerMessage::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:ServerMessage.ServerMessage)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 numOfPlayer = 1;
-      case 1: {
-        if (tag == 8) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &numofplayer_)));
-          set_has_numofplayer();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(18)) goto parse_serverinfo;
-        break;
-      }
-
-      // required .ServerMessage.ServerInformation serverinfo = 2;
-      case 2: {
-        if (tag == 18) {
-         parse_serverinfo:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_serverinfo()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(26)) goto parse_playerOne;
-        break;
-      }
-
-      // required .ServerMessage.Playerinfromation playerOne = 3;
-      case 3: {
-        if (tag == 26) {
-         parse_playerOne:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_playerone()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(34)) goto parse_playerTwo;
-        break;
-      }
-
-      // required .ServerMessage.Playerinfromation playerTwo = 4;
-      case 4: {
-        if (tag == 34) {
-         parse_playerTwo:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_playertwo()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(42)) goto parse_playerThree;
-        break;
-      }
-
-      // required .ServerMessage.Playerinfromation playerThree = 5;
-      case 5: {
-        if (tag == 42) {
-         parse_playerThree:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_playerthree()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(50)) goto parse_playerFour;
-        break;
-      }
-
-      // required .ServerMessage.Playerinfromation playerFour = 6;
-      case 6: {
-        if (tag == 50) {
-         parse_playerFour:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_playerfour()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(58)) goto parse_mapInfo;
-        break;
-      }
-
-      // required .ServerMessage.MapData mapInfo = 7;
-      case 7: {
-        if (tag == 58) {
-         parse_mapInfo:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_mapinfo()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:ServerMessage.ServerMessage)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:ServerMessage.ServerMessage)
-  return false;
-#undef DO_
-}
-
-void ServerMessage::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:ServerMessage.ServerMessage)
-  // required int32 numOfPlayer = 1;
-  if (has_numofplayer()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->numofplayer(), output);
-  }
-
-  // required .ServerMessage.ServerInformation serverinfo = 2;
-  if (has_serverinfo()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->serverinfo(), output);
-  }
-
-  // required .ServerMessage.Playerinfromation playerOne = 3;
-  if (has_playerone()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->playerone(), output);
-  }
-
-  // required .ServerMessage.Playerinfromation playerTwo = 4;
-  if (has_playertwo()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->playertwo(), output);
-  }
-
-  // required .ServerMessage.Playerinfromation playerThree = 5;
-  if (has_playerthree()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, this->playerthree(), output);
-  }
-
-  // required .ServerMessage.Playerinfromation playerFour = 6;
-  if (has_playerfour()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, this->playerfour(), output);
-  }
-
-  // required .ServerMessage.MapData mapInfo = 7;
-  if (has_mapinfo()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, this->mapinfo(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:ServerMessage.ServerMessage)
-}
-
-::google::protobuf::uint8* ServerMessage::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.ServerMessage)
-  // required int32 numOfPlayer = 1;
-  if (has_numofplayer()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->numofplayer(), target);
-  }
-
-  // required .ServerMessage.ServerInformation serverinfo = 2;
-  if (has_serverinfo()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        2, this->serverinfo(), target);
-  }
-
-  // required .ServerMessage.Playerinfromation playerOne = 3;
-  if (has_playerone()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        3, this->playerone(), target);
-  }
-
-  // required .ServerMessage.Playerinfromation playerTwo = 4;
-  if (has_playertwo()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        4, this->playertwo(), target);
-  }
-
-  // required .ServerMessage.Playerinfromation playerThree = 5;
-  if (has_playerthree()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        5, this->playerthree(), target);
-  }
-
-  // required .ServerMessage.Playerinfromation playerFour = 6;
-  if (has_playerfour()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        6, this->playerfour(), target);
-  }
-
-  // required .ServerMessage.MapData mapInfo = 7;
-  if (has_mapinfo()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        7, this->mapinfo(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:ServerMessage.ServerMessage)
-  return target;
-}
-
-int ServerMessage::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 numOfPlayer = 1;
-    if (has_numofplayer()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->numofplayer());
-    }
-
-    // required .ServerMessage.ServerInformation serverinfo = 2;
-    if (has_serverinfo()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->serverinfo());
-    }
-
-    // required .ServerMessage.Playerinfromation playerOne = 3;
-    if (has_playerone()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->playerone());
-    }
-
-    // required .ServerMessage.Playerinfromation playerTwo = 4;
-    if (has_playertwo()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->playertwo());
-    }
-
-    // required .ServerMessage.Playerinfromation playerThree = 5;
-    if (has_playerthree()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->playerthree());
-    }
-
-    // required .ServerMessage.Playerinfromation playerFour = 6;
-    if (has_playerfour()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->playerfour());
-    }
-
-    // required .ServerMessage.MapData mapInfo = 7;
-    if (has_mapinfo()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->mapinfo());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ServerMessage::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ServerMessage* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ServerMessage*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void ServerMessage::MergeFrom(const ServerMessage& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_numofplayer()) {
-      set_numofplayer(from.numofplayer());
-    }
-    if (from.has_serverinfo()) {
-      mutable_serverinfo()->::ServerMessage::ServerInformation::MergeFrom(from.serverinfo());
-    }
-    if (from.has_playerone()) {
-      mutable_playerone()->::ServerMessage::Playerinfromation::MergeFrom(from.playerone());
-    }
-    if (from.has_playertwo()) {
-      mutable_playertwo()->::ServerMessage::Playerinfromation::MergeFrom(from.playertwo());
-    }
-    if (from.has_playerthree()) {
-      mutable_playerthree()->::ServerMessage::Playerinfromation::MergeFrom(from.playerthree());
-    }
-    if (from.has_playerfour()) {
-      mutable_playerfour()->::ServerMessage::Playerinfromation::MergeFrom(from.playerfour());
-    }
-    if (from.has_mapinfo()) {
-      mutable_mapinfo()->::ServerMessage::MapData::MergeFrom(from.mapinfo());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void ServerMessage::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void ServerMessage::CopyFrom(const ServerMessage& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ServerMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000007f) != 0x0000007f) return false;
-
-  if (has_serverinfo()) {
-    if (!this->serverinfo().IsInitialized()) return false;
-  }
-  if (has_playerone()) {
-    if (!this->playerone().IsInitialized()) return false;
-  }
-  if (has_playertwo()) {
-    if (!this->playertwo().IsInitialized()) return false;
-  }
-  if (has_playerthree()) {
-    if (!this->playerthree().IsInitialized()) return false;
-  }
-  if (has_playerfour()) {
-    if (!this->playerfour().IsInitialized()) return false;
-  }
-  return true;
-}
-
-void ServerMessage::Swap(ServerMessage* other) {
-  if (other != this) {
-    std::swap(numofplayer_, other->numofplayer_);
-    std::swap(serverinfo_, other->serverinfo_);
-    std::swap(playerone_, other->playerone_);
-    std::swap(playertwo_, other->playertwo_);
-    std::swap(playerthree_, other->playerthree_);
-    std::swap(playerfour_, other->playerfour_);
-    std::swap(mapinfo_, other->mapinfo_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata ServerMessage::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ServerMessage_descriptor_;
-  metadata.reflection = ServerMessage_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
 const ::google::protobuf::EnumDescriptor* MapData_MapTile_descriptor() {
   protobuf_AssignDescriptorsOnce();
   return MapData_MapTile_descriptor_;
@@ -2176,6 +1700,780 @@ void MapData::Swap(MapData* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = MapData_descriptor_;
   metadata.reflection = MapData_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int AdditionalInformation::kClientPlayerNumberFieldNumber;
+#endif  // !_MSC_VER
+
+AdditionalInformation::AdditionalInformation()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ServerMessage.AdditionalInformation)
+}
+
+void AdditionalInformation::InitAsDefaultInstance() {
+}
+
+AdditionalInformation::AdditionalInformation(const AdditionalInformation& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:ServerMessage.AdditionalInformation)
+}
+
+void AdditionalInformation::SharedCtor() {
+  _cached_size_ = 0;
+  clientplayernumber_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AdditionalInformation::~AdditionalInformation() {
+  // @@protoc_insertion_point(destructor:ServerMessage.AdditionalInformation)
+  SharedDtor();
+}
+
+void AdditionalInformation::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void AdditionalInformation::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* AdditionalInformation::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AdditionalInformation_descriptor_;
+}
+
+const AdditionalInformation& AdditionalInformation::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_ServerMessage_2eproto();
+  return *default_instance_;
+}
+
+AdditionalInformation* AdditionalInformation::default_instance_ = NULL;
+
+AdditionalInformation* AdditionalInformation::New() const {
+  return new AdditionalInformation;
+}
+
+void AdditionalInformation::Clear() {
+  clientplayernumber_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool AdditionalInformation::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ServerMessage.AdditionalInformation)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 clientPlayerNumber = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &clientplayernumber_)));
+          set_has_clientplayernumber();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ServerMessage.AdditionalInformation)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ServerMessage.AdditionalInformation)
+  return false;
+#undef DO_
+}
+
+void AdditionalInformation::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ServerMessage.AdditionalInformation)
+  // required int32 clientPlayerNumber = 1;
+  if (has_clientplayernumber()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->clientplayernumber(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:ServerMessage.AdditionalInformation)
+}
+
+::google::protobuf::uint8* AdditionalInformation::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.AdditionalInformation)
+  // required int32 clientPlayerNumber = 1;
+  if (has_clientplayernumber()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->clientplayernumber(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ServerMessage.AdditionalInformation)
+  return target;
+}
+
+int AdditionalInformation::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 clientPlayerNumber = 1;
+    if (has_clientplayernumber()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->clientplayernumber());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AdditionalInformation::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const AdditionalInformation* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const AdditionalInformation*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void AdditionalInformation::MergeFrom(const AdditionalInformation& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_clientplayernumber()) {
+      set_clientplayernumber(from.clientplayernumber());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void AdditionalInformation::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AdditionalInformation::CopyFrom(const AdditionalInformation& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AdditionalInformation::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void AdditionalInformation::Swap(AdditionalInformation* other) {
+  if (other != this) {
+    std::swap(clientplayernumber_, other->clientplayernumber_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AdditionalInformation::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AdditionalInformation_descriptor_;
+  metadata.reflection = AdditionalInformation_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ServerMessage::kNumOfPlayerFieldNumber;
+const int ServerMessage::kServerinfoFieldNumber;
+const int ServerMessage::kPlayerOneFieldNumber;
+const int ServerMessage::kPlayerTwoFieldNumber;
+const int ServerMessage::kPlayerThreeFieldNumber;
+const int ServerMessage::kPlayerFourFieldNumber;
+const int ServerMessage::kMapInfoFieldNumber;
+const int ServerMessage::kAdditioanlInfoFieldNumber;
+#endif  // !_MSC_VER
+
+ServerMessage::ServerMessage()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ServerMessage.ServerMessage)
+}
+
+void ServerMessage::InitAsDefaultInstance() {
+  serverinfo_ = const_cast< ::ServerMessage::ServerInformation*>(&::ServerMessage::ServerInformation::default_instance());
+  playerone_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
+  playertwo_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
+  playerthree_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
+  playerfour_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
+  mapinfo_ = const_cast< ::ServerMessage::MapData*>(&::ServerMessage::MapData::default_instance());
+  additioanlinfo_ = const_cast< ::ServerMessage::AdditionalInformation*>(&::ServerMessage::AdditionalInformation::default_instance());
+}
+
+ServerMessage::ServerMessage(const ServerMessage& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:ServerMessage.ServerMessage)
+}
+
+void ServerMessage::SharedCtor() {
+  _cached_size_ = 0;
+  numofplayer_ = 0;
+  serverinfo_ = NULL;
+  playerone_ = NULL;
+  playertwo_ = NULL;
+  playerthree_ = NULL;
+  playerfour_ = NULL;
+  mapinfo_ = NULL;
+  additioanlinfo_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ServerMessage::~ServerMessage() {
+  // @@protoc_insertion_point(destructor:ServerMessage.ServerMessage)
+  SharedDtor();
+}
+
+void ServerMessage::SharedDtor() {
+  if (this != default_instance_) {
+    delete serverinfo_;
+    delete playerone_;
+    delete playertwo_;
+    delete playerthree_;
+    delete playerfour_;
+    delete mapinfo_;
+    delete additioanlinfo_;
+  }
+}
+
+void ServerMessage::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ServerMessage::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ServerMessage_descriptor_;
+}
+
+const ServerMessage& ServerMessage::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_ServerMessage_2eproto();
+  return *default_instance_;
+}
+
+ServerMessage* ServerMessage::default_instance_ = NULL;
+
+ServerMessage* ServerMessage::New() const {
+  return new ServerMessage;
+}
+
+void ServerMessage::Clear() {
+  if (_has_bits_[0 / 32] & 255) {
+    numofplayer_ = 0;
+    if (has_serverinfo()) {
+      if (serverinfo_ != NULL) serverinfo_->::ServerMessage::ServerInformation::Clear();
+    }
+    if (has_playerone()) {
+      if (playerone_ != NULL) playerone_->::ServerMessage::Playerinfromation::Clear();
+    }
+    if (has_playertwo()) {
+      if (playertwo_ != NULL) playertwo_->::ServerMessage::Playerinfromation::Clear();
+    }
+    if (has_playerthree()) {
+      if (playerthree_ != NULL) playerthree_->::ServerMessage::Playerinfromation::Clear();
+    }
+    if (has_playerfour()) {
+      if (playerfour_ != NULL) playerfour_->::ServerMessage::Playerinfromation::Clear();
+    }
+    if (has_mapinfo()) {
+      if (mapinfo_ != NULL) mapinfo_->::ServerMessage::MapData::Clear();
+    }
+    if (has_additioanlinfo()) {
+      if (additioanlinfo_ != NULL) additioanlinfo_->::ServerMessage::AdditionalInformation::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ServerMessage::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ServerMessage.ServerMessage)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 numOfPlayer = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &numofplayer_)));
+          set_has_numofplayer();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_serverinfo;
+        break;
+      }
+
+      // required .ServerMessage.ServerInformation serverinfo = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_serverinfo:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_serverinfo()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_playerOne;
+        break;
+      }
+
+      // required .ServerMessage.Playerinfromation playerOne = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_playerOne:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_playerone()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_playerTwo;
+        break;
+      }
+
+      // required .ServerMessage.Playerinfromation playerTwo = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_playerTwo:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_playertwo()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(42)) goto parse_playerThree;
+        break;
+      }
+
+      // required .ServerMessage.Playerinfromation playerThree = 5;
+      case 5: {
+        if (tag == 42) {
+         parse_playerThree:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_playerthree()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(50)) goto parse_playerFour;
+        break;
+      }
+
+      // required .ServerMessage.Playerinfromation playerFour = 6;
+      case 6: {
+        if (tag == 50) {
+         parse_playerFour:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_playerfour()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(58)) goto parse_mapInfo;
+        break;
+      }
+
+      // required .ServerMessage.MapData mapInfo = 7;
+      case 7: {
+        if (tag == 58) {
+         parse_mapInfo:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_mapinfo()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(66)) goto parse_additioanlInfo;
+        break;
+      }
+
+      // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
+      case 8: {
+        if (tag == 66) {
+         parse_additioanlInfo:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_additioanlinfo()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ServerMessage.ServerMessage)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ServerMessage.ServerMessage)
+  return false;
+#undef DO_
+}
+
+void ServerMessage::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ServerMessage.ServerMessage)
+  // required int32 numOfPlayer = 1;
+  if (has_numofplayer()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->numofplayer(), output);
+  }
+
+  // required .ServerMessage.ServerInformation serverinfo = 2;
+  if (has_serverinfo()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->serverinfo(), output);
+  }
+
+  // required .ServerMessage.Playerinfromation playerOne = 3;
+  if (has_playerone()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->playerone(), output);
+  }
+
+  // required .ServerMessage.Playerinfromation playerTwo = 4;
+  if (has_playertwo()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->playertwo(), output);
+  }
+
+  // required .ServerMessage.Playerinfromation playerThree = 5;
+  if (has_playerthree()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, this->playerthree(), output);
+  }
+
+  // required .ServerMessage.Playerinfromation playerFour = 6;
+  if (has_playerfour()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->playerfour(), output);
+  }
+
+  // required .ServerMessage.MapData mapInfo = 7;
+  if (has_mapinfo()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->mapinfo(), output);
+  }
+
+  // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
+  if (has_additioanlinfo()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      8, this->additioanlinfo(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:ServerMessage.ServerMessage)
+}
+
+::google::protobuf::uint8* ServerMessage::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.ServerMessage)
+  // required int32 numOfPlayer = 1;
+  if (has_numofplayer()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->numofplayer(), target);
+  }
+
+  // required .ServerMessage.ServerInformation serverinfo = 2;
+  if (has_serverinfo()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->serverinfo(), target);
+  }
+
+  // required .ServerMessage.Playerinfromation playerOne = 3;
+  if (has_playerone()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->playerone(), target);
+  }
+
+  // required .ServerMessage.Playerinfromation playerTwo = 4;
+  if (has_playertwo()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->playertwo(), target);
+  }
+
+  // required .ServerMessage.Playerinfromation playerThree = 5;
+  if (has_playerthree()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        5, this->playerthree(), target);
+  }
+
+  // required .ServerMessage.Playerinfromation playerFour = 6;
+  if (has_playerfour()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->playerfour(), target);
+  }
+
+  // required .ServerMessage.MapData mapInfo = 7;
+  if (has_mapinfo()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->mapinfo(), target);
+  }
+
+  // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
+  if (has_additioanlinfo()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        8, this->additioanlinfo(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ServerMessage.ServerMessage)
+  return target;
+}
+
+int ServerMessage::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 numOfPlayer = 1;
+    if (has_numofplayer()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->numofplayer());
+    }
+
+    // required .ServerMessage.ServerInformation serverinfo = 2;
+    if (has_serverinfo()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->serverinfo());
+    }
+
+    // required .ServerMessage.Playerinfromation playerOne = 3;
+    if (has_playerone()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->playerone());
+    }
+
+    // required .ServerMessage.Playerinfromation playerTwo = 4;
+    if (has_playertwo()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->playertwo());
+    }
+
+    // required .ServerMessage.Playerinfromation playerThree = 5;
+    if (has_playerthree()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->playerthree());
+    }
+
+    // required .ServerMessage.Playerinfromation playerFour = 6;
+    if (has_playerfour()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->playerfour());
+    }
+
+    // required .ServerMessage.MapData mapInfo = 7;
+    if (has_mapinfo()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->mapinfo());
+    }
+
+    // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
+    if (has_additioanlinfo()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->additioanlinfo());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ServerMessage::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ServerMessage* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ServerMessage*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ServerMessage::MergeFrom(const ServerMessage& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_numofplayer()) {
+      set_numofplayer(from.numofplayer());
+    }
+    if (from.has_serverinfo()) {
+      mutable_serverinfo()->::ServerMessage::ServerInformation::MergeFrom(from.serverinfo());
+    }
+    if (from.has_playerone()) {
+      mutable_playerone()->::ServerMessage::Playerinfromation::MergeFrom(from.playerone());
+    }
+    if (from.has_playertwo()) {
+      mutable_playertwo()->::ServerMessage::Playerinfromation::MergeFrom(from.playertwo());
+    }
+    if (from.has_playerthree()) {
+      mutable_playerthree()->::ServerMessage::Playerinfromation::MergeFrom(from.playerthree());
+    }
+    if (from.has_playerfour()) {
+      mutable_playerfour()->::ServerMessage::Playerinfromation::MergeFrom(from.playerfour());
+    }
+    if (from.has_mapinfo()) {
+      mutable_mapinfo()->::ServerMessage::MapData::MergeFrom(from.mapinfo());
+    }
+    if (from.has_additioanlinfo()) {
+      mutable_additioanlinfo()->::ServerMessage::AdditionalInformation::MergeFrom(from.additioanlinfo());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ServerMessage::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ServerMessage::CopyFrom(const ServerMessage& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ServerMessage::IsInitialized() const {
+  if ((_has_bits_[0] & 0x000000ff) != 0x000000ff) return false;
+
+  if (has_serverinfo()) {
+    if (!this->serverinfo().IsInitialized()) return false;
+  }
+  if (has_playerone()) {
+    if (!this->playerone().IsInitialized()) return false;
+  }
+  if (has_playertwo()) {
+    if (!this->playertwo().IsInitialized()) return false;
+  }
+  if (has_playerthree()) {
+    if (!this->playerthree().IsInitialized()) return false;
+  }
+  if (has_playerfour()) {
+    if (!this->playerfour().IsInitialized()) return false;
+  }
+  if (has_additioanlinfo()) {
+    if (!this->additioanlinfo().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void ServerMessage::Swap(ServerMessage* other) {
+  if (other != this) {
+    std::swap(numofplayer_, other->numofplayer_);
+    std::swap(serverinfo_, other->serverinfo_);
+    std::swap(playerone_, other->playerone_);
+    std::swap(playertwo_, other->playertwo_);
+    std::swap(playerthree_, other->playerthree_);
+    std::swap(playerfour_, other->playerfour_);
+    std::swap(mapinfo_, other->mapinfo_);
+    std::swap(additioanlinfo_, other->additioanlinfo_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ServerMessage::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ServerMessage_descriptor_;
+  metadata.reflection = ServerMessage_reflection_;
   return metadata;
 }
 
