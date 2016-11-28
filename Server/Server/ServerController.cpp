@@ -46,8 +46,7 @@ bool ServerController::Init()
 	}
 //	networkManger.SendServerMessage(2, *players, *map, 1);
 	 
-
-
+ 
 	return true;
 }
 void ServerController::Render(sf::RenderWindow* renderWindow)
@@ -64,6 +63,11 @@ bool ServerController::Update()
 	{
 		playersInGame++;
 		networkManger.SendServerMessage(versionNumber, *players, *gameMap, playersInGame);
+	}
+	// If a player has disconnected 
+	else if (playersInGame > networkManger.getPlayersConnected())
+	{
+		playersInGame--;
 	}
 		
 	networkManger.Update();
