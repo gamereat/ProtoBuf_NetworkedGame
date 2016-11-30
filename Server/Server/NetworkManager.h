@@ -81,9 +81,9 @@ private:
 	*/
 	void WorkOutSyncTimingForClient();
 	/*
-	Number of messages sent
+	Number of messages sent to each client that's connected
 	*/
-	int numOfMessageSend;
+	std::vector<int> numOfMessageSend;
 	/*
 	UDP socket used to conect to clients
 	*/

@@ -62,14 +62,14 @@ bool ServerController::Update()
 	if (playersInGame < networkManger.getPlayersConnected())
 	{
 		playersInGame++;
-		networkManger.SendServerMessage(versionNumber, *players, *gameMap, playersInGame);
 	}
 	// If a player has disconnected 
 	else if (playersInGame > networkManger.getPlayersConnected())
 	{
 		playersInGame--;
 	}
-		
+	networkManger.SendServerMessage(versionNumber, *players, *gameMap, playersInGame);
+
 	networkManger.Update();
 	
 	return true;

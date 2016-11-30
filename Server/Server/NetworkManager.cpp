@@ -6,6 +6,11 @@ NetworkManager::NetworkManager()
 {
 	portNumber = 7777;
 	playerConnected = 0;
+	
+	for (int i = 0; i < NUM_PLAYERS; i++)
+	{
+		numOfMessageSend.push_back(0);
+	}
 }
 
 
@@ -46,7 +51,7 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Player playerData[4
 
 		newMessage->set_allocated_additioanlinfo(additionalInfo);
 
-		serverInfo->set_messagenumber(numOfMessageSend);
+		serverInfo->set_messagenumber(numOfMessageSend[client]);
 		serverInfo->set_serverinformation(serverVersionNum);
 		newMessage->set_allocated_serverinfo(serverInfo);
 
@@ -115,7 +120,7 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Player playerData[4
 		newMessage->set_numofplayer(numConnectedPlayers);
 
 		// increase the number of messaage sent
-		numOfMessageSend++;
+ 		numOfMessageSend[client]++;
 
 		std::vector<std::string> f;
 		newMessage->FindInitializationErrors(&f);
@@ -233,7 +238,7 @@ void NetworkManager::ReciveClientInfo()
 					if (clientsIPInfo[clientIndex].port == clientRecived.port && clientsIPInfo[clientIndex].ip == clientRecived.ip)
 					{
 						clientsIPInfo.erase(clientsIPInfo.begin() + clientIndex);
-
+						numOfMessageSend.erase(numOfMessageSend.begin() + clientIndex);
 						break;
 					}
 
