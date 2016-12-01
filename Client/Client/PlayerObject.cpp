@@ -42,7 +42,7 @@ void PlayerObject::UpdatePlayerInfo(ServerMessage::Playerinfromation playerInfo)
 {
 	currentScore = playerInfo.playerscore();
 	
-	setPosition(sf::Vector2f(playerInfo.pos().posx(), playerInfo.pos().posy()));
+	setPosition(sf::Vector2f(playerInfo.possition().posx(), playerInfo.possition().posy()));
 
 }
 

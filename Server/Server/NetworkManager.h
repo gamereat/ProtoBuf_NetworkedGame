@@ -4,10 +4,14 @@
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 #include "Player.h"
 #include <vector>
+#include "Ball.h"
 /*
 Number of players within a game
 */
 const int NUM_PLAYERS = 2;
+const sf::Vector2f playerOneStartingLocation = sf::Vector2f(0, 10);
+const sf::Vector2f playerTwoStartingLocation = sf::Vector2f(750, 10);
+const sf::Vector2f ballStartPos = sf::Vector2f(400, 300);
 
 struct clientUDPInfo
 {
@@ -46,7 +50,7 @@ public:
 
 
 	void Update();
-	void SendServerMessage(int serverVersionNum, Player* players[NUM_PLAYERS],  int numConnectedPlayers);
+	void  SendServerMessage(int serverVersionNum, Ball* ball, Player* playerData[NUM_PLAYERS], int numConnectedPlayers);
 
 
 	void SendMessage(std::string data, clientUDPInfo clientIp);

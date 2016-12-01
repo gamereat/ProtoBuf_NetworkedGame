@@ -35,7 +35,7 @@ void NetworkManager::Update()
 	ReciveClientInfo();
  
 }
-void NetworkManager::SendServerMessage(int serverVersionNum, Player* playerData[NUM_PLAYERS], int numConnectedPlayers)
+void NetworkManager::SendServerMessage(int serverVersionNum, Ball* ball,Player* playerData[NUM_PLAYERS], int numConnectedPlayers)
 {
 	for (int client = 0; client < numConnectedPlayers; client++)
 	{
@@ -48,6 +48,22 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Player* playerData[
 		ServerMessage::AdditionalInformation* additionalInfo = new ServerMessage::AdditionalInformation();
  
 
+		ServerMessage::BallInformation* ballInfo = new ServerMessage::BallInformation();
+
+		ServerMessage::Vector2f* ballPos = new ServerMessage::Vector2f();
+		ServerMessage::Vector2f* ballVelocity = new ServerMessage::Vector2f();
+
+		ballPos->set_posx(ball->getPosition().x);
+		ballPos->set_posy(ball->getPosition().y);
+
+		ballVelocity->set_posx(ball->getVelocity().x);
+		ballVelocity->set_posy(ball->getVelocity().y);
+
+		ballInfo->set_angle(ball->getAngle());
+		ballInfo->set_allocated_possition(ballPos);
+		ballInfo->set_allocated_velocity(ballVelocity);
+
+		newMessage->set_allocated_ballinformation(ballInfo);
 
 		// Get player infromation
 		ServerMessage::ServerInformation* serverInfo = new ServerMessage::ServerInformation();
@@ -71,13 +87,13 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Player* playerData[
 			ServerMessage::Playerinfromation* playerInfo = gamePlayers[player];
 			playerInfo->New();
 			// Get the pos of the player
-			ServerMessage::playerPos* playerPos = new ServerMessage::playerPos();
+			ServerMessage::Vector2f* playerPos = new ServerMessage::Vector2f();
 			playerPos->New();
 			sf::Vector2f pos = playerData[player]->getPosition();
 			playerPos->set_posx(pos.x);
 			playerPos->set_posy(pos.y);
 
-			playerInfo->set_allocated_pos(playerPos);
+			playerInfo->set_allocated_possition(playerPos);
 
 			//get other data for the player
 			playerInfo->set_playernumber(player);

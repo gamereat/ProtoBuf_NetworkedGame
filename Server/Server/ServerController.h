@@ -5,8 +5,7 @@
 #include "SFML/Window.hpp"
 #include "NetworkManager.h"
 #include "Player.h"
-#include "Map.h"
-
+#include "Ball.h"
 class ServerController
 {
 public:
@@ -31,6 +30,10 @@ public:
 	bool Update();
 private:
 	
+	/*
+	Ball used to hit around by players
+	*/
+	Ball* ball;
 
 	sf::Clock networkUpdateTimer;
 

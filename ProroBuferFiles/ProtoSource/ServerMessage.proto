@@ -7,7 +7,8 @@ message ServerInformation {
   
 }
 
-message playerPos{
+message Vector2f {
+
     required float posY = 1;
     required float posX = 2;
 
@@ -16,10 +17,18 @@ message playerPos{
 message Playerinfromation {
 
   required int32 playerNumber = 1;
-  required playerPos pos = 3;
-  required int32 playerScore = 4; 
+  required Vector2f possition = 3;
+  required int32 playerScore =2; 
+
+  
 }
 
+message BallInformation {
+
+    required Vector2f possition = 1;
+     required float angle = 2;
+    required Vector2f velocity =3;
+}
 
 
 message AdditionalInformation{
@@ -40,12 +49,10 @@ message ServerMessage{
  
      //The client player infromation
     required int32 playerNumber = 5;
+    required BallInformation ballInformation = 6;
 
     required AdditionalInformation additioanlInfo = 8;
-    /*
-Number of players within a game
-*/
-const int NUM_PLAYERS = 2;
+    
 
 }
 

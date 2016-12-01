@@ -34,8 +34,9 @@ void protobuf_AssignDesc_ServerMessage_2eproto();
 void protobuf_ShutdownFile_ServerMessage_2eproto();
 
 class ServerInformation;
-class playerPos;
+class Vector2f;
 class Playerinfromation;
+class BallInformation;
 class AdditionalInformation;
 class ServerMessage;
 
@@ -130,14 +131,14 @@ class ServerInformation : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class playerPos : public ::google::protobuf::Message {
+class Vector2f : public ::google::protobuf::Message {
  public:
-  playerPos();
-  virtual ~playerPos();
+  Vector2f();
+  virtual ~Vector2f();
 
-  playerPos(const playerPos& from);
+  Vector2f(const Vector2f& from);
 
-  inline playerPos& operator=(const playerPos& from) {
+  inline Vector2f& operator=(const Vector2f& from) {
     CopyFrom(from);
     return *this;
   }
@@ -151,17 +152,17 @@ class playerPos : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const playerPos& default_instance();
+  static const Vector2f& default_instance();
 
-  void Swap(playerPos* other);
+  void Swap(Vector2f* other);
 
   // implements Message ----------------------------------------------
 
-  playerPos* New() const;
+  Vector2f* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const playerPos& from);
-  void MergeFrom(const playerPos& from);
+  void CopyFrom(const Vector2f& from);
+  void MergeFrom(const Vector2f& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -197,7 +198,7 @@ class playerPos : public ::google::protobuf::Message {
   inline float posx() const;
   inline void set_posx(float value);
 
-  // @@protoc_insertion_point(class_scope:ServerMessage.playerPos)
+  // @@protoc_insertion_point(class_scope:ServerMessage.Vector2f)
  private:
   inline void set_has_posy();
   inline void clear_has_posy();
@@ -215,7 +216,7 @@ class playerPos : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_ServerMessage_2eproto();
 
   void InitAsDefaultInstance();
-  static playerPos* default_instance_;
+  static Vector2f* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -279,19 +280,19 @@ class Playerinfromation : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 playernumber() const;
   inline void set_playernumber(::google::protobuf::int32 value);
 
-  // required .ServerMessage.playerPos pos = 3;
-  inline bool has_pos() const;
-  inline void clear_pos();
-  static const int kPosFieldNumber = 3;
-  inline const ::ServerMessage::playerPos& pos() const;
-  inline ::ServerMessage::playerPos* mutable_pos();
-  inline ::ServerMessage::playerPos* release_pos();
-  inline void set_allocated_pos(::ServerMessage::playerPos* pos);
+  // required .ServerMessage.Vector2f possition = 3;
+  inline bool has_possition() const;
+  inline void clear_possition();
+  static const int kPossitionFieldNumber = 3;
+  inline const ::ServerMessage::Vector2f& possition() const;
+  inline ::ServerMessage::Vector2f* mutable_possition();
+  inline ::ServerMessage::Vector2f* release_possition();
+  inline void set_allocated_possition(::ServerMessage::Vector2f* possition);
 
-  // required int32 playerScore = 4;
+  // required int32 playerScore = 2;
   inline bool has_playerscore() const;
   inline void clear_playerscore();
-  static const int kPlayerScoreFieldNumber = 4;
+  static const int kPlayerScoreFieldNumber = 2;
   inline ::google::protobuf::int32 playerscore() const;
   inline void set_playerscore(::google::protobuf::int32 value);
 
@@ -299,8 +300,8 @@ class Playerinfromation : public ::google::protobuf::Message {
  private:
   inline void set_has_playernumber();
   inline void clear_has_playernumber();
-  inline void set_has_pos();
-  inline void clear_has_pos();
+  inline void set_has_possition();
+  inline void clear_has_possition();
   inline void set_has_playerscore();
   inline void clear_has_playerscore();
 
@@ -308,7 +309,7 @@ class Playerinfromation : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::ServerMessage::playerPos* pos_;
+  ::ServerMessage::Vector2f* possition_;
   ::google::protobuf::int32 playernumber_;
   ::google::protobuf::int32 playerscore_;
   friend void  protobuf_AddDesc_ServerMessage_2eproto();
@@ -317,6 +318,109 @@ class Playerinfromation : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static Playerinfromation* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class BallInformation : public ::google::protobuf::Message {
+ public:
+  BallInformation();
+  virtual ~BallInformation();
+
+  BallInformation(const BallInformation& from);
+
+  inline BallInformation& operator=(const BallInformation& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BallInformation& default_instance();
+
+  void Swap(BallInformation* other);
+
+  // implements Message ----------------------------------------------
+
+  BallInformation* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const BallInformation& from);
+  void MergeFrom(const BallInformation& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .ServerMessage.Vector2f possition = 1;
+  inline bool has_possition() const;
+  inline void clear_possition();
+  static const int kPossitionFieldNumber = 1;
+  inline const ::ServerMessage::Vector2f& possition() const;
+  inline ::ServerMessage::Vector2f* mutable_possition();
+  inline ::ServerMessage::Vector2f* release_possition();
+  inline void set_allocated_possition(::ServerMessage::Vector2f* possition);
+
+  // required float angle = 2;
+  inline bool has_angle() const;
+  inline void clear_angle();
+  static const int kAngleFieldNumber = 2;
+  inline float angle() const;
+  inline void set_angle(float value);
+
+  // required .ServerMessage.Vector2f velocity = 3;
+  inline bool has_velocity() const;
+  inline void clear_velocity();
+  static const int kVelocityFieldNumber = 3;
+  inline const ::ServerMessage::Vector2f& velocity() const;
+  inline ::ServerMessage::Vector2f* mutable_velocity();
+  inline ::ServerMessage::Vector2f* release_velocity();
+  inline void set_allocated_velocity(::ServerMessage::Vector2f* velocity);
+
+  // @@protoc_insertion_point(class_scope:ServerMessage.BallInformation)
+ private:
+  inline void set_has_possition();
+  inline void clear_has_possition();
+  inline void set_has_angle();
+  inline void clear_has_angle();
+  inline void set_has_velocity();
+  inline void clear_has_velocity();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::ServerMessage::Vector2f* possition_;
+  ::ServerMessage::Vector2f* velocity_;
+  float angle_;
+  friend void  protobuf_AddDesc_ServerMessage_2eproto();
+  friend void protobuf_AssignDesc_ServerMessage_2eproto();
+  friend void protobuf_ShutdownFile_ServerMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static BallInformation* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -483,6 +587,15 @@ class ServerMessage : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 playernumber() const;
   inline void set_playernumber(::google::protobuf::int32 value);
 
+  // required .ServerMessage.BallInformation ballInformation = 6;
+  inline bool has_ballinformation() const;
+  inline void clear_ballinformation();
+  static const int kBallInformationFieldNumber = 6;
+  inline const ::ServerMessage::BallInformation& ballinformation() const;
+  inline ::ServerMessage::BallInformation* mutable_ballinformation();
+  inline ::ServerMessage::BallInformation* release_ballinformation();
+  inline void set_allocated_ballinformation(::ServerMessage::BallInformation* ballinformation);
+
   // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
   inline bool has_additioanlinfo() const;
   inline void clear_additioanlinfo();
@@ -504,6 +617,8 @@ class ServerMessage : public ::google::protobuf::Message {
   inline void clear_has_playertwo();
   inline void set_has_playernumber();
   inline void clear_has_playernumber();
+  inline void set_has_ballinformation();
+  inline void clear_has_ballinformation();
   inline void set_has_additioanlinfo();
   inline void clear_has_additioanlinfo();
 
@@ -516,6 +631,7 @@ class ServerMessage : public ::google::protobuf::Message {
   ::google::protobuf::int32 playersconnected_;
   ::google::protobuf::int32 playernumber_;
   ::ServerMessage::Playerinfromation* playertwo_;
+  ::ServerMessage::BallInformation* ballinformation_;
   ::ServerMessage::AdditionalInformation* additioanlinfo_;
   friend void  protobuf_AddDesc_ServerMessage_2eproto();
   friend void protobuf_AssignDesc_ServerMessage_2eproto();
@@ -581,54 +697,54 @@ inline void ServerInformation::set_messagenumber(::google::protobuf::int64 value
 
 // -------------------------------------------------------------------
 
-// playerPos
+// Vector2f
 
 // required float posY = 1;
-inline bool playerPos::has_posy() const {
+inline bool Vector2f::has_posy() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void playerPos::set_has_posy() {
+inline void Vector2f::set_has_posy() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void playerPos::clear_has_posy() {
+inline void Vector2f::clear_has_posy() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void playerPos::clear_posy() {
+inline void Vector2f::clear_posy() {
   posy_ = 0;
   clear_has_posy();
 }
-inline float playerPos::posy() const {
-  // @@protoc_insertion_point(field_get:ServerMessage.playerPos.posY)
+inline float Vector2f::posy() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.Vector2f.posY)
   return posy_;
 }
-inline void playerPos::set_posy(float value) {
+inline void Vector2f::set_posy(float value) {
   set_has_posy();
   posy_ = value;
-  // @@protoc_insertion_point(field_set:ServerMessage.playerPos.posY)
+  // @@protoc_insertion_point(field_set:ServerMessage.Vector2f.posY)
 }
 
 // required float posX = 2;
-inline bool playerPos::has_posx() const {
+inline bool Vector2f::has_posx() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void playerPos::set_has_posx() {
+inline void Vector2f::set_has_posx() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void playerPos::clear_has_posx() {
+inline void Vector2f::clear_has_posx() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void playerPos::clear_posx() {
+inline void Vector2f::clear_posx() {
   posx_ = 0;
   clear_has_posx();
 }
-inline float playerPos::posx() const {
-  // @@protoc_insertion_point(field_get:ServerMessage.playerPos.posX)
+inline float Vector2f::posx() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.Vector2f.posX)
   return posx_;
 }
-inline void playerPos::set_posx(float value) {
+inline void Vector2f::set_posx(float value) {
   set_has_posx();
   posx_ = value;
-  // @@protoc_insertion_point(field_set:ServerMessage.playerPos.posX)
+  // @@protoc_insertion_point(field_set:ServerMessage.Vector2f.posX)
 }
 
 // -------------------------------------------------------------------
@@ -659,48 +775,48 @@ inline void Playerinfromation::set_playernumber(::google::protobuf::int32 value)
   // @@protoc_insertion_point(field_set:ServerMessage.Playerinfromation.playerNumber)
 }
 
-// required .ServerMessage.playerPos pos = 3;
-inline bool Playerinfromation::has_pos() const {
+// required .ServerMessage.Vector2f possition = 3;
+inline bool Playerinfromation::has_possition() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Playerinfromation::set_has_pos() {
+inline void Playerinfromation::set_has_possition() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Playerinfromation::clear_has_pos() {
+inline void Playerinfromation::clear_has_possition() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Playerinfromation::clear_pos() {
-  if (pos_ != NULL) pos_->::ServerMessage::playerPos::Clear();
-  clear_has_pos();
+inline void Playerinfromation::clear_possition() {
+  if (possition_ != NULL) possition_->::ServerMessage::Vector2f::Clear();
+  clear_has_possition();
 }
-inline const ::ServerMessage::playerPos& Playerinfromation::pos() const {
-  // @@protoc_insertion_point(field_get:ServerMessage.Playerinfromation.pos)
-  return pos_ != NULL ? *pos_ : *default_instance_->pos_;
+inline const ::ServerMessage::Vector2f& Playerinfromation::possition() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.Playerinfromation.possition)
+  return possition_ != NULL ? *possition_ : *default_instance_->possition_;
 }
-inline ::ServerMessage::playerPos* Playerinfromation::mutable_pos() {
-  set_has_pos();
-  if (pos_ == NULL) pos_ = new ::ServerMessage::playerPos;
-  // @@protoc_insertion_point(field_mutable:ServerMessage.Playerinfromation.pos)
-  return pos_;
+inline ::ServerMessage::Vector2f* Playerinfromation::mutable_possition() {
+  set_has_possition();
+  if (possition_ == NULL) possition_ = new ::ServerMessage::Vector2f;
+  // @@protoc_insertion_point(field_mutable:ServerMessage.Playerinfromation.possition)
+  return possition_;
 }
-inline ::ServerMessage::playerPos* Playerinfromation::release_pos() {
-  clear_has_pos();
-  ::ServerMessage::playerPos* temp = pos_;
-  pos_ = NULL;
+inline ::ServerMessage::Vector2f* Playerinfromation::release_possition() {
+  clear_has_possition();
+  ::ServerMessage::Vector2f* temp = possition_;
+  possition_ = NULL;
   return temp;
 }
-inline void Playerinfromation::set_allocated_pos(::ServerMessage::playerPos* pos) {
-  delete pos_;
-  pos_ = pos;
-  if (pos) {
-    set_has_pos();
+inline void Playerinfromation::set_allocated_possition(::ServerMessage::Vector2f* possition) {
+  delete possition_;
+  possition_ = possition;
+  if (possition) {
+    set_has_possition();
   } else {
-    clear_has_pos();
+    clear_has_possition();
   }
-  // @@protoc_insertion_point(field_set_allocated:ServerMessage.Playerinfromation.pos)
+  // @@protoc_insertion_point(field_set_allocated:ServerMessage.Playerinfromation.possition)
 }
 
-// required int32 playerScore = 4;
+// required int32 playerScore = 2;
 inline bool Playerinfromation::has_playerscore() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -722,6 +838,116 @@ inline void Playerinfromation::set_playerscore(::google::protobuf::int32 value) 
   set_has_playerscore();
   playerscore_ = value;
   // @@protoc_insertion_point(field_set:ServerMessage.Playerinfromation.playerScore)
+}
+
+// -------------------------------------------------------------------
+
+// BallInformation
+
+// required .ServerMessage.Vector2f possition = 1;
+inline bool BallInformation::has_possition() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void BallInformation::set_has_possition() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void BallInformation::clear_has_possition() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void BallInformation::clear_possition() {
+  if (possition_ != NULL) possition_->::ServerMessage::Vector2f::Clear();
+  clear_has_possition();
+}
+inline const ::ServerMessage::Vector2f& BallInformation::possition() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.BallInformation.possition)
+  return possition_ != NULL ? *possition_ : *default_instance_->possition_;
+}
+inline ::ServerMessage::Vector2f* BallInformation::mutable_possition() {
+  set_has_possition();
+  if (possition_ == NULL) possition_ = new ::ServerMessage::Vector2f;
+  // @@protoc_insertion_point(field_mutable:ServerMessage.BallInformation.possition)
+  return possition_;
+}
+inline ::ServerMessage::Vector2f* BallInformation::release_possition() {
+  clear_has_possition();
+  ::ServerMessage::Vector2f* temp = possition_;
+  possition_ = NULL;
+  return temp;
+}
+inline void BallInformation::set_allocated_possition(::ServerMessage::Vector2f* possition) {
+  delete possition_;
+  possition_ = possition;
+  if (possition) {
+    set_has_possition();
+  } else {
+    clear_has_possition();
+  }
+  // @@protoc_insertion_point(field_set_allocated:ServerMessage.BallInformation.possition)
+}
+
+// required float angle = 2;
+inline bool BallInformation::has_angle() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void BallInformation::set_has_angle() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void BallInformation::clear_has_angle() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void BallInformation::clear_angle() {
+  angle_ = 0;
+  clear_has_angle();
+}
+inline float BallInformation::angle() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.BallInformation.angle)
+  return angle_;
+}
+inline void BallInformation::set_angle(float value) {
+  set_has_angle();
+  angle_ = value;
+  // @@protoc_insertion_point(field_set:ServerMessage.BallInformation.angle)
+}
+
+// required .ServerMessage.Vector2f velocity = 3;
+inline bool BallInformation::has_velocity() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void BallInformation::set_has_velocity() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void BallInformation::clear_has_velocity() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void BallInformation::clear_velocity() {
+  if (velocity_ != NULL) velocity_->::ServerMessage::Vector2f::Clear();
+  clear_has_velocity();
+}
+inline const ::ServerMessage::Vector2f& BallInformation::velocity() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.BallInformation.velocity)
+  return velocity_ != NULL ? *velocity_ : *default_instance_->velocity_;
+}
+inline ::ServerMessage::Vector2f* BallInformation::mutable_velocity() {
+  set_has_velocity();
+  if (velocity_ == NULL) velocity_ = new ::ServerMessage::Vector2f;
+  // @@protoc_insertion_point(field_mutable:ServerMessage.BallInformation.velocity)
+  return velocity_;
+}
+inline ::ServerMessage::Vector2f* BallInformation::release_velocity() {
+  clear_has_velocity();
+  ::ServerMessage::Vector2f* temp = velocity_;
+  velocity_ = NULL;
+  return temp;
+}
+inline void BallInformation::set_allocated_velocity(::ServerMessage::Vector2f* velocity) {
+  delete velocity_;
+  velocity_ = velocity;
+  if (velocity) {
+    set_has_velocity();
+  } else {
+    clear_has_velocity();
+  }
+  // @@protoc_insertion_point(field_set_allocated:ServerMessage.BallInformation.velocity)
 }
 
 // -------------------------------------------------------------------
@@ -903,15 +1129,56 @@ inline void ServerMessage::set_playernumber(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:ServerMessage.ServerMessage.playerNumber)
 }
 
-// required .ServerMessage.AdditionalInformation additioanlInfo = 8;
-inline bool ServerMessage::has_additioanlinfo() const {
+// required .ServerMessage.BallInformation ballInformation = 6;
+inline bool ServerMessage::has_ballinformation() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void ServerMessage::set_has_additioanlinfo() {
+inline void ServerMessage::set_has_ballinformation() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void ServerMessage::clear_has_additioanlinfo() {
+inline void ServerMessage::clear_has_ballinformation() {
   _has_bits_[0] &= ~0x00000020u;
+}
+inline void ServerMessage::clear_ballinformation() {
+  if (ballinformation_ != NULL) ballinformation_->::ServerMessage::BallInformation::Clear();
+  clear_has_ballinformation();
+}
+inline const ::ServerMessage::BallInformation& ServerMessage::ballinformation() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.ServerMessage.ballInformation)
+  return ballinformation_ != NULL ? *ballinformation_ : *default_instance_->ballinformation_;
+}
+inline ::ServerMessage::BallInformation* ServerMessage::mutable_ballinformation() {
+  set_has_ballinformation();
+  if (ballinformation_ == NULL) ballinformation_ = new ::ServerMessage::BallInformation;
+  // @@protoc_insertion_point(field_mutable:ServerMessage.ServerMessage.ballInformation)
+  return ballinformation_;
+}
+inline ::ServerMessage::BallInformation* ServerMessage::release_ballinformation() {
+  clear_has_ballinformation();
+  ::ServerMessage::BallInformation* temp = ballinformation_;
+  ballinformation_ = NULL;
+  return temp;
+}
+inline void ServerMessage::set_allocated_ballinformation(::ServerMessage::BallInformation* ballinformation) {
+  delete ballinformation_;
+  ballinformation_ = ballinformation;
+  if (ballinformation) {
+    set_has_ballinformation();
+  } else {
+    clear_has_ballinformation();
+  }
+  // @@protoc_insertion_point(field_set_allocated:ServerMessage.ServerMessage.ballInformation)
+}
+
+// required .ServerMessage.AdditionalInformation additioanlInfo = 8;
+inline bool ServerMessage::has_additioanlinfo() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void ServerMessage::set_has_additioanlinfo() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void ServerMessage::clear_has_additioanlinfo() {
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void ServerMessage::clear_additioanlinfo() {
   if (additioanlinfo_ != NULL) additioanlinfo_->::ServerMessage::AdditionalInformation::Clear();

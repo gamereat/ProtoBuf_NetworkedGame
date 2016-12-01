@@ -23,12 +23,15 @@ namespace {
 const ::google::protobuf::Descriptor* ServerInformation_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ServerInformation_reflection_ = NULL;
-const ::google::protobuf::Descriptor* playerPos_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* Vector2f_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  playerPos_reflection_ = NULL;
+  Vector2f_reflection_ = NULL;
 const ::google::protobuf::Descriptor* Playerinfromation_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Playerinfromation_reflection_ = NULL;
+const ::google::protobuf::Descriptor* BallInformation_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  BallInformation_reflection_ = NULL;
 const ::google::protobuf::Descriptor* AdditionalInformation_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AdditionalInformation_reflection_ = NULL;
@@ -61,26 +64,26 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ServerInformation));
-  playerPos_descriptor_ = file->message_type(1);
-  static const int playerPos_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(playerPos, posy_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(playerPos, posx_),
+  Vector2f_descriptor_ = file->message_type(1);
+  static const int Vector2f_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2f, posy_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2f, posx_),
   };
-  playerPos_reflection_ =
+  Vector2f_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      playerPos_descriptor_,
-      playerPos::default_instance_,
-      playerPos_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(playerPos, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(playerPos, _unknown_fields_),
+      Vector2f_descriptor_,
+      Vector2f::default_instance_,
+      Vector2f_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2f, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2f, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(playerPos));
+      sizeof(Vector2f));
   Playerinfromation_descriptor_ = file->message_type(2);
   static const int Playerinfromation_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, playernumber_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, pos_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, possition_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, playerscore_),
   };
   Playerinfromation_reflection_ =
@@ -94,7 +97,24 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Playerinfromation));
-  AdditionalInformation_descriptor_ = file->message_type(3);
+  BallInformation_descriptor_ = file->message_type(3);
+  static const int BallInformation_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BallInformation, possition_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BallInformation, angle_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BallInformation, velocity_),
+  };
+  BallInformation_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      BallInformation_descriptor_,
+      BallInformation::default_instance_,
+      BallInformation_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BallInformation, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BallInformation, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(BallInformation));
+  AdditionalInformation_descriptor_ = file->message_type(4);
   static const int AdditionalInformation_offsets_[1] = {
   };
   AdditionalInformation_reflection_ =
@@ -108,13 +128,14 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AdditionalInformation));
-  ServerMessage_descriptor_ = file->message_type(4);
-  static const int ServerMessage_offsets_[6] = {
+  ServerMessage_descriptor_ = file->message_type(5);
+  static const int ServerMessage_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playersconnected_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, serverinfo_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerone_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playertwo_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playernumber_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, ballinformation_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, additioanlinfo_),
   };
   ServerMessage_reflection_ =
@@ -143,9 +164,11 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ServerInformation_descriptor_, &ServerInformation::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    playerPos_descriptor_, &playerPos::default_instance());
+    Vector2f_descriptor_, &Vector2f::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Playerinfromation_descriptor_, &Playerinfromation::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    BallInformation_descriptor_, &BallInformation::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AdditionalInformation_descriptor_, &AdditionalInformation::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -157,10 +180,12 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_ServerMessage_2eproto() {
   delete ServerInformation::default_instance_;
   delete ServerInformation_reflection_;
-  delete playerPos::default_instance_;
-  delete playerPos_reflection_;
+  delete Vector2f::default_instance_;
+  delete Vector2f_reflection_;
   delete Playerinfromation::default_instance_;
   delete Playerinfromation_reflection_;
+  delete BallInformation::default_instance_;
+  delete BallInformation_reflection_;
   delete AdditionalInformation::default_instance_;
   delete AdditionalInformation_reflection_;
   delete ServerMessage::default_instance_;
@@ -176,29 +201,35 @@ void protobuf_AddDesc_ServerMessage_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\023ServerMessage.proto\022\rServerMessage\"E\n\021"
     "ServerInformation\022\031\n\021serverInformation\030\001"
-    " \002(\005\022\025\n\rmessageNumber\030\002 \002(\003\"\'\n\tplayerPos"
-    "\022\014\n\004posY\030\001 \002(\002\022\014\n\004posX\030\002 \002(\002\"e\n\021Playerin"
-    "fromation\022\024\n\014playerNumber\030\001 \002(\005\022%\n\003pos\030\003"
-    " \002(\0132\030.ServerMessage.playerPos\022\023\n\013player"
-    "Score\030\004 \002(\005\"\027\n\025AdditionalInformation\"\235\002\n"
-    "\rServerMessage\022\030\n\020playersConnected\030\001 \002(\005"
-    "\0224\n\nserverinfo\030\002 \002(\0132 .ServerMessage.Ser"
-    "verInformation\0223\n\tplayerOne\030\003 \002(\0132 .Serv"
-    "erMessage.Playerinfromation\0223\n\tplayerTwo"
-    "\030\004 \002(\0132 .ServerMessage.Playerinfromation"
-    "\022\024\n\014playerNumber\030\005 \002(\005\022<\n\016additioanlInfo"
-    "\030\010 \002(\0132$.ServerMessage.AdditionalInforma"
-    "tion", 564);
+    " \002(\005\022\025\n\rmessageNumber\030\002 \002(\003\"&\n\010Vector2f\022"
+    "\014\n\004posY\030\001 \002(\002\022\014\n\004posX\030\002 \002(\002\"j\n\021Playerinf"
+    "romation\022\024\n\014playerNumber\030\001 \002(\005\022*\n\tpossit"
+    "ion\030\003 \002(\0132\027.ServerMessage.Vector2f\022\023\n\013pl"
+    "ayerScore\030\002 \002(\005\"w\n\017BallInformation\022*\n\tpo"
+    "ssition\030\001 \002(\0132\027.ServerMessage.Vector2f\022\r"
+    "\n\005angle\030\002 \002(\002\022)\n\010velocity\030\003 \002(\0132\027.Server"
+    "Message.Vector2f\"\027\n\025AdditionalInformatio"
+    "n\"\326\002\n\rServerMessage\022\030\n\020playersConnected\030"
+    "\001 \002(\005\0224\n\nserverinfo\030\002 \002(\0132 .ServerMessag"
+    "e.ServerInformation\0223\n\tplayerOne\030\003 \002(\0132 "
+    ".ServerMessage.Playerinfromation\0223\n\tplay"
+    "erTwo\030\004 \002(\0132 .ServerMessage.Playerinfrom"
+    "ation\022\024\n\014playerNumber\030\005 \002(\005\0227\n\017ballInfor"
+    "mation\030\006 \002(\0132\036.ServerMessage.BallInforma"
+    "tion\022<\n\016additioanlInfo\030\010 \002(\0132$.ServerMes"
+    "sage.AdditionalInformation", 746);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ServerMessage.proto", &protobuf_RegisterTypes);
   ServerInformation::default_instance_ = new ServerInformation();
-  playerPos::default_instance_ = new playerPos();
+  Vector2f::default_instance_ = new Vector2f();
   Playerinfromation::default_instance_ = new Playerinfromation();
+  BallInformation::default_instance_ = new BallInformation();
   AdditionalInformation::default_instance_ = new AdditionalInformation();
   ServerMessage::default_instance_ = new ServerMessage();
   ServerInformation::default_instance_->InitAsDefaultInstance();
-  playerPos::default_instance_->InitAsDefaultInstance();
+  Vector2f::default_instance_->InitAsDefaultInstance();
   Playerinfromation::default_instance_->InitAsDefaultInstance();
+  BallInformation::default_instance_->InitAsDefaultInstance();
   AdditionalInformation::default_instance_->InitAsDefaultInstance();
   ServerMessage::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_ServerMessage_2eproto);
@@ -489,67 +520,67 @@ void ServerInformation::Swap(ServerInformation* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int playerPos::kPosYFieldNumber;
-const int playerPos::kPosXFieldNumber;
+const int Vector2f::kPosYFieldNumber;
+const int Vector2f::kPosXFieldNumber;
 #endif  // !_MSC_VER
 
-playerPos::playerPos()
+Vector2f::Vector2f()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:ServerMessage.playerPos)
+  // @@protoc_insertion_point(constructor:ServerMessage.Vector2f)
 }
 
-void playerPos::InitAsDefaultInstance() {
+void Vector2f::InitAsDefaultInstance() {
 }
 
-playerPos::playerPos(const playerPos& from)
+Vector2f::Vector2f(const Vector2f& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:ServerMessage.playerPos)
+  // @@protoc_insertion_point(copy_constructor:ServerMessage.Vector2f)
 }
 
-void playerPos::SharedCtor() {
+void Vector2f::SharedCtor() {
   _cached_size_ = 0;
   posy_ = 0;
   posx_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-playerPos::~playerPos() {
-  // @@protoc_insertion_point(destructor:ServerMessage.playerPos)
+Vector2f::~Vector2f() {
+  // @@protoc_insertion_point(destructor:ServerMessage.Vector2f)
   SharedDtor();
 }
 
-void playerPos::SharedDtor() {
+void Vector2f::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void playerPos::SetCachedSize(int size) const {
+void Vector2f::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* playerPos::descriptor() {
+const ::google::protobuf::Descriptor* Vector2f::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return playerPos_descriptor_;
+  return Vector2f_descriptor_;
 }
 
-const playerPos& playerPos::default_instance() {
+const Vector2f& Vector2f::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_ServerMessage_2eproto();
   return *default_instance_;
 }
 
-playerPos* playerPos::default_instance_ = NULL;
+Vector2f* Vector2f::default_instance_ = NULL;
 
-playerPos* playerPos::New() const {
-  return new playerPos;
+Vector2f* Vector2f::New() const {
+  return new Vector2f;
 }
 
-void playerPos::Clear() {
+void Vector2f::Clear() {
 #define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<playerPos*>(16)->f) - \
+  &reinterpret_cast<Vector2f*>(16)->f) - \
    reinterpret_cast<char*>(16))
 
 #define ZR_(first, last) do {                              \
@@ -567,11 +598,11 @@ void playerPos::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool playerPos::MergePartialFromCodedStream(
+bool Vector2f::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:ServerMessage.playerPos)
+  // @@protoc_insertion_point(parse_start:ServerMessage.Vector2f)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -620,17 +651,17 @@ bool playerPos::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:ServerMessage.playerPos)
+  // @@protoc_insertion_point(parse_success:ServerMessage.Vector2f)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:ServerMessage.playerPos)
+  // @@protoc_insertion_point(parse_failure:ServerMessage.Vector2f)
   return false;
 #undef DO_
 }
 
-void playerPos::SerializeWithCachedSizes(
+void Vector2f::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:ServerMessage.playerPos)
+  // @@protoc_insertion_point(serialize_start:ServerMessage.Vector2f)
   // required float posY = 1;
   if (has_posy()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->posy(), output);
@@ -645,12 +676,12 @@ void playerPos::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:ServerMessage.playerPos)
+  // @@protoc_insertion_point(serialize_end:ServerMessage.Vector2f)
 }
 
-::google::protobuf::uint8* playerPos::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* Vector2f::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.playerPos)
+  // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.Vector2f)
   // required float posY = 1;
   if (has_posy()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->posy(), target);
@@ -665,11 +696,11 @@ void playerPos::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:ServerMessage.playerPos)
+  // @@protoc_insertion_point(serialize_to_array_end:ServerMessage.Vector2f)
   return target;
 }
 
-int playerPos::ByteSize() const {
+int Vector2f::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -695,10 +726,10 @@ int playerPos::ByteSize() const {
   return total_size;
 }
 
-void playerPos::MergeFrom(const ::google::protobuf::Message& from) {
+void Vector2f::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const playerPos* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const playerPos*>(
+  const Vector2f* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Vector2f*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -707,7 +738,7 @@ void playerPos::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void playerPos::MergeFrom(const playerPos& from) {
+void Vector2f::MergeFrom(const Vector2f& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_posy()) {
@@ -720,25 +751,25 @@ void playerPos::MergeFrom(const playerPos& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void playerPos::CopyFrom(const ::google::protobuf::Message& from) {
+void Vector2f::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void playerPos::CopyFrom(const playerPos& from) {
+void Vector2f::CopyFrom(const Vector2f& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool playerPos::IsInitialized() const {
+bool Vector2f::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
-void playerPos::Swap(playerPos* other) {
+void Vector2f::Swap(Vector2f* other) {
   if (other != this) {
     std::swap(posy_, other->posy_);
     std::swap(posx_, other->posx_);
@@ -748,11 +779,11 @@ void playerPos::Swap(playerPos* other) {
   }
 }
 
-::google::protobuf::Metadata playerPos::GetMetadata() const {
+::google::protobuf::Metadata Vector2f::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = playerPos_descriptor_;
-  metadata.reflection = playerPos_reflection_;
+  metadata.descriptor = Vector2f_descriptor_;
+  metadata.reflection = Vector2f_reflection_;
   return metadata;
 }
 
@@ -761,7 +792,7 @@ void playerPos::Swap(playerPos* other) {
 
 #ifndef _MSC_VER
 const int Playerinfromation::kPlayerNumberFieldNumber;
-const int Playerinfromation::kPosFieldNumber;
+const int Playerinfromation::kPossitionFieldNumber;
 const int Playerinfromation::kPlayerScoreFieldNumber;
 #endif  // !_MSC_VER
 
@@ -772,7 +803,7 @@ Playerinfromation::Playerinfromation()
 }
 
 void Playerinfromation::InitAsDefaultInstance() {
-  pos_ = const_cast< ::ServerMessage::playerPos*>(&::ServerMessage::playerPos::default_instance());
+  possition_ = const_cast< ::ServerMessage::Vector2f*>(&::ServerMessage::Vector2f::default_instance());
 }
 
 Playerinfromation::Playerinfromation(const Playerinfromation& from)
@@ -785,7 +816,7 @@ Playerinfromation::Playerinfromation(const Playerinfromation& from)
 void Playerinfromation::SharedCtor() {
   _cached_size_ = 0;
   playernumber_ = 0;
-  pos_ = NULL;
+  possition_ = NULL;
   playerscore_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -797,7 +828,7 @@ Playerinfromation::~Playerinfromation() {
 
 void Playerinfromation::SharedDtor() {
   if (this != default_instance_) {
-    delete pos_;
+    delete possition_;
   }
 }
 
@@ -835,8 +866,8 @@ void Playerinfromation::Clear() {
 
   if (_has_bits_[0 / 32] & 7) {
     ZR_(playernumber_, playerscore_);
-    if (has_pos()) {
-      if (pos_ != NULL) pos_->::ServerMessage::playerPos::Clear();
+    if (has_possition()) {
+      if (possition_ != NULL) possition_->::ServerMessage::Vector2f::Clear();
     }
   }
 
@@ -867,31 +898,31 @@ bool Playerinfromation::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(26)) goto parse_pos;
+        if (input->ExpectTag(16)) goto parse_playerScore;
         break;
       }
 
-      // required .ServerMessage.playerPos pos = 3;
-      case 3: {
-        if (tag == 26) {
-         parse_pos:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_pos()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(32)) goto parse_playerScore;
-        break;
-      }
-
-      // required int32 playerScore = 4;
-      case 4: {
-        if (tag == 32) {
+      // required int32 playerScore = 2;
+      case 2: {
+        if (tag == 16) {
          parse_playerScore:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &playerscore_)));
           set_has_playerscore();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_possition;
+        break;
+      }
+
+      // required .ServerMessage.Vector2f possition = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_possition:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_possition()));
         } else {
           goto handle_unusual;
         }
@@ -929,15 +960,15 @@ void Playerinfromation::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->playernumber(), output);
   }
 
-  // required .ServerMessage.playerPos pos = 3;
-  if (has_pos()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->pos(), output);
+  // required int32 playerScore = 2;
+  if (has_playerscore()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->playerscore(), output);
   }
 
-  // required int32 playerScore = 4;
-  if (has_playerscore()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->playerscore(), output);
+  // required .ServerMessage.Vector2f possition = 3;
+  if (has_possition()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->possition(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -955,16 +986,16 @@ void Playerinfromation::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->playernumber(), target);
   }
 
-  // required .ServerMessage.playerPos pos = 3;
-  if (has_pos()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        3, this->pos(), target);
+  // required int32 playerScore = 2;
+  if (has_playerscore()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->playerscore(), target);
   }
 
-  // required int32 playerScore = 4;
-  if (has_playerscore()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->playerscore(), target);
+  // required .ServerMessage.Vector2f possition = 3;
+  if (has_possition()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->possition(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -986,14 +1017,14 @@ int Playerinfromation::ByteSize() const {
           this->playernumber());
     }
 
-    // required .ServerMessage.playerPos pos = 3;
-    if (has_pos()) {
+    // required .ServerMessage.Vector2f possition = 3;
+    if (has_possition()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->pos());
+          this->possition());
     }
 
-    // required int32 playerScore = 4;
+    // required int32 playerScore = 2;
     if (has_playerscore()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -1030,8 +1061,8 @@ void Playerinfromation::MergeFrom(const Playerinfromation& from) {
     if (from.has_playernumber()) {
       set_playernumber(from.playernumber());
     }
-    if (from.has_pos()) {
-      mutable_pos()->::ServerMessage::playerPos::MergeFrom(from.pos());
+    if (from.has_possition()) {
+      mutable_possition()->::ServerMessage::Vector2f::MergeFrom(from.possition());
     }
     if (from.has_playerscore()) {
       set_playerscore(from.playerscore());
@@ -1055,8 +1086,8 @@ void Playerinfromation::CopyFrom(const Playerinfromation& from) {
 bool Playerinfromation::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
-  if (has_pos()) {
-    if (!this->pos().IsInitialized()) return false;
+  if (has_possition()) {
+    if (!this->possition().IsInitialized()) return false;
   }
   return true;
 }
@@ -1064,7 +1095,7 @@ bool Playerinfromation::IsInitialized() const {
 void Playerinfromation::Swap(Playerinfromation* other) {
   if (other != this) {
     std::swap(playernumber_, other->playernumber_);
-    std::swap(pos_, other->pos_);
+    std::swap(possition_, other->possition_);
     std::swap(playerscore_, other->playerscore_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -1077,6 +1108,323 @@ void Playerinfromation::Swap(Playerinfromation* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = Playerinfromation_descriptor_;
   metadata.reflection = Playerinfromation_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int BallInformation::kPossitionFieldNumber;
+const int BallInformation::kAngleFieldNumber;
+const int BallInformation::kVelocityFieldNumber;
+#endif  // !_MSC_VER
+
+BallInformation::BallInformation()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ServerMessage.BallInformation)
+}
+
+void BallInformation::InitAsDefaultInstance() {
+  possition_ = const_cast< ::ServerMessage::Vector2f*>(&::ServerMessage::Vector2f::default_instance());
+  velocity_ = const_cast< ::ServerMessage::Vector2f*>(&::ServerMessage::Vector2f::default_instance());
+}
+
+BallInformation::BallInformation(const BallInformation& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:ServerMessage.BallInformation)
+}
+
+void BallInformation::SharedCtor() {
+  _cached_size_ = 0;
+  possition_ = NULL;
+  angle_ = 0;
+  velocity_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+BallInformation::~BallInformation() {
+  // @@protoc_insertion_point(destructor:ServerMessage.BallInformation)
+  SharedDtor();
+}
+
+void BallInformation::SharedDtor() {
+  if (this != default_instance_) {
+    delete possition_;
+    delete velocity_;
+  }
+}
+
+void BallInformation::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* BallInformation::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return BallInformation_descriptor_;
+}
+
+const BallInformation& BallInformation::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_ServerMessage_2eproto();
+  return *default_instance_;
+}
+
+BallInformation* BallInformation::default_instance_ = NULL;
+
+BallInformation* BallInformation::New() const {
+  return new BallInformation;
+}
+
+void BallInformation::Clear() {
+  if (_has_bits_[0 / 32] & 7) {
+    if (has_possition()) {
+      if (possition_ != NULL) possition_->::ServerMessage::Vector2f::Clear();
+    }
+    angle_ = 0;
+    if (has_velocity()) {
+      if (velocity_ != NULL) velocity_->::ServerMessage::Vector2f::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool BallInformation::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ServerMessage.BallInformation)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .ServerMessage.Vector2f possition = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_possition()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(21)) goto parse_angle;
+        break;
+      }
+
+      // required float angle = 2;
+      case 2: {
+        if (tag == 21) {
+         parse_angle:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &angle_)));
+          set_has_angle();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_velocity;
+        break;
+      }
+
+      // required .ServerMessage.Vector2f velocity = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_velocity:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_velocity()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ServerMessage.BallInformation)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ServerMessage.BallInformation)
+  return false;
+#undef DO_
+}
+
+void BallInformation::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ServerMessage.BallInformation)
+  // required .ServerMessage.Vector2f possition = 1;
+  if (has_possition()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->possition(), output);
+  }
+
+  // required float angle = 2;
+  if (has_angle()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->angle(), output);
+  }
+
+  // required .ServerMessage.Vector2f velocity = 3;
+  if (has_velocity()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->velocity(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:ServerMessage.BallInformation)
+}
+
+::google::protobuf::uint8* BallInformation::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.BallInformation)
+  // required .ServerMessage.Vector2f possition = 1;
+  if (has_possition()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->possition(), target);
+  }
+
+  // required float angle = 2;
+  if (has_angle()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->angle(), target);
+  }
+
+  // required .ServerMessage.Vector2f velocity = 3;
+  if (has_velocity()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->velocity(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ServerMessage.BallInformation)
+  return target;
+}
+
+int BallInformation::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .ServerMessage.Vector2f possition = 1;
+    if (has_possition()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->possition());
+    }
+
+    // required float angle = 2;
+    if (has_angle()) {
+      total_size += 1 + 4;
+    }
+
+    // required .ServerMessage.Vector2f velocity = 3;
+    if (has_velocity()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->velocity());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void BallInformation::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const BallInformation* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const BallInformation*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void BallInformation::MergeFrom(const BallInformation& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_possition()) {
+      mutable_possition()->::ServerMessage::Vector2f::MergeFrom(from.possition());
+    }
+    if (from.has_angle()) {
+      set_angle(from.angle());
+    }
+    if (from.has_velocity()) {
+      mutable_velocity()->::ServerMessage::Vector2f::MergeFrom(from.velocity());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void BallInformation::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BallInformation::CopyFrom(const BallInformation& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BallInformation::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  if (has_possition()) {
+    if (!this->possition().IsInitialized()) return false;
+  }
+  if (has_velocity()) {
+    if (!this->velocity().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void BallInformation::Swap(BallInformation* other) {
+  if (other != this) {
+    std::swap(possition_, other->possition_);
+    std::swap(angle_, other->angle_);
+    std::swap(velocity_, other->velocity_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata BallInformation::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = BallInformation_descriptor_;
+  metadata.reflection = BallInformation_reflection_;
   return metadata;
 }
 
@@ -1263,6 +1611,7 @@ const int ServerMessage::kServerinfoFieldNumber;
 const int ServerMessage::kPlayerOneFieldNumber;
 const int ServerMessage::kPlayerTwoFieldNumber;
 const int ServerMessage::kPlayerNumberFieldNumber;
+const int ServerMessage::kBallInformationFieldNumber;
 const int ServerMessage::kAdditioanlInfoFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1276,6 +1625,7 @@ void ServerMessage::InitAsDefaultInstance() {
   serverinfo_ = const_cast< ::ServerMessage::ServerInformation*>(&::ServerMessage::ServerInformation::default_instance());
   playerone_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
   playertwo_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
+  ballinformation_ = const_cast< ::ServerMessage::BallInformation*>(&::ServerMessage::BallInformation::default_instance());
   additioanlinfo_ = const_cast< ::ServerMessage::AdditionalInformation*>(&::ServerMessage::AdditionalInformation::default_instance());
 }
 
@@ -1293,6 +1643,7 @@ void ServerMessage::SharedCtor() {
   playerone_ = NULL;
   playertwo_ = NULL;
   playernumber_ = 0;
+  ballinformation_ = NULL;
   additioanlinfo_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1307,6 +1658,7 @@ void ServerMessage::SharedDtor() {
     delete serverinfo_;
     delete playerone_;
     delete playertwo_;
+    delete ballinformation_;
     delete additioanlinfo_;
   }
 }
@@ -1343,7 +1695,7 @@ void ServerMessage::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  if (_has_bits_[0 / 32] & 63) {
+  if (_has_bits_[0 / 32] & 127) {
     ZR_(playersconnected_, playernumber_);
     if (has_serverinfo()) {
       if (serverinfo_ != NULL) serverinfo_->::ServerMessage::ServerInformation::Clear();
@@ -1353,6 +1705,9 @@ void ServerMessage::Clear() {
     }
     if (has_playertwo()) {
       if (playertwo_ != NULL) playertwo_->::ServerMessage::Playerinfromation::Clear();
+    }
+    if (has_ballinformation()) {
+      if (ballinformation_ != NULL) ballinformation_->::ServerMessage::BallInformation::Clear();
     }
     if (has_additioanlinfo()) {
       if (additioanlinfo_ != NULL) additioanlinfo_->::ServerMessage::AdditionalInformation::Clear();
@@ -1440,6 +1795,19 @@ bool ServerMessage::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(50)) goto parse_ballInformation;
+        break;
+      }
+
+      // required .ServerMessage.BallInformation ballInformation = 6;
+      case 6: {
+        if (tag == 50) {
+         parse_ballInformation:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_ballinformation()));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectTag(66)) goto parse_additioanlInfo;
         break;
       }
@@ -1510,6 +1878,12 @@ void ServerMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->playernumber(), output);
   }
 
+  // required .ServerMessage.BallInformation ballInformation = 6;
+  if (has_ballinformation()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->ballinformation(), output);
+  }
+
   // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
   if (has_additioanlinfo()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -1555,6 +1929,13 @@ void ServerMessage::SerializeWithCachedSizes(
   // required int32 playerNumber = 5;
   if (has_playernumber()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->playernumber(), target);
+  }
+
+  // required .ServerMessage.BallInformation ballInformation = 6;
+  if (has_ballinformation()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->ballinformation(), target);
   }
 
   // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
@@ -1611,6 +1992,13 @@ int ServerMessage::ByteSize() const {
           this->playernumber());
     }
 
+    // required .ServerMessage.BallInformation ballInformation = 6;
+    if (has_ballinformation()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->ballinformation());
+    }
+
     // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
     if (has_additioanlinfo()) {
       total_size += 1 +
@@ -1660,6 +2048,9 @@ void ServerMessage::MergeFrom(const ServerMessage& from) {
     if (from.has_playernumber()) {
       set_playernumber(from.playernumber());
     }
+    if (from.has_ballinformation()) {
+      mutable_ballinformation()->::ServerMessage::BallInformation::MergeFrom(from.ballinformation());
+    }
     if (from.has_additioanlinfo()) {
       mutable_additioanlinfo()->::ServerMessage::AdditionalInformation::MergeFrom(from.additioanlinfo());
     }
@@ -1680,7 +2071,7 @@ void ServerMessage::CopyFrom(const ServerMessage& from) {
 }
 
 bool ServerMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
+  if ((_has_bits_[0] & 0x0000007f) != 0x0000007f) return false;
 
   if (has_serverinfo()) {
     if (!this->serverinfo().IsInitialized()) return false;
@@ -1690,6 +2081,9 @@ bool ServerMessage::IsInitialized() const {
   }
   if (has_playertwo()) {
     if (!this->playertwo().IsInitialized()) return false;
+  }
+  if (has_ballinformation()) {
+    if (!this->ballinformation().IsInitialized()) return false;
   }
   return true;
 }
@@ -1701,6 +2095,7 @@ void ServerMessage::Swap(ServerMessage* other) {
     std::swap(playerone_, other->playerone_);
     std::swap(playertwo_, other->playertwo_);
     std::swap(playernumber_, other->playernumber_);
+    std::swap(ballinformation_, other->ballinformation_);
     std::swap(additioanlinfo_, other->additioanlinfo_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

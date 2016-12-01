@@ -1,7 +1,6 @@
 #pragma once
 #include "SFML\Graphics.hpp"
-#include "../ShaderControlls/constantHeader.h"
-class GameObject 
+ class GameObject 
 {
 public:
 	GameObject();
@@ -10,6 +9,8 @@ public:
 	sf::Vector2f  getPosition();
 
 	void setPosition(sf::Vector2f);
+
+	sf::Sprite  getSprite();
  protected:
  
 	sf::Vector2f position;

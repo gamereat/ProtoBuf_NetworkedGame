@@ -42,9 +42,10 @@ bool ServerController::Init()
 		players[i] = player;
 		i++;
 	}
-	players[0]->setPosition(sf::Vector2f(0, 10));
-	players[1]->setPosition(sf::Vector2f(800, 10));
+	players[0]->setPosition(playerOneStartingLocation);
+	players[1]->setPosition(playerTwoStartingLocation);
 
+	ball = new Ball(sf::Vector2f(0, 0), 90, ballStartPos);
 
  
 	return true;
@@ -52,6 +53,7 @@ bool ServerController::Init()
 void ServerController::Render(sf::RenderWindow* renderWindow)
 {
  
+	renderWindow->draw(ball->getSprite());
 	renderWindow->draw(severVersionNumberText);
 }
 
@@ -63,13 +65,13 @@ bool ServerController::Update()
 	if (playersInGame < networkManger.getPlayersConnected())
 	{
 		playersInGame++;
-		networkManger.SendServerMessage(versionNumber, players, playersInGame);
+		networkManger.SendServerMessage(versionNumber, ball,players, playersInGame);
 	}
 	// If a player has disconnected 
 	else if (playersInGame > networkManger.getPlayersConnected())
 	{
 		playersInGame--;
-		networkManger.SendServerMessage(versionNumber, players, playersInGame);
+		networkManger.SendServerMessage(versionNumber, ball, players, playersInGame);
 	}
 	//
 
@@ -80,7 +82,7 @@ bool ServerController::Update()
 	if (timeSinceClientUpdate >= clientNetworkUpdateTime)
 	{
 		networkUpdateTimer.restart();
-		networkManger.SendServerMessage(versionNumber, players, playersInGame);
+		networkManger.SendServerMessage(versionNumber, ball, players, playersInGame);
 	}
 
 	networkManger.Update();
@@ -100,16 +102,23 @@ void ServerController::createClientMessage()
 			int clientNum = networkManger.lastMessageRecivedClients()[i]->clientnumber();
 			ClientMessage::Playerinfromation playerInfo = networkManger.lastMessageRecivedClients()[i]->playerinfo();
 		
-			clientsInfo [i]  = std::pair<int, ClientMessage::Playerinfromation>(clientNum, playerInfo);
+			clientsInfo[i]  = std::pair<int, ClientMessage::Playerinfromation>(clientNum, playerInfo);
 
 		
+		}
+		else
+		{
+			clientsInfo[i] = std::pair<int, ClientMessage::Playerinfromation>(-1, *ClientMessage::Playerinfromation().New());
 		}
 		
 	}
 
 	for (int i = 0; i < clientsInfo.size(); i++)
 	{
-		players[i]->UpdatePlayer(&(clientsInfo[i].second));
+		if (clientsInfo[i].first != -1)
+		{
+			players[i]->UpdatePlayer(&(clientsInfo[i].second));
+		}
 	}
 
 }

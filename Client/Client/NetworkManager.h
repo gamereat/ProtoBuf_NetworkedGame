@@ -3,6 +3,9 @@
 #include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 
+const sf::Vector2f playerOneStartingLocation = sf::Vector2f(0, 10);
+const sf::Vector2f playerTwoStartingLocation = sf::Vector2f(400, 10);
+
 class NetworkManager
 {
 public:
