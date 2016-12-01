@@ -173,6 +173,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc" />
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="ClientController.cpp" />
     <ClCompile Include="GameLogging.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="MapPoint.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="PacManPlayer.cpp" />
+    <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PointObject.cpp" />
     <ClCompile Include="TeleportBlock.cpp" />
@@ -191,6 +193,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h" />
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h" />
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="ClientController.h" />
     <ClInclude Include="GameLogging.h" />
     <ClInclude Include="GameObject.h" />
@@ -200,6 +203,7 @@
     <ClInclude Include="MapPoint.h" />
     <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="PacManPlayer.h" />
+    <ClInclude Include="Paddle.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PointObject.h" />
     <ClInclude Include="TeleportBlock.h" />

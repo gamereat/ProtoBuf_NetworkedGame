@@ -37,17 +37,23 @@
     <ClCompile Include="TeleportBlock.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="MapObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Paddle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="WallBlock.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc">
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc">
       <Filter>Protobuf\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc">
-      <Filter>Protobuf</Filter>
-    </ClCompile>
-    <ClCompile Include="MapObject.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc">
+      <Filter>Protobuf\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,14 +93,20 @@
     <ClInclude Include="ClientController.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h">
-      <Filter>Protobuf\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h">
-      <Filter>Protobuf</Filter>
-    </ClInclude>
     <ClInclude Include="MapObject.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Paddle.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h">
+      <Filter>Protobuf\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h">
+      <Filter>Protobuf\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +123,7 @@
       <UniqueIdentifier>{2960af04-2b51-4360-8f1a-c084e2bad047}</UniqueIdentifier>
     </Filter>
     <Filter Include="Protobuf\Source">
-      <UniqueIdentifier>{3aec3ddd-4987-4e31-b2ce-c339389454bc}</UniqueIdentifier>
+      <UniqueIdentifier>{39575b12-0c4b-48c6-807f-e1cb08b26a36}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

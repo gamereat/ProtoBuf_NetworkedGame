@@ -7,6 +7,11 @@ NetworkManager::NetworkManager()
 
 	// Varify protobuf settings
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+
+	serverPort = 7777;
+	serverAddress = "127.0.0.1";
+	clientNumber = -1;
 }
 
 
@@ -20,12 +25,19 @@ void NetworkManager::Init()
 	numOfMessageSend = 0;
 	numOfMessageRecived = 0;
 
-	if (updSocket.bind(54000) != sf::Socket::Done)
+	if (updSocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
 	{
 		// error...
 	}
-	updSocket.setBlocking(false);
-	lastServerMessage = nullptr;
+	else 
+	{
+		updSocket.setBlocking(false);
+		lastServerMessage = nullptr;
+
+		// get the port number 
+		portNumber = updSocket.getLocalPort();
+
+	}
 }
 
 void NetworkManager::ConnectToServer()
@@ -59,6 +71,8 @@ void NetworkManager::ReciveMessageToServer()
 	char buffer[1024];
 	updSocket.receive(buffer, 1024, received, sender, port);
 
+
+
 	if (received > 0)
 	{
 		std::string f = buffer;
@@ -69,11 +83,18 @@ void NetworkManager::ReciveMessageToServer()
 
 		lastServerMessage = newMessage;
 
+		// if first message sent 
+		if (newMessage->serverinfo().messagenumber() == 0)
+		{
+			clientNumber = newMessage->playernumber();
+		}
+
+		GameLogging::Log("Message Number" +std::to_string( newMessage->serverinfo().messagenumber()));
+		GameLogging::Log("Message Recived" + std::to_string(numOfMessageRecived));
 		numOfMessageRecived++;
-	 
 
 		// Send a debug log of message to logging system when in debug mode 
-		GameLogging::Log(newMessage->DebugString());
+		//GameLogging::Log(newMessage->DebugString());
 	}
 
 }
@@ -83,6 +104,8 @@ void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playe
 	// new client message to be sent to server
 	ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage() ;
 	newMessage->New();
+
+	newMessage->set_clientnumber(clientNumber);
 
 	// Get the client information
 	ClientMessage::ClientInformation clientInfo ;
@@ -125,11 +148,11 @@ void NetworkManager::SendDissconectMessage()
 
 	newMessage->set_allocated_clientinfo(&clientInfo);
 
+
 	ClientMessage::Playerinfromation playerInfo = ClientMessage::Playerinfromation();
 	ClientMessage::playerPos* playerPos = new ClientMessage::playerPos();
 
-	playerInfo.set_type(ClientMessage::Playerinfromation_PlayerType_PacMan);
-	playerPos->set_posx(0);
+ 	playerPos->set_posx(0);
 	playerPos->set_posy(0);
 	playerInfo.set_allocated_pos(playerPos);
 
@@ -143,7 +166,7 @@ void NetworkManager::SendDissconectMessage()
 	newMessage->set_addiontalinfo(ClientMessage::ClientMessage_AdditioanlRequests_Disconnect);
 
 
-
+	newMessage->set_clientnumber(clientNumber);
 
 	// Make sure message has got all valid feilds
 	newMessage->CheckInitialized();
@@ -163,7 +186,8 @@ void NetworkManager::SentConnectionMessage(int clientVersion)
 	ClientMessage::ClientInformation clientInfo;
 	clientInfo.set_clientversion(clientVersion);
 	clientInfo.set_messagenumber(numOfMessageSend);
-
+	
+	newMessage->set_clientnumber(clientNumber);
 	// increase the number of messaage sent
 	numOfMessageSend++;
 
@@ -172,8 +196,7 @@ void NetworkManager::SentConnectionMessage(int clientVersion)
 	ClientMessage::Playerinfromation playerInfo = ClientMessage::Playerinfromation();
 	ClientMessage::playerPos* playerPos = new ClientMessage::playerPos();
 
-	playerInfo.set_type(ClientMessage::Playerinfromation_PlayerType_PacMan);
-	playerPos->set_posx(0);
+ 	playerPos->set_posx(0);
 	playerPos->set_posy(0);
 	playerInfo.set_allocated_pos(playerPos);
 
@@ -212,14 +235,16 @@ void NetworkManager::SendMessage(std::string data)
 	ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
 	newMessage->ParseFromString(data);
 	// Send a debug log of message to logging system when in debug mode 
-	GameLogging::Log(newMessage->DebugString());
- 	sf::IpAddress recipient = "127.0.0.1";
-	unsigned short port = 7777;
+//	GameLogging::Log(newMessage->DebugString());
+
+	newMessage->CheckInitialized();
+ 	sf::IpAddress recipient = serverAddress;
+	unsigned short port = serverPort;
 
 	int size = newMessage->ByteSize();
 	void *buffer = malloc(size);
 	newMessage->SerializeToArray(buffer, size);
-	GameLogging::Log("Message Length " + std::to_string(size));
+	//GameLogging::Log("Message Length " + std::to_string(size));
 
 
 	if (updSocket.send(buffer, size, recipient, port) != sf::Socket::Done)
@@ -229,7 +254,7 @@ void NetworkManager::SendMessage(std::string data)
 	else {
 		ClientMessage::ClientMessage* newMessages = new ClientMessage::ClientMessage();
 		newMessages->ParseFromArray(buffer, size);
-		GameLogging::Log(newMessages->DebugString());
+
 
 	}
 }

@@ -29,7 +29,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Playerinfromation_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Playerinfromation_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Playerinfromation_PlayerType_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* ClientMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ClientMessage_reflection_ = NULL;
@@ -77,9 +76,8 @@ void protobuf_AssignDesc_ClientMessage_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(playerPos));
   Playerinfromation_descriptor_ = file->message_type(2);
-  static const int Playerinfromation_offsets_[3] = {
+  static const int Playerinfromation_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, playernumber_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, pos_),
   };
   Playerinfromation_reflection_ =
@@ -93,12 +91,12 @@ void protobuf_AssignDesc_ClientMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Playerinfromation));
-  Playerinfromation_PlayerType_descriptor_ = Playerinfromation_descriptor_->enum_type(0);
   ClientMessage_descriptor_ = file->message_type(3);
-  static const int ClientMessage_offsets_[3] = {
+  static const int ClientMessage_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientMessage, clientinfo_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientMessage, playerinfo_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientMessage, addiontalinfo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientMessage, clientnumber_),
   };
   ClientMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -157,19 +155,17 @@ void protobuf_AddDesc_ClientMessage_2eproto() {
     "\n\023ClientMessage.proto\022\rClientMessage\"A\n\021"
     "ClientInformation\022\025\n\rclientVersion\030\001 \002(\005"
     "\022\025\n\rmessageNumber\030\002 \002(\003\"\'\n\tplayerPos\022\014\n\004"
-    "posY\030\001 \002(\002\022\014\n\004posX\030\002 \002(\002\"\314\001\n\021Playerinfro"
-    "mation\022\024\n\014playerNumber\030\001 \002(\005\022E\n\004type\030\002 \002"
-    "(\0162+.ClientMessage.Playerinfromation.Pla"
-    "yerType:\nUnassigned\022%\n\003pos\030\003 \002(\0132\030.Clien"
-    "tMessage.playerPos\"3\n\nPlayerType\022\n\n\006PacM"
-    "an\020\001\022\t\n\005Ghost\020\002\022\016\n\nUnassigned\020\003\"\224\002\n\rClie"
-    "ntMessage\0224\n\nclientinfo\030\001 \002(\0132 .ClientMe"
-    "ssage.ClientInformation\0224\n\nplayerinfo\030\002 "
-    "\002(\0132 .ClientMessage.Playerinfromation\022F\n"
-    "\raddiontalInfo\030\003 \002(\0162/.ClientMessage.Cli"
-    "entMessage.AdditioanlRequests\"O\n\022Additio"
-    "anlRequests\022\010\n\004None\020\001\022\020\n\014FirstConnect\020\002\022"
-    "\r\n\tReconnect\020\003\022\016\n\nDisconnect\020\004", 630);
+    "posY\030\001 \002(\002\022\014\n\004posX\030\002 \002(\002\"P\n\021Playerinfrom"
+    "ation\022\024\n\014playerNumber\030\001 \002(\005\022%\n\003pos\030\003 \002(\013"
+    "2\030.ClientMessage.playerPos\"\252\002\n\rClientMes"
+    "sage\0224\n\nclientinfo\030\001 \002(\0132 .ClientMessage"
+    ".ClientInformation\0224\n\nplayerinfo\030\002 \002(\0132 "
+    ".ClientMessage.Playerinfromation\022F\n\raddi"
+    "ontalInfo\030\003 \002(\0162/.ClientMessage.ClientMe"
+    "ssage.AdditioanlRequests\022\024\n\014clientNumber"
+    "\030\004 \002(\005\"O\n\022AdditioanlRequests\022\010\n\004None\020\001\022\020"
+    "\n\014FirstConnect\020\002\022\r\n\tReconnect\020\003\022\016\n\nDisco"
+    "nnect\020\004", 527);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ClientMessage.proto", &protobuf_RegisterTypes);
   ClientInformation::default_instance_ = new ClientInformation();
@@ -738,32 +734,8 @@ void playerPos::Swap(playerPos* other) {
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* Playerinfromation_PlayerType_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return Playerinfromation_PlayerType_descriptor_;
-}
-bool Playerinfromation_PlayerType_IsValid(int value) {
-  switch(value) {
-    case 1:
-    case 2:
-    case 3:
-      return true;
-    default:
-      return false;
-  }
-}
-
-#ifndef _MSC_VER
-const Playerinfromation_PlayerType Playerinfromation::PacMan;
-const Playerinfromation_PlayerType Playerinfromation::Ghost;
-const Playerinfromation_PlayerType Playerinfromation::Unassigned;
-const Playerinfromation_PlayerType Playerinfromation::PlayerType_MIN;
-const Playerinfromation_PlayerType Playerinfromation::PlayerType_MAX;
-const int Playerinfromation::PlayerType_ARRAYSIZE;
-#endif  // _MSC_VER
 #ifndef _MSC_VER
 const int Playerinfromation::kPlayerNumberFieldNumber;
-const int Playerinfromation::kTypeFieldNumber;
 const int Playerinfromation::kPosFieldNumber;
 #endif  // !_MSC_VER
 
@@ -787,7 +759,6 @@ Playerinfromation::Playerinfromation(const Playerinfromation& from)
 void Playerinfromation::SharedCtor() {
   _cached_size_ = 0;
   playernumber_ = 0;
-  type_ = 3;
   pos_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -825,9 +796,8 @@ Playerinfromation* Playerinfromation::New() const {
 }
 
 void Playerinfromation::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
+  if (_has_bits_[0 / 32] & 3) {
     playernumber_ = 0;
-    type_ = 3;
     if (has_pos()) {
       if (pos_ != NULL) pos_->::ClientMessage::playerPos::Clear();
     }
@@ -853,26 +823,6 @@ bool Playerinfromation::MergePartialFromCodedStream(
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &playernumber_)));
           set_has_playernumber();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_type;
-        break;
-      }
-
-      // required .ClientMessage.Playerinfromation.PlayerType type = 2 [default = Unassigned];
-      case 2: {
-        if (tag == 16) {
-         parse_type:
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::ClientMessage::Playerinfromation_PlayerType_IsValid(value)) {
-            set_type(static_cast< ::ClientMessage::Playerinfromation_PlayerType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(2, value);
-          }
         } else {
           goto handle_unusual;
         }
@@ -923,12 +873,6 @@ void Playerinfromation::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->playernumber(), output);
   }
 
-  // required .ClientMessage.Playerinfromation.PlayerType type = 2 [default = Unassigned];
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->type(), output);
-  }
-
   // required .ClientMessage.playerPos pos = 3;
   if (has_pos()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -948,12 +892,6 @@ void Playerinfromation::SerializeWithCachedSizes(
   // required int32 playerNumber = 1;
   if (has_playernumber()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->playernumber(), target);
-  }
-
-  // required .ClientMessage.Playerinfromation.PlayerType type = 2 [default = Unassigned];
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->type(), target);
   }
 
   // required .ClientMessage.playerPos pos = 3;
@@ -980,12 +918,6 @@ int Playerinfromation::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->playernumber());
-    }
-
-    // required .ClientMessage.Playerinfromation.PlayerType type = 2 [default = Unassigned];
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
     // required .ClientMessage.playerPos pos = 3;
@@ -1025,9 +957,6 @@ void Playerinfromation::MergeFrom(const Playerinfromation& from) {
     if (from.has_playernumber()) {
       set_playernumber(from.playernumber());
     }
-    if (from.has_type()) {
-      set_type(from.type());
-    }
     if (from.has_pos()) {
       mutable_pos()->::ClientMessage::playerPos::MergeFrom(from.pos());
     }
@@ -1048,7 +977,7 @@ void Playerinfromation::CopyFrom(const Playerinfromation& from) {
 }
 
 bool Playerinfromation::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   if (has_pos()) {
     if (!this->pos().IsInitialized()) return false;
@@ -1059,7 +988,6 @@ bool Playerinfromation::IsInitialized() const {
 void Playerinfromation::Swap(Playerinfromation* other) {
   if (other != this) {
     std::swap(playernumber_, other->playernumber_);
-    std::swap(type_, other->type_);
     std::swap(pos_, other->pos_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -1107,6 +1035,7 @@ const int ClientMessage::AdditioanlRequests_ARRAYSIZE;
 const int ClientMessage::kClientinfoFieldNumber;
 const int ClientMessage::kPlayerinfoFieldNumber;
 const int ClientMessage::kAddiontalInfoFieldNumber;
+const int ClientMessage::kClientNumberFieldNumber;
 #endif  // !_MSC_VER
 
 ClientMessage::ClientMessage()
@@ -1132,6 +1061,7 @@ void ClientMessage::SharedCtor() {
   clientinfo_ = NULL;
   playerinfo_ = NULL;
   addiontalinfo_ = 1;
+  clientnumber_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1169,7 +1099,7 @@ ClientMessage* ClientMessage::New() const {
 }
 
 void ClientMessage::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
+  if (_has_bits_[0 / 32] & 15) {
     if (has_clientinfo()) {
       if (clientinfo_ != NULL) clientinfo_->::ClientMessage::ClientInformation::Clear();
     }
@@ -1177,6 +1107,7 @@ void ClientMessage::Clear() {
       if (playerinfo_ != NULL) playerinfo_->::ClientMessage::Playerinfromation::Clear();
     }
     addiontalinfo_ = 1;
+    clientnumber_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1233,6 +1164,21 @@ bool ClientMessage::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(32)) goto parse_clientNumber;
+        break;
+      }
+
+      // required int32 clientNumber = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_clientNumber:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &clientnumber_)));
+          set_has_clientnumber();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -1280,6 +1226,11 @@ void ClientMessage::SerializeWithCachedSizes(
       3, this->addiontalinfo(), output);
   }
 
+  // required int32 clientNumber = 4;
+  if (has_clientnumber()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->clientnumber(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1308,6 +1259,11 @@ void ClientMessage::SerializeWithCachedSizes(
   if (has_addiontalinfo()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       3, this->addiontalinfo(), target);
+  }
+
+  // required int32 clientNumber = 4;
+  if (has_clientnumber()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->clientnumber(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1340,6 +1296,13 @@ int ClientMessage::ByteSize() const {
     if (has_addiontalinfo()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->addiontalinfo());
+    }
+
+    // required int32 clientNumber = 4;
+    if (has_clientnumber()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->clientnumber());
     }
 
   }
@@ -1378,6 +1341,9 @@ void ClientMessage::MergeFrom(const ClientMessage& from) {
     if (from.has_addiontalinfo()) {
       set_addiontalinfo(from.addiontalinfo());
     }
+    if (from.has_clientnumber()) {
+      set_clientnumber(from.clientnumber());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -1395,7 +1361,7 @@ void ClientMessage::CopyFrom(const ClientMessage& from) {
 }
 
 bool ClientMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
   if (has_clientinfo()) {
     if (!this->clientinfo().IsInitialized()) return false;
@@ -1411,6 +1377,7 @@ void ClientMessage::Swap(ClientMessage* other) {
     std::swap(clientinfo_, other->clientinfo_);
     std::swap(playerinfo_, other->playerinfo_);
     std::swap(addiontalinfo_, other->addiontalinfo_);
+    std::swap(clientnumber_, other->clientnumber_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

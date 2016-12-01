@@ -1,0 +1,64 @@
+package ServerMessage;
+
+message ServerInformation {
+ 
+  required int32 serverInformation = 1;
+  required int64 messageNumber = 2;
+  
+}
+
+message playerPos{
+    required float posY = 1;
+    required float posX = 2;
+
+}
+
+message Playerinfromation {
+    enum PlayerType {
+    PacMan = 0;
+    Ghost = 1;
+    Unassigned = 2;
+  }
+
+  required int32 playerNumber = 1;
+  required PlayerType player = 2 [default = Unassigned];
+  required playerPos pos = 3;
+  required int32 playerScore = 4;
+}
+message MapData{
+    enum MapTile
+    {
+        Empty = 1;
+        Wall = 2;
+        Point = 3;
+    }
+    message row{ 
+         repeated MapTile tile = 1  [packed=true];;
+
+    }
+
+    repeated row col = 1 ;
+
+}
+
+message AdditionalInformation{
+
+    // The player number of the client
+    required int32 clientPlayerNumber = 1;
+}   
+message ServerMessage{
+     
+
+    required int32 numOfPlayer = 1;
+
+    required ServerInformation serverinfo = 2;
+    required Playerinfromation playerOne = 3;
+    required Playerinfromation playerTwo = 4;
+    required Playerinfromation playerThree = 5;
+    required Playerinfromation playerFour = 6;
+
+    required MapData mapInfo = 7;
+    required AdditionalInformation additioanlInfo = 8;
+
+}
+

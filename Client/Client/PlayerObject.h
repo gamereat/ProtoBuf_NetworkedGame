@@ -8,14 +8,33 @@
  struct playerControls
 {
 public:
-
 	playerControls()
 	{
-		// sets the default contorls 
-		upMovementKey = sf::Keyboard::W;
-		downMovementKey = sf::Keyboard::S;
-		rightMovementKey = sf::Keyboard::D;
-		leftMovementKey = sf::Keyboard::A;
+ 
+		upMovementKey = sf::Keyboard::Up;
+		downMovementKey = sf::Keyboard::Down;
+		rightMovementKey = sf::Keyboard::Right;
+		leftMovementKey = sf::Keyboard::Left;
+	 
+	}
+
+	playerControls(bool isSecondPlayer)
+	{
+		if (!isSecondPlayer)
+		{
+			// sets the default contorls 
+			upMovementKey = sf::Keyboard::W;
+			downMovementKey = sf::Keyboard::S;
+			rightMovementKey = sf::Keyboard::D;
+			leftMovementKey = sf::Keyboard::A;
+		}
+		else
+		{
+			upMovementKey = sf::Keyboard::Up;
+			downMovementKey = sf::Keyboard::Down;
+			rightMovementKey = sf::Keyboard::Right;
+			leftMovementKey = sf::Keyboard::Left;
+		}
 	}
 
 	inline sf::Keyboard::Key getUpMovementKey()
@@ -75,9 +94,7 @@ public:
 
 	float getPlayerSpeed();
 	void setPlayerSpeed(float playerSpeed);
-
-	ClientMessage::Playerinfromation::PlayerType getPlayerType();
-	void setPlayerType(ClientMessage::Playerinfromation::PlayerType playerType);
+	 ;
 
 	int getCurrentScore();
 	void setCurrentScore(int currentScore);
@@ -86,16 +103,17 @@ public:
 	void setPlayerNumber(int playerNum);
 
 	void setIsControllable(bool isControllable);
+
+	void setPlayerControls(bool isSecondPlayer);
+
+	sf::Vector2f  getPosition();
+	void setPosition(sf::Vector2f);
+
 protected:
 
 	virtual void HandleInput(float deltaTime);
 
-	
-	/*
-	The Player type being controlled by the player
-	*/
-	ClientMessage::Playerinfromation::PlayerType playerType;
- 
+	 
 	/*
 	The speed the user can move at
 	*/
@@ -111,6 +129,8 @@ protected:
 private:
 	// Will caculate all the momement information
 	void playerMovement(float deltaTime);
+
+ 
 
 	// Holds the controls for the player
 	playerControls playerControlls;

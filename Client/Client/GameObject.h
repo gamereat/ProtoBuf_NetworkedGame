@@ -11,9 +11,7 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render(sf::RenderWindow*) = 0;
 
-	sf::Vector2f  getPosition();
-	void setPosition(sf::Vector2f);
-	
+
 	void setSprite(sf::Sprite);
 
 

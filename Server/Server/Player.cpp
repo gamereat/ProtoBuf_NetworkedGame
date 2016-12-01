@@ -6,13 +6,10 @@ Player::Player()
 {
 }
 
-Player::Player(int score, ServerMessage::Playerinfromation::PlayerType playerType, sf::Vector2f pos) 
+Player::Player(int score, sf::Vector2f pos) 
 {
-	position = pos;
-	this->playerType = playerType;
-	currentScore = score;
+ 	currentScore = score;
 }
-
 
 Player::~Player()
 {
@@ -28,12 +25,12 @@ int Player::getScore()
 	return currentScore;
 }
 
-void Player::setPlayerType(ServerMessage::Playerinfromation::PlayerType mewType)
+void Player::UpdatePlayer(ClientMessage::Playerinfromation* playerInfo)
 {
-	playerType = mewType;
-}
+	playerNumber = playerInfo->playernumber();
 
-ServerMessage::Playerinfromation::PlayerType Player::getPlayerType()
-{
-	return playerType;
+	ClientMessage::playerPos playerpos = playerInfo->pos();
+	position = sf::Vector2f(playerpos.posx(), playerpos.posy());
+ 
+
 }

@@ -4,15 +4,19 @@
 
 GameObject::GameObject()
 {
-	position = sf::Vector2f(0, 0);
-}
+ }
 
 
 GameObject::~GameObject()
 {
 }
 
-sf::Vector2<float> GameObject::getPosition()
+sf::Vector2f GameObject::getPosition()
 {
 	return position;
+}
+
+void GameObject::setPosition(sf::Vector2f position)
+{
+	this->position = position;
 }

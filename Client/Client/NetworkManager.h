@@ -42,6 +42,10 @@ public:
 	int getNumberMessageRecived();
 private:
 
+	/*
+	Client number assigned by the server
+	*/
+	int clientNumber;
 
 	/*
 	Holds the last server message recived from the server
@@ -58,7 +62,7 @@ private:
 	/*
 	Port number being used currently
 	*/
-	int portNumber;
+	short portNumber;
 
 	/*
 	Socked used to communicate with the server

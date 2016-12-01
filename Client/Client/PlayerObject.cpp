@@ -1,5 +1,5 @@
 #include "PlayerObject.h"
-
+#include "GameLogging.h"
 
 
 PlayerObject::PlayerObject()
@@ -55,16 +55,8 @@ void PlayerObject::setPlayerSpeed(float playerSpeed)
 {
 	this->playerSpeed = playerSpeed;
 }
-
-ClientMessage::Playerinfromation::PlayerType PlayerObject::getPlayerType()
-{
-	return playerType;
-}
-
-void PlayerObject::setPlayerType(ClientMessage::Playerinfromation::PlayerType playerType)
-{
-	this->playerType = playerType;
-}
+ 
+ 
 
 int PlayerObject::getCurrentScore()
 {
@@ -91,6 +83,11 @@ void PlayerObject::setIsControllable(bool isControllable)
 	this->isControllable = isControllable;
 }
 
+void PlayerObject::setPlayerControls(bool isSecondPlayer)
+{
+	playerControlls = playerControls(isSecondPlayer);
+}
+
 void PlayerObject::playerMovement(float deltaTime)
 {
 	if (isControllable)
@@ -108,17 +105,19 @@ void PlayerObject::playerMovement(float deltaTime)
 			playerDirection = PlayerDirection::Down;
 
 		}
-		if (sf::Keyboard::isKeyPressed(playerControlls.getLeftMovementKey()))
-		{
-			sprite.move(-playerSpeed * deltaTime, 0.0f);
-			playerDirection = PlayerDirection::Left;
-
-		}
-		if (sf::Keyboard::isKeyPressed(playerControlls.getRightMovementKey()))
-		{
-			sprite.move(playerSpeed *deltaTime, 0.0f);
-			playerDirection = PlayerDirection::Right;
-
-		}
+ 
 	}
+}
+
+sf::Vector2f PlayerObject::getPosition()
+{
+	GameLogging::Log("sprite pos " + std::to_string(sprite.getPosition().y));
+
+	return sprite.getPosition();
+
+}
+
+void PlayerObject::setPosition(sf::Vector2f position)
+{
+	sprite.setPosition(position);
 }

@@ -29,14 +29,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Playerinfromation_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Playerinfromation_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Playerinfromation_PlayerType_descriptor_ = NULL;
-const ::google::protobuf::Descriptor* MapData_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  MapData_reflection_ = NULL;
-const ::google::protobuf::Descriptor* MapData_row_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  MapData_row_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* MapData_MapTile_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* AdditionalInformation_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AdditionalInformation_reflection_ = NULL;
@@ -86,9 +78,8 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(playerPos));
   Playerinfromation_descriptor_ = file->message_type(2);
-  static const int Playerinfromation_offsets_[4] = {
+  static const int Playerinfromation_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, playernumber_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, player_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, pos_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Playerinfromation, playerscore_),
   };
@@ -103,41 +94,8 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Playerinfromation));
-  Playerinfromation_PlayerType_descriptor_ = Playerinfromation_descriptor_->enum_type(0);
-  MapData_descriptor_ = file->message_type(3);
-  static const int MapData_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapData, col_),
-  };
-  MapData_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      MapData_descriptor_,
-      MapData::default_instance_,
-      MapData_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapData, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapData, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(MapData));
-  MapData_row_descriptor_ = MapData_descriptor_->nested_type(0);
-  static const int MapData_row_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapData_row, tile_),
-  };
-  MapData_row_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      MapData_row_descriptor_,
-      MapData_row::default_instance_,
-      MapData_row_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapData_row, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapData_row, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(MapData_row));
-  MapData_MapTile_descriptor_ = MapData_descriptor_->enum_type(0);
-  AdditionalInformation_descriptor_ = file->message_type(4);
+  AdditionalInformation_descriptor_ = file->message_type(3);
   static const int AdditionalInformation_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AdditionalInformation, clientplayernumber_),
   };
   AdditionalInformation_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -150,15 +108,13 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AdditionalInformation));
-  ServerMessage_descriptor_ = file->message_type(5);
-  static const int ServerMessage_offsets_[8] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, numofplayer_),
+  ServerMessage_descriptor_ = file->message_type(4);
+  static const int ServerMessage_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playersconnected_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, serverinfo_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerone_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playertwo_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerthree_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playerfour_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, mapinfo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, playernumber_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerMessage, additioanlinfo_),
   };
   ServerMessage_reflection_ =
@@ -191,10 +147,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Playerinfromation_descriptor_, &Playerinfromation::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    MapData_descriptor_, &MapData::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    MapData_row_descriptor_, &MapData_row::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AdditionalInformation_descriptor_, &AdditionalInformation::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ServerMessage_descriptor_, &ServerMessage::default_instance());
@@ -209,10 +161,6 @@ void protobuf_ShutdownFile_ServerMessage_2eproto() {
   delete playerPos_reflection_;
   delete Playerinfromation::default_instance_;
   delete Playerinfromation_reflection_;
-  delete MapData::default_instance_;
-  delete MapData_reflection_;
-  delete MapData_row::default_instance_;
-  delete MapData_row_reflection_;
   delete AdditionalInformation::default_instance_;
   delete AdditionalInformation_reflection_;
   delete ServerMessage::default_instance_;
@@ -229,42 +177,28 @@ void protobuf_AddDesc_ServerMessage_2eproto() {
     "\n\023ServerMessage.proto\022\rServerMessage\"E\n\021"
     "ServerInformation\022\031\n\021serverInformation\030\001"
     " \002(\005\022\025\n\rmessageNumber\030\002 \002(\003\"\'\n\tplayerPos"
-    "\022\014\n\004posY\030\001 \002(\002\022\014\n\004posX\030\002 \002(\002\"\343\001\n\021Playeri"
-    "nfromation\022\024\n\014playerNumber\030\001 \002(\005\022G\n\006play"
-    "er\030\002 \002(\0162+.ServerMessage.Playerinfromati"
-    "on.PlayerType:\nUnassigned\022%\n\003pos\030\003 \002(\0132\030"
-    ".ServerMessage.playerPos\022\023\n\013playerScore\030"
-    "\004 \002(\005\"3\n\nPlayerType\022\n\n\006PacMan\020\000\022\t\n\005Ghost"
-    "\020\001\022\016\n\nUnassigned\020\002\"\226\001\n\007MapData\022\'\n\003col\030\001 "
-    "\003(\0132\032.ServerMessage.MapData.row\0327\n\003row\0220"
-    "\n\004tile\030\001 \003(\0162\036.ServerMessage.MapData.Map"
-    "TileB\002\020\001\")\n\007MapTile\022\t\n\005Empty\020\001\022\010\n\004Wall\020\002"
-    "\022\t\n\005Point\020\003\"3\n\025AdditionalInformation\022\032\n\022"
-    "clientPlayerNumber\030\001 \002(\005\"\230\003\n\rServerMessa"
-    "ge\022\023\n\013numOfPlayer\030\001 \002(\005\0224\n\nserverinfo\030\002 "
-    "\002(\0132 .ServerMessage.ServerInformation\0223\n"
-    "\tplayerOne\030\003 \002(\0132 .ServerMessage.Playeri"
-    "nfromation\0223\n\tplayerTwo\030\004 \002(\0132 .ServerMe"
-    "ssage.Playerinfromation\0225\n\013playerThree\030\005"
-    " \002(\0132 .ServerMessage.Playerinfromation\0224"
-    "\n\nplayerFour\030\006 \002(\0132 .ServerMessage.Playe"
-    "rinfromation\022\'\n\007mapInfo\030\007 \002(\0132\026.ServerMe"
-    "ssage.MapData\022<\n\016additioanlInfo\030\010 \002(\0132$."
-    "ServerMessage.AdditionalInformation", 995);
+    "\022\014\n\004posY\030\001 \002(\002\022\014\n\004posX\030\002 \002(\002\"e\n\021Playerin"
+    "fromation\022\024\n\014playerNumber\030\001 \002(\005\022%\n\003pos\030\003"
+    " \002(\0132\030.ServerMessage.playerPos\022\023\n\013player"
+    "Score\030\004 \002(\005\"\027\n\025AdditionalInformation\"\235\002\n"
+    "\rServerMessage\022\030\n\020playersConnected\030\001 \002(\005"
+    "\0224\n\nserverinfo\030\002 \002(\0132 .ServerMessage.Ser"
+    "verInformation\0223\n\tplayerOne\030\003 \002(\0132 .Serv"
+    "erMessage.Playerinfromation\0223\n\tplayerTwo"
+    "\030\004 \002(\0132 .ServerMessage.Playerinfromation"
+    "\022\024\n\014playerNumber\030\005 \002(\005\022<\n\016additioanlInfo"
+    "\030\010 \002(\0132$.ServerMessage.AdditionalInforma"
+    "tion", 564);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ServerMessage.proto", &protobuf_RegisterTypes);
   ServerInformation::default_instance_ = new ServerInformation();
   playerPos::default_instance_ = new playerPos();
   Playerinfromation::default_instance_ = new Playerinfromation();
-  MapData::default_instance_ = new MapData();
-  MapData_row::default_instance_ = new MapData_row();
   AdditionalInformation::default_instance_ = new AdditionalInformation();
   ServerMessage::default_instance_ = new ServerMessage();
   ServerInformation::default_instance_->InitAsDefaultInstance();
   playerPos::default_instance_->InitAsDefaultInstance();
   Playerinfromation::default_instance_->InitAsDefaultInstance();
-  MapData::default_instance_->InitAsDefaultInstance();
-  MapData_row::default_instance_->InitAsDefaultInstance();
   AdditionalInformation::default_instance_->InitAsDefaultInstance();
   ServerMessage::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_ServerMessage_2eproto);
@@ -825,32 +759,8 @@ void playerPos::Swap(playerPos* other) {
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* Playerinfromation_PlayerType_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return Playerinfromation_PlayerType_descriptor_;
-}
-bool Playerinfromation_PlayerType_IsValid(int value) {
-  switch(value) {
-    case 0:
-    case 1:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-#ifndef _MSC_VER
-const Playerinfromation_PlayerType Playerinfromation::PacMan;
-const Playerinfromation_PlayerType Playerinfromation::Ghost;
-const Playerinfromation_PlayerType Playerinfromation::Unassigned;
-const Playerinfromation_PlayerType Playerinfromation::PlayerType_MIN;
-const Playerinfromation_PlayerType Playerinfromation::PlayerType_MAX;
-const int Playerinfromation::PlayerType_ARRAYSIZE;
-#endif  // _MSC_VER
 #ifndef _MSC_VER
 const int Playerinfromation::kPlayerNumberFieldNumber;
-const int Playerinfromation::kPlayerFieldNumber;
 const int Playerinfromation::kPosFieldNumber;
 const int Playerinfromation::kPlayerScoreFieldNumber;
 #endif  // !_MSC_VER
@@ -875,7 +785,6 @@ Playerinfromation::Playerinfromation(const Playerinfromation& from)
 void Playerinfromation::SharedCtor() {
   _cached_size_ = 0;
   playernumber_ = 0;
-  player_ = 2;
   pos_ = NULL;
   playerscore_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -914,14 +823,26 @@ Playerinfromation* Playerinfromation::New() const {
 }
 
 void Playerinfromation::Clear() {
-  if (_has_bits_[0 / 32] & 15) {
-    playernumber_ = 0;
-    player_ = 2;
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<Playerinfromation*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 7) {
+    ZR_(playernumber_, playerscore_);
     if (has_pos()) {
       if (pos_ != NULL) pos_->::ServerMessage::playerPos::Clear();
     }
-    playerscore_ = 0;
   }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -943,26 +864,6 @@ bool Playerinfromation::MergePartialFromCodedStream(
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &playernumber_)));
           set_has_playernumber();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_player;
-        break;
-      }
-
-      // required .ServerMessage.Playerinfromation.PlayerType player = 2 [default = Unassigned];
-      case 2: {
-        if (tag == 16) {
-         parse_player:
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::ServerMessage::Playerinfromation_PlayerType_IsValid(value)) {
-            set_player(static_cast< ::ServerMessage::Playerinfromation_PlayerType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(2, value);
-          }
         } else {
           goto handle_unusual;
         }
@@ -1028,12 +929,6 @@ void Playerinfromation::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->playernumber(), output);
   }
 
-  // required .ServerMessage.Playerinfromation.PlayerType player = 2 [default = Unassigned];
-  if (has_player()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->player(), output);
-  }
-
   // required .ServerMessage.playerPos pos = 3;
   if (has_pos()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -1058,12 +953,6 @@ void Playerinfromation::SerializeWithCachedSizes(
   // required int32 playerNumber = 1;
   if (has_playernumber()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->playernumber(), target);
-  }
-
-  // required .ServerMessage.Playerinfromation.PlayerType player = 2 [default = Unassigned];
-  if (has_player()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->player(), target);
   }
 
   // required .ServerMessage.playerPos pos = 3;
@@ -1095,12 +984,6 @@ int Playerinfromation::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->playernumber());
-    }
-
-    // required .ServerMessage.Playerinfromation.PlayerType player = 2 [default = Unassigned];
-    if (has_player()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->player());
     }
 
     // required .ServerMessage.playerPos pos = 3;
@@ -1147,9 +1030,6 @@ void Playerinfromation::MergeFrom(const Playerinfromation& from) {
     if (from.has_playernumber()) {
       set_playernumber(from.playernumber());
     }
-    if (from.has_player()) {
-      set_player(from.player());
-    }
     if (from.has_pos()) {
       mutable_pos()->::ServerMessage::playerPos::MergeFrom(from.pos());
     }
@@ -1173,7 +1053,7 @@ void Playerinfromation::CopyFrom(const Playerinfromation& from) {
 }
 
 bool Playerinfromation::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   if (has_pos()) {
     if (!this->pos().IsInitialized()) return false;
@@ -1184,7 +1064,6 @@ bool Playerinfromation::IsInitialized() const {
 void Playerinfromation::Swap(Playerinfromation* other) {
   if (other != this) {
     std::swap(playernumber_, other->playernumber_);
-    std::swap(player_, other->player_);
     std::swap(pos_, other->pos_);
     std::swap(playerscore_, other->playerscore_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -1204,510 +1083,7 @@ void Playerinfromation::Swap(Playerinfromation* other) {
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* MapData_MapTile_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return MapData_MapTile_descriptor_;
-}
-bool MapData_MapTile_IsValid(int value) {
-  switch(value) {
-    case 1:
-    case 2:
-    case 3:
-      return true;
-    default:
-      return false;
-  }
-}
-
 #ifndef _MSC_VER
-const MapData_MapTile MapData::Empty;
-const MapData_MapTile MapData::Wall;
-const MapData_MapTile MapData::Point;
-const MapData_MapTile MapData::MapTile_MIN;
-const MapData_MapTile MapData::MapTile_MAX;
-const int MapData::MapTile_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
-const int MapData_row::kTileFieldNumber;
-#endif  // !_MSC_VER
-
-MapData_row::MapData_row()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:ServerMessage.MapData.row)
-}
-
-void MapData_row::InitAsDefaultInstance() {
-}
-
-MapData_row::MapData_row(const MapData_row& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:ServerMessage.MapData.row)
-}
-
-void MapData_row::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-MapData_row::~MapData_row() {
-  // @@protoc_insertion_point(destructor:ServerMessage.MapData.row)
-  SharedDtor();
-}
-
-void MapData_row::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void MapData_row::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* MapData_row::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return MapData_row_descriptor_;
-}
-
-const MapData_row& MapData_row::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_ServerMessage_2eproto();
-  return *default_instance_;
-}
-
-MapData_row* MapData_row::default_instance_ = NULL;
-
-MapData_row* MapData_row::New() const {
-  return new MapData_row;
-}
-
-void MapData_row::Clear() {
-  tile_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool MapData_row::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:ServerMessage.MapData.row)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .ServerMessage.MapData.MapTile tile = 1 [packed = true];
-      case 1: {
-        if (tag == 10) {
-          ::google::protobuf::uint32 length;
-          DO_(input->ReadVarint32(&length));
-          ::google::protobuf::io::CodedInputStream::Limit limit = input->PushLimit(length);
-          while (input->BytesUntilLimit() > 0) {
-            int value;
-            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-            if (::ServerMessage::MapData_MapTile_IsValid(value)) {
-              add_tile(static_cast< ::ServerMessage::MapData_MapTile >(value));
-            }
-          }
-          input->PopLimit(limit);
-        } else if (tag == 8) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::ServerMessage::MapData_MapTile_IsValid(value)) {
-            add_tile(static_cast< ::ServerMessage::MapData_MapTile >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:ServerMessage.MapData.row)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:ServerMessage.MapData.row)
-  return false;
-#undef DO_
-}
-
-void MapData_row::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:ServerMessage.MapData.row)
-  // repeated .ServerMessage.MapData.MapTile tile = 1 [packed = true];
-  if (this->tile_size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteTag(
-      1,
-      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      output);
-    output->WriteVarint32(_tile_cached_byte_size_);
-  }
-  for (int i = 0; i < this->tile_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnumNoTag(
-      this->tile(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:ServerMessage.MapData.row)
-}
-
-::google::protobuf::uint8* MapData_row::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.MapData.row)
-  // repeated .ServerMessage.MapData.MapTile tile = 1 [packed = true];
-  if (this->tile_size() > 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
-      1,
-      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      target);
-    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(    _tile_cached_byte_size_, target);
-  }
-  for (int i = 0; i < this->tile_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumNoTagToArray(
-      this->tile(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:ServerMessage.MapData.row)
-  return target;
-}
-
-int MapData_row::ByteSize() const {
-  int total_size = 0;
-
-  // repeated .ServerMessage.MapData.MapTile tile = 1 [packed = true];
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->tile_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::EnumSize(
-        this->tile(i));
-    }
-    if (data_size > 0) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(data_size);
-    }
-    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-    _tile_cached_byte_size_ = data_size;
-    GOOGLE_SAFE_CONCURRENT_WRITES_END();
-    total_size += data_size;
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void MapData_row::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const MapData_row* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const MapData_row*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void MapData_row::MergeFrom(const MapData_row& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  tile_.MergeFrom(from.tile_);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void MapData_row::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void MapData_row::CopyFrom(const MapData_row& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool MapData_row::IsInitialized() const {
-
-  return true;
-}
-
-void MapData_row::Swap(MapData_row* other) {
-  if (other != this) {
-    tile_.Swap(&other->tile_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata MapData_row::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MapData_row_descriptor_;
-  metadata.reflection = MapData_row_reflection_;
-  return metadata;
-}
-
-
-// -------------------------------------------------------------------
-
-#ifndef _MSC_VER
-const int MapData::kColFieldNumber;
-#endif  // !_MSC_VER
-
-MapData::MapData()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:ServerMessage.MapData)
-}
-
-void MapData::InitAsDefaultInstance() {
-}
-
-MapData::MapData(const MapData& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:ServerMessage.MapData)
-}
-
-void MapData::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-MapData::~MapData() {
-  // @@protoc_insertion_point(destructor:ServerMessage.MapData)
-  SharedDtor();
-}
-
-void MapData::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void MapData::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* MapData::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return MapData_descriptor_;
-}
-
-const MapData& MapData::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_ServerMessage_2eproto();
-  return *default_instance_;
-}
-
-MapData* MapData::default_instance_ = NULL;
-
-MapData* MapData::New() const {
-  return new MapData;
-}
-
-void MapData::Clear() {
-  col_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool MapData::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:ServerMessage.MapData)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .ServerMessage.MapData.row col = 1;
-      case 1: {
-        if (tag == 10) {
-         parse_col:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_col()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(10)) goto parse_col;
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:ServerMessage.MapData)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:ServerMessage.MapData)
-  return false;
-#undef DO_
-}
-
-void MapData::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:ServerMessage.MapData)
-  // repeated .ServerMessage.MapData.row col = 1;
-  for (int i = 0; i < this->col_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->col(i), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:ServerMessage.MapData)
-}
-
-::google::protobuf::uint8* MapData::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.MapData)
-  // repeated .ServerMessage.MapData.row col = 1;
-  for (int i = 0; i < this->col_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        1, this->col(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:ServerMessage.MapData)
-  return target;
-}
-
-int MapData::ByteSize() const {
-  int total_size = 0;
-
-  // repeated .ServerMessage.MapData.row col = 1;
-  total_size += 1 * this->col_size();
-  for (int i = 0; i < this->col_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->col(i));
-  }
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void MapData::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const MapData* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const MapData*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void MapData::MergeFrom(const MapData& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  col_.MergeFrom(from.col_);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void MapData::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void MapData::CopyFrom(const MapData& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool MapData::IsInitialized() const {
-
-  return true;
-}
-
-void MapData::Swap(MapData* other) {
-  if (other != this) {
-    col_.Swap(&other->col_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata MapData::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MapData_descriptor_;
-  metadata.reflection = MapData_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int AdditionalInformation::kClientPlayerNumberFieldNumber;
 #endif  // !_MSC_VER
 
 AdditionalInformation::AdditionalInformation()
@@ -1728,7 +1104,6 @@ AdditionalInformation::AdditionalInformation(const AdditionalInformation& from)
 
 void AdditionalInformation::SharedCtor() {
   _cached_size_ = 0;
-  clientplayernumber_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1764,7 +1139,6 @@ AdditionalInformation* AdditionalInformation::New() const {
 }
 
 void AdditionalInformation::Clear() {
-  clientplayernumber_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1778,33 +1152,14 @@ bool AdditionalInformation::MergePartialFromCodedStream(
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 clientPlayerNumber = 1;
-      case 1: {
-        if (tag == 8) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &clientplayernumber_)));
-          set_has_clientplayernumber();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
+  handle_unusual:
+    if (tag == 0 ||
+        ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+      goto success;
     }
+    DO_(::google::protobuf::internal::WireFormat::SkipField(
+          input, tag, mutable_unknown_fields()));
   }
 success:
   // @@protoc_insertion_point(parse_success:ServerMessage.AdditionalInformation)
@@ -1818,11 +1173,6 @@ failure:
 void AdditionalInformation::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ServerMessage.AdditionalInformation)
-  // required int32 clientPlayerNumber = 1;
-  if (has_clientplayernumber()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->clientplayernumber(), output);
-  }
-
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1833,11 +1183,6 @@ void AdditionalInformation::SerializeWithCachedSizes(
 ::google::protobuf::uint8* AdditionalInformation::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.AdditionalInformation)
-  // required int32 clientPlayerNumber = 1;
-  if (has_clientplayernumber()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->clientplayernumber(), target);
-  }
-
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -1849,15 +1194,6 @@ void AdditionalInformation::SerializeWithCachedSizes(
 int AdditionalInformation::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 clientPlayerNumber = 1;
-    if (has_clientplayernumber()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->clientplayernumber());
-    }
-
-  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -1883,11 +1219,6 @@ void AdditionalInformation::MergeFrom(const ::google::protobuf::Message& from) {
 
 void AdditionalInformation::MergeFrom(const AdditionalInformation& from) {
   GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_clientplayernumber()) {
-      set_clientplayernumber(from.clientplayernumber());
-    }
-  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -1904,15 +1235,12 @@ void AdditionalInformation::CopyFrom(const AdditionalInformation& from) {
 }
 
 bool AdditionalInformation::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
 void AdditionalInformation::Swap(AdditionalInformation* other) {
   if (other != this) {
-    std::swap(clientplayernumber_, other->clientplayernumber_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
@@ -1930,13 +1258,11 @@ void AdditionalInformation::Swap(AdditionalInformation* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ServerMessage::kNumOfPlayerFieldNumber;
+const int ServerMessage::kPlayersConnectedFieldNumber;
 const int ServerMessage::kServerinfoFieldNumber;
 const int ServerMessage::kPlayerOneFieldNumber;
 const int ServerMessage::kPlayerTwoFieldNumber;
-const int ServerMessage::kPlayerThreeFieldNumber;
-const int ServerMessage::kPlayerFourFieldNumber;
-const int ServerMessage::kMapInfoFieldNumber;
+const int ServerMessage::kPlayerNumberFieldNumber;
 const int ServerMessage::kAdditioanlInfoFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1950,9 +1276,6 @@ void ServerMessage::InitAsDefaultInstance() {
   serverinfo_ = const_cast< ::ServerMessage::ServerInformation*>(&::ServerMessage::ServerInformation::default_instance());
   playerone_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
   playertwo_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
-  playerthree_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
-  playerfour_ = const_cast< ::ServerMessage::Playerinfromation*>(&::ServerMessage::Playerinfromation::default_instance());
-  mapinfo_ = const_cast< ::ServerMessage::MapData*>(&::ServerMessage::MapData::default_instance());
   additioanlinfo_ = const_cast< ::ServerMessage::AdditionalInformation*>(&::ServerMessage::AdditionalInformation::default_instance());
 }
 
@@ -1965,13 +1288,11 @@ ServerMessage::ServerMessage(const ServerMessage& from)
 
 void ServerMessage::SharedCtor() {
   _cached_size_ = 0;
-  numofplayer_ = 0;
+  playersconnected_ = 0;
   serverinfo_ = NULL;
   playerone_ = NULL;
   playertwo_ = NULL;
-  playerthree_ = NULL;
-  playerfour_ = NULL;
-  mapinfo_ = NULL;
+  playernumber_ = 0;
   additioanlinfo_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1986,9 +1307,6 @@ void ServerMessage::SharedDtor() {
     delete serverinfo_;
     delete playerone_;
     delete playertwo_;
-    delete playerthree_;
-    delete playerfour_;
-    delete mapinfo_;
     delete additioanlinfo_;
   }
 }
@@ -2015,8 +1333,18 @@ ServerMessage* ServerMessage::New() const {
 }
 
 void ServerMessage::Clear() {
-  if (_has_bits_[0 / 32] & 255) {
-    numofplayer_ = 0;
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<ServerMessage*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 63) {
+    ZR_(playersconnected_, playernumber_);
     if (has_serverinfo()) {
       if (serverinfo_ != NULL) serverinfo_->::ServerMessage::ServerInformation::Clear();
     }
@@ -2026,19 +1354,14 @@ void ServerMessage::Clear() {
     if (has_playertwo()) {
       if (playertwo_ != NULL) playertwo_->::ServerMessage::Playerinfromation::Clear();
     }
-    if (has_playerthree()) {
-      if (playerthree_ != NULL) playerthree_->::ServerMessage::Playerinfromation::Clear();
-    }
-    if (has_playerfour()) {
-      if (playerfour_ != NULL) playerfour_->::ServerMessage::Playerinfromation::Clear();
-    }
-    if (has_mapinfo()) {
-      if (mapinfo_ != NULL) mapinfo_->::ServerMessage::MapData::Clear();
-    }
     if (has_additioanlinfo()) {
       if (additioanlinfo_ != NULL) additioanlinfo_->::ServerMessage::AdditionalInformation::Clear();
     }
   }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -2053,13 +1376,13 @@ bool ServerMessage::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 numOfPlayer = 1;
+      // required int32 playersConnected = 1;
       case 1: {
         if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &numofplayer_)));
-          set_has_numofplayer();
+                 input, &playersconnected_)));
+          set_has_playersconnected();
         } else {
           goto handle_unusual;
         }
@@ -2102,42 +1425,18 @@ bool ServerMessage::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(42)) goto parse_playerThree;
+        if (input->ExpectTag(40)) goto parse_playerNumber;
         break;
       }
 
-      // required .ServerMessage.Playerinfromation playerThree = 5;
+      // required int32 playerNumber = 5;
       case 5: {
-        if (tag == 42) {
-         parse_playerThree:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_playerthree()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(50)) goto parse_playerFour;
-        break;
-      }
-
-      // required .ServerMessage.Playerinfromation playerFour = 6;
-      case 6: {
-        if (tag == 50) {
-         parse_playerFour:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_playerfour()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(58)) goto parse_mapInfo;
-        break;
-      }
-
-      // required .ServerMessage.MapData mapInfo = 7;
-      case 7: {
-        if (tag == 58) {
-         parse_mapInfo:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_mapinfo()));
+        if (tag == 40) {
+         parse_playerNumber:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &playernumber_)));
+          set_has_playernumber();
         } else {
           goto handle_unusual;
         }
@@ -2183,9 +1482,9 @@ failure:
 void ServerMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ServerMessage.ServerMessage)
-  // required int32 numOfPlayer = 1;
-  if (has_numofplayer()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->numofplayer(), output);
+  // required int32 playersConnected = 1;
+  if (has_playersconnected()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->playersconnected(), output);
   }
 
   // required .ServerMessage.ServerInformation serverinfo = 2;
@@ -2206,22 +1505,9 @@ void ServerMessage::SerializeWithCachedSizes(
       4, this->playertwo(), output);
   }
 
-  // required .ServerMessage.Playerinfromation playerThree = 5;
-  if (has_playerthree()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, this->playerthree(), output);
-  }
-
-  // required .ServerMessage.Playerinfromation playerFour = 6;
-  if (has_playerfour()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, this->playerfour(), output);
-  }
-
-  // required .ServerMessage.MapData mapInfo = 7;
-  if (has_mapinfo()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, this->mapinfo(), output);
+  // required int32 playerNumber = 5;
+  if (has_playernumber()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->playernumber(), output);
   }
 
   // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
@@ -2240,9 +1526,9 @@ void ServerMessage::SerializeWithCachedSizes(
 ::google::protobuf::uint8* ServerMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ServerMessage.ServerMessage)
-  // required int32 numOfPlayer = 1;
-  if (has_numofplayer()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->numofplayer(), target);
+  // required int32 playersConnected = 1;
+  if (has_playersconnected()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->playersconnected(), target);
   }
 
   // required .ServerMessage.ServerInformation serverinfo = 2;
@@ -2266,25 +1552,9 @@ void ServerMessage::SerializeWithCachedSizes(
         4, this->playertwo(), target);
   }
 
-  // required .ServerMessage.Playerinfromation playerThree = 5;
-  if (has_playerthree()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        5, this->playerthree(), target);
-  }
-
-  // required .ServerMessage.Playerinfromation playerFour = 6;
-  if (has_playerfour()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        6, this->playerfour(), target);
-  }
-
-  // required .ServerMessage.MapData mapInfo = 7;
-  if (has_mapinfo()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        7, this->mapinfo(), target);
+  // required int32 playerNumber = 5;
+  if (has_playernumber()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->playernumber(), target);
   }
 
   // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
@@ -2306,11 +1576,11 @@ int ServerMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 numOfPlayer = 1;
-    if (has_numofplayer()) {
+    // required int32 playersConnected = 1;
+    if (has_playersconnected()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->numofplayer());
+          this->playersconnected());
     }
 
     // required .ServerMessage.ServerInformation serverinfo = 2;
@@ -2334,25 +1604,11 @@ int ServerMessage::ByteSize() const {
           this->playertwo());
     }
 
-    // required .ServerMessage.Playerinfromation playerThree = 5;
-    if (has_playerthree()) {
+    // required int32 playerNumber = 5;
+    if (has_playernumber()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->playerthree());
-    }
-
-    // required .ServerMessage.Playerinfromation playerFour = 6;
-    if (has_playerfour()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->playerfour());
-    }
-
-    // required .ServerMessage.MapData mapInfo = 7;
-    if (has_mapinfo()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->mapinfo());
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->playernumber());
     }
 
     // required .ServerMessage.AdditionalInformation additioanlInfo = 8;
@@ -2389,8 +1645,8 @@ void ServerMessage::MergeFrom(const ::google::protobuf::Message& from) {
 void ServerMessage::MergeFrom(const ServerMessage& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_numofplayer()) {
-      set_numofplayer(from.numofplayer());
+    if (from.has_playersconnected()) {
+      set_playersconnected(from.playersconnected());
     }
     if (from.has_serverinfo()) {
       mutable_serverinfo()->::ServerMessage::ServerInformation::MergeFrom(from.serverinfo());
@@ -2401,14 +1657,8 @@ void ServerMessage::MergeFrom(const ServerMessage& from) {
     if (from.has_playertwo()) {
       mutable_playertwo()->::ServerMessage::Playerinfromation::MergeFrom(from.playertwo());
     }
-    if (from.has_playerthree()) {
-      mutable_playerthree()->::ServerMessage::Playerinfromation::MergeFrom(from.playerthree());
-    }
-    if (from.has_playerfour()) {
-      mutable_playerfour()->::ServerMessage::Playerinfromation::MergeFrom(from.playerfour());
-    }
-    if (from.has_mapinfo()) {
-      mutable_mapinfo()->::ServerMessage::MapData::MergeFrom(from.mapinfo());
+    if (from.has_playernumber()) {
+      set_playernumber(from.playernumber());
     }
     if (from.has_additioanlinfo()) {
       mutable_additioanlinfo()->::ServerMessage::AdditionalInformation::MergeFrom(from.additioanlinfo());
@@ -2430,7 +1680,7 @@ void ServerMessage::CopyFrom(const ServerMessage& from) {
 }
 
 bool ServerMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000000ff) != 0x000000ff) return false;
+  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
 
   if (has_serverinfo()) {
     if (!this->serverinfo().IsInitialized()) return false;
@@ -2441,27 +1691,16 @@ bool ServerMessage::IsInitialized() const {
   if (has_playertwo()) {
     if (!this->playertwo().IsInitialized()) return false;
   }
-  if (has_playerthree()) {
-    if (!this->playerthree().IsInitialized()) return false;
-  }
-  if (has_playerfour()) {
-    if (!this->playerfour().IsInitialized()) return false;
-  }
-  if (has_additioanlinfo()) {
-    if (!this->additioanlinfo().IsInitialized()) return false;
-  }
   return true;
 }
 
 void ServerMessage::Swap(ServerMessage* other) {
   if (other != this) {
-    std::swap(numofplayer_, other->numofplayer_);
+    std::swap(playersconnected_, other->playersconnected_);
     std::swap(serverinfo_, other->serverinfo_);
     std::swap(playerone_, other->playerone_);
     std::swap(playertwo_, other->playertwo_);
-    std::swap(playerthree_, other->playerthree_);
-    std::swap(playerfour_, other->playerfour_);
-    std::swap(mapinfo_, other->mapinfo_);
+    std::swap(playernumber_, other->playernumber_);
     std::swap(additioanlinfo_, other->additioanlinfo_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

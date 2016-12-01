@@ -39,26 +39,6 @@ class playerPos;
 class Playerinfromation;
 class ClientMessage;
 
-enum Playerinfromation_PlayerType {
-  Playerinfromation_PlayerType_PacMan = 1,
-  Playerinfromation_PlayerType_Ghost = 2,
-  Playerinfromation_PlayerType_Unassigned = 3
-};
-bool Playerinfromation_PlayerType_IsValid(int value);
-const Playerinfromation_PlayerType Playerinfromation_PlayerType_PlayerType_MIN = Playerinfromation_PlayerType_PacMan;
-const Playerinfromation_PlayerType Playerinfromation_PlayerType_PlayerType_MAX = Playerinfromation_PlayerType_Unassigned;
-const int Playerinfromation_PlayerType_PlayerType_ARRAYSIZE = Playerinfromation_PlayerType_PlayerType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* Playerinfromation_PlayerType_descriptor();
-inline const ::std::string& Playerinfromation_PlayerType_Name(Playerinfromation_PlayerType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Playerinfromation_PlayerType_descriptor(), value);
-}
-inline bool Playerinfromation_PlayerType_Parse(
-    const ::std::string& name, Playerinfromation_PlayerType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Playerinfromation_PlayerType>(
-    Playerinfromation_PlayerType_descriptor(), name, value);
-}
 enum ClientMessage_AdditioanlRequests {
   ClientMessage_AdditioanlRequests_None = 1,
   ClientMessage_AdditioanlRequests_FirstConnect = 2,
@@ -311,31 +291,6 @@ class Playerinfromation : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef Playerinfromation_PlayerType PlayerType;
-  static const PlayerType PacMan = Playerinfromation_PlayerType_PacMan;
-  static const PlayerType Ghost = Playerinfromation_PlayerType_Ghost;
-  static const PlayerType Unassigned = Playerinfromation_PlayerType_Unassigned;
-  static inline bool PlayerType_IsValid(int value) {
-    return Playerinfromation_PlayerType_IsValid(value);
-  }
-  static const PlayerType PlayerType_MIN =
-    Playerinfromation_PlayerType_PlayerType_MIN;
-  static const PlayerType PlayerType_MAX =
-    Playerinfromation_PlayerType_PlayerType_MAX;
-  static const int PlayerType_ARRAYSIZE =
-    Playerinfromation_PlayerType_PlayerType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  PlayerType_descriptor() {
-    return Playerinfromation_PlayerType_descriptor();
-  }
-  static inline const ::std::string& PlayerType_Name(PlayerType value) {
-    return Playerinfromation_PlayerType_Name(value);
-  }
-  static inline bool PlayerType_Parse(const ::std::string& name,
-      PlayerType* value) {
-    return Playerinfromation_PlayerType_Parse(name, value);
-  }
-
   // accessors -------------------------------------------------------
 
   // required int32 playerNumber = 1;
@@ -344,13 +299,6 @@ class Playerinfromation : public ::google::protobuf::Message {
   static const int kPlayerNumberFieldNumber = 1;
   inline ::google::protobuf::int32 playernumber() const;
   inline void set_playernumber(::google::protobuf::int32 value);
-
-  // required .ClientMessage.Playerinfromation.PlayerType type = 2 [default = Unassigned];
-  inline bool has_type() const;
-  inline void clear_type();
-  static const int kTypeFieldNumber = 2;
-  inline ::ClientMessage::Playerinfromation_PlayerType type() const;
-  inline void set_type(::ClientMessage::Playerinfromation_PlayerType value);
 
   // required .ClientMessage.playerPos pos = 3;
   inline bool has_pos() const;
@@ -365,8 +313,6 @@ class Playerinfromation : public ::google::protobuf::Message {
  private:
   inline void set_has_playernumber();
   inline void clear_has_playernumber();
-  inline void set_has_type();
-  inline void clear_has_type();
   inline void set_has_pos();
   inline void clear_has_pos();
 
@@ -374,9 +320,8 @@ class Playerinfromation : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::int32 playernumber_;
-  int type_;
   ::ClientMessage::playerPos* pos_;
+  ::google::protobuf::int32 playernumber_;
   friend void  protobuf_AddDesc_ClientMessage_2eproto();
   friend void protobuf_AssignDesc_ClientMessage_2eproto();
   friend void protobuf_ShutdownFile_ClientMessage_2eproto();
@@ -490,6 +435,13 @@ class ClientMessage : public ::google::protobuf::Message {
   inline ::ClientMessage::ClientMessage_AdditioanlRequests addiontalinfo() const;
   inline void set_addiontalinfo(::ClientMessage::ClientMessage_AdditioanlRequests value);
 
+  // required int32 clientNumber = 4;
+  inline bool has_clientnumber() const;
+  inline void clear_clientnumber();
+  static const int kClientNumberFieldNumber = 4;
+  inline ::google::protobuf::int32 clientnumber() const;
+  inline void set_clientnumber(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:ClientMessage.ClientMessage)
  private:
   inline void set_has_clientinfo();
@@ -498,6 +450,8 @@ class ClientMessage : public ::google::protobuf::Message {
   inline void clear_has_playerinfo();
   inline void set_has_addiontalinfo();
   inline void clear_has_addiontalinfo();
+  inline void set_has_clientnumber();
+  inline void clear_has_clientnumber();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -506,6 +460,7 @@ class ClientMessage : public ::google::protobuf::Message {
   ::ClientMessage::ClientInformation* clientinfo_;
   ::ClientMessage::Playerinfromation* playerinfo_;
   int addiontalinfo_;
+  ::google::protobuf::int32 clientnumber_;
   friend void  protobuf_AddDesc_ClientMessage_2eproto();
   friend void protobuf_AssignDesc_ClientMessage_2eproto();
   friend void protobuf_ShutdownFile_ClientMessage_2eproto();
@@ -648,40 +603,15 @@ inline void Playerinfromation::set_playernumber(::google::protobuf::int32 value)
   // @@protoc_insertion_point(field_set:ClientMessage.Playerinfromation.playerNumber)
 }
 
-// required .ClientMessage.Playerinfromation.PlayerType type = 2 [default = Unassigned];
-inline bool Playerinfromation::has_type() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Playerinfromation::set_has_type() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Playerinfromation::clear_has_type() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void Playerinfromation::clear_type() {
-  type_ = 3;
-  clear_has_type();
-}
-inline ::ClientMessage::Playerinfromation_PlayerType Playerinfromation::type() const {
-  // @@protoc_insertion_point(field_get:ClientMessage.Playerinfromation.type)
-  return static_cast< ::ClientMessage::Playerinfromation_PlayerType >(type_);
-}
-inline void Playerinfromation::set_type(::ClientMessage::Playerinfromation_PlayerType value) {
-  assert(::ClientMessage::Playerinfromation_PlayerType_IsValid(value));
-  set_has_type();
-  type_ = value;
-  // @@protoc_insertion_point(field_set:ClientMessage.Playerinfromation.type)
-}
-
 // required .ClientMessage.playerPos pos = 3;
 inline bool Playerinfromation::has_pos() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void Playerinfromation::set_has_pos() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void Playerinfromation::clear_has_pos() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void Playerinfromation::clear_pos() {
   if (pos_ != NULL) pos_->::ClientMessage::playerPos::Clear();
@@ -825,6 +755,30 @@ inline void ClientMessage::set_addiontalinfo(::ClientMessage::ClientMessage_Addi
   // @@protoc_insertion_point(field_set:ClientMessage.ClientMessage.addiontalInfo)
 }
 
+// required int32 clientNumber = 4;
+inline bool ClientMessage::has_clientnumber() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ClientMessage::set_has_clientnumber() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ClientMessage::clear_has_clientnumber() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ClientMessage::clear_clientnumber() {
+  clientnumber_ = 0;
+  clear_has_clientnumber();
+}
+inline ::google::protobuf::int32 ClientMessage::clientnumber() const {
+  // @@protoc_insertion_point(field_get:ClientMessage.ClientMessage.clientNumber)
+  return clientnumber_;
+}
+inline void ClientMessage::set_clientnumber(::google::protobuf::int32 value) {
+  set_has_clientnumber();
+  clientnumber_ = value;
+  // @@protoc_insertion_point(field_set:ClientMessage.ClientMessage.clientNumber)
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -834,11 +788,6 @@ inline void ClientMessage::set_addiontalinfo(::ClientMessage::ClientMessage_Addi
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::ClientMessage::Playerinfromation_PlayerType> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::ClientMessage::Playerinfromation_PlayerType>() {
-  return ::ClientMessage::Playerinfromation_PlayerType_descriptor();
-}
 template <> struct is_proto_enum< ::ClientMessage::ClientMessage_AdditioanlRequests> : ::google::protobuf::internal::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::ClientMessage::ClientMessage_AdditioanlRequests>() {

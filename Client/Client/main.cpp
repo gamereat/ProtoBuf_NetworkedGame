@@ -9,26 +9,10 @@ int main()
 {
 
 	ClientController clientController;
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Pac Man client");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong client - Alan Yeats 1402402");
 
 	GameLogging::Log("----------- INIT STATED ----------");
-
- 
-	ClientMessage::ClientMessage newMessage; 
-	//ClientMessage::ClientInformation client;
-	//	ClientMessage::Playerinfromation player;
-	//	ClientMessage::playerPos pos;
-	//	pos.set_posx(0);
-	//	pos.set_posy(0);
-	//	client.set_clientversion(0);
-	//	client.set_messagenumber(0);
-	//	player.set_playernumber(0);
-	//	player.set_type(ClientMessage::Playerinfromation_PlayerType_Ghost);
-	//	player.set_allocated_pos(&pos);
-	//	newMessage.set_allocated_clientinfo(&client);
-	//	newMessage.set_allocated_playerinfo(&player);
- //
-		std::cout << newMessage.SpaceUsed();
+	
 	if (!clientController.Init())
 	{
 		GameLogging::LogError(" INIT FAILED   " );

@@ -6,11 +6,11 @@
 #include <iostream>
 #include "GameLogging.h"
 #include "NetworkManager.h"
-#include "PacManPlayer.h"
-#include "Map.h"
-#include "GhostPlayer.h"
+#include "Paddle.h"
 #include ".././../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include ".././../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
+
+const int NUM_PLAYERS = 2;
 
  /**
 *	Controls the client interaction though the game 
@@ -80,7 +80,7 @@ private:
 	
 	@returns the current player information
 	*/
-	ClientMessage::Playerinfromation GetPlayerInfo();
+	ClientMessage::Playerinfromation* GetPlayerInfo();
 
  
 	/*
@@ -91,18 +91,13 @@ private:
 	Called to update game information from the server messages
 	*/
 	void UpdateGameFromServer();
-	/*
-	Updates the map to latest version from the server
-
-	@param mapData	The updated map data from the server
-	*/
-	void UpdateMap(ServerMessage::MapData mapData);
+ 
 
 
 	/*
 	Update player location and data from the server
 	*/
-	void UpdatePlayers(ServerMessage::Playerinfromation players[4]);
+	void UpdatePlayers(ServerMessage::Playerinfromation players[NUM_PLAYERS]);
 
 	/*
 	Controls network connections for game
@@ -153,24 +148,19 @@ private:
 	*/
 	PlayerObject* controllingPlayer;
 	
-	/*
-	Pac man player which tries to 
-	*/
-	PacManPlayer* pacManPlayer;
-
-	/*
-	Ghost players that will try and chase the pac
-	*/
-	GhostPlayer* ghosts[3];
-
-	/*
-	Map from the game
-	*/
-	Map map;
 
 	/*
 	The message number from the server last recived
 	*/
 	int lastSeverMessageRecived;
+	
+	/*
+	The paddles used to hit the ball around 
+	only one is controlled by each client 
+	*/
+	Paddle* paddle[NUM_PLAYERS];
+
+	int t = 0;
+	int tt = 1000;
 };
 

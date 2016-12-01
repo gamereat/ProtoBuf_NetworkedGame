@@ -13,13 +13,13 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Proto3">
+    <Filter Include="Proto2">
       <UniqueIdentifier>{3a692587-56a0-4568-9f0f-f92825de1647}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Proto3\Header">
+    <Filter Include="Proto2\Header">
       <UniqueIdentifier>{516ea20e-79ac-4d69-9ae8-ad296b33c9ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Proto3\Source">
+    <Filter Include="Proto2\Source">
       <UniqueIdentifier>{90a64ca7-5d2d-4837-a230-4d8e5228641f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -36,9 +36,6 @@
     <ClCompile Include="GameLogging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc">
-      <Filter>Proto3\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -51,8 +48,11 @@
     <ClCompile Include="MapObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc">
+      <Filter>Proto2\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc">
-      <Filter>Proto3\Source</Filter>
+      <Filter>Proto2\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,9 +64,6 @@
     </ClInclude>
     <ClInclude Include="GameLogging.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h">
-      <Filter>Proto3\Header</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
@@ -80,8 +77,11 @@
     <ClInclude Include="MapObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h">
+      <Filter>Proto2\Header</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h">
-      <Filter>Proto3\Header</Filter>
+      <Filter>Proto2\Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

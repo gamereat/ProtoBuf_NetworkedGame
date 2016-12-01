@@ -4,7 +4,10 @@
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 #include "Player.h"
 #include <vector>
-#include "Map.h"
+/*
+Number of players within a game
+*/
+const int NUM_PLAYERS = 2;
 
 struct clientUDPInfo
 {
@@ -43,12 +46,12 @@ public:
 
 
 	void Update();
-	void SendServerMessage(int serverVersionNum, Player players[4], Map map, int numConnectedPlayers);
+	void SendServerMessage(int serverVersionNum, Player* players[NUM_PLAYERS],  int numConnectedPlayers);
 
 
 	void SendMessage(std::string data, clientUDPInfo clientIp);
 
-
+	std::vector<ClientMessage::ClientMessage*> lastMessageRecivedClients();
 	int getPlayersConnected();
 private:
 
@@ -65,7 +68,7 @@ private:
 	/*
 	Holds the last server message recived from the server
 	*/
-	std::vector<ClientMessage::ClientMessage> lastServerMessage;
+	std::vector<ClientMessage::ClientMessage*> lastServerMessage;
 	/*
 	Recives data from a client  
 	*/

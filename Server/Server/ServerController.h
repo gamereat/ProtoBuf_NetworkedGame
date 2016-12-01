@@ -6,10 +6,7 @@
 #include "NetworkManager.h"
 #include "Player.h"
 #include "Map.h"
-/*
-Number of players within a game
-*/
-const int NUM_PLAYERS = 4;
+
 class ServerController
 {
 public:
@@ -34,15 +31,21 @@ public:
 	bool Update();
 private:
 	
-	/*
-	Synced up map used to dispaly to players
-	*/
-	Map* gameMap;
 
+	sf::Clock networkUpdateTimer;
+
+ 
+	/*
+	time (IN SECONDS) between new message being sent the clients
+	*/
+	float clientNetworkUpdateTime;
+
+	void createClientMessage();
+ 
 	/*
 	players in the game
 	*/
-	Player* players[4];
+	Player* players[NUM_PLAYERS];
 
 	/*
 	Manages all the nwtwork conections

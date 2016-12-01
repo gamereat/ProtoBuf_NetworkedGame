@@ -4,12 +4,10 @@
 ClientController::ClientController()
 {
 	currentClientGameState = ClientGameState::Init;
-
-	pacManPlayer = new PacManPlayer();
-
-	for (int i = 0; i < 4; i++)
+	
+	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
-		ghosts[i] = new GhostPlayer();
+		paddle[i] = new Paddle();
 	}
 }
 
@@ -17,25 +15,16 @@ ClientController::ClientController()
 ClientController::~ClientController()
 {
 
-	// Free up memory
+ 	// clean up memory
 
-	if (pacManPlayer)
+	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
-		delete pacManPlayer;
-		pacManPlayer = nullptr;
-	}
-
-
-	for (int i = 0; i < 4; i++)
-	{
-		if (ghosts[i])
+		if (paddle[i])
 		{
-			delete ghosts[i];
-			ghosts[i] = nullptr;
+			delete paddle[i];
+			paddle[i] = nullptr;
 		}
-
-	}
-
+ 	}
 	
 }
 
@@ -60,18 +49,27 @@ bool ClientController::Init()
 	clientVersionNumberText.setFillColor(sf::Color::Red);
 	
 
+	// Init the players
+	for (int i = 0; i < NUM_PLAYERS; i++)
+	{
+		paddle[i]->Init();
+	}
+
+	
+	paddle[0]->setPlayerControls(false);
+	paddle[1]->setPlayerControls(true);
+
 	// init the network
 	networkManager.Init();
 
-	map.Init();
 
-	pacManPlayer->Init();
-	pacManPlayer->setIsControllable(true);
-	for (int i = 0; i < 4; i++)
-	{
-		ghosts[i]->Init();
-	}
 	connectToGameSever();
+
+
+
+
+	lastSeverMessageRecived = 0;
+
 
 	return true;
 }
@@ -104,27 +102,34 @@ bool ClientController::Update()
 	default:
 		break;
 	}
-	pacManPlayer->Update(deltaTime);
 
-	for (int i = 0; i < 4; i++)
-	{
-		ghosts[i]->Update(deltaTime);
-	}
 
 	networkManager.Update();
 	UpdateGameFromServer();
-
-
+	if (t >= tt)
+	{
+		UpdateGameToServer();
+	}
+	else
+	{
+		t++;
+	}
+	// Init the players
+	for (int i = 0; i < NUM_PLAYERS; i++)
+	{
+		paddle[i]->Update(deltaTime);
+	}
 	return true;
 }
 
 void ClientController::Render(sf::RenderWindow* renderWindow)
 {
-	map.Render(renderWindow);
-	pacManPlayer->Render(renderWindow);
-	for (int i = 0; i < 4; i++)
+
+	// Render Players
+	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
-		ghosts[i]->Render(renderWindow);
+		paddle[i]->Render(renderWindow);
+
 	}
 	renderWindow->draw(clientVersionNumberText);
 	renderWindow->draw(clientNumberText);
@@ -151,51 +156,29 @@ void ClientController::connectToGameSever()
 	ServerMessage::ServerMessage serverMessage = *networkManager.getLastServerMessage();
 
 	// get the player number
-	int playerNum = serverMessage.additioanlinfo().clientplayernumber();
+	int playerNum = serverMessage.playernumber();
+	int playerConncted = serverMessage.playersconnected();
 
 	// Player number relates to which player the user is controlling 
 
 	switch (playerNum)
 	{
 	case 0:
-		// if if player then they are the pacman
-		pacManPlayer->setIsControllable(false);
-
-
-		controllingPlayer = pacManPlayer;
 		break;
-	case 1:
-		// if second player then they are first ghost
-		ghosts[0]->setIsControllable(false);
-
-		controllingPlayer = ghosts[0];
+	case 1: 
 
 		break;
-	case 2:
-		// if second player then they are second ghost
-		ghosts[1]->setIsControllable(false);
-
-		controllingPlayer = ghosts[1];
-
-		break;
-	case 3:
-		// if second player then they are third ghost
-		ghosts[2]->setIsControllable(false);
-		controllingPlayer = ghosts[2];
-
-		break;
-
-	default:
-		GameLogging::LogError("Incorrect player number recived from the server");
-		break;		
 	}
+	
+	controllingPlayer = paddle[playerNum];
 
 	// set the player number of the controlling player
 	controllingPlayer->setPlayerNumber(playerNum);
 
 	clientNumberText.setFont(standardFont);
 
-	clientNumberText.setString("Client Number " + std::to_string( playerNum));
+	// Adding 1 to player num to make it more readable to the user
+	// ie if only 1 user is conenct it is 1/1 rather than 0/1 which is correct but not understadable
 	clientNumberText.setPosition(600, 25);
 	clientNumberText.setCharacterSize(24);
 
@@ -208,113 +191,78 @@ void ClientController::connectToGameSever()
 
 }
 
-ClientMessage::Playerinfromation ClientController::GetPlayerInfo()
+ClientMessage::Playerinfromation* ClientController::GetPlayerInfo()
 {
 	sf::Vector2f pos = controllingPlayer->getPosition();
-
-	ClientMessage::Playerinfromation_PlayerType type = controllingPlayer->getPlayerType();
 
 	int playerNum = controllingPlayer->getPlayerNumber();
 
 
-	ClientMessage::playerPos playerPos;
-
-	playerPos.set_posx(pos.x);
-	playerPos.set_posy(pos.y);
-
-	ClientMessage::Playerinfromation playerInfo;
-
-	playerInfo.set_type(type);
-	playerInfo.set_playernumber(playerNum);
+	ClientMessage::playerPos* playerPos = new ClientMessage::playerPos();
 
 
-	playerInfo.set_allocated_pos(&playerPos);
+	playerPos->set_posx(pos.x);
+	playerPos->set_posy(pos.y);
 
+	ClientMessage::Playerinfromation* playerInfo = new ClientMessage::Playerinfromation();
+
+	playerInfo->set_playernumber(playerNum);
+
+
+	playerInfo->set_allocated_pos(playerPos);
+	
+	std::vector<std::string >t;
+	playerInfo->FindInitializationErrors(&t);
+ 
 	return playerInfo;
 }
 
 void ClientController::UpdateGameToServer()
 {
 
-	networkManager.SentMessageToServer(clientVersionNumber, &GetPlayerInfo(), ClientMessage::ClientMessage_AdditioanlRequests_None);
+	networkManager.SentMessageToServer(clientVersionNumber, GetPlayerInfo(), ClientMessage::ClientMessage_AdditioanlRequests_None);
 }
 
 void ClientController::UpdateGameFromServer()
 {
-	 ServerMessage::ServerMessage newMessage = *networkManager.getLastServerMessage();
+	 ServerMessage::ServerMessage* newMessage = networkManager.getLastServerMessage();
 
-	 ServerMessage::ServerInformation serverInfo = newMessage.serverinfo();
-
-	 unsigned int  messageNumber = serverInfo.messagenumber();
-	 // Check if a new message has been recived
-	 if (messageNumber> lastSeverMessageRecived)
+	 // Check if any messages have been recived yet
+	 if (newMessage != nullptr)
 	 {
-		 // Check if a message has been lost 
-		 if (lastSeverMessageRecived++ != messageNumber)
-		 {
-			 //ERROR: 
-			 GameLogging::LogError("Message has been lost");
-			
-			 //TODO: use some interpulation to work fix errors from missing messages 
-		 }
+		 ServerMessage::ServerInformation serverInfo = newMessage->serverinfo();
+		 unsigned int  messageNumber =  serverInfo.messagenumber();
 
-		 // Update the map with information from the server
-		 UpdateMap(newMessage.mapinfo());
 
-		 //collect player information
+ 			 // Update the map with information from the server
 
-		 ServerMessage::Playerinfromation updatePlayers[4];
-		 updatePlayers[0] = newMessage.playerone();
-		 updatePlayers[1] = newMessage.playertwo();
-		 updatePlayers[2] = newMessage.playerthree();
-		 updatePlayers[3] = newMessage.playerfour();
+			 //collect player information
 
-		 // Update players
-		 UpdatePlayers(updatePlayers);
+			 ServerMessage::Playerinfromation updatePlayers[2];
+			 updatePlayers[0] = newMessage->playerone();
+			 updatePlayers[1] = newMessage->playertwo();
+
+
+			 // Update players
+			 UpdatePlayers(updatePlayers);
+			 int playerNum = newMessage->playernumber();
+			 int playerConncted = newMessage->playersconnected();
+
+			 clientNumberText.setString("Client Number " + std::to_string(playerNum + 1) + "/" + std::to_string(playerConncted));
 
 	 }
 }
 
-void ClientController::UpdateMap(ServerMessage::MapData mapData)
+
+void ClientController::UpdatePlayers(ServerMessage::Playerinfromation players[NUM_PLAYERS])
 {
-	// Map the map data to the map objects
-	std::vector<std::vector<MapObject>> newMap;
-
-	// loop for the height 
-	for (int i = 0; i < MAP_LENGTH ; i++)
+	if (controllingPlayer != paddle[0])
 	{
-		std::vector <MapObject> col;
-
-		// loop for width
-		for (int j = 0;j< MAP_HIGHT; j++)
-		{
-			// Set the tile based off the server info
-			MapObject obj;
-			obj.setTileType(mapData.col(i).tile(j));
-			col.push_back(obj);
-
-		}
-		newMap.push_back(col);
+		paddle[0]->UpdatePlayerInfo(players[0]);
 	}
-	map.updateMap(newMap);
-}
+	if (controllingPlayer != paddle[1])
+	{
+		paddle[1]->UpdatePlayerInfo(players[1]);
+	}
 
-void ClientController::UpdatePlayers(ServerMessage::Playerinfromation players[4])
-{
-	if (controllingPlayer != pacManPlayer)
-	{
-		pacManPlayer->UpdatePlayerInfo(players[0]);
-	}
-	if (controllingPlayer != ghosts[0])
-	{
-		ghosts[0]->UpdatePlayerInfo(players[1]);
-	}
-	if (controllingPlayer != ghosts[1])
-	{
-		ghosts[1]->UpdatePlayerInfo(players[2]);
-	}
-	if (controllingPlayer != ghosts[2])
-	{
-		ghosts[2]->UpdatePlayerInfo(players[3]);
-	} 
  }
