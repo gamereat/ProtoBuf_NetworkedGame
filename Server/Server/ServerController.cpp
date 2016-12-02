@@ -1,21 +1,29 @@
 #include "ServerController.h"
 #include "GameLogging.h"
-
+#include "NetworkManager.h"
+#include "Player.h"
+#include "Ball.h"
 
 ServerController::ServerController()
 {
 	playersInGame = 0;
 	versionNumber = 2;
-	clientNetworkUpdateTime = 1;
+	clientNetworkUpdateTime = 0.06;
 }
 
 
 ServerController::~ServerController()
 {
+	if (networkManger)
+	{
+		delete networkManger;
+		networkManger = nullptr;
+	}
 }
 
 bool ServerController::Init()
 {
+	networkManger = new NetworkManager();
 	if (!standardFont.loadFromFile("../res/font/Politik.otf"))
 	{
 		GameLogging::LogError("Standard font faile to load");
@@ -32,7 +40,7 @@ bool ServerController::Init()
 	severVersionNumberText.setCharacterSize(24);
 
 	severVersionNumberText.setFillColor(sf::Color::Red);
-	networkManger.Init();
+	networkManger->Init();
 
 	
  	int i = 0;
@@ -41,37 +49,44 @@ bool ServerController::Init()
 		player = new Player(0,  sf::Vector2f(0, 10));
 		players[i] = player;
 		i++;
+		player->Init();
 	}
 	players[0]->setPosition(playerOneStartingLocation);
 	players[1]->setPosition(playerTwoStartingLocation);
 
-	ball = new Ball(sf::Vector2f(0, 0), 90, ballStartPos);
-
+	ball = new Ball(sf::Vector2f(10, 0), 90, ballStartPos);
+	ball->Init();
  
 	return true;
 }
 void ServerController::Render(sf::RenderWindow* renderWindow)
 {
- 
+	for each (auto player in players)
+	{ 
+		player->Render(renderWindow);
+	}
 	renderWindow->draw(ball->getSprite());
 	renderWindow->draw(severVersionNumberText);
 }
 
 bool ServerController::Update()
 {
+	deltaTime = deltaTimeClock.restart().asSeconds();
+
+
 	createClientMessage();
 	// if there has been more players connected to the network since last frame then send data to them and other players
 	// about this new player
-	if (playersInGame < networkManger.getPlayersConnected())
+	if (playersInGame < networkManger->getPlayersConnected())
 	{
 		playersInGame++;
-		networkManger.SendServerMessage(versionNumber, ball,players, playersInGame);
+		networkManger->SendServerMessage(versionNumber, ball,players, playersInGame);
 	}
 	// If a player has disconnected 
-	else if (playersInGame > networkManger.getPlayersConnected())
+	else if (playersInGame > networkManger->getPlayersConnected())
 	{
 		playersInGame--;
-		networkManger.SendServerMessage(versionNumber, ball, players, playersInGame);
+		networkManger->SendServerMessage(versionNumber, ball, players, playersInGame);
 	}
 	//
 
@@ -82,13 +97,39 @@ bool ServerController::Update()
 	if (timeSinceClientUpdate >= clientNetworkUpdateTime)
 	{
 		networkUpdateTimer.restart();
-		networkManger.SendServerMessage(versionNumber, ball, players, playersInGame);
+		networkManger->SendServerMessage(versionNumber, ball, players, playersInGame);
 	}
 
-	networkManger.Update();
+	networkManger->Update();
 	
+	ball->Update(deltaTime);
 
- 	return true;
+	switch (ball->CollisionDetection(players))
+	{
+
+	case None:
+		break;
+
+	case HitBat:
+		break;
+
+	case HitTopBottom:
+		break;
+
+	case PlayerOneScore:
+		players[0]->setScore(players[0]->getScore() + 1);
+		ball->Restart();
+
+		break;
+
+	case PlayerTwoScore:
+		players[1]->setScore(players[1]->getScore() + 1);
+		ball->Restart();
+	default:
+		break;
+	}
+
+	return true;
 }
 
 void ServerController::createClientMessage()
@@ -97,10 +138,10 @@ void ServerController::createClientMessage()
 	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
 		//make sure messages have been recived
-		if (networkManger.lastMessageRecivedClients()[i] != nullptr)
+		if (networkManger->lastMessageRecivedClients()[i] != nullptr)
 		{
-			int clientNum = networkManger.lastMessageRecivedClients()[i]->clientnumber();
-			ClientMessage::Playerinfromation playerInfo = networkManger.lastMessageRecivedClients()[i]->playerinfo();
+			int clientNum = networkManger->lastMessageRecivedClients()[i]->clientnumber();
+			ClientMessage::Playerinfromation playerInfo = networkManger->lastMessageRecivedClients()[i]->playerinfo();
 		
 			clientsInfo[i]  = std::pair<int, ClientMessage::Playerinfromation>(clientNum, playerInfo);
 
@@ -120,5 +161,7 @@ void ServerController::createClientMessage()
 			players[i]->UpdatePlayer(&(clientsInfo[i].second));
 		}
 	}
+
+
 
 }

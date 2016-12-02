@@ -11,6 +11,7 @@ public:
 	void setPosition(sf::Vector2f);
 
 	sf::Sprite  getSprite();
+
  protected:
  
 	sf::Vector2f position;

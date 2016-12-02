@@ -1,6 +1,9 @@
 #include "NetworkManager.h"
 #include "ServerController.h"
 #include "GameLogging.h"
+#include "Ball.h"
+#include "Player.h"
+
 
 NetworkManager::NetworkManager()
 {

@@ -9,6 +9,10 @@ public:
 	Player(int score, sf::Vector2f pos);
 	~Player();
 
+	virtual void Render(sf::RenderWindow* renderWindow);
+	virtual void Init();
+	virtual void Update(float deltaTime);
+
 	void setScore(int newScore);
 	int getScore();
 
@@ -16,7 +20,7 @@ public:
 	void UpdatePlayer(ClientMessage::Playerinfromation*);
 private:
 
-	
+	sf::Texture paddleTexture;
 
 	int currentScore;
 

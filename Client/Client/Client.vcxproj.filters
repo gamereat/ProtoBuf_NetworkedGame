@@ -13,9 +13,6 @@
     <ClCompile Include="GhostPlayer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -55,6 +52,13 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc">
       <Filter>Protobuf\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WallBlock.h">
@@ -108,6 +112,10 @@
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h">
       <Filter>Protobuf\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header\States</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
@@ -124,6 +132,24 @@
     </Filter>
     <Filter Include="Protobuf\Source">
       <UniqueIdentifier>{39575b12-0c4b-48c6-807f-e1cb08b26a36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\UI">
+      <UniqueIdentifier>{25130a99-e37c-4822-bd8a-101dec2f8580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\States">
+      <UniqueIdentifier>{df3022a5-d7d8-41a3-8860-dd7fc4cb554f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI">
+      <UniqueIdentifier>{1b82054b-a132-486e-96b7-4e2e5c908161}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\State">
+      <UniqueIdentifier>{067d0375-b5a4-47fe-a77f-b48408765ff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Networking">
+      <UniqueIdentifier>{6fe6e9dc-2bda-4276-a37c-76b4e5611714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Networking">
+      <UniqueIdentifier>{a63816de-fa9e-482e-a2e6-d38b734056b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

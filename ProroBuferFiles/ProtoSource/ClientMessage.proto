@@ -29,6 +29,7 @@ message ClientMessage{
         FirstConnect = 2;
         Reconnect = 3;
         Disconnect = 4;
+
     }
 
     required ClientInformation clientinfo = 1;

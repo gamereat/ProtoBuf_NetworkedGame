@@ -9,6 +9,9 @@ ClientController::ClientController()
 	{
 		paddle[i] = new Paddle();
 	}
+
+	ball = new Ball();
+ 
 }
 
 
@@ -26,6 +29,11 @@ ClientController::~ClientController()
 		}
  	}
 	
+	if (ball)
+	{
+		delete ball;
+		ball = nullptr;
+	}
 }
 
 bool ClientController::Init()
@@ -65,7 +73,7 @@ bool ClientController::Init()
 
 	connectToGameSever();
 
-
+	ball->Init();
 
 
 	lastSeverMessageRecived = 0;
@@ -106,19 +114,26 @@ bool ClientController::Update()
 
 	networkManager.Update();
 	UpdateGameFromServer();
-	if (t >= tt)
+
+	// Work out if clients need a update with latest data from server
+	float timeSinceClientUpdate = networkUpdateTimer.getElapsedTime().asSeconds();
+
+	// if corrrecnt time has past send update information
+	if (timeSinceClientUpdate >= serverNetworkUpdateTime)
 	{
+		networkUpdateTimer.restart();
 		UpdateGameToServer();
 	}
-	else
-	{
-		t++;
-	}
+
+	networkManager.Update();
+
 	// Init the players
 	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
 		paddle[i]->Update(deltaTime);
 	}
+
+	ball->Update(deltaTime);
 	return true;
 }
 
@@ -131,6 +146,8 @@ void ClientController::Render(sf::RenderWindow* renderWindow)
 		paddle[i]->Render(renderWindow);
 
 	}
+
+	ball->Render(renderWindow);
 	renderWindow->draw(clientVersionNumberText);
 	renderWindow->draw(clientNumberText);
 }
@@ -154,6 +171,15 @@ void ClientController::connectToGameSever()
 
 	};
 	ServerMessage::ServerMessage serverMessage = *networkManager.getLastServerMessage();
+
+
+	ServerMessage::Playerinfromation updatePlayers[2];
+	updatePlayers[0] = serverMessage.playerone();
+	updatePlayers[1] = serverMessage.playertwo();
+	UpdatePlayers(updatePlayers);
+
+
+	UpdateBall(serverMessage.ballinformation());
 
 	// get the player number
 	int playerNum = serverMessage.playernumber();
@@ -250,6 +276,8 @@ void ClientController::UpdateGameFromServer()
 
 			 clientNumberText.setString("Client Number " + std::to_string(playerNum + 1) + "/" + std::to_string(playerConncted));
 
+			 // Update ball location
+			 UpdateBall(newMessage->ballinformation());
 	 }
 }
 
@@ -266,3 +294,8 @@ void ClientController::UpdatePlayers(ServerMessage::Playerinfromation players[NU
 	}
 
  }
+
+void ClientController::UpdateBall(ServerMessage::BallInformation ballInfo)
+{
+	ball->UpdateBallInfo(ballInfo);
+}

@@ -17,13 +17,16 @@ void Paddle::Init()
 	PlayerObject::Init();
 	
 	
-	if (!paddleTexture.loadFromFile("../res/art/ghost.png"))
+	if (!paddleTexture.loadFromFile("../res/art/paddle.png"))
 	{
 		GameLogging::LogError("Failed to load in paddle texture");
 	}
+
 	else
 	{
 		sprite = sf::Sprite(paddleTexture);
+
+		sprite.setOrigin(sprite.getTextureRect().width / 2, sprite.getTextureRect().height / 2);
 	}
 
 }

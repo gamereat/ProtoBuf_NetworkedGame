@@ -5,7 +5,7 @@
 #include "GameLogging.h"
 void main()
 {
- 	sf::RenderWindow window(sf::VideoMode(800, 600), "Pac Man Server");
+ 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH,SCREEN_HEIGHT ), "Pac Man Server");
 	ServerController serverController;
 	GameLogging::Log("----------- INIT STATED ----------");
 
@@ -22,14 +22,15 @@ void main()
 		{
 
 			sf::Event event;
-			while (window.pollEvent(event))
+			while (window.pollEvent(event) || ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
 			{
 				if (event.type == sf::Event::Closed)
 					window.close();
 			}
 
-			window.clear();
- 
+			window.clear(sf::Color(0, 0, 124, 255));
+
+  
 			serverController.Update();
 			serverController.Render(&window);
 

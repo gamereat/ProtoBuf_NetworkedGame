@@ -2,16 +2,14 @@
 #include "SFML/Network.hpp"
 #include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
-#include "Player.h"
 #include <vector>
-#include "Ball.h"
+#include "ServerController.h"
 /*
 Number of players within a game
 */
-const int NUM_PLAYERS = 2;
-const sf::Vector2f playerOneStartingLocation = sf::Vector2f(0, 10);
+const sf::Vector2f playerOneStartingLocation = sf::Vector2f(25, 10);
 const sf::Vector2f playerTwoStartingLocation = sf::Vector2f(750, 10);
-const sf::Vector2f ballStartPos = sf::Vector2f(400, 300);
+const sf::Vector2f ballStartPos = sf::Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
 struct clientUDPInfo
 {
@@ -37,11 +35,12 @@ public:
 };
 class NetworkManager
 {
+
 public:
 	NetworkManager();
 	~NetworkManager();
 
-
+ 
 
 	/*
 	Init the server network conection
@@ -50,7 +49,7 @@ public:
 
 
 	void Update();
-	void  SendServerMessage(int serverVersionNum, Ball* ball, Player* playerData[NUM_PLAYERS], int numConnectedPlayers);
+	void  SendServerMessage(int serverVersionNum, class Ball* ball, Player* playerData[NUM_PLAYERS], int numConnectedPlayers);
 
 
 	void SendMessage(std::string data, clientUDPInfo clientIp);

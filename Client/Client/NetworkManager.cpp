@@ -91,6 +91,7 @@ void NetworkManager::ReciveMessageToServer()
 
 		GameLogging::Log("Message Number" +std::to_string( newMessage->serverinfo().messagenumber()));
 		GameLogging::Log("Message Recived" + std::to_string(numOfMessageRecived));
+
 		numOfMessageRecived++;
 
 		// Send a debug log of message to logging system when in debug mode 

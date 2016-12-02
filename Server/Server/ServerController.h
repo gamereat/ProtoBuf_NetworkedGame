@@ -3,9 +3,12 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
-#include "NetworkManager.h"
-#include "Player.h"
-#include "Ball.h"
+
+const int NUM_PLAYERS = 2;
+
+const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 800;
+
 class ServerController
 {
 public:
@@ -33,7 +36,7 @@ private:
 	/*
 	Ball used to hit around by players
 	*/
-	Ball* ball;
+	class Ball* ball;
 
 	sf::Clock networkUpdateTimer;
 
@@ -48,12 +51,12 @@ private:
 	/*
 	players in the game
 	*/
-	Player* players[NUM_PLAYERS];
+	class Player* players[NUM_PLAYERS];
 
 	/*
 	Manages all the nwtwork conections
 	*/
-	NetworkManager networkManger;
+	class NetworkManager* networkManger;
 
 
 	/*

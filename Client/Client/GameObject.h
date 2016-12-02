@@ -17,7 +17,7 @@ public:
 
 	void SetTexture(sf::Texture);
 protected:
-	virtual void HandleInput(float deltaTime) = 0;
+	//virtual void HandleInput(float deltaTime) = 0;
 
 
 

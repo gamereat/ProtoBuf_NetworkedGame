@@ -9,7 +9,8 @@
 #include "Paddle.h"
 #include ".././../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include ".././../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
-
+#include "Ball.h"
+#include "Menu.h"
 const int NUM_PLAYERS = 2;
 
  /**
@@ -70,6 +71,15 @@ public:
 
 private: 
 	
+	Menu* Menu;
+
+	Ball* ball;
+
+	/*
+	Updates ball from serverlocation
+	*/
+	void UpdateBall(ServerMessage::BallInformation ballInfo);
+
 	/*
 		Will connect to game server and get data from it 
 	*/
@@ -160,7 +170,12 @@ private:
 	*/
 	Paddle* paddle[NUM_PLAYERS];
 
-	int t = 0;
-	int tt = 1000;
+	sf::Clock networkUpdateTimer;
+
+
+	/*
+	time (IN SECONDS) between new message being sent the clients
+	*/
+	float serverNetworkUpdateTime;
 };
 
