@@ -4,6 +4,7 @@
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 #include <vector>
 #include "ServerController.h"
+#include "NetworkTimeLapse.h"
 /*
 Number of players within a game
 */
@@ -57,6 +58,12 @@ public:
 	std::vector<ClientMessage::ClientMessage*> lastMessageRecivedClients();
 	int getPlayersConnected();
 private:
+
+
+	/*
+	Sends time syncing message
+	*/
+	NetworkTimeLapse* networkTimeLapse;
 
 	/*
 	Number of player's current connect to game server

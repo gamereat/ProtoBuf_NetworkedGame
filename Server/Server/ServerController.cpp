@@ -129,6 +129,9 @@ bool ServerController::Update()
 		break;
 	}
 
+
+	players[0]->Update(deltaTime);
+	players[1]->Update(deltaTime);
 	return true;
 }
 

@@ -4,7 +4,8 @@ message ServerInformation {
  
   required int32 serverInformation = 1;
   required int64 messageNumber = 2;
-  
+  required float timeStamp = 3;
+
 }
 
 message Vector2f {

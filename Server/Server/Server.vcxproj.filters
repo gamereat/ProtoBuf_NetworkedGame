@@ -22,6 +22,12 @@
     <Filter Include="Proto2\Source">
       <UniqueIdentifier>{90a64ca7-5d2d-4837-a230-4d8e5228641f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Networking">
+      <UniqueIdentifier>{52b0d2b8-73aa-435a-9cd5-0a11a75a6978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Networking">
+      <UniqueIdentifier>{7111587c-7dbb-4857-8f91-c137cdcff919}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +63,12 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc">
       <Filter>Proto2\Source</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkTimeLapse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc">
+      <Filter>Proto2\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerController.h">
@@ -87,6 +99,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h">
+      <Filter>Proto2\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTimeLapse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h">
       <Filter>Proto2\Header</Filter>
     </ClInclude>
   </ItemGroup>

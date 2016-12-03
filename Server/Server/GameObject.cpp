@@ -15,14 +15,14 @@ GameObject::~GameObject()
 sf::Vector2f GameObject::getPosition()
 {
 
-	this->position = sprite.getPosition();;
+	this->lasteUpdatePosition = sprite.getPosition();;
 
 	return sprite.getPosition();
 }
 
 void GameObject::setPosition(sf::Vector2f position)
 {
-	this->position = position;
+	this->lasteUpdatePosition = position;
 
 	sprite.setPosition(position);
 	

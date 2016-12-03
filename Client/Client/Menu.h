@@ -16,7 +16,6 @@ private:
 
 	sf::Font MenuFont;
 
-	sf::Text
- 
+  
 };
 

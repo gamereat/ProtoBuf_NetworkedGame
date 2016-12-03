@@ -109,12 +109,21 @@ class ServerInformation : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 messagenumber() const;
   inline void set_messagenumber(::google::protobuf::int64 value);
 
+  // required float timeStamp = 3;
+  inline bool has_timestamp() const;
+  inline void clear_timestamp();
+  static const int kTimeStampFieldNumber = 3;
+  inline float timestamp() const;
+  inline void set_timestamp(float value);
+
   // @@protoc_insertion_point(class_scope:ServerMessage.ServerInformation)
  private:
   inline void set_has_serverinformation();
   inline void clear_has_serverinformation();
   inline void set_has_messagenumber();
   inline void clear_has_messagenumber();
+  inline void set_has_timestamp();
+  inline void clear_has_timestamp();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -122,6 +131,7 @@ class ServerInformation : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::int64 messagenumber_;
   ::google::protobuf::int32 serverinformation_;
+  float timestamp_;
   friend void  protobuf_AddDesc_ServerMessage_2eproto();
   friend void protobuf_AssignDesc_ServerMessage_2eproto();
   friend void protobuf_ShutdownFile_ServerMessage_2eproto();
@@ -693,6 +703,30 @@ inline void ServerInformation::set_messagenumber(::google::protobuf::int64 value
   set_has_messagenumber();
   messagenumber_ = value;
   // @@protoc_insertion_point(field_set:ServerMessage.ServerInformation.messageNumber)
+}
+
+// required float timeStamp = 3;
+inline bool ServerInformation::has_timestamp() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ServerInformation::set_has_timestamp() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ServerInformation::clear_has_timestamp() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ServerInformation::clear_timestamp() {
+  timestamp_ = 0;
+  clear_has_timestamp();
+}
+inline float ServerInformation::timestamp() const {
+  // @@protoc_insertion_point(field_get:ServerMessage.ServerInformation.timeStamp)
+  return timestamp_;
+}
+inline void ServerInformation::set_timestamp(float value) {
+  set_has_timestamp();
+  timestamp_ = value;
+  // @@protoc_insertion_point(field_set:ServerMessage.ServerInformation.timeStamp)
 }
 
 // -------------------------------------------------------------------

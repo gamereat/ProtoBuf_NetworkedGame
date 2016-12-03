@@ -1,0 +1,42 @@
+
+
+package SyncTimeMessage;
+
+
+message ConnectTime {
+
+    // seconds since epoch on client
+    required float clientTimeSinceEpoch  = 1;
+
+    // send the time taken to recive last message
+    required float timeTakeToReciveLastMessage  =2;
+
+
+}
+
+
+message ServerConnectConfirm {
+
+
+    required float serverStartTime = 1;
+
+    // seconds since epoch on client
+    required float serverTimeSinceEpoch  = 2;
+
+     required int32 playerNumber = 3;
+
+     required int32 playersConnected = 4;
+
+     
+}
+
+
+message ClientConfirmConnect {
+ 
+    // seconds since epoch on client
+    required ConnectTime connectTime  = 2;
+
+    required int32 clientNumber = 1;
+
+     
+}

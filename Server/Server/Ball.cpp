@@ -34,7 +34,7 @@ void Ball::Init()
 		sprite = sf::Sprite(ballTexture);
 
 		sprite.setOrigin(sprite.getTextureRect().width / 2, sprite.getTextureRect().height / 2);
-		sprite.setPosition(position);
+		sprite.setPosition(lasteUpdatePosition);
 
 	}
 

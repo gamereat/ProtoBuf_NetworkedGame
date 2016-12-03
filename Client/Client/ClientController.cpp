@@ -11,6 +11,8 @@ ClientController::ClientController()
 	}
 
 	ball = new Ball();
+
+	serverNetworkUpdateTime = 0.01;
  
 }
 
@@ -112,8 +114,7 @@ bool ClientController::Update()
 	}
 
 
-	networkManager.Update();
-	UpdateGameFromServer();
+ 	UpdateGameFromServer();
 
 	// Work out if clients need a update with latest data from server
 	float timeSinceClientUpdate = networkUpdateTimer.getElapsedTime().asSeconds();

@@ -93,7 +93,7 @@
       </PrecompiledHeader>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\SFML-2.4.1\include;E:\Source\Repos\GameNetworking\Client\protobuf\include;E:\Source\Repos\GameNetworking\ProroBuferFiles\ProtoSource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -133,9 +133,10 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGSSFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\SFML-2.4.1\include;E:\Source\Repos\GameNetworking\Client\protobuf\include;E:\Source\Repos\GameNetworking\ProroBuferFiles\ProtoSource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -173,6 +174,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc" />
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc" />
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="ClientController.cpp" />
     <ClCompile Include="GameLogging.cpp" />
@@ -184,6 +186,7 @@
     <ClCompile Include="MapPoint.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="NetworkTimeStar.cpp" />
     <ClCompile Include="PacManPlayer.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
@@ -195,6 +198,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h" />
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h" />
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="ClientController.h" />
     <ClInclude Include="GameLogging.h" />
@@ -205,6 +209,7 @@
     <ClInclude Include="MapPoint.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="NetworkManager.h" />
+    <ClInclude Include="NetworkTimeStart.h" />
     <ClInclude Include="PacManPlayer.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PlayerObject.h" />

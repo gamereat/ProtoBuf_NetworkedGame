@@ -19,9 +19,6 @@
     <ClCompile Include="MapPoint.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="PacManPlayer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -55,10 +52,21 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source\State</Filter>
+    <ClCompile Include="NetworkTimeStar.cpp">
+      <Filter>Source\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkManager.cpp">
+      <Filter>Source\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc">
+      <Filter>Protobuf\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WallBlock.h">
@@ -74,9 +82,6 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="PacManPlayer.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkManager.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="MapPoint.h">
@@ -115,7 +120,18 @@
     <ClInclude Include="Menu.h">
       <Filter>Header\States</Filter>
     </ClInclude>
-    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="NetworkTimeStart.h">
+      <Filter>Header\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkManager.h">
+      <Filter>Header\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h">
+      <Filter>Protobuf\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">

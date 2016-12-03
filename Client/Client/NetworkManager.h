@@ -2,7 +2,7 @@
 #include "SFML/Network.hpp"
 #include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
-
+#include "NetworkTimeStart.h"
 const sf::Vector2f playerOneStartingLocation = sf::Vector2f(0, 10);
 const sf::Vector2f playerTwoStartingLocation = sf::Vector2f(400, 10);
 
@@ -44,6 +44,8 @@ public:
 
 	int getNumberMessageRecived();
 private:
+
+	NetworkTimeStart networkTimeStart;
 
 	/*
 	Client number assigned by the server

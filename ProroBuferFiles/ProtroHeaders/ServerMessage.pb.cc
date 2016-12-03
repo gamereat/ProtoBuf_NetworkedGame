@@ -49,9 +49,10 @@ void protobuf_AssignDesc_ServerMessage_2eproto() {
       "ServerMessage.proto");
   GOOGLE_CHECK(file != NULL);
   ServerInformation_descriptor_ = file->message_type(0);
-  static const int ServerInformation_offsets_[2] = {
+  static const int ServerInformation_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerInformation, serverinformation_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerInformation, messagenumber_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerInformation, timestamp_),
   };
   ServerInformation_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -199,25 +200,26 @@ void protobuf_AddDesc_ServerMessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023ServerMessage.proto\022\rServerMessage\"E\n\021"
+    "\n\023ServerMessage.proto\022\rServerMessage\"X\n\021"
     "ServerInformation\022\031\n\021serverInformation\030\001"
-    " \002(\005\022\025\n\rmessageNumber\030\002 \002(\003\"&\n\010Vector2f\022"
-    "\014\n\004posY\030\001 \002(\002\022\014\n\004posX\030\002 \002(\002\"j\n\021Playerinf"
-    "romation\022\024\n\014playerNumber\030\001 \002(\005\022*\n\tpossit"
-    "ion\030\003 \002(\0132\027.ServerMessage.Vector2f\022\023\n\013pl"
-    "ayerScore\030\002 \002(\005\"w\n\017BallInformation\022*\n\tpo"
-    "ssition\030\001 \002(\0132\027.ServerMessage.Vector2f\022\r"
-    "\n\005angle\030\002 \002(\002\022)\n\010velocity\030\003 \002(\0132\027.Server"
-    "Message.Vector2f\"\027\n\025AdditionalInformatio"
-    "n\"\326\002\n\rServerMessage\022\030\n\020playersConnected\030"
-    "\001 \002(\005\0224\n\nserverinfo\030\002 \002(\0132 .ServerMessag"
-    "e.ServerInformation\0223\n\tplayerOne\030\003 \002(\0132 "
-    ".ServerMessage.Playerinfromation\0223\n\tplay"
-    "erTwo\030\004 \002(\0132 .ServerMessage.Playerinfrom"
-    "ation\022\024\n\014playerNumber\030\005 \002(\005\0227\n\017ballInfor"
-    "mation\030\006 \002(\0132\036.ServerMessage.BallInforma"
-    "tion\022<\n\016additioanlInfo\030\010 \002(\0132$.ServerMes"
-    "sage.AdditionalInformation", 746);
+    " \002(\005\022\025\n\rmessageNumber\030\002 \002(\003\022\021\n\ttimeStamp"
+    "\030\003 \002(\002\"&\n\010Vector2f\022\014\n\004posY\030\001 \002(\002\022\014\n\004posX"
+    "\030\002 \002(\002\"j\n\021Playerinfromation\022\024\n\014playerNum"
+    "ber\030\001 \002(\005\022*\n\tpossition\030\003 \002(\0132\027.ServerMes"
+    "sage.Vector2f\022\023\n\013playerScore\030\002 \002(\005\"w\n\017Ba"
+    "llInformation\022*\n\tpossition\030\001 \002(\0132\027.Serve"
+    "rMessage.Vector2f\022\r\n\005angle\030\002 \002(\002\022)\n\010velo"
+    "city\030\003 \002(\0132\027.ServerMessage.Vector2f\"\027\n\025A"
+    "dditionalInformation\"\326\002\n\rServerMessage\022\030"
+    "\n\020playersConnected\030\001 \002(\005\0224\n\nserverinfo\030\002"
+    " \002(\0132 .ServerMessage.ServerInformation\0223"
+    "\n\tplayerOne\030\003 \002(\0132 .ServerMessage.Player"
+    "infromation\0223\n\tplayerTwo\030\004 \002(\0132 .ServerM"
+    "essage.Playerinfromation\022\024\n\014playerNumber"
+    "\030\005 \002(\005\0227\n\017ballInformation\030\006 \002(\0132\036.Server"
+    "Message.BallInformation\022<\n\016additioanlInf"
+    "o\030\010 \002(\0132$.ServerMessage.AdditionalInform"
+    "ation", 765);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ServerMessage.proto", &protobuf_RegisterTypes);
   ServerInformation::default_instance_ = new ServerInformation();
@@ -247,6 +249,7 @@ struct StaticDescriptorInitializer_ServerMessage_2eproto {
 #ifndef _MSC_VER
 const int ServerInformation::kServerInformationFieldNumber;
 const int ServerInformation::kMessageNumberFieldNumber;
+const int ServerInformation::kTimeStampFieldNumber;
 #endif  // !_MSC_VER
 
 ServerInformation::ServerInformation()
@@ -269,6 +272,7 @@ void ServerInformation::SharedCtor() {
   _cached_size_ = 0;
   serverinformation_ = 0;
   messagenumber_ = GOOGLE_LONGLONG(0);
+  timestamp_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -314,7 +318,7 @@ void ServerInformation::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  ZR_(messagenumber_, serverinformation_);
+  ZR_(messagenumber_, timestamp_);
 
 #undef OFFSET_OF_FIELD_
 #undef ZR_
@@ -358,6 +362,21 @@ bool ServerInformation::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(29)) goto parse_timeStamp;
+        break;
+      }
+
+      // required float timeStamp = 3;
+      case 3: {
+        if (tag == 29) {
+         parse_timeStamp:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &timestamp_)));
+          set_has_timestamp();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -397,6 +416,11 @@ void ServerInformation::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->messagenumber(), output);
   }
 
+  // required float timeStamp = 3;
+  if (has_timestamp()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->timestamp(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -415,6 +439,11 @@ void ServerInformation::SerializeWithCachedSizes(
   // required int64 messageNumber = 2;
   if (has_messagenumber()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->messagenumber(), target);
+  }
+
+  // required float timeStamp = 3;
+  if (has_timestamp()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->timestamp(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -441,6 +470,11 @@ int ServerInformation::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
           this->messagenumber());
+    }
+
+    // required float timeStamp = 3;
+    if (has_timestamp()) {
+      total_size += 1 + 4;
     }
 
   }
@@ -476,6 +510,9 @@ void ServerInformation::MergeFrom(const ServerInformation& from) {
     if (from.has_messagenumber()) {
       set_messagenumber(from.messagenumber());
     }
+    if (from.has_timestamp()) {
+      set_timestamp(from.timestamp());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -493,7 +530,7 @@ void ServerInformation::CopyFrom(const ServerInformation& from) {
 }
 
 bool ServerInformation::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -502,6 +539,7 @@ void ServerInformation::Swap(ServerInformation* other) {
   if (other != this) {
     std::swap(serverinformation_, other->serverinformation_);
     std::swap(messagenumber_, other->messagenumber_);
+    std::swap(timestamp_, other->timestamp_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

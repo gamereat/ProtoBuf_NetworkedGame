@@ -4,6 +4,7 @@ message ClientInformation {
        
   required int32 clientVersion = 1;
   required int64 messageNumber = 2;
+  required float timeStamp = 3;
   
 }
 

@@ -15,15 +15,23 @@ NetworkManager::NetworkManager()
 		numOfMessageSend.push_back(0);
 		lastServerMessage.push_back(nullptr);
 	}
+
+	networkTimeLapse = new NetworkTimeLapse();
 }
 
 
 NetworkManager::~NetworkManager()
 {
+	if (networkTimeLapse)
+	{
+		delete networkTimeLapse;
+		networkTimeLapse = nullptr;
+	}
 }
 
 void NetworkManager::Init()
 {
+	networkTimeLapse->Init();
 	if(udpSocket.bind(portNumber) != sf::Socket::Done)
 	{
 		GameLogging::LogError(" Failed to bind udp socket   ");
@@ -35,6 +43,7 @@ void NetworkManager::Init()
 
 void NetworkManager::Update()
 {
+	networkTimeLapse->Update();
 	ReciveClientInfo();
  
 }
@@ -68,14 +77,7 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Ball* ball,Player* 
 
 		newMessage->set_allocated_ballinformation(ballInfo);
 
-		// Get player infromation
-		ServerMessage::ServerInformation* serverInfo = new ServerMessage::ServerInformation();
 
-		newMessage->set_allocated_additioanlinfo(additionalInfo);
-
-		serverInfo->set_messagenumber(numOfMessageSend[client]++);
-		serverInfo->set_serverinformation(serverVersionNum);
-		newMessage->set_allocated_serverinfo(serverInfo);
 
 		//Get player infromation
 		ServerMessage::Playerinfromation* gamePlayers[NUM_PLAYERS];
@@ -126,7 +128,16 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Ball* ball,Player* 
 		newMessage->set_playersconnected(numConnectedPlayers);
 
 		newMessage->set_playernumber(client);
- 
+		// Get player infromation
+		ServerMessage::ServerInformation* serverInfo = new ServerMessage::ServerInformation();
+
+		newMessage->set_allocated_additioanlinfo(additionalInfo);
+
+		serverInfo->set_messagenumber(numOfMessageSend[client]++);
+		serverInfo->set_serverinformation(serverVersionNum);
+		serverInfo->set_timestamp(networkTimeLapse->getTimeSinceEpoch());
+		newMessage->set_allocated_serverinfo(serverInfo);
+
 		std::vector<std::string> f;
 		newMessage->FindInitializationErrors(&f);
 		// Make sure message has got all valid feilds
@@ -224,6 +235,7 @@ void NetworkManager::ReciveClientInfo()
 		if (newMessage->addiontalinfo() == ClientMessage::ClientMessage_AdditioanlRequests::ClientMessage_AdditioanlRequests_FirstConnect)
 		{
 
+
 			if (!clientAlreadyFounds)
 			{
 				// if not already reached the max number of players connected 
@@ -235,9 +247,13 @@ void NetworkManager::ReciveClientInfo()
 
 					// sends data to a client so they know what player tehy will be 
 					SendInitConnectionInformation(clientRecived);
-					playerConnected++;
+					playerConnected++;		
+					
+					networkTimeLapse->SendServerConfirmMessage(newMessage->clientinfo().timestamp(),playerConnected - 1, playerConnected, clientRecived.ip);
+
 				}
 			}
+
 		}
 		else if (newMessage->addiontalinfo() == ClientMessage::ClientMessage_AdditioanlRequests::ClientMessage_AdditioanlRequests_Disconnect)
 		{

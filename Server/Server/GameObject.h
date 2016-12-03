@@ -14,7 +14,10 @@ public:
 
  protected:
  
-	sf::Vector2f position;
+	 /*
+	 Possition last updated from the clients
+	 */
+	sf::Vector2f lasteUpdatePosition;
 	/*
 	Sprite that displays is used to display an object
 	*/

@@ -129,12 +129,21 @@ class ClientInformation : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 messagenumber() const;
   inline void set_messagenumber(::google::protobuf::int64 value);
 
+  // required float timeStamp = 3;
+  inline bool has_timestamp() const;
+  inline void clear_timestamp();
+  static const int kTimeStampFieldNumber = 3;
+  inline float timestamp() const;
+  inline void set_timestamp(float value);
+
   // @@protoc_insertion_point(class_scope:ClientMessage.ClientInformation)
  private:
   inline void set_has_clientversion();
   inline void clear_has_clientversion();
   inline void set_has_messagenumber();
   inline void clear_has_messagenumber();
+  inline void set_has_timestamp();
+  inline void clear_has_timestamp();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -142,6 +151,7 @@ class ClientInformation : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::int64 messagenumber_;
   ::google::protobuf::int32 clientversion_;
+  float timestamp_;
   friend void  protobuf_AddDesc_ClientMessage_2eproto();
   friend void protobuf_AssignDesc_ClientMessage_2eproto();
   friend void protobuf_ShutdownFile_ClientMessage_2eproto();
@@ -521,6 +531,30 @@ inline void ClientInformation::set_messagenumber(::google::protobuf::int64 value
   set_has_messagenumber();
   messagenumber_ = value;
   // @@protoc_insertion_point(field_set:ClientMessage.ClientInformation.messageNumber)
+}
+
+// required float timeStamp = 3;
+inline bool ClientInformation::has_timestamp() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ClientInformation::set_has_timestamp() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ClientInformation::clear_has_timestamp() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ClientInformation::clear_timestamp() {
+  timestamp_ = 0;
+  clear_has_timestamp();
+}
+inline float ClientInformation::timestamp() const {
+  // @@protoc_insertion_point(field_get:ClientMessage.ClientInformation.timeStamp)
+  return timestamp_;
+}
+inline void ClientInformation::set_timestamp(float value) {
+  set_has_timestamp();
+  timestamp_ = value;
+  // @@protoc_insertion_point(field_set:ClientMessage.ClientInformation.timeStamp)
 }
 
 // -------------------------------------------------------------------

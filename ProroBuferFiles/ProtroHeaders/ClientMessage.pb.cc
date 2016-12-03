@@ -44,9 +44,10 @@ void protobuf_AssignDesc_ClientMessage_2eproto() {
       "ClientMessage.proto");
   GOOGLE_CHECK(file != NULL);
   ClientInformation_descriptor_ = file->message_type(0);
-  static const int ClientInformation_offsets_[2] = {
+  static const int ClientInformation_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientInformation, clientversion_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientInformation, messagenumber_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientInformation, timestamp_),
   };
   ClientInformation_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -152,20 +153,20 @@ void protobuf_AddDesc_ClientMessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023ClientMessage.proto\022\rClientMessage\"A\n\021"
+    "\n\023ClientMessage.proto\022\rClientMessage\"T\n\021"
     "ClientInformation\022\025\n\rclientVersion\030\001 \002(\005"
-    "\022\025\n\rmessageNumber\030\002 \002(\003\"\'\n\tplayerPos\022\014\n\004"
-    "posY\030\001 \002(\002\022\014\n\004posX\030\002 \002(\002\"P\n\021Playerinfrom"
-    "ation\022\024\n\014playerNumber\030\001 \002(\005\022%\n\003pos\030\003 \002(\013"
-    "2\030.ClientMessage.playerPos\"\252\002\n\rClientMes"
-    "sage\0224\n\nclientinfo\030\001 \002(\0132 .ClientMessage"
-    ".ClientInformation\0224\n\nplayerinfo\030\002 \002(\0132 "
-    ".ClientMessage.Playerinfromation\022F\n\raddi"
-    "ontalInfo\030\003 \002(\0162/.ClientMessage.ClientMe"
-    "ssage.AdditioanlRequests\022\024\n\014clientNumber"
-    "\030\004 \002(\005\"O\n\022AdditioanlRequests\022\010\n\004None\020\001\022\020"
-    "\n\014FirstConnect\020\002\022\r\n\tReconnect\020\003\022\016\n\nDisco"
-    "nnect\020\004", 527);
+    "\022\025\n\rmessageNumber\030\002 \002(\003\022\021\n\ttimeStamp\030\003 \002"
+    "(\002\"\'\n\tplayerPos\022\014\n\004posY\030\001 \002(\002\022\014\n\004posX\030\002 "
+    "\002(\002\"P\n\021Playerinfromation\022\024\n\014playerNumber"
+    "\030\001 \002(\005\022%\n\003pos\030\003 \002(\0132\030.ClientMessage.play"
+    "erPos\"\252\002\n\rClientMessage\0224\n\nclientinfo\030\001 "
+    "\002(\0132 .ClientMessage.ClientInformation\0224\n"
+    "\nplayerinfo\030\002 \002(\0132 .ClientMessage.Player"
+    "infromation\022F\n\raddiontalInfo\030\003 \002(\0162/.Cli"
+    "entMessage.ClientMessage.AdditioanlReque"
+    "sts\022\024\n\014clientNumber\030\004 \002(\005\"O\n\022AdditioanlR"
+    "equests\022\010\n\004None\020\001\022\020\n\014FirstConnect\020\002\022\r\n\tR"
+    "econnect\020\003\022\016\n\nDisconnect\020\004", 546);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ClientMessage.proto", &protobuf_RegisterTypes);
   ClientInformation::default_instance_ = new ClientInformation();
@@ -191,6 +192,7 @@ struct StaticDescriptorInitializer_ClientMessage_2eproto {
 #ifndef _MSC_VER
 const int ClientInformation::kClientVersionFieldNumber;
 const int ClientInformation::kMessageNumberFieldNumber;
+const int ClientInformation::kTimeStampFieldNumber;
 #endif  // !_MSC_VER
 
 ClientInformation::ClientInformation()
@@ -213,6 +215,7 @@ void ClientInformation::SharedCtor() {
   _cached_size_ = 0;
   clientversion_ = 0;
   messagenumber_ = GOOGLE_LONGLONG(0);
+  timestamp_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -258,7 +261,7 @@ void ClientInformation::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  ZR_(messagenumber_, clientversion_);
+  ZR_(messagenumber_, timestamp_);
 
 #undef OFFSET_OF_FIELD_
 #undef ZR_
@@ -302,6 +305,21 @@ bool ClientInformation::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(29)) goto parse_timeStamp;
+        break;
+      }
+
+      // required float timeStamp = 3;
+      case 3: {
+        if (tag == 29) {
+         parse_timeStamp:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &timestamp_)));
+          set_has_timestamp();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -341,6 +359,11 @@ void ClientInformation::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->messagenumber(), output);
   }
 
+  // required float timeStamp = 3;
+  if (has_timestamp()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->timestamp(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -359,6 +382,11 @@ void ClientInformation::SerializeWithCachedSizes(
   // required int64 messageNumber = 2;
   if (has_messagenumber()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->messagenumber(), target);
+  }
+
+  // required float timeStamp = 3;
+  if (has_timestamp()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->timestamp(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -385,6 +413,11 @@ int ClientInformation::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
           this->messagenumber());
+    }
+
+    // required float timeStamp = 3;
+    if (has_timestamp()) {
+      total_size += 1 + 4;
     }
 
   }
@@ -420,6 +453,9 @@ void ClientInformation::MergeFrom(const ClientInformation& from) {
     if (from.has_messagenumber()) {
       set_messagenumber(from.messagenumber());
     }
+    if (from.has_timestamp()) {
+      set_timestamp(from.timestamp());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -437,7 +473,7 @@ void ClientInformation::CopyFrom(const ClientInformation& from) {
 }
 
 bool ClientInformation::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -446,6 +482,7 @@ void ClientInformation::Swap(ClientInformation* other) {
   if (other != this) {
     std::swap(clientversion_, other->clientversion_);
     std::swap(messagenumber_, other->messagenumber_);
+    std::swap(timestamp_, other->timestamp_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

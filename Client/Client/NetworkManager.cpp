@@ -38,6 +38,7 @@ void NetworkManager::Init()
 		portNumber = updSocket.getLocalPort();
 
 	}
+	networkTimeStart.Init();
 }
 
 void NetworkManager::ConnectToServer()
@@ -56,6 +57,8 @@ void NetworkManager::WorkOutSyncTiming()
 
 void NetworkManager::Update()
 {
+	networkTimeStart.Update();
+
 	ReciveMessageToServer();
 }
 
@@ -108,19 +111,24 @@ void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playe
 
 	newMessage->set_clientnumber(clientNumber);
 
-	// Get the client information
-	ClientMessage::ClientInformation clientInfo ;
- 	clientInfo.set_clientversion(clientVersion);
-	clientInfo.set_messagenumber( numOfMessageSend);
 	
 	// increase the number of messaage sent
 	numOfMessageSend++;
 
-	newMessage->set_allocated_clientinfo(&clientInfo);
 	newMessage->set_allocated_playerinfo(playerInfo); 
 
 
 	newMessage->set_addiontalinfo(additionalRequests);
+
+
+
+
+	// Get the client information
+	ClientMessage::ClientInformation clientInfo;
+	clientInfo.set_clientversion(clientVersion);
+	clientInfo.set_messagenumber(numOfMessageSend);
+	clientInfo.set_timestamp(networkTimeStart.getTimeSinceEpoch());
+	newMessage->set_allocated_clientinfo(&clientInfo);
 
 	// Make sure message has got all valid feilds
 	newMessage->CheckInitialized();
@@ -139,15 +147,10 @@ void NetworkManager::SendDissconectMessage()
 	ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
 	newMessage->New();
 
-	// Get the client information
-	ClientMessage::ClientInformation clientInfo;
-	clientInfo.set_clientversion(-1);
-	clientInfo.set_messagenumber(numOfMessageSend);
 
 	// increase the number of messaage sent
 	numOfMessageSend++;
 
-	newMessage->set_allocated_clientinfo(&clientInfo);
 
 
 	ClientMessage::Playerinfromation playerInfo = ClientMessage::Playerinfromation();
@@ -169,6 +172,14 @@ void NetworkManager::SendDissconectMessage()
 
 	newMessage->set_clientnumber(clientNumber);
 
+	// Get the client information
+	ClientMessage::ClientInformation clientInfo;
+	clientInfo.set_clientversion(-1);
+	clientInfo.set_messagenumber(numOfMessageSend);
+	clientInfo.set_timestamp(networkTimeStart.getTimeSinceEpoch());
+
+	newMessage->set_allocated_clientinfo(&clientInfo);
+
 	// Make sure message has got all valid feilds
 	newMessage->CheckInitialized();
 	std::string messageData;
@@ -183,16 +194,6 @@ void NetworkManager::SentConnectionMessage(int clientVersion)
 	ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
 	newMessage->New();
 
-	// Get the client information
-	ClientMessage::ClientInformation clientInfo;
-	clientInfo.set_clientversion(clientVersion);
-	clientInfo.set_messagenumber(numOfMessageSend);
-	
-	newMessage->set_clientnumber(clientNumber);
-	// increase the number of messaage sent
-	numOfMessageSend++;
-
-	newMessage->set_allocated_clientinfo(&clientInfo);
 
 	ClientMessage::Playerinfromation playerInfo = ClientMessage::Playerinfromation();
 	ClientMessage::playerPos* playerPos = new ClientMessage::playerPos();
@@ -212,6 +213,17 @@ void NetworkManager::SentConnectionMessage(int clientVersion)
 
    
 
+	// Get the client information
+	ClientMessage::ClientInformation clientInfo;
+	clientInfo.set_clientversion(clientVersion);
+	clientInfo.set_messagenumber(numOfMessageSend);
+	clientInfo.set_timestamp(networkTimeStart.getTimeSinceEpoch());
+
+	newMessage->set_clientnumber(clientNumber);
+	// increase the number of messaage sent
+	numOfMessageSend++;
+
+	newMessage->set_allocated_clientinfo(&clientInfo);
 
 	// Make sure message has got all valid feilds
 	newMessage->CheckInitialized();
@@ -219,6 +231,8 @@ void NetworkManager::SentConnectionMessage(int clientVersion)
 	newMessage->SerializeToString(&messageData);
 
 	SendMessage(messageData);
+
+	networkTimeStart.setExpectingConfirmMessage();
 }
 
 ServerMessage::ServerMessage* NetworkManager::getLastServerMessage()
