@@ -9,6 +9,7 @@ int main()
 {
  	ClientController clientController;
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong client - Alan Yeats 1402402");
+	clientController.setWindow(&window);
 
 	GameLogging::Log("----------- INIT STATED ----------");
 	

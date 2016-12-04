@@ -12,7 +12,7 @@
 #include "Ball.h"
 #include "Menu.h"
 const int NUM_PLAYERS = 2;
-
+const sf::Vector2f SCREEN_SIZE = sf::Vector2f(800, 600);
  /**
 *	Controls the client interaction though the game 
 *	
@@ -68,10 +68,13 @@ public:
 	*/
 	void Disconect();
 
-
+	
+	void setWindow(sf::Window*);
 private: 
 	
-	Menu* Menu;
+	sf::Window* window;
+
+	Menu* menu;
 
 	Ball* ball;
 

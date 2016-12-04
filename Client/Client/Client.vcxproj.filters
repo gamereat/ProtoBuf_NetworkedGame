@@ -49,9 +49,6 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc">
       <Filter>Protobuf\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="NetworkTimeStar.cpp">
       <Filter>Source\Networking</Filter>
     </ClCompile>
@@ -68,6 +65,9 @@
       <Filter>Protobuf\Source</Filter>
     </ClCompile>
     <ClCompile Include="PerdictedGameObject.cpp" />
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WallBlock.h">

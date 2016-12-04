@@ -3,7 +3,7 @@
 
 ClientController::ClientController()
 {
-	currentClientGameState = ClientGameState::Init;
+	currentClientGameState = ClientGameState::Menu;
 	
 	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
@@ -73,13 +73,14 @@ bool ClientController::Init()
 	networkManager.Init();
 
 
-	connectToGameSever();
 
 	ball->Init();
 
 
 	lastSeverMessageRecived = 0;
 
+	menu = new Menu();
+	menu->Init(window);
 
 	return true;
 }
@@ -88,75 +89,119 @@ bool ClientController::Update()
 {
 	deltaTime = deltaTimeClock.restart().asSeconds();
 	
+	
+	
 	switch (currentClientGameState)
 	{
-	case ClientController::ClientGameState::Init:
-		currentClientGameState = ClientGameState::Menu;
+		case ClientController::ClientGameState::Init:
+		{
+			currentClientGameState = ClientGameState::Menu;
+			break;
+		}
+		case ClientController::ClientGameState::Menu:
+		{
+			if (menu->Update())
+			{
+				currentClientGameState = ClientGameState::ReadyToPlay;
 
-		break;
-	case ClientController::ClientGameState::Menu:
-		
-		
-		currentClientGameState = ClientGameState::ReadyToPlay;
+			}
 
-		break;
-	case ClientController::ClientGameState::ReadyToPlay:
-		currentClientGameState = ClientGameState::Playing;
+			break;
+		}
+		case ClientController::ClientGameState::ReadyToPlay:
+		{	
+			connectToGameSever();
+		}
+		case ClientController::ClientGameState::Playing:
+		{
+			currentClientGameState = ClientGameState::Playing;
+			UpdateGameFromServer();
 
-		break;
-	case ClientController::ClientGameState::Playing:
- 
-		break;
-	case ClientController::ClientGameState::GameOver:
-		break;
-	default:
-		break;
+			// Work out if clients need a update with latest data from server
+			float timeSinceClientUpdate = networkUpdateTimer.getElapsedTime().asSeconds();
+
+			// if corrrecnt time has past send update information
+			if (timeSinceClientUpdate >= serverNetworkUpdateTime)
+			{
+				networkUpdateTimer.restart();
+				UpdateGameToServer();
+			}
+
+			networkManager.Update();
+
+			// Init the players
+			for (int i = 0; i < NUM_PLAYERS; i++)
+			{
+				paddle[i]->Update(deltaTime);
+			}
+
+			ball->Update(deltaTime);
+
+
+			break;
+			break;
+		}
+		case ClientController::ClientGameState::GameOver:
+		{	break;
+		}
 	}
 
 
- 	UpdateGameFromServer();
-
-	// Work out if clients need a update with latest data from server
-	float timeSinceClientUpdate = networkUpdateTimer.getElapsedTime().asSeconds();
-
-	// if corrrecnt time has past send update information
-	if (timeSinceClientUpdate >= serverNetworkUpdateTime)
-	{
-		networkUpdateTimer.restart();
-		UpdateGameToServer();
-	}
-
-	networkManager.Update();
-
-	// Init the players
-	for (int i = 0; i < NUM_PLAYERS; i++)
-	{
-		paddle[i]->Update(deltaTime);
-	}
-
-	ball->Update(deltaTime);
 	return true;
 }
 
 void ClientController::Render(sf::RenderWindow* renderWindow)
 {
-
-	// Render Players
-	for (int i = 0; i < NUM_PLAYERS; i++)
+	switch (currentClientGameState)
 	{
-		paddle[i]->Render(renderWindow);
+		case ClientController::ClientGameState::Init:
+		{
+ 			break;
+		}
+		case ClientController::ClientGameState::Menu:
+		{
+			menu->Render(renderWindow);
 
+			break;
+		}
+		case ClientController::ClientGameState::ReadyToPlay:
+		{
+ 
+			break;
+		}
+		case ClientController::ClientGameState::Playing:
+		{
+			// Render Players
+			for (int i = 0; i < NUM_PLAYERS; i++)
+			{
+				paddle[i]->Render(renderWindow);
+
+			}
+
+			ball->Render(renderWindow);
+			renderWindow->draw(clientVersionNumberText);
+			renderWindow->draw(clientNumberText);
+
+			break;
+		}
+		case ClientController::ClientGameState::GameOver:
+		{	
+			break;
+		}
+	
 	}
-
-	ball->Render(renderWindow);
-	renderWindow->draw(clientVersionNumberText);
-	renderWindow->draw(clientNumberText);
+ 
 }
 
 void ClientController::Disconect()
 {
 	networkManager.SendDissconectMessage();
 
+}
+
+void ClientController::setWindow(sf::Window * window)
+{
+	this->window = window;
 }
 
 void ClientController::connectToGameSever()

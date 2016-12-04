@@ -5,7 +5,7 @@ class UIButton
 {
 public:
 	UIButton();
-	UIButton(sf::Vector2f buttonSize, sf::Vector2f location, const char* textureFileName);
+	UIButton(sf::Vector2f buttonSize, sf::Vector2f location, const char* textureFileName, sf::Window* window);
 	~UIButton();
 
 	
@@ -14,12 +14,12 @@ public:
 	/*
 	Will return if button was pressed
 	*/
-	bool hasButtonBeenPressed(sf::Vector2f mousePos);
+	bool HasButtonBeenPressed(sf::Vector2i mousePos);
 
  
 protected:
 	 
-
+	sf::Window* window;
 	sf::RectangleShape buttonShape;;
 
 	sf::Texture buttonTexture;

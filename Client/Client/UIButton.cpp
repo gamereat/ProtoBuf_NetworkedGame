@@ -2,9 +2,9 @@
 
 #include "GameLogging.h"
  
-UIButton::UIButton(sf::Vector2f buttonSize, sf::Vector2f location, const char * textureFileName)
+UIButton::UIButton(sf::Vector2f buttonSize, sf::Vector2f location, const char * textureFileName, sf::Window* window)
 {
-
+	this->window = window;
 	if (!buttonTexture.loadFromFile(textureFileName))
 	{
 		GameLogging::LogError("Failed to load in paddle texture");
@@ -14,6 +14,8 @@ UIButton::UIButton(sf::Vector2f buttonSize, sf::Vector2f location, const char * 
 		buttonShape.setTexture(&buttonTexture);
 
  	}
+	buttonShape.setPosition(location);
+	buttonShape.setSize(buttonSize);
 }
 
 
@@ -26,17 +28,20 @@ void UIButton::Render(sf::RenderWindow * renderWindow)
 	renderWindow->draw(buttonShape);
 }
 
-bool UIButton::hasButtonBeenPressed(sf::Vector2f mousePos)
+bool UIButton::HasButtonBeenPressed(sf::Vector2i mousePos)
 {
-	// Check if button overlaps with the mouse
-	sf::Vector2f butPos = buttonShape.getPosition();
-	if (butPos.x < mousePos.x   &&
-		butPos.x + buttonShape.getTextureRect().width / 2 > mousePos.x &&
-		butPos.y < mousePos.y   &&
-		buttonShape.getTextureRect().height / 2 + butPos.y > mousePos.y)
-	{
-		return true;
 
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+
+
+		// Check if button overlaps with the mouse
+		if (buttonShape.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
+		{
+			return true;
+		}
+ 
+ 
 	}
 	return false;
 }
