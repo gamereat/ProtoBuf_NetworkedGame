@@ -3,6 +3,8 @@
 #include ".././../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 
+const int PADDLE_SPEED = 100;
+
 // How the player will be able to move
 // Allows for rebuinding of keys if needed 
  struct playerControls

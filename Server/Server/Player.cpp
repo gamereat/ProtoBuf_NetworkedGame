@@ -2,6 +2,7 @@
 
 #include"GameLogging.h"
 #include "NetworkTimeLapse.h"
+#include "ServerController.h"
 Player::Player()
 {
 }
@@ -35,6 +36,7 @@ void Player::Update(float deltaTime)
 {
 	CacaulatePerdictedPos();
 	sprite.setPosition(perdictedPos);
+	estimateLag = NetworkTimeLapse::GetClientEsimateLag(playerNumber);
 
 	
 }
@@ -46,9 +48,8 @@ void Player::Render(sf::RenderWindow * renderWindow)
 }
 void Player::CacaulatePerdictedPos()
 {
-	NetworkTimeLapse networkTimer;
+ 
 
-	estimateLag = 5;
 	if (estimateLag != 0)
 	{
 		// Using Cubic Splines
@@ -60,30 +61,56 @@ void Player::CacaulatePerdictedPos()
 		//Cubic Bézier curves
 
 		//(1-t)^3 * P0 + 3 * (1-t)^2 * t * P1 + 3 * (1-t) * t^2 * P2 + t^3 * P3 ;    0 < t < 1;
-
-		if (timeOfLastUpdate != 0 && prevousPosition.size() >= PREVOUS_POS_TO_RECORD )
+		if (timeOfLastUpdate.size() >= PREVOUS_POS_TO_RECORD && prevousVelocity.size() > 2)
 		{
-			sf::Vector2f newPerdictedPos;
-
-			int time = (networkTimer.getTimeSinceEpoch() - timeOfLastUpdate) / estimateLag;
-
-			int OneMinusTime = (1 - time);
+			if (timeOfLastUpdate.end()[-1] != 0 && prevousPosition.size() >= 2)
+			{
 
 
-			newPerdictedPos.x = powf(OneMinusTime, 3) * prevousPosition[3].x;
-			newPerdictedPos.x += 3 * powf(OneMinusTime, 2) * time * prevousPosition[2].x;
-			newPerdictedPos.x += 3 * OneMinusTime * powf(time, 2) * prevousPosition[1].x;
-			newPerdictedPos.x += powf(time, 3) * prevousPosition[0].x;
 
-			newPerdictedPos.y = powf(OneMinusTime, 3) * prevousPosition[3].y;
-			newPerdictedPos.y += 3 * powf(OneMinusTime, 2) * time * prevousPosition[2].y;
-			newPerdictedPos.y += 3 * OneMinusTime * powf(time, 2) * prevousPosition[1].y;
-			newPerdictedPos.y += powf(time, 3) * prevousPosition[0].y;
+				float time;
+				// Time since last packet info
+				float gameTime = (float)NetworkTimeLapse::gameTime;
+				float tSincePrevPacket = (gameTime - timeOfLastUpdate.end()[-2])*0.001f;
+				float tSinceLastPacket = (gameTime - timeOfLastUpdate.end()[-1])*0.001f;
+				
+				
+				float tSinceLastUpdate = (gameTime + estimateLag - gameTimeAtLastUpdate)*0.001f;
 
+ 
+				tSinceLastUpdate = clamp(0, 1, tSinceLastUpdate);
+ 
 
-			perdictedPos = newPerdictedPos;
+				float OneMinusTime = (1 - tSinceLastUpdate);
+ 
+	 
+				//
+				// Linear interpolation - should be perfect for static linear velocity tests with 1 server and 1 client
+				// More clients will mean the clock varies a bit from clients -> srv -> other clients
+				//
+				time = clamp(0,1,tSinceLastPacket);
+
+				// Calculate current position based on packet info
+				 sf::Vector2f posLast, posPrev , newPerdictedPos;
+ 				posLast.y = prevousPosition.end()[-2].y + prevousVelocity.end()[-1].y * time;
+ 
+				// Calculate predicted previous position - use time since last interpolation time
+				// Calculate interpolated velocity for a bit more smoothness
+				sf::Vector2f ipVel;
+ 				ipVel.y =  prevousVelocity.end()[-1].y + OneMinusTime * prevousVelocity.end()[-2].y;
+ 
+				time = clamp(0, 1, tSincePrevPacket);
+ 				posPrev.y = prevousPosition.end()[-1].y + ipVel.y * time;
+ 
+				// Calculate position, interpolating from posPrev -> posLast as time goes by
+				// to correct towards the last received packet
+				newPerdictedPos.x = prevousPosition[0].x;
+				newPerdictedPos.y = posLast.y ;
+ 
+
+				perdictedPos = newPerdictedPos;
+			}
 		}
-
 	}
 
 
@@ -108,14 +135,41 @@ void Player::UpdatePlayer(ClientMessage::Playerinfromation* playerInfo)
 	lasteUpdatePosition = sf::Vector2f(playerpos.posx(), playerpos.posy());
 
 
-	// only keep min pos on record 
-	while (prevousPosition.size() >= PREVOUS_POS_TO_RECORD)
-	{
-		prevousPosition.pop_back();
-	}
+	gameTimeAtLastUpdate = NetworkTimeLapse::gameTime;
 	prevousPosition.push_back(lasteUpdatePosition);
-	NetworkTimeLapse networkTimer;
+ 
+	prevousMessageTimes.push_back(NetworkTimeLapse::gameTime);
+	sf::Vector2f velocity;
+	sf::Vector2f distance;
+ 
 
-	timeOfLastUpdate = networkTimer.getTimeSinceEpoch();
+	if (prevousPosition.size() > 2)
+	{
+		distance.x = prevousPosition.end()[-1].x - prevousPosition.end()[-2].x;
+		distance.y = prevousPosition.end()[-1].y - prevousPosition.end()[-2].y;
+
+		float tDistance = sqrt(distance.x * distance.x + distance.y * distance.y);
+
+		if (tDistance == 0)
+		{
+
+			prevousVelocity.push_back(sf::Vector2f(0, 0));
+		}
+		else
+		{
+			sf::Vector2f unitVelocity = sf::Vector2f((distance.x / tDistance), (distance.y / tDistance));
+
+			velocity.x = 0;
+			velocity.y = unitVelocity.y * PADDLE_SPEED;
+
+			prevousVelocity.push_back(velocity);
+		}
+	}
+	timeOfLastUpdate.push_back(gameTimeAtLastUpdate);
  }
+
+float Player::clamp(float lower, float upper, float num)
+{
+	return num <= lower ? lower : num >= upper ? upper : num;
+}
 

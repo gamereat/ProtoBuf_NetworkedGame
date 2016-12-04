@@ -69,6 +69,12 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc">
       <Filter>Proto2\Source</Filter>
     </ClCompile>
+    <ClCompile Include="PridictedGameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMathsLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerController.h">
@@ -106,6 +112,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h">
       <Filter>Proto2\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PridictedGameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMathsLib.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

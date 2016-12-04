@@ -1,7 +1,8 @@
 #pragma once
-#include "GameObject.h"
+#include "PerdictedGameObject.h"
+
 #include "../ProtroHeaders/ServerMessage.pb.h"
-class Ball : public GameObject
+class Ball : public PerdictedGameObject
 {
 public:
 	Ball();
@@ -15,6 +16,7 @@ public:
 
 	float getAngle();
 
+ 
 	/*
 	Update ball based on ball info
 	*/
@@ -22,6 +24,8 @@ public:
 	sf::Vector2f getVelocity();
 private:
 
+
+ 
 	/*
 	Velocity the ball is current firing at 
 	*/
@@ -37,5 +41,6 @@ private:
 	Texture applied to ball
 	*/
 	sf::Texture ballTexture;
+
 };
 

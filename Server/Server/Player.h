@@ -23,16 +23,18 @@ public:
 
 	void UpdatePlayer(ClientMessage::Playerinfromation*);
 
+	float clamp(float lower, float upper, float num);
 private:
 	std::vector<sf::Vector2f> prevousPosition;
 	
 	std::vector<int> prevousMessageTimes;
 
-	int timeOfLastUpdate;
+	std::vector<int> timeOfLastUpdate;
 
+	std::vector<sf::Vector2f> prevousVelocity;
+	sf::Vector2f	perdictedPos;
 	void CacaulatePerdictedPos();
 	
-	sf::Vector2f perdictedPos;
 
 	sf::Texture paddleTexture;
 
@@ -41,6 +43,9 @@ private:
 	int playerNumber;
 
 	int estimateLag;
+
+
+	int gameTimeAtLastUpdate;
 
 };
 

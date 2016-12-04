@@ -31,7 +31,9 @@
     <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="NetworkTimeLapse.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PridictedGameObject.cpp" />
     <ClCompile Include="ServerController.cpp" />
+    <ClCompile Include="StaticMathsLib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h" />
@@ -45,7 +47,9 @@
     <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="NetworkTimeLapse.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PridictedGameObject.h" />
     <ClInclude Include="ServerController.h" />
+    <ClInclude Include="StaticMathsLib.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C01335B5-2F9A-4AF9-94F7-FAF485666B23}</ProjectGuid>
@@ -122,7 +126,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\SFML-2.4.1\include;E:\Source\Repos\GameNetworking\Client\protobuf\include;%(AdditionalIncludeDirectories);E:\Source\Repos\GameNetworking\ShaderControlls</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>

@@ -18,7 +18,7 @@ void GameLogging::Log(std::string output)
 	SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN);
 	// only log information if in debug mode
 #ifndef DEBUG
-	std::cout << output.c_str() << '\n';
+//	std::cout << output.c_str() << '\n';
 #endif // !DEBUG
 
 }

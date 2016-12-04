@@ -23,7 +23,6 @@ public:
 	*/
 	sf::Sprite sprite;
  
-	
 
 };
 

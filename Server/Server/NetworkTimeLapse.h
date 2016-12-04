@@ -6,6 +6,7 @@
 port number clients will listen for time sync messages on
 */
 const int TIME_SYNC_PORT_CLIENT = 7779;
+const int DEFAULT_PING_TIMEOUT = 1000;
 class NetworkTimeLapse
 {
 public:
@@ -29,13 +30,33 @@ public:
 	/*
 	Gets the time since Epoch
 	*/
-	int getTimeSinceEpoch();	
+	static int getTimeSinceEpoch();	
 	float getTimeSinceLastMessage(int lastMessageTime, int currentTime);
 
 
-	float estlag;
+	/*
+	@retuns		returns last ping test to the client int seconds  
+	*/
+	static int GetClientEsimateLag(int clientNumber);
+
+
+	/*
+	The current time for the game. Each client is synced up to this
+	*/
+	static int gameTime;
+
 private:
 
+
+	/*
+	Holds the last ping res	
+	*/
+	static std::vector<int> clientLastPingResult;
+
+	/*
+	@Returns	Advarge time in ms to ping ip
+	*/
+	int RunPingTest(sf::IpAddress ipToPing, int timeOut);
 
 	void SentServerTimeSyncMessage(SyncTimeMessage::ClientConfirmConnect* ,sf::IpAddress clientIp);
 
@@ -52,6 +73,14 @@ private:
 	Record of time send points for each client 
 	*/
 	std::vector<std::vector<int>> playerReciveTimeStamps;
+
+	/*
+	the time staamp the server starated at
+	*/
+	clock_t timeServerStarted;
+
+
+
 
 
 };

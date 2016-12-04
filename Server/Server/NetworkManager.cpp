@@ -17,6 +17,10 @@ NetworkManager::NetworkManager()
 	}
 
 	networkTimeLapse = new NetworkTimeLapse();
+
+
+	recivedClientInfo = std::vector<bool>(NUM_PLAYERS);
+
 }
 
 
@@ -39,6 +43,7 @@ void NetworkManager::Init()
 	}
 	udpSocket.setBlocking(false);
 
+	recivedClientInfo = std::vector<bool>(NUM_PLAYERS);
 }
 
 void NetworkManager::Update()
@@ -212,14 +217,19 @@ void NetworkManager::ReciveClientInfo()
 
 	if (received > 0)
 	{
+
 		std::string f = buffer;
-		std::cout << "Received " << received << " bytes from " << sender << " on port " << port << std::endl;
 		ClientMessage::ClientMessage* newMessage = new ClientMessage::ClientMessage();
 
 		newMessage->ParseFromArray(buffer, sizeof(buffer));
 		// Send a debug log of message to logging system when in debug mode 
 		//GameLogging::Log(newMessage->DebugString());
 	
+		if (newMessage->clientnumber() != -1)
+		{
+			recivedClientInfo[newMessage->clientnumber()] = true;
+		}
+
 		clientUDPInfo clientRecived = clientUDPInfo(sender, port, clientsIPInfo.size());
 
 		bool clientAlreadyFounds = false;

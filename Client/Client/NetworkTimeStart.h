@@ -16,6 +16,7 @@ public:
 	void Init();
 
 	void getServerConfirmMessage();
+	void getServerConnectMessage();
 
 	float getTimeSinceEpoch();
 

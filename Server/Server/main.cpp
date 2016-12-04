@@ -3,16 +3,23 @@
 #include <iostream>
 #include "ServerController.h";
 #include "GameLogging.h"
+
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+
 void main()
-{
+{ 
+ 
  	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH,SCREEN_HEIGHT ), "Pac Man Server");
 	ServerController serverController;
 	GameLogging::Log("----------- INIT STATED ----------");
 
 	serverController.Init();
 
-
-
+ 
 		GameLogging::Log("----------- INIT COMPLETE ----------");
 
 
@@ -45,3 +52,8 @@ void main()
 	std::cin.get();
  
 }
+
+
+
+
+ 

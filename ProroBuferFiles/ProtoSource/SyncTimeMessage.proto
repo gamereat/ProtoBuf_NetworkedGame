@@ -18,10 +18,11 @@ message ConnectTime {
 message ServerConnectConfirm {
 
 
-    required float serverStartTime = 1;
+    // the time the server started at 
+    required int32 serverStartTime = 1;
 
-    // seconds since epoch on client
-    required float serverTimeSinceEpoch  = 2;
+    // The current game timer for the match
+    required int32 gameTimer  = 2;
 
      required int32 playerNumber = 3;
 

@@ -1,7 +1,6 @@
 #include "Ball.h"
 #include "GameLogging.h"
 
-
 Ball::Ball()
 {
 }
@@ -37,8 +36,9 @@ void Ball::Init()
 
 void Ball::Update(float deltaTime)
 {
-
-}
+	// Update super class
+	PerdictedGameObject::Update(deltaTime);
+ }
 
 void Ball::Render(sf::RenderWindow * renderWindow)
 {
@@ -59,11 +59,14 @@ void Ball::UpdateBallInfo(ServerMessage::BallInformation ballnfo)
 {
 	angle = ballnfo.angle();
 	velocity = sf::Vector2f( ballnfo.velocity().posx(), ballnfo.velocity().posy());
-	sprite.setPosition(sf::Vector2f(ballnfo.possition().posx(), ballnfo.possition().posy()));
+	prevousPosition.push_back(sf::Vector2f(ballnfo.possition().posx(), ballnfo.possition().posy()));
+ 
+
 }
 
 sf::Vector2f Ball::getVelocity()
 {
 	return velocity;
 }
+
 

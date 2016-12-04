@@ -79,8 +79,7 @@ void NetworkManager::ReciveMessageToServer()
 	if (received > 0)
 	{
 		std::string f = buffer;
-		std::cout << "Received " << received << " bytes from " << sender << " on port " << port << std::endl;
-		ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage();
+ 		ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage();
 
 		newMessage->ParseFromArray(buffer, sizeof(buffer));
 

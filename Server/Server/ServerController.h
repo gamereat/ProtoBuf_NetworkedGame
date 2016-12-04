@@ -8,7 +8,7 @@ const int NUM_PLAYERS = 2;
 
 const int SCREEN_HEIGHT = 600;
 const int SCREEN_WIDTH = 800;
-
+const int PADDLE_SPEED = 100;
 class ServerController
 {
 public:

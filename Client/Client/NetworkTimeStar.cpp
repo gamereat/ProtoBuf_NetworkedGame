@@ -64,6 +64,28 @@ void NetworkTimeStart::getServerConfirmMessage()
 	}
 }
 
+void NetworkTimeStart::getServerConnectMessage()
+{
+	sf::IpAddress sender;;
+	std::size_t received = 0;
+	unsigned short port;
+	char buffer[1024];
+	timeSyncSocket.receive(buffer, 1024, received, sender, port);
+
+
+
+	if (received > 0)
+	{
+
+		SyncTimeMessage::ConnectTime* connectMess = new SyncTimeMessage::ConnectTime();
+
+		connectMess->ParseFromArray(buffer, sizeof(buffer));
+
+
+
+	}
+}
+
 void NetworkTimeStart::setExpectingConfirmMessage()
 {
 	expectingConfirmMessage = true;

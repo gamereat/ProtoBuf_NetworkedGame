@@ -12,7 +12,7 @@ ClientController::ClientController()
 
 	ball = new Ball();
 
-	serverNetworkUpdateTime = 0.01;
+	serverNetworkUpdateTime = 0.2;
  
 }
 
@@ -275,7 +275,7 @@ void ClientController::UpdateGameFromServer()
 			 int playerNum = newMessage->playernumber();
 			 int playerConncted = newMessage->playersconnected();
 
-			 clientNumberText.setString("Client Number " + std::to_string(playerNum + 1) + "/" + std::to_string(playerConncted));
+			// clientNumberText.setString("Client Number " + std::to_string(playerNum + 1) + "/" + std::to_string(playerConncted));
 
 			 // Update ball location
 			 UpdateBall(newMessage->ballinformation());

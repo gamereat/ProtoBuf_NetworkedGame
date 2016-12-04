@@ -18,7 +18,7 @@ void PlayerObject::Init()
 	sprite.setColor(sf::Color(255, 0, 0, 255));
 
 	playerNumber = -1;
-	playerSpeed = 100;
+	playerSpeed = PADDLE_SPEED;
 }
 
 void PlayerObject::Render(sf::RenderWindow* renderWindow)

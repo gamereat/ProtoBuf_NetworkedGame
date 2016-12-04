@@ -26,8 +26,7 @@ void GameObject::setPosition(sf::Vector2f position)
 
 	sprite.setPosition(position);
 	
-	
-}
+ }
 
 sf::Sprite GameObject::getSprite()
 {

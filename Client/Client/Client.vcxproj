@@ -189,6 +189,7 @@
     <ClCompile Include="NetworkTimeStar.cpp" />
     <ClCompile Include="PacManPlayer.cpp" />
     <ClCompile Include="Paddle.cpp" />
+    <ClCompile Include="PerdictedGameObject.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PointObject.cpp" />
     <ClCompile Include="TeleportBlock.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="NetworkTimeStart.h" />
     <ClInclude Include="PacManPlayer.h" />
     <ClInclude Include="Paddle.h" />
+    <ClInclude Include="PerdictedGameObject.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PointObject.h" />
     <ClInclude Include="TeleportBlock.h" />

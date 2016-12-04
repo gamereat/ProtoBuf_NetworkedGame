@@ -67,6 +67,7 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc">
       <Filter>Protobuf\Source</Filter>
     </ClCompile>
+    <ClCompile Include="PerdictedGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WallBlock.h">
@@ -132,6 +133,7 @@
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h">
       <Filter>Protobuf\Header</Filter>
     </ClInclude>
+    <ClInclude Include="PerdictedGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">

@@ -8,7 +8,7 @@ ServerController::ServerController()
 {
 	playersInGame = 0;
 	versionNumber = 2;
-	clientNetworkUpdateTime = 0.06;
+	clientNetworkUpdateTime = 0.01;
 }
 
 
@@ -36,7 +36,7 @@ bool ServerController::Init()
 	//HACK: CURRENT HARD CODED V NUMBER
 	severVersionNumberText.setString("Server: (0.0.2)");
 
-	severVersionNumberText.setPosition(715, 0);
+	severVersionNumberText.setPosition(650, 0);
 	severVersionNumberText.setCharacterSize(24);
 
 	severVersionNumberText.setFillColor(sf::Color::Red);
@@ -74,17 +74,18 @@ bool ServerController::Update()
 	deltaTime = deltaTimeClock.restart().asSeconds();
 
 
-	createClientMessage();
 	// if there has been more players connected to the network since last frame then send data to them and other players
 	// about this new player
 	if (playersInGame < networkManger->getPlayersConnected())
 	{
+ 
 		playersInGame++;
 		networkManger->SendServerMessage(versionNumber, ball,players, playersInGame);
 	}
 	// If a player has disconnected 
 	else if (playersInGame > networkManger->getPlayersConnected())
 	{
+ 
 		playersInGame--;
 		networkManger->SendServerMessage(versionNumber, ball, players, playersInGame);
 	}
@@ -96,6 +97,7 @@ bool ServerController::Update()
 	// if corrrecnt time has past send update information
 	if (timeSinceClientUpdate >= clientNetworkUpdateTime)
 	{
+ 
 		networkUpdateTimer.restart();
 		networkManger->SendServerMessage(versionNumber, ball, players, playersInGame);
 	}
@@ -130,8 +132,18 @@ bool ServerController::Update()
 	}
 
 
-	players[0]->Update(deltaTime);
-	players[1]->Update(deltaTime);
+ 
+
+	for (int i = 0; i < NUM_PLAYERS; i ++ )
+	{
+		players[i]->Update(deltaTime);
+		
+		if (networkManger->recivedClientInfo[i] == true)
+		{
+			createClientMessage();
+			networkManger->recivedClientInfo[i] = false;
+		}
+	}
 	return true;
 }
 

@@ -8,8 +8,8 @@
 /*
 Number of players within a game
 */
-const sf::Vector2f playerOneStartingLocation = sf::Vector2f(25, 10);
-const sf::Vector2f playerTwoStartingLocation = sf::Vector2f(750, 10);
+const sf::Vector2f playerOneStartingLocation = sf::Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+const sf::Vector2f playerTwoStartingLocation = sf::Vector2f(750, 100);
 const sf::Vector2f ballStartPos = sf::Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
 struct clientUDPInfo
@@ -57,7 +57,11 @@ public:
 
 	std::vector<ClientMessage::ClientMessage*> lastMessageRecivedClients();
 	int getPlayersConnected();
+
+	std::vector<bool> recivedClientInfo;
+
 private:
+
 
 
 	/*
