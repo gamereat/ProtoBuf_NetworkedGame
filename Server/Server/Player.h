@@ -25,6 +25,10 @@ public:
 
 	float clamp(float lower, float upper, float num);
 private:
+
+	sf::Vector2f perdictedPos;
+
+
 	std::vector<sf::Vector2f> prevousPosition;
 	
 	std::vector<int> prevousMessageTimes;
@@ -32,7 +36,6 @@ private:
 	std::vector<int> timeOfLastUpdate;
 
 	std::vector<sf::Vector2f> prevousVelocity;
-	sf::Vector2f	perdictedPos;
 	void CacaulatePerdictedPos();
 	
 

@@ -2,8 +2,8 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "ServerController.h"
-const float MAX_STARTING_VELOCITY = 25;
-const float MIN_STARTING_VELOCITY = 10;
+const float MAX_STARTING_VELOCITY = 250;
+const float MIN_STARTING_VELOCITY = 75;
 enum BallCollionResults
 {
 	None,

@@ -10,7 +10,10 @@ PridictedGameObject::PridictedGameObject()
 PridictedGameObject::~PridictedGameObject()
 {
 }
- 
+void PridictedGameObject::Init()
+{
+	perdictedPos = this->lasteUpdatePosition;
+}
 void PridictedGameObject::CacaulatePerdictedPos()
 {
 

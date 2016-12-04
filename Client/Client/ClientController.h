@@ -11,6 +11,7 @@
 #include ".././../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 #include "Ball.h"
 #include "Menu.h"
+#include "ConnectToServer.h"
 const int NUM_PLAYERS = 2;
 const sf::Vector2f SCREEN_SIZE = sf::Vector2f(800, 600);
  /**
@@ -28,9 +29,10 @@ public:
 	{
 		Init = 0,
 		Menu = 1,
-		ReadyToPlay = 2,
-		Playing = 3,
-		GameOver = 4
+		ConnectToServer = 2,
+		ReadyToPlay = 3,
+		Playing = 4,
+		GameOver = 5
 		
 	};
 
@@ -70,15 +72,22 @@ public:
 
 	
 	void setWindow(sf::Window*);
+
 private: 
 	
+
+
+	ConnectToServer* connectToServer;
+
 	sf::Window* window;
 
 	Menu* menu;
 
 	Ball* ball;
 
-	/*
+	sf::Text readToPlayText;
+
+ 	/*
 	Updates ball from serverlocation
 	*/
 	void UpdateBall(ServerMessage::BallInformation ballInfo);
@@ -180,5 +189,9 @@ private:
 	time (IN SECONDS) between new message being sent the clients
 	*/
 	float serverNetworkUpdateTime;
+
+	int frameToConnect;
+
+	bool connectedToServer;
 };
 

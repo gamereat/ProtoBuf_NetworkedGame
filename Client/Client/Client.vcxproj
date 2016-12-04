@@ -177,6 +177,7 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="ClientController.cpp" />
+    <ClCompile Include="ConnectToServer.cpp" />
     <ClCompile Include="GameLogging.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GhostPlayer.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="ClientController.h" />
+    <ClInclude Include="ConnectToServer.h" />
     <ClInclude Include="GameLogging.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GhostPlayer.h" />

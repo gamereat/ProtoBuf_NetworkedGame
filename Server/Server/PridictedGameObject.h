@@ -11,6 +11,9 @@ public:
 	PridictedGameObject();
 	~PridictedGameObject();
 
+
+	virtual void Init();
+
 	void Update();
 
 protected:

@@ -32,6 +32,10 @@ public:
 	*/
 	bool Update();
 private:
+
+
+	sf::Text playerOneScore;
+	sf::Text playerTwoScore;
 	
 	/*
 	Ball used to hit around by players

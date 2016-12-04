@@ -20,7 +20,7 @@ Player::~Player()
 void Player::Init() 
 {
 
-	if (!paddleTexture.loadFromFile("../res/art/paddle.png"))
+ 	if (!paddleTexture.loadFromFile("../res/art/paddle.png"))
 	{
 		GameLogging::LogError("Failed to load in paddle texture");
 	}
@@ -30,6 +30,10 @@ void Player::Init()
 
 		sprite.setOrigin(sprite.getTextureRect().width / 2, sprite.getTextureRect().height / 2);
 	}
+
+
+	perdictedPos = this->lasteUpdatePosition;
+
 }
 
 void Player::Update(float deltaTime)

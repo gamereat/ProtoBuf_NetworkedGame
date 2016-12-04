@@ -42,8 +42,25 @@ bool ServerController::Init()
 	severVersionNumberText.setFillColor(sf::Color::Red);
 	networkManger->Init();
 
-	
- 	int i = 0;
+
+	playerOneScore.setFont(standardFont);
+ 
+	playerOneScore.setString("0");
+
+	playerOneScore.setPosition(50, SCREEN_HEIGHT - 50);
+	playerOneScore.setCharacterSize(24);
+
+	playerTwoScore.setFont(standardFont);
+
+	//TODO: load version number from file
+	//HACK: CURRENT HARD CODED V NUMBER
+	playerTwoScore.setString("0");
+
+	playerTwoScore.setPosition(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 50);
+	playerTwoScore.setCharacterSize(24);
+
+  
+	int i = 0;
 	for each (auto player in players)
 	{
 		player = new Player(0,  sf::Vector2f(0, 10));
@@ -54,6 +71,8 @@ bool ServerController::Init()
 	players[0]->setPosition(playerOneStartingLocation);
 	players[1]->setPosition(playerTwoStartingLocation);
 
+	players[0]->Init();
+	players[1]->Init();
 	ball = new Ball(sf::Vector2f(10, 0), 90, ballStartPos);
 	ball->Init();
  
@@ -67,6 +86,8 @@ void ServerController::Render(sf::RenderWindow* renderWindow)
 	}
 	renderWindow->draw(ball->getSprite());
 	renderWindow->draw(severVersionNumberText);
+	renderWindow->draw(playerOneScore);
+	renderWindow->draw(playerTwoScore);
 }
 
 bool ServerController::Update()
@@ -120,12 +141,15 @@ bool ServerController::Update()
 
 	case PlayerOneScore:
 		players[0]->setScore(players[0]->getScore() + 1);
+		playerOneScore.setString(std::to_string(players[0]->getScore()));
+
 		ball->Restart();
 
 		break;
 
 	case PlayerTwoScore:
 		players[1]->setScore(players[1]->getScore() + 1);
+		playerTwoScore.setString(std::to_string(players[1]->getScore()));
 		ball->Restart();
 	default:
 		break;

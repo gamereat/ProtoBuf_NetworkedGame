@@ -1,11 +1,6 @@
 #pragma once
 #include "GameObject.h"
 
-
-// number of prevous pos to keep on record at any given point 
-const int PREVOUS_POS_TO_RECORD = 4;
-
-
 class PerdictedGameObject :
 	public GameObject
 {
@@ -16,6 +11,7 @@ public:
 
 	virtual void Update(float deltaTime);
 
+	virtual void Init();
 protected:
 
 	/*
@@ -24,17 +20,31 @@ protected:
 	void CacaulatePerdictedPos();
 
 
-	std::vector<sf::Vector2f> prevousPosition;
-
-	std::vector<int> prevousMessageTimes;
-
-	int timeOfLastUpdate;
 
 
 	sf::Vector2f perdictedPos;
 
 
+	std::vector<sf::Vector2f> prevousPosition;
+
+	std::vector<int> prevousMessageTimes;
+
+	std::vector<int> timeOfLastUpdate;
+
+	std::vector<sf::Vector2f> prevousVelocity;
+
+	sf::Vector2f	lasteUpdatePosition;
+
+	sf::Texture paddleTexture;
+
+	int currentScore;
+
+	int playerNumber;
+
 	int estimateLag;
+
+
+	int gameTimeAtLastUpdate;
 
 };
 

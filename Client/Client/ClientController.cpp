@@ -1,10 +1,9 @@
 #include "ClientController.h"
 
-
-ClientController::ClientController()
+ ClientController::ClientController()
 {
 	currentClientGameState = ClientGameState::Menu;
-	
+
 	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
 		paddle[i] = new Paddle();
@@ -12,8 +11,14 @@ ClientController::ClientController()
 
 	ball = new Ball();
 
-	serverNetworkUpdateTime = 0.2;
- 
+	serverNetworkUpdateTime = 0.1;
+
+
+	menu = new Menu();
+
+	connectToServer = new ConnectToServer();
+
+	connectedToServer = false;
 }
 
 
@@ -35,6 +40,18 @@ ClientController::~ClientController()
 	{
 		delete ball;
 		ball = nullptr;
+	}
+
+	if (connectToServer)
+	{
+		delete connectToServer;
+		connectToServer = nullptr;
+	}
+
+	if (menu)
+	{
+		delete menu;
+		menu = nullptr;
 	}
 }
 
@@ -59,6 +76,16 @@ bool ClientController::Init()
 	clientVersionNumberText.setFillColor(sf::Color::Red);
 	
 
+	readToPlayText.setFont(standardFont);
+	 
+	readToPlayText.setString("Connecting to game server please wait");
+
+	readToPlayText.setPosition(35, 40);
+	readToPlayText.setCharacterSize(24);
+
+
+
+
 	// Init the players
 	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
@@ -79,8 +106,13 @@ bool ClientController::Init()
 
 	lastSeverMessageRecived = 0;
 
-	menu = new Menu();
 	menu->Init(window);
+
+
+	connectToServer->Init(window);
+
+
+	frameToConnect = 0;
 
 	return true;
 }
@@ -89,7 +121,8 @@ bool ClientController::Update()
 {
 	deltaTime = deltaTimeClock.restart().asSeconds();
 	
-	
+	networkManager.Update();
+
 	
 	switch (currentClientGameState)
 	{
@@ -102,15 +135,30 @@ bool ClientController::Update()
 		{
 			if (menu->Update())
 			{
-				currentClientGameState = ClientGameState::ReadyToPlay;
-
+				currentClientGameState = ClientGameState::ConnectToServer;
+				 
 			}
 
 			break;
 		}
+	
+		case  ClientController::ClientGameState::ConnectToServer:
+		{
+			if (connectToServer->Update())
+			{
+				currentClientGameState = ClientGameState::ReadyToPlay;
+
+			}
+			break;
+
+		}
 		case ClientController::ClientGameState::ReadyToPlay:
-		{	
+		{
+		
+
 			connectToGameSever();
+
+			break;
 		}
 		case ClientController::ClientGameState::Playing:
 		{
@@ -127,7 +175,6 @@ bool ClientController::Update()
 				UpdateGameToServer();
 			}
 
-			networkManager.Update();
 
 			// Init the players
 			for (int i = 0; i < NUM_PLAYERS; i++)
@@ -164,8 +211,15 @@ void ClientController::Render(sf::RenderWindow* renderWindow)
 
 			break;
 		}
+		case ClientController::ClientGameState::ConnectToServer:
+		{
+			connectToServer->Render(renderWindow);
+
+			break;
+		}
 		case ClientController::ClientGameState::ReadyToPlay:
 		{
+			renderWindow->draw(readToPlayText);
  
 			break;
 		}
@@ -207,60 +261,70 @@ void ClientController::setWindow(sf::Window * window)
 void ClientController::connectToGameSever()
 {
 
+
 	// Connect to server
 	networkManager.SentConnectionMessage(clientVersionNumber);
 	// once Connected get player info
 
-	while (networkManager.getLastServerMessage() == nullptr)
+	if (networkManager.getLastServerMessage() != nullptr)
 	{
-		networkManager.Update();
-
-	};
-	ServerMessage::ServerMessage serverMessage = *networkManager.getLastServerMessage();
-
-
-	ServerMessage::Playerinfromation updatePlayers[2];
-	updatePlayers[0] = serverMessage.playerone();
-	updatePlayers[1] = serverMessage.playertwo();
-	UpdatePlayers(updatePlayers);
-
-
-	UpdateBall(serverMessage.ballinformation());
-
-	// get the player number
-	int playerNum = serverMessage.playernumber();
-	int playerConncted = serverMessage.playersconnected();
-
-	// Player number relates to which player the user is controlling 
-
-	switch (playerNum)
+		connectedToServer = true;
+	}
+	else
 	{
-	case 0:
-		break;
-	case 1: 
-
-		break;
+		frameToConnect++;
 	}
 	
-	controllingPlayer = paddle[playerNum];
 
-	// set the player number of the controlling player
-	controllingPlayer->setPlayerNumber(playerNum);
-
-	clientNumberText.setFont(standardFont);
-
-	// Adding 1 to player num to make it more readable to the user
-	// ie if only 1 user is conenct it is 1/1 rather than 0/1 which is correct but not understadable
-	clientNumberText.setPosition(600, 25);
-	clientNumberText.setCharacterSize(24);
-
-	clientNumberText.setFillColor(sf::Color::Red);
-
-	controllingPlayer->setIsControllable(true);
-	// Update the game to display this info
-	UpdateGameFromServer();
+	
+	if (connectedToServer)
+	{
+		ServerMessage::ServerMessage serverMessage = *networkManager.getLastServerMessage();
 
 
+		ServerMessage::Playerinfromation updatePlayers[2];
+		updatePlayers[0] = serverMessage.playerone();
+		updatePlayers[1] = serverMessage.playertwo();
+		UpdatePlayers(updatePlayers);
+
+
+		UpdateBall(serverMessage.ballinformation());
+
+		// get the player number
+		int playerNum = serverMessage.playernumber();
+		int playerConncted = serverMessage.playersconnected();
+
+		// Player number relates to which player the user is controlling 
+
+		switch (playerNum)
+		{
+		case 0:
+			break;
+		case 1:
+
+			break;
+		}
+
+		controllingPlayer = paddle[playerNum];
+
+		// set the player number of the controlling player
+		controllingPlayer->setPlayerNumber(playerNum);
+
+		clientNumberText.setFont(standardFont);
+
+		// Adding 1 to player num to make it more readable to the user
+		// ie if only 1 user is conenct it is 1/1 rather than 0/1 which is correct but not understadable
+		clientNumberText.setPosition(600, 25);
+		clientNumberText.setCharacterSize(24);
+
+		clientNumberText.setFillColor(sf::Color::Red);
+
+		controllingPlayer->setIsControllable(true);
+		// Update the game to display this info
+		UpdateGameFromServer();
+
+		currentClientGameState = ClientGameState::Playing;
+	}
 }
 
 ClientMessage::Playerinfromation* ClientController::GetPlayerInfo()
