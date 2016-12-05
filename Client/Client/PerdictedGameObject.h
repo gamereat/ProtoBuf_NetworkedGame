@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-
+#include "curl\curl.h"
 // number of prevous pos to keep on record at any given point 
 const int PREVOUS_POS_TO_RECORD = 4;
 
@@ -28,13 +28,20 @@ protected:
 
 	std::vector<int> prevousMessageTimes;
 
-	int timeOfLastUpdate;
+	std::vector<int> timeOfLastUpdate;
 
+ 
 
 	sf::Vector2f perdictedPos;
 
 
 	int estimateLag;
 
+
+	std::vector<sf::Vector2f> prevousVelocity;
+
+
+
+	int gameTimeAtLastUpdate;
 };
 

@@ -140,7 +140,7 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Ball* ball,Player* 
 
 		serverInfo->set_messagenumber(numOfMessageSend[client]++);
 		serverInfo->set_serverinformation(serverVersionNum);
-		serverInfo->set_timestamp(networkTimeLapse->getTimeSinceEpoch());
+		serverInfo->set_timestamp(networkTimeLapse->gameTime);
 		newMessage->set_allocated_serverinfo(serverInfo);
 
 		std::vector<std::string> f;

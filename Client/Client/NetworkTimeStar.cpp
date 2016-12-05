@@ -3,7 +3,7 @@
 #include <iomanip>
 #include "GameLogging.h"
 
-
+int NetworkTimeStart::gameTime = 0;
 NetworkTimeStart::NetworkTimeStart()
 {
 	timeSyncServerPort = 7778;
@@ -23,6 +23,8 @@ void NetworkTimeStart::Update()
 	{
 		getServerConfirmMessage();
 	}
+
+	gameTime  = (clock.getElapsedTime().asMilliseconds() - serverStartTime);
 }
 
 void NetworkTimeStart::Init()
@@ -57,6 +59,8 @@ void NetworkTimeStart::getServerConfirmMessage()
 		serverConfimMess->ParseFromArray(buffer, sizeof(buffer));
 
 		clientNumber = serverConfimMess->playernumber();
+
+		serverStartTime = serverConfimMess->serverstarttime() + serverConfimMess->gametimer();
 
 		SentClientTimeSyncMessage(serverConfimMess);
 
@@ -100,8 +104,8 @@ void NetworkTimeStart::SentClientTimeSyncMessage(SyncTimeMessage::ServerConnectC
 
 	SyncTimeMessage::ConnectTime* connectTime = new SyncTimeMessage::ConnectTime();
 
-	connectTime->set_clienttimesinceepoch(getTimeSinceEpoch());
-	connectTime->set_timetaketorecivelastmessage(serverConfirmMess->servertimesinceepoch() - getTimeSinceEpoch());
+	connectTime->set_clienttimesinceepoch(gameTime);
+	connectTime->set_timetaketorecivelastmessage(gameTime - serverConfirmMess->gametimer());
 
 	clientConfim->set_allocated_connecttime(connectTime);
 
@@ -131,14 +135,5 @@ int NetworkTimeStart::CaculateTimeDelay(int serverTime, int clientTime)
 	return (clientTime - serverTime) / 2;
 }
 
-float NetworkTimeStart::getTimeSinceEpoch()
-{
-	double epoch;
+ 
 
-	std::time_t t = std::time(nullptr);
-
-	// get the time since epoch
-	epoch = difftime(mktime(std::gmtime(&t)), time_t(0));
-
-	return epoch;
-}

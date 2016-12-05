@@ -18,7 +18,7 @@ public:
 	void getServerConfirmMessage();
 	void getServerConnectMessage();
 
-	float getTimeSinceEpoch();
+	static int gameTime;
 
 	void setExpectingConfirmMessage();
 private:
@@ -59,6 +59,7 @@ private:
 	float serverStartTime;
 
  
+	sf::Clock clock;
 
 };
 

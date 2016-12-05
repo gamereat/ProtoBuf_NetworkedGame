@@ -181,19 +181,19 @@ class ServerConnectConfirm : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required float serverStartTime = 1;
+  // required int64 serverStartTime = 1;
   inline bool has_serverstarttime() const;
   inline void clear_serverstarttime();
   static const int kServerStartTimeFieldNumber = 1;
-  inline float serverstarttime() const;
-  inline void set_serverstarttime(float value);
+  inline ::google::protobuf::int64 serverstarttime() const;
+  inline void set_serverstarttime(::google::protobuf::int64 value);
 
-  // required float serverTimeSinceEpoch = 2;
-  inline bool has_servertimesinceepoch() const;
-  inline void clear_servertimesinceepoch();
-  static const int kServerTimeSinceEpochFieldNumber = 2;
-  inline float servertimesinceepoch() const;
-  inline void set_servertimesinceepoch(float value);
+  // required int64 gameTimer = 2;
+  inline bool has_gametimer() const;
+  inline void clear_gametimer();
+  static const int kGameTimerFieldNumber = 2;
+  inline ::google::protobuf::int64 gametimer() const;
+  inline void set_gametimer(::google::protobuf::int64 value);
 
   // required int32 playerNumber = 3;
   inline bool has_playernumber() const;
@@ -213,8 +213,8 @@ class ServerConnectConfirm : public ::google::protobuf::Message {
  private:
   inline void set_has_serverstarttime();
   inline void clear_has_serverstarttime();
-  inline void set_has_servertimesinceepoch();
-  inline void clear_has_servertimesinceepoch();
+  inline void set_has_gametimer();
+  inline void clear_has_gametimer();
   inline void set_has_playernumber();
   inline void clear_has_playernumber();
   inline void set_has_playersconnected();
@@ -224,8 +224,8 @@ class ServerConnectConfirm : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  float serverstarttime_;
-  float servertimesinceepoch_;
+  ::google::protobuf::int64 serverstarttime_;
+  ::google::protobuf::int64 gametimer_;
   ::google::protobuf::int32 playernumber_;
   ::google::protobuf::int32 playersconnected_;
   friend void  protobuf_AddDesc_SyncTimeMessage_2eproto();
@@ -385,7 +385,7 @@ inline void ConnectTime::set_timetaketorecivelastmessage(float value) {
 
 // ServerConnectConfirm
 
-// required float serverStartTime = 1;
+// required int64 serverStartTime = 1;
 inline bool ServerConnectConfirm::has_serverstarttime() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -396,41 +396,41 @@ inline void ServerConnectConfirm::clear_has_serverstarttime() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ServerConnectConfirm::clear_serverstarttime() {
-  serverstarttime_ = 0;
+  serverstarttime_ = GOOGLE_LONGLONG(0);
   clear_has_serverstarttime();
 }
-inline float ServerConnectConfirm::serverstarttime() const {
+inline ::google::protobuf::int64 ServerConnectConfirm::serverstarttime() const {
   // @@protoc_insertion_point(field_get:SyncTimeMessage.ServerConnectConfirm.serverStartTime)
   return serverstarttime_;
 }
-inline void ServerConnectConfirm::set_serverstarttime(float value) {
+inline void ServerConnectConfirm::set_serverstarttime(::google::protobuf::int64 value) {
   set_has_serverstarttime();
   serverstarttime_ = value;
   // @@protoc_insertion_point(field_set:SyncTimeMessage.ServerConnectConfirm.serverStartTime)
 }
 
-// required float serverTimeSinceEpoch = 2;
-inline bool ServerConnectConfirm::has_servertimesinceepoch() const {
+// required int64 gameTimer = 2;
+inline bool ServerConnectConfirm::has_gametimer() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ServerConnectConfirm::set_has_servertimesinceepoch() {
+inline void ServerConnectConfirm::set_has_gametimer() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ServerConnectConfirm::clear_has_servertimesinceepoch() {
+inline void ServerConnectConfirm::clear_has_gametimer() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ServerConnectConfirm::clear_servertimesinceepoch() {
-  servertimesinceepoch_ = 0;
-  clear_has_servertimesinceepoch();
+inline void ServerConnectConfirm::clear_gametimer() {
+  gametimer_ = GOOGLE_LONGLONG(0);
+  clear_has_gametimer();
 }
-inline float ServerConnectConfirm::servertimesinceepoch() const {
-  // @@protoc_insertion_point(field_get:SyncTimeMessage.ServerConnectConfirm.serverTimeSinceEpoch)
-  return servertimesinceepoch_;
+inline ::google::protobuf::int64 ServerConnectConfirm::gametimer() const {
+  // @@protoc_insertion_point(field_get:SyncTimeMessage.ServerConnectConfirm.gameTimer)
+  return gametimer_;
 }
-inline void ServerConnectConfirm::set_servertimesinceepoch(float value) {
-  set_has_servertimesinceepoch();
-  servertimesinceepoch_ = value;
-  // @@protoc_insertion_point(field_set:SyncTimeMessage.ServerConnectConfirm.serverTimeSinceEpoch)
+inline void ServerConnectConfirm::set_gametimer(::google::protobuf::int64 value) {
+  set_has_gametimer();
+  gametimer_ = value;
+  // @@protoc_insertion_point(field_set:SyncTimeMessage.ServerConnectConfirm.gameTimer)
 }
 
 // required int32 playerNumber = 3;

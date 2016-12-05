@@ -58,7 +58,7 @@ void protobuf_AssignDesc_SyncTimeMessage_2eproto() {
   ServerConnectConfirm_descriptor_ = file->message_type(1);
   static const int ServerConnectConfirm_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConnectConfirm, serverstarttime_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConnectConfirm, servertimesinceepoch_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConnectConfirm, gametimer_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConnectConfirm, playernumber_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConnectConfirm, playersconnected_),
   };
@@ -130,12 +130,12 @@ void protobuf_AddDesc_SyncTimeMessage_2eproto() {
     "\n\025SyncTimeMessage.proto\022\017SyncTimeMessage"
     "\"P\n\013ConnectTime\022\034\n\024clientTimeSinceEpoch\030"
     "\001 \002(\002\022#\n\033timeTakeToReciveLastMessage\030\002 \002"
-    "(\002\"}\n\024ServerConnectConfirm\022\027\n\017serverStar"
-    "tTime\030\001 \002(\002\022\034\n\024serverTimeSinceEpoch\030\002 \002("
-    "\002\022\024\n\014playerNumber\030\003 \002(\005\022\030\n\020playersConnec"
-    "ted\030\004 \002(\005\"_\n\024ClientConfirmConnect\0221\n\013con"
-    "nectTime\030\002 \002(\0132\034.SyncTimeMessage.Connect"
-    "Time\022\024\n\014clientNumber\030\001 \002(\005", 346);
+    "(\002\"r\n\024ServerConnectConfirm\022\027\n\017serverStar"
+    "tTime\030\001 \002(\003\022\021\n\tgameTimer\030\002 \002(\003\022\024\n\014player"
+    "Number\030\003 \002(\005\022\030\n\020playersConnected\030\004 \002(\005\"_"
+    "\n\024ClientConfirmConnect\0221\n\013connectTime\030\002 "
+    "\002(\0132\034.SyncTimeMessage.ConnectTime\022\024\n\014cli"
+    "entNumber\030\001 \002(\005", 335);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "SyncTimeMessage.proto", &protobuf_RegisterTypes);
   ConnectTime::default_instance_ = new ConnectTime();
@@ -429,7 +429,7 @@ void ConnectTime::Swap(ConnectTime* other) {
 
 #ifndef _MSC_VER
 const int ServerConnectConfirm::kServerStartTimeFieldNumber;
-const int ServerConnectConfirm::kServerTimeSinceEpochFieldNumber;
+const int ServerConnectConfirm::kGameTimerFieldNumber;
 const int ServerConnectConfirm::kPlayerNumberFieldNumber;
 const int ServerConnectConfirm::kPlayersConnectedFieldNumber;
 #endif  // !_MSC_VER
@@ -452,8 +452,8 @@ ServerConnectConfirm::ServerConnectConfirm(const ServerConnectConfirm& from)
 
 void ServerConnectConfirm::SharedCtor() {
   _cached_size_ = 0;
-  serverstarttime_ = 0;
-  servertimesinceepoch_ = 0;
+  serverstarttime_ = GOOGLE_LONGLONG(0);
+  gametimer_ = GOOGLE_LONGLONG(0);
   playernumber_ = 0;
   playersconnected_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -520,28 +520,28 @@ bool ServerConnectConfirm::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required float serverStartTime = 1;
+      // required int64 serverStartTime = 1;
       case 1: {
-        if (tag == 13) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &serverstarttime_)));
           set_has_serverstarttime();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(21)) goto parse_serverTimeSinceEpoch;
+        if (input->ExpectTag(16)) goto parse_gameTimer;
         break;
       }
 
-      // required float serverTimeSinceEpoch = 2;
+      // required int64 gameTimer = 2;
       case 2: {
-        if (tag == 21) {
-         parse_serverTimeSinceEpoch:
+        if (tag == 16) {
+         parse_gameTimer:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &servertimesinceepoch_)));
-          set_has_servertimesinceepoch();
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &gametimer_)));
+          set_has_gametimer();
         } else {
           goto handle_unusual;
         }
@@ -604,14 +604,14 @@ failure:
 void ServerConnectConfirm::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:SyncTimeMessage.ServerConnectConfirm)
-  // required float serverStartTime = 1;
+  // required int64 serverStartTime = 1;
   if (has_serverstarttime()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->serverstarttime(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->serverstarttime(), output);
   }
 
-  // required float serverTimeSinceEpoch = 2;
-  if (has_servertimesinceepoch()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->servertimesinceepoch(), output);
+  // required int64 gameTimer = 2;
+  if (has_gametimer()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->gametimer(), output);
   }
 
   // required int32 playerNumber = 3;
@@ -634,14 +634,14 @@ void ServerConnectConfirm::SerializeWithCachedSizes(
 ::google::protobuf::uint8* ServerConnectConfirm::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:SyncTimeMessage.ServerConnectConfirm)
-  // required float serverStartTime = 1;
+  // required int64 serverStartTime = 1;
   if (has_serverstarttime()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->serverstarttime(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->serverstarttime(), target);
   }
 
-  // required float serverTimeSinceEpoch = 2;
-  if (has_servertimesinceepoch()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->servertimesinceepoch(), target);
+  // required int64 gameTimer = 2;
+  if (has_gametimer()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->gametimer(), target);
   }
 
   // required int32 playerNumber = 3;
@@ -666,14 +666,18 @@ int ServerConnectConfirm::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required float serverStartTime = 1;
+    // required int64 serverStartTime = 1;
     if (has_serverstarttime()) {
-      total_size += 1 + 4;
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->serverstarttime());
     }
 
-    // required float serverTimeSinceEpoch = 2;
-    if (has_servertimesinceepoch()) {
-      total_size += 1 + 4;
+    // required int64 gameTimer = 2;
+    if (has_gametimer()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->gametimer());
     }
 
     // required int32 playerNumber = 3;
@@ -720,8 +724,8 @@ void ServerConnectConfirm::MergeFrom(const ServerConnectConfirm& from) {
     if (from.has_serverstarttime()) {
       set_serverstarttime(from.serverstarttime());
     }
-    if (from.has_servertimesinceepoch()) {
-      set_servertimesinceepoch(from.servertimesinceepoch());
+    if (from.has_gametimer()) {
+      set_gametimer(from.gametimer());
     }
     if (from.has_playernumber()) {
       set_playernumber(from.playernumber());
@@ -754,7 +758,7 @@ bool ServerConnectConfirm::IsInitialized() const {
 void ServerConnectConfirm::Swap(ServerConnectConfirm* other) {
   if (other != this) {
     std::swap(serverstarttime_, other->serverstarttime_);
-    std::swap(servertimesinceepoch_, other->servertimesinceepoch_);
+    std::swap(gametimer_, other->gametimer_);
     std::swap(playernumber_, other->playernumber_);
     std::swap(playersconnected_, other->playersconnected_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);

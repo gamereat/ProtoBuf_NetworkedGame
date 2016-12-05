@@ -23,8 +23,7 @@ public:
 
 	void UpdatePlayer(ClientMessage::Playerinfromation*);
 
-	float clamp(float lower, float upper, float num);
-private:
+ private:
 	std::vector<sf::Vector2f> prevousPosition;
 	
 	std::vector<int> prevousMessageTimes;

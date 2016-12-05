@@ -38,7 +38,7 @@ void Player::Update(float deltaTime)
 
 	perdictedPos = lasteUpdatePosition;
 
-	//CacaulatePerdictedPos();
+	CacaulatePerdictedPos();
 	sprite.setPosition(perdictedPos);
 	estimateLag = NetworkTimeLapse::GetClientEsimateLag(playerNumber);
 
@@ -54,8 +54,6 @@ void Player::CacaulatePerdictedPos()
 {
  
 
-	if (estimateLag != 0)
-	{
 		// Using Cubic Splines
 
 		// Will use the last 3 cords recived to work out next one 
@@ -65,42 +63,41 @@ void Player::CacaulatePerdictedPos()
 		//Cubic Bézier curves
 
 		//(1-t)^3 * P0 + 3 * (1-t)^2 * t * P1 + 3 * (1-t) * t^2 * P2 + t^3 * P3 ;    0 < t < 1;
-		if (timeOfLastUpdate.size() >= PREVOUS_POS_TO_RECORD && prevousVelocity.size() > PREVOUS_POS_TO_RECORD)
+	if (timeOfLastUpdate.size() >= PREVOUS_POS_TO_RECORD && prevousVelocity.size() > PREVOUS_POS_TO_RECORD)
+	{
+		if (timeOfLastUpdate.end()[-1] != 0 && prevousPosition.size() >= PREVOUS_POS_TO_RECORD)
 		{
-			if (timeOfLastUpdate.end()[-1] != 0 && prevousPosition.size() >= PREVOUS_POS_TO_RECORD)
-			{
- 
-				// Time since last packet info
-				float gameTime = (float)NetworkTimeLapse::gameTime;
- 
 
-				sf::Vector2f lastPrePath = prevousPosition.end()[-2] - prevousPosition.end()[-3];
+			// Time since last packet info
+			float gameTime = (float)NetworkTimeLapse::gameTime;
 
-				float lastDTime = timeOfLastUpdate.end()[-2] - timeOfLastUpdate.end()[-1];
-				
-				float startDTime = timeOfLastUpdate.end()[-1] - timeOfLastUpdate.end()[-3];
 
-				sf::Vector2f lastVelocity = lastPrePath / lastDTime;
+			sf::Vector2f lastPrePath = prevousPosition.end()[-2] - prevousPosition.end()[-3];
 
-				sf::Vector2f startPos = prevousPosition.end()[-3] + startDTime * lastVelocity;
+			float lastDTime = timeOfLastUpdate.end()[-2] - timeOfLastUpdate.end()[-1];
 
-				float currentDTime = gameTime - timeOfLastUpdate.end()[-1];
-				
-				sf::Vector2f predicPath = prevousPosition.end()[-1] - prevousPosition.end()[-2];
+			float startDTime = timeOfLastUpdate.end()[-1] - timeOfLastUpdate.end()[-3];
 
-				float dTime = timeOfLastUpdate.end()[-1] - timeOfLastUpdate.end()[-2];
-				
-				sf::Vector2f endpos = prevousPosition.end()[-1] + currentDTime *	predicPath / dTime;
+			sf::Vector2f lastVelocity = lastPrePath / lastDTime;
 
-				sf::Vector2f linearConvergence = endpos - startPos;
+			sf::Vector2f startPos = prevousPosition.end()[-3] + startDTime * lastVelocity;
 
-				float velocity = linearConvergence.y / dTime;
+			float currentDTime = gameTime - timeOfLastUpdate.end()[-1];
 
-				perdictedPos.y = startPos.y + currentDTime * velocity;
+			sf::Vector2f predicPath = prevousPosition.end()[-1] - prevousPosition.end()[-2];
 
-				perdictedPos.x = prevousPosition.end()[-1].x;
+			float dTime = timeOfLastUpdate.end()[-1] - timeOfLastUpdate.end()[-2];
 
-			}
+			sf::Vector2f endpos = prevousPosition.end()[-1] + currentDTime *	predicPath / dTime;
+
+			sf::Vector2f linearConvergence = endpos - startPos;
+
+			float velocity = linearConvergence.y / dTime;
+
+			perdictedPos.y = startPos.y + currentDTime * velocity;
+
+			perdictedPos.x = prevousPosition.end()[-1].x;
+
 		}
 	}
 

@@ -19,10 +19,10 @@ message ServerConnectConfirm {
 
 
     // the time the server started at 
-    required int32 serverStartTime = 1;
+    required int64 serverStartTime = 1;
 
     // The current game timer for the match
-    required int32 gameTimer  = 2;
+    required int64 gameTimer  = 2;
 
      required int32 playerNumber = 3;
 

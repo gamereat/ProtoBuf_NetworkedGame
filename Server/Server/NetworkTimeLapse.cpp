@@ -18,7 +18,7 @@ NetworkTimeLapse::NetworkTimeLapse()
 
 	playerReciveTimeStamps = std::vector<std::vector<int>>(2);
 
-	timeServerStarted =	clock();;
+	timeServerStarted = clock.getElapsedTime().asMilliseconds();
 
 
 }
@@ -37,7 +37,7 @@ void NetworkTimeLapse::Init()
 	timeSyncSocket.setBlocking(false);
 
 
-	RunPingTest(sf::IpAddress("8.8.8.8"), 1000);
+
 
 }
 
@@ -46,9 +46,10 @@ void NetworkTimeLapse::Update()
 
 
 	// recaculate the game time
-	gameTime = (clock() - timeServerStarted);
+	gameTime = (clock.getElapsedTime().asMilliseconds() - timeServerStarted);
 
 
+	std::cout << gameTime << std::endl;
 	sf::IpAddress sender;;
 	std::size_t received = 0;
 	unsigned short port;
@@ -64,7 +65,11 @@ void NetworkTimeLapse::Update()
 
 		clientSync->ParseFromArray(buffer, sizeof(buffer));
 
-		SentServerTimeSyncMessage(clientSync, sender);
+		if (clientSync->IsInitialized())
+		{
+
+			SentServerTimeSyncMessage(clientSync, sender);
+		}
 	}
 }
 
@@ -84,7 +89,7 @@ void NetworkTimeLapse::SendServerConfirmMessage(int timestamp, int clientNumber,
 
 	//Get time stamp
 	
-	serverConfimMessage->set_servertimesinceepoch(getTimeSinceEpoch());
+	serverConfimMessage->set_servertimesinceepoch(gameTime);
 
 	// add time to message time log 
 
@@ -254,7 +259,7 @@ void NetworkTimeLapse::SentServerTimeSyncMessage(SyncTimeMessage::ClientConfirmC
 
 
 
-	connectTime->set_clienttimesinceepoch(getTimeSinceEpoch());
+	connectTime->set_clienttimesinceepoch(clock.getElapsedTime().asMilliseconds());
 
 
  
@@ -265,7 +270,7 @@ void NetworkTimeLapse::SentServerTimeSyncMessage(SyncTimeMessage::ClientConfirmC
 
 	playerReciveTimeStamps[clientSyncMess->clientnumber()].push_back(clientSyncMess->connecttime().timetaketorecivelastmessage());
 
-	connectTime->set_timetaketorecivelastmessage(getTimeSinceLastMessage(lastMessagTime, getTimeSinceEpoch()));
+	connectTime->set_timetaketorecivelastmessage(getTimeSinceLastMessage(lastMessagTime, clock.getElapsedTime().asMilliseconds()));
 
 	int size = connectTime->ByteSize();
 	void *buffer = malloc(size);
@@ -294,15 +299,4 @@ float NetworkTimeLapse::getTimeSinceServerStarted()
 }
 
 
-int NetworkTimeLapse::getTimeSinceEpoch()
-{
-	int epoch;
 
-	std::time_t t = std::time(nullptr);
-
-	// get the time since epoch
-	epoch = difftime(mktime(std::gmtime(&t)), time_t(0));
-
-
-	return epoch;
-}

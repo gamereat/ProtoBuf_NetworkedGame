@@ -3,10 +3,13 @@
 #include <iostream>
 #include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include "google\protobuf\message.h"
-
-#include "GameLogging.h"
+ 
+ #include "GameLogging.h"
 int main()
 {
+
+ 
+
  	ClientController clientController;
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong client - Alan Yeats 1402402");
 	clientController.setWindow(&window);
@@ -65,4 +68,44 @@ int main()
 
 	return 0;
 }
- 
+//#include <windows.h>
+//#include <string>
+//#include <stdio.h>
+//
+//using std::string;
+//
+//HINSTANCE hInst;
+//WSADATA wsaData;
+//
+//
+//#include <SFML/Network.hpp>
+//#include <sstream>
+//
+//void main()
+//{
+//	// prepare the request
+//	sf::Http::Request request;
+//
+//	request.setHttpVersion(1, 1);
+//	request.setUri("/name");
+//	request.setMethod(sf::Http::Request::Get);
+//
+//
+// 
+//
+//	// send the request
+//	sf::Http http("192.168.0.4",8001);
+//	
+//	sf::Http::Response response = http.sendRequest(request);
+//
+//	// check the status
+//	if (response.getStatus() == sf::Http::Response::Ok)
+//	{
+//		// check the contents of the response
+//		std::cout << response.getBody() << std::endl;
+//	}
+//	else
+//	{
+//		std::cout << "request failed" << std::endl;
+//	}
+//}

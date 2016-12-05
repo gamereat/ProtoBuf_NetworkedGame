@@ -27,10 +27,7 @@ public:
 	void SendServerConfirmMessage(int timestamp,int clientNumber,int playersConnected, sf::IpAddress clientIp);
 
 
-	/*
-	Gets the time since Epoch
-	*/
-	static int getTimeSinceEpoch();	
+
 	float getTimeSinceLastMessage(int lastMessageTime, int currentTime);
 
 
@@ -80,7 +77,7 @@ private:
 	clock_t timeServerStarted;
 
 
-
+	sf::Clock clock;
 
 
 };

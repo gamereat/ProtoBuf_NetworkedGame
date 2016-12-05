@@ -126,7 +126,7 @@ void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playe
 	ClientMessage::ClientInformation clientInfo;
 	clientInfo.set_clientversion(clientVersion);
 	clientInfo.set_messagenumber(numOfMessageSend);
-	clientInfo.set_timestamp(networkTimeStart.getTimeSinceEpoch());
+	clientInfo.set_timestamp(networkTimeStart.gameTime);
 	newMessage->set_allocated_clientinfo(&clientInfo);
 
 	// Make sure message has got all valid feilds
@@ -175,7 +175,7 @@ void NetworkManager::SendDissconectMessage()
 	ClientMessage::ClientInformation clientInfo;
 	clientInfo.set_clientversion(-1);
 	clientInfo.set_messagenumber(numOfMessageSend);
-	clientInfo.set_timestamp(networkTimeStart.getTimeSinceEpoch());
+	clientInfo.set_timestamp(networkTimeStart.gameTime);
 
 	newMessage->set_allocated_clientinfo(&clientInfo);
 
@@ -216,7 +216,7 @@ void NetworkManager::SentConnectionMessage(int clientVersion)
 	ClientMessage::ClientInformation clientInfo;
 	clientInfo.set_clientversion(clientVersion);
 	clientInfo.set_messagenumber(numOfMessageSend);
-	clientInfo.set_timestamp(networkTimeStart.getTimeSinceEpoch());
+	clientInfo.set_timestamp(networkTimeStart.gameTime);
 
 	newMessage->set_clientnumber(clientNumber);
 	// increase the number of messaage sent
