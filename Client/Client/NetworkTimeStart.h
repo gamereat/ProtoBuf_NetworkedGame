@@ -23,6 +23,8 @@ public:
 	void setExpectingConfirmMessage();
 private:
 
+	int lagTime;
+
 	bool expectingConfirmMessage;
 
 	void SentClientTimeSyncMessage(SyncTimeMessage::ServerConnectConfirm*);
@@ -33,6 +35,8 @@ private:
 	Works out the diffrence in time from messages being recived and expected time
 	*/
 	int CaculateTimeDelay(int serverTime, int clientTime);
+
+	int RunPingTest(sf::IpAddress ipToPing, int timeOut);
 
 	sf::UdpSocket timeSyncSocket; 
 

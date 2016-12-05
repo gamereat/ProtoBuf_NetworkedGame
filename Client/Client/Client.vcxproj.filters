@@ -61,12 +61,12 @@
     <ClCompile Include="NetworkManager.cpp">
       <Filter>Source\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc">
-      <Filter>Protobuf\Source</Filter>
-    </ClCompile>
     <ClCompile Include="PerdictedGameObject.cpp" />
     <ClCompile Include="Menu.cpp">
       <Filter>Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc">
+      <Filter>Protobuf\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,10 +130,37 @@
     <ClInclude Include="NetworkManager.h">
       <Filter>Header\Networking</Filter>
     </ClInclude>
+    <ClInclude Include="PerdictedGameObject.h" />
+    <ClInclude Include="..\..\curl-master\include\curl\curl.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\curl-master\include\curl\curlbuild.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\curl-master\include\curl\curlrules.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\curl-master\include\curl\curlver.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\curl-master\include\curl\easy.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\curl-master\include\curl\mprintf.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\curl-master\include\curl\multi.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\curl-master\include\curl\stdcheaders.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\curl-master\include\curl\typecheck-gcc.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h">
       <Filter>Protobuf\Header</Filter>
     </ClInclude>
-    <ClInclude Include="PerdictedGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
@@ -169,5 +196,25 @@
     <Filter Include="Source\Networking">
       <UniqueIdentifier>{a63816de-fa9e-482e-a2e6-d38b734056b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{1d48bdc9-23e0-405d-8724-350726c2f5e5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\curl-master\include\curl\.gitignore">
+      <Filter>NewFilter1</Filter>
+    </None>
+    <None Include="..\..\curl-master\include\curl\curlbuild.h.cmake">
+      <Filter>NewFilter1</Filter>
+    </None>
+    <None Include="..\..\curl-master\include\curl\curlbuild.h.dist">
+      <Filter>NewFilter1</Filter>
+    </None>
+    <None Include="..\..\curl-master\include\curl\curlbuild.h.in">
+      <Filter>NewFilter1</Filter>
+    </None>
+    <None Include="..\..\curl-master\include\curl\Makefile.am">
+      <Filter>NewFilter1</Filter>
+    </None>
   </ItemGroup>
 </Project>
