@@ -1,7 +1,7 @@
 #include "NetworkManager.h"
 #include "GameLogging.h"
 #include <google\protobuf\message.h>
- 
+#include "ClientController.h"
 NetworkManager::NetworkManager()
 {
 
@@ -25,7 +25,7 @@ void NetworkManager::Init()
 	numOfMessageSend = 0;
 	numOfMessageRecived = 0;
 
-	if (updSocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
+	if (updSocket.bind(sf::Socket::AnyPort, ClientController::IpAdress) != sf::Socket::Done)
 	{
 		// error...
 	}

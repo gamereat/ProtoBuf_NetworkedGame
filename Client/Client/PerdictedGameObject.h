@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
-
-#include "curl\curl.h"
+ 
 // number of prevous pos to keep on record at any given point 
 const int PREVOUS_POS_TO_RECORD = 4;
 

@@ -70,6 +70,10 @@ public:
 
 	
 	void setWindow(sf::Window*);
+
+
+	static sf::IpAddress IpAdress;
+
 private: 
 	
 	sf::Window* window;

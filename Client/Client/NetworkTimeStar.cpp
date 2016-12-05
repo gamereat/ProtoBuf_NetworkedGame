@@ -3,6 +3,7 @@
 #include <iomanip>
 #include "GameLogging.h"
 #include "../ProtroHeaders/ServerMessage.pb.h"
+#include "ClientController.h"
 #include <winsock2.h>
 #include <iphlpapi.h>
 #include <icmpapi.h>
@@ -35,7 +36,7 @@ void NetworkTimeStart::Update()
 
 void NetworkTimeStart::Init()
 {
-	if (timeSyncSocket.bind(TIME_SYNC_PORT_CLIENT) != sf::Socket::Done)
+	if (timeSyncSocket.bind(TIME_SYNC_PORT_CLIENT, ClientController::IpAdress) != sf::Socket::Done)
 	{
 		// error...
 	}

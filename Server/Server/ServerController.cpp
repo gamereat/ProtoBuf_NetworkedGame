@@ -9,7 +9,7 @@ ServerController::ServerController()
 {
 	playersInGame = 0;
 	versionNumber = 2;
-	clientNetworkUpdateTime = 0.01;
+	clientNetworkUpdateTime = 0.06;
 }
 
 
@@ -50,13 +50,13 @@ bool ServerController::Init()
 	players[0]->setPosition(playerOneStartingLocation);
 	
 	// Create AI player
-	aiPlayer = new AIPlayer();
-	players[1] = aiPlayer;
+	players[1] = new Player(0, sf::Vector2f(0, 10));
+//	players[1] = aiPlayer;
 	players[1]->Init();
 	players[1]->setPosition(playerTwoStartingLocation);
  	ball = new Ball(sf::Vector2f(10, 0), 90, ballStartPos);
 	ball->Init();
-	aiPlayer->setBall(ball);
+	//aiPlayer->setBall(ball);
 	return true;
 }
 void ServerController::Render(sf::RenderWindow* renderWindow)
@@ -173,7 +173,7 @@ void ServerController::createClientMessage()
 	{
 		if (clientsInfo[i].first != -1)
 		{
-			players[i]->UpdatePlayer(&(clientsInfo[i].second));
+			players[i]->UpdatePlayer(&(clientsInfo[i].second), networkManger->lastMessageRecivedClients()[i]->clientinfo().messagenumber());
 		}
 	}
 

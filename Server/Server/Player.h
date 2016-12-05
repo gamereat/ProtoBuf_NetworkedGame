@@ -6,6 +6,17 @@
 // number of prevous pos to keep on record at any given point 
 const int PREVOUS_POS_TO_RECORD = 4;
 
+
+struct playerInfo
+{
+	int messageNumber;
+	sf::Vector2f pos;
+	sf::Vector2f velocity;
+	int timeOfUpdat;
+	float acceleration;
+
+};
+
  class Player : public GameObject
 {
 public:
@@ -21,16 +32,12 @@ public:
 	int getScore();
 
 
-	void UpdatePlayer(ClientMessage::Playerinfromation*);
+	void UpdatePlayer(ClientMessage::Playerinfromation*,int messageNumber);
 
  private:
-	std::vector<sf::Vector2f> prevousPosition;
-	
-	std::vector<int> prevousMessageTimes;
+	 std::vector<playerInfo> messageData;
 
-	std::vector<int> timeOfLastUpdate;
 
-	std::vector<sf::Vector2f> prevousVelocity;
 	sf::Vector2f	perdictedPos;
 	void CacaulatePerdictedPos();
 	
