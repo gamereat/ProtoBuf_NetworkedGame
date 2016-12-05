@@ -30,11 +30,15 @@ void Player::Init()
 
 		sprite.setOrigin(sprite.getTextureRect().width / 2, sprite.getTextureRect().height / 2);
 	}
+
 }
 
 void Player::Update(float deltaTime)
 {
-	CacaulatePerdictedPos();
+
+	perdictedPos = lasteUpdatePosition;
+
+	//CacaulatePerdictedPos();
 	sprite.setPosition(perdictedPos);
 	estimateLag = NetworkTimeLapse::GetClientEsimateLag(playerNumber);
 
@@ -61,54 +65,41 @@ void Player::CacaulatePerdictedPos()
 		//Cubic Bézier curves
 
 		//(1-t)^3 * P0 + 3 * (1-t)^2 * t * P1 + 3 * (1-t) * t^2 * P2 + t^3 * P3 ;    0 < t < 1;
-		if (timeOfLastUpdate.size() >= PREVOUS_POS_TO_RECORD && prevousVelocity.size() > 2)
+		if (timeOfLastUpdate.size() >= PREVOUS_POS_TO_RECORD && prevousVelocity.size() > PREVOUS_POS_TO_RECORD)
 		{
-			if (timeOfLastUpdate.end()[-1] != 0 && prevousPosition.size() >= 2)
+			if (timeOfLastUpdate.end()[-1] != 0 && prevousPosition.size() >= PREVOUS_POS_TO_RECORD)
 			{
-
-
-
-				float time;
+ 
 				// Time since last packet info
 				float gameTime = (float)NetworkTimeLapse::gameTime;
-				float tSincePrevPacket = (gameTime - timeOfLastUpdate.end()[-2])*0.001f;
-				float tSinceLastPacket = (gameTime - timeOfLastUpdate.end()[-1])*0.001f;
+ 
+
+				sf::Vector2f lastPrePath = prevousPosition.end()[-2] - prevousPosition.end()[-3];
+
+				float lastDTime = timeOfLastUpdate.end()[-2] - timeOfLastUpdate.end()[-1];
 				
+				float startDTime = timeOfLastUpdate.end()[-1] - timeOfLastUpdate.end()[-3];
+
+				sf::Vector2f lastVelocity = lastPrePath / lastDTime;
+
+				sf::Vector2f startPos = prevousPosition.end()[-3] + startDTime * lastVelocity;
+
+				float currentDTime = gameTime - timeOfLastUpdate.end()[-1];
 				
-				float tSinceLastUpdate = (gameTime + estimateLag - gameTimeAtLastUpdate)*0.001f;
+				sf::Vector2f predicPath = prevousPosition.end()[-1] - prevousPosition.end()[-2];
 
- 
-				tSinceLastUpdate = clamp(0, 1, tSinceLastUpdate);
- 
+				float dTime = timeOfLastUpdate.end()[-1] - timeOfLastUpdate.end()[-2];
+				
+				sf::Vector2f endpos = prevousPosition.end()[-1] + currentDTime *	predicPath / dTime;
 
-				float OneMinusTime = (1 - tSinceLastUpdate);
- 
-	 
-				//
-				// Linear interpolation - should be perfect for static linear velocity tests with 1 server and 1 client
-				// More clients will mean the clock varies a bit from clients -> srv -> other clients
-				//
-				time = clamp(0,1,tSinceLastPacket);
+				sf::Vector2f linearConvergence = endpos - startPos;
 
-				// Calculate current position based on packet info
-				 sf::Vector2f posLast, posPrev , newPerdictedPos;
- 				posLast.y = prevousPosition.end()[-2].y + prevousVelocity.end()[-1].y * time;
- 
-				// Calculate predicted previous position - use time since last interpolation time
-				// Calculate interpolated velocity for a bit more smoothness
-				sf::Vector2f ipVel;
- 				ipVel.y =  prevousVelocity.end()[-1].y + OneMinusTime * prevousVelocity.end()[-2].y;
- 
-				time = clamp(0, 1, tSincePrevPacket);
- 				posPrev.y = prevousPosition.end()[-1].y + ipVel.y * time;
- 
-				// Calculate position, interpolating from posPrev -> posLast as time goes by
-				// to correct towards the last received packet
-				newPerdictedPos.x = prevousPosition[0].x;
-				newPerdictedPos.y = posLast.y ;
- 
+				float velocity = linearConvergence.y / dTime;
 
-				perdictedPos = newPerdictedPos;
+				perdictedPos.y = startPos.y + currentDTime * velocity;
+
+				perdictedPos.x = prevousPosition.end()[-1].x;
+
 			}
 		}
 	}
@@ -168,8 +159,4 @@ void Player::UpdatePlayer(ClientMessage::Playerinfromation* playerInfo)
 	timeOfLastUpdate.push_back(gameTimeAtLastUpdate);
  }
 
-float Player::clamp(float lower, float upper, float num)
-{
-	return num <= lower ? lower : num >= upper ? upper : num;
-}
-
+ 

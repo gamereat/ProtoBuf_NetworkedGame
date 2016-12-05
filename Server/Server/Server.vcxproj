@@ -22,6 +22,7 @@
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.cc" />
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.cc" />
     <ClCompile Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.cc" />
+    <ClCompile Include="AIPlayer.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="GameLogging.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h" />
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h" />
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h" />
+    <ClInclude Include="AIPlayer.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="GameLogging.h" />
     <ClInclude Include="GameObject.h" />

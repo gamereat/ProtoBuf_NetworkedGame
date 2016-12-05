@@ -9,11 +9,35 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <http_client.h>
+#include <filestream.h>
+#include <iostream>
+#include <sstream>
 
+using namespace web::http;
+using namespace web::http::client;
 void main()
-{ 
- 
- 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH,SCREEN_HEIGHT ), "Pac Man Server");
+{  
+
+	sf::Http::Request request;
+
+	// fill the request...
+	//request.setUri("/name");
+	//request.setHttpVersion(1, 1); // HTTP 1.1
+	//request.setField("Content-Type", "application/text");
+
+
+	request.setMethod(sf::Http::Request::Get);
+
+	 
+
+
+
+	// send the request
+	sf::Http http("http://localhost:8001/");
+	sf::Http::Response response = http.sendRequest(request);
+
+	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH,SCREEN_HEIGHT ), "Pac Man Server");
 	ServerController serverController;
 	GameLogging::Log("----------- INIT STATED ----------");
 

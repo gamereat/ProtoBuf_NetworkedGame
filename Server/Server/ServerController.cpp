@@ -3,6 +3,7 @@
 #include "NetworkManager.h"
 #include "Player.h"
 #include "Ball.h"
+#include "AIPlayer.h"
 
 ServerController::ServerController()
 {
@@ -36,27 +37,26 @@ bool ServerController::Init()
 	//HACK: CURRENT HARD CODED V NUMBER
 	severVersionNumberText.setString("Server: (0.0.2)");
 
-	severVersionNumberText.setPosition(650, 0);
+	severVersionNumberText.setPosition(SCREEN_WIDTH  - severVersionNumberText.getString().getSize() * severVersionNumberText.getCharacterSize(), 0);
 	severVersionNumberText.setCharacterSize(24);
-
+	;
 	severVersionNumberText.setFillColor(sf::Color::Red);
 	networkManger->Init();
 
-	
- 	int i = 0;
-	for each (auto player in players)
-	{
-		player = new Player(0,  sf::Vector2f(0, 10));
-		players[i] = player;
-		i++;
-		player->Init();
-	}
-	players[0]->setPosition(playerOneStartingLocation);
-	players[1]->setPosition(playerTwoStartingLocation);
-
-	ball = new Ball(sf::Vector2f(10, 0), 90, ballStartPos);
-	ball->Init();
  
+	// Create user controlled player
+	players[0] =  new Player(0,  sf::Vector2f(0, 10));
+	players[0]->Init(); 
+	players[0]->setPosition(playerOneStartingLocation);
+	
+	// Create AI player
+	aiPlayer = new AIPlayer();
+	players[1] = aiPlayer;
+	players[1]->Init();
+	players[1]->setPosition(playerTwoStartingLocation);
+ 	ball = new Ball(sf::Vector2f(10, 0), 90, ballStartPos);
+	ball->Init();
+	aiPlayer->setBall(ball);
 	return true;
 }
 void ServerController::Render(sf::RenderWindow* renderWindow)

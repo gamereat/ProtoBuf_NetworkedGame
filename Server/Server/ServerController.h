@@ -33,6 +33,17 @@ public:
 	bool Update();
 private:
 	
+
+	/*
+	The text for the user score 
+	*/
+	sf::Text userScoreText;
+
+
+	/*
+	The text for AI Score
+	*/
+	sf::Text AIScoreText;
 	/*
 	Ball used to hit around by players
 	*/
@@ -52,6 +63,12 @@ private:
 	players in the game
 	*/
 	class Player* players[NUM_PLAYERS];
+
+
+	/*
+	AI player which is against player
+	*/
+	class AIPlayer* aiPlayer;
 
 	/*
 	Manages all the nwtwork conections

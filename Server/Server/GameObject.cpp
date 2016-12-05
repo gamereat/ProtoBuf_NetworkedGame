@@ -4,7 +4,7 @@
 
 GameObject::GameObject()
 {
- 
+	lasteUpdatePosition = sf::Vector2f(0,0);
 }
 
 
