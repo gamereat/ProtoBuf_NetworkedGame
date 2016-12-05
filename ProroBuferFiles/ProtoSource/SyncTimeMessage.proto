@@ -11,7 +11,8 @@ message ConnectTime {
     // send the time taken to recive last message
     required float timeTakeToReciveLastMessage  =2;
 
-
+    // The current game timer for the match
+    required int64 gameTimer  = 3;
 }
 
 

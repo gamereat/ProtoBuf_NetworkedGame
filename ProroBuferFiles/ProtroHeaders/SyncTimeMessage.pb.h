@@ -106,12 +106,21 @@ class ConnectTime : public ::google::protobuf::Message {
   inline float timetaketorecivelastmessage() const;
   inline void set_timetaketorecivelastmessage(float value);
 
+  // required int64 gameTimer = 3;
+  inline bool has_gametimer() const;
+  inline void clear_gametimer();
+  static const int kGameTimerFieldNumber = 3;
+  inline ::google::protobuf::int64 gametimer() const;
+  inline void set_gametimer(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:SyncTimeMessage.ConnectTime)
  private:
   inline void set_has_clienttimesinceepoch();
   inline void clear_has_clienttimesinceepoch();
   inline void set_has_timetaketorecivelastmessage();
   inline void clear_has_timetaketorecivelastmessage();
+  inline void set_has_gametimer();
+  inline void clear_has_gametimer();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -119,6 +128,7 @@ class ConnectTime : public ::google::protobuf::Message {
   mutable int _cached_size_;
   float clienttimesinceepoch_;
   float timetaketorecivelastmessage_;
+  ::google::protobuf::int64 gametimer_;
   friend void  protobuf_AddDesc_SyncTimeMessage_2eproto();
   friend void protobuf_AssignDesc_SyncTimeMessage_2eproto();
   friend void protobuf_ShutdownFile_SyncTimeMessage_2eproto();
@@ -379,6 +389,30 @@ inline void ConnectTime::set_timetaketorecivelastmessage(float value) {
   set_has_timetaketorecivelastmessage();
   timetaketorecivelastmessage_ = value;
   // @@protoc_insertion_point(field_set:SyncTimeMessage.ConnectTime.timeTakeToReciveLastMessage)
+}
+
+// required int64 gameTimer = 3;
+inline bool ConnectTime::has_gametimer() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ConnectTime::set_has_gametimer() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ConnectTime::clear_has_gametimer() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ConnectTime::clear_gametimer() {
+  gametimer_ = GOOGLE_LONGLONG(0);
+  clear_has_gametimer();
+}
+inline ::google::protobuf::int64 ConnectTime::gametimer() const {
+  // @@protoc_insertion_point(field_get:SyncTimeMessage.ConnectTime.gameTimer)
+  return gametimer_;
+}
+inline void ConnectTime::set_gametimer(::google::protobuf::int64 value) {
+  set_has_gametimer();
+  gametimer_ = value;
+  // @@protoc_insertion_point(field_set:SyncTimeMessage.ConnectTime.gameTimer)
 }
 
 // -------------------------------------------------------------------

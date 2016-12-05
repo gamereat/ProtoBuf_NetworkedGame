@@ -40,9 +40,10 @@ void protobuf_AssignDesc_SyncTimeMessage_2eproto() {
       "SyncTimeMessage.proto");
   GOOGLE_CHECK(file != NULL);
   ConnectTime_descriptor_ = file->message_type(0);
-  static const int ConnectTime_offsets_[2] = {
+  static const int ConnectTime_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectTime, clienttimesinceepoch_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectTime, timetaketorecivelastmessage_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectTime, gametimer_),
   };
   ConnectTime_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -128,14 +129,14 @@ void protobuf_AddDesc_SyncTimeMessage_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\025SyncTimeMessage.proto\022\017SyncTimeMessage"
-    "\"P\n\013ConnectTime\022\034\n\024clientTimeSinceEpoch\030"
+    "\"c\n\013ConnectTime\022\034\n\024clientTimeSinceEpoch\030"
     "\001 \002(\002\022#\n\033timeTakeToReciveLastMessage\030\002 \002"
-    "(\002\"r\n\024ServerConnectConfirm\022\027\n\017serverStar"
-    "tTime\030\001 \002(\003\022\021\n\tgameTimer\030\002 \002(\003\022\024\n\014player"
-    "Number\030\003 \002(\005\022\030\n\020playersConnected\030\004 \002(\005\"_"
-    "\n\024ClientConfirmConnect\0221\n\013connectTime\030\002 "
-    "\002(\0132\034.SyncTimeMessage.ConnectTime\022\024\n\014cli"
-    "entNumber\030\001 \002(\005", 335);
+    "(\002\022\021\n\tgameTimer\030\003 \002(\003\"r\n\024ServerConnectCo"
+    "nfirm\022\027\n\017serverStartTime\030\001 \002(\003\022\021\n\tgameTi"
+    "mer\030\002 \002(\003\022\024\n\014playerNumber\030\003 \002(\005\022\030\n\020playe"
+    "rsConnected\030\004 \002(\005\"_\n\024ClientConfirmConnec"
+    "t\0221\n\013connectTime\030\002 \002(\0132\034.SyncTimeMessage"
+    ".ConnectTime\022\024\n\014clientNumber\030\001 \002(\005", 354);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "SyncTimeMessage.proto", &protobuf_RegisterTypes);
   ConnectTime::default_instance_ = new ConnectTime();
@@ -159,6 +160,7 @@ struct StaticDescriptorInitializer_SyncTimeMessage_2eproto {
 #ifndef _MSC_VER
 const int ConnectTime::kClientTimeSinceEpochFieldNumber;
 const int ConnectTime::kTimeTakeToReciveLastMessageFieldNumber;
+const int ConnectTime::kGameTimerFieldNumber;
 #endif  // !_MSC_VER
 
 ConnectTime::ConnectTime()
@@ -181,6 +183,7 @@ void ConnectTime::SharedCtor() {
   _cached_size_ = 0;
   clienttimesinceepoch_ = 0;
   timetaketorecivelastmessage_ = 0;
+  gametimer_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -226,7 +229,7 @@ void ConnectTime::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  ZR_(clienttimesinceepoch_, timetaketorecivelastmessage_);
+  ZR_(clienttimesinceepoch_, gametimer_);
 
 #undef OFFSET_OF_FIELD_
 #undef ZR_
@@ -270,6 +273,21 @@ bool ConnectTime::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(24)) goto parse_gameTimer;
+        break;
+      }
+
+      // required int64 gameTimer = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_gameTimer:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &gametimer_)));
+          set_has_gametimer();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -309,6 +327,11 @@ void ConnectTime::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->timetaketorecivelastmessage(), output);
   }
 
+  // required int64 gameTimer = 3;
+  if (has_gametimer()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->gametimer(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -327,6 +350,11 @@ void ConnectTime::SerializeWithCachedSizes(
   // required float timeTakeToReciveLastMessage = 2;
   if (has_timetaketorecivelastmessage()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->timetaketorecivelastmessage(), target);
+  }
+
+  // required int64 gameTimer = 3;
+  if (has_gametimer()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->gametimer(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -349,6 +377,13 @@ int ConnectTime::ByteSize() const {
     // required float timeTakeToReciveLastMessage = 2;
     if (has_timetaketorecivelastmessage()) {
       total_size += 1 + 4;
+    }
+
+    // required int64 gameTimer = 3;
+    if (has_gametimer()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->gametimer());
     }
 
   }
@@ -384,6 +419,9 @@ void ConnectTime::MergeFrom(const ConnectTime& from) {
     if (from.has_timetaketorecivelastmessage()) {
       set_timetaketorecivelastmessage(from.timetaketorecivelastmessage());
     }
+    if (from.has_gametimer()) {
+      set_gametimer(from.gametimer());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -401,7 +439,7 @@ void ConnectTime::CopyFrom(const ConnectTime& from) {
 }
 
 bool ConnectTime::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -410,6 +448,7 @@ void ConnectTime::Swap(ConnectTime* other) {
   if (other != this) {
     std::swap(clienttimesinceepoch_, other->clienttimesinceepoch_);
     std::swap(timetaketorecivelastmessage_, other->timetaketorecivelastmessage_);
+    std::swap(gametimer_, other->gametimer_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

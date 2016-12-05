@@ -89,7 +89,7 @@ void NetworkTimeLapse::SendServerConfirmMessage(int timestamp, int clientNumber,
 
 	//Get time stamp
 	
-	serverConfimMessage->set_servertimesinceepoch(gameTime);
+	serverConfimMessage->set_gametimer(gameTime);
 
 	// add time to message time log 
 
@@ -263,7 +263,7 @@ void NetworkTimeLapse::SentServerTimeSyncMessage(SyncTimeMessage::ClientConfirmC
 
 
  
-
+	connectTime->set_gametimer(gameTime);
 	int lastMessagTime = playerReciveTimeStamps[clientSyncMess->clientnumber()].back();
 
 

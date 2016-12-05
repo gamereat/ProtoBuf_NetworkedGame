@@ -69,7 +69,7 @@ void Player::CacaulatePerdictedPos()
 		{
 
 			// Time since last packet info
-			float gameTime = (float)NetworkTimeLapse::gameTime;
+			float gameTime = (float)NetworkTimeLapse::gameTime - estimateLag;
 
 
 			sf::Vector2f lastPrePath = prevousPosition.end()[-2] - prevousPosition.end()[-3];
@@ -123,7 +123,7 @@ void Player::UpdatePlayer(ClientMessage::Playerinfromation* playerInfo)
 	lasteUpdatePosition = sf::Vector2f(playerpos.posx(), playerpos.posy());
 
 
-	gameTimeAtLastUpdate = NetworkTimeLapse::gameTime;
+	gameTimeAtLastUpdate = NetworkTimeLapse::gameTime - estimateLag;
 	prevousPosition.push_back(lasteUpdatePosition);
  
 	prevousMessageTimes.push_back(NetworkTimeLapse::gameTime);
