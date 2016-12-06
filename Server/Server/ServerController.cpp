@@ -9,26 +9,44 @@ ServerController::ServerController()
 {
 	playersInGame = 0;
 	versionNumber = 2;
-	clientNetworkUpdateTime = 0.06;
+	clientNetworkUpdateTime = 0.03;
 }
 
 
 ServerController::~ServerController()
 {
+
+	// clean memory up
 	if (networkManger)
 	{
 		delete networkManger;
 		networkManger = nullptr;
 	}
+
+	if (ball)
+	{
+		delete ball;
+		ball = nullptr;
+	}
+
+	for (int i = 0; i < NUM_PLAYERS; i++)
+	{
+		delete players[i]; 
+		players[i] = nullptr;
+	}
 }
 
 bool ServerController::Init()
 {
+	// get a new network manager 
 	networkManger = new NetworkManager();
+	networkManger->Init();
+
+
 	if (!standardFont.loadFromFile("../res/font/Politik.otf"))
 	{
 		GameLogging::LogError("Standard font faile to load");
-	//	return false;
+		return false;
 	}
 
 	severVersionNumberText.setFont(standardFont);
@@ -41,7 +59,7 @@ bool ServerController::Init()
 	severVersionNumberText.setCharacterSize(24);
 	;
 	severVersionNumberText.setFillColor(sf::Color::Red);
-	networkManger->Init();
+
 
  
 	// Create user controlled player
@@ -50,14 +68,15 @@ bool ServerController::Init()
 	players[0]->setPosition(playerOneStartingLocation);
 	players[0]->Init();
 
-	// Create AI player
+	// Create second player player
 	players[1] = new Player(0, sf::Vector2f(0, 10));
 //	players[1] = aiPlayer;
 	players[1]->Init();
 	players[1]->setPosition(playerTwoStartingLocation);
 	players[1]->Init();
 
- 	ball = new Ball(sf::Vector2f(10, 0), 90, ballStartPos);
+	// load in ball
+ 	ball = new Ball(sf::Vector2f(10, 0),  ballStartPos);
 	ball->Init();
 	//aiPlayer->setBall(ball);
 	return true;
@@ -74,6 +93,7 @@ void ServerController::Render(sf::RenderWindow* renderWindow)
 
 bool ServerController::Update()
 {
+	// get new delta time 
 	deltaTime = deltaTimeClock.restart().asSeconds();
 
 
@@ -109,6 +129,7 @@ bool ServerController::Update()
 	
 	ball->Update(deltaTime);
 
+	// get any collision with ball
 	switch (ball->CollisionDetection(players))
 	{
 
@@ -152,6 +173,7 @@ bool ServerController::Update()
 
 void ServerController::createClientMessage()
 {
+	// get a new client message
 	std::vector<std::pair<int, ClientMessage::Playerinfromation>> clientsInfo =  std::vector<std::pair<int, ClientMessage::Playerinfromation>>(NUM_PLAYERS);
 	for (int i = 0; i < NUM_PLAYERS; i++)
 	{

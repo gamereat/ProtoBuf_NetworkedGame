@@ -6,11 +6,11 @@ Ball::Ball()
 {
 }
 
-Ball::Ball(sf::Vector2f velocity, float angle, sf::Vector2f startPos)
+Ball::Ball(sf::Vector2f velocity, sf::Vector2f startPos)
 {
+	//Set the init values for the ball
 	this->velocity = velocity;
-	this->angle = angle;
-	setPosition(startPos);
+ 	setPosition(startPos);
 
 	sprite.setPosition(startPos);
 
@@ -24,25 +24,27 @@ Ball::~Ball()
 
 void Ball::Init()
 {
-
+	// load ball texture from server 
 	if (!ballTexture.loadFromFile("../res/art/ball.png"))
 	{
 		GameLogging::LogError("Failed to load in paddle texture");
 	}
 	else
 	{
+
 		sprite = sf::Sprite(ballTexture);
 
 		sprite.setOrigin(sprite.getTextureRect().width / 2, sprite.getTextureRect().height / 2);
 		sprite.setPosition(lasteUpdatePosition);
 
 	}
-
+	// get a random starting velocity
 	velocity = ChoiceRandomStartingVelocity();
 }
 
 void Ball::Update(float deltaTime)
 {
+	// move the ball based off its velocity
 	sprite.move(velocity.x * deltaTime, velocity.y * deltaTime);
 
 }
@@ -51,9 +53,11 @@ void Ball::Update(float deltaTime)
 
 void Ball::Restart()
 {
+	// Get a new random start pots
 	velocity = ChoiceRandomStartingVelocity();
 	
 
+	// restart to starting pos 
 	sprite.setPosition(ballStartPos);
 
 }
@@ -76,9 +80,11 @@ BallCollionResults Ball::CollisionDetection(Player* players[NUM_PLAYERS])
  	// check if ball is out bounds
 
 	//Check if hit the to bottom or top
-	if (sprite.getPosition().y - sprite.getTextureRect().height / 2 > SCREEN_HEIGHT ||
-		sprite.getPosition().y + sprite.getTextureRect().height / 2 < 0)
+	// removing 1 so boucnes a wee bit early
+	if (sprite.getPosition().y + sprite.getTextureRect().height / 2 > SCREEN_HEIGHT -1  ||
+		sprite.getPosition().y - sprite.getTextureRect().height / 2 < 1)
 	{
+		// flip velocity of ball
 		velocity.y *= -1;
 
 		return HitTopBottom;

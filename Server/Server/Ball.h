@@ -31,7 +31,14 @@ public:
 
 
 	Ball();
-	Ball(sf::Vector2f velocity, float angle, sf::Vector2f startPos);
+
+	/*
+	Overload constructor 
+
+	@param velocity		The velocity ball will start at
+	@param startPos		Starting position of the ball
+	*/
+	Ball(sf::Vector2f velocity, sf::Vector2f startPos);
 	~Ball();
 
 	/*
@@ -88,12 +95,7 @@ private:
 	*/
 	sf::Vector2f velocity;
 
-
-	/*
-	Angle the ball is cuurently at
-	*/
-	float angle;
-
+ 
 	/*
 	Texture applied to ball
 	*/

@@ -4,7 +4,7 @@
 
 PridictedGameObject::PridictedGameObject()
 {
-
+	// add some init messages so can look back on prevus pos 
 	for (int i = 0; i < PREVOUS_POS_TO_RECORD ; i++)
 	{
 		predictionInfo newInfo;
@@ -82,8 +82,7 @@ void PridictedGameObject::UpdateMessageInfo(sf::Vector2f newPos, int gameTime, i
 
 
 		messageData.push_back(info);
-		//timeOfLastUpdate.push_back(gameTimeAtLastUpdate);
-	}
+ 	}
 }
  
 void PridictedGameObject::CacaulatePerdictedPos()

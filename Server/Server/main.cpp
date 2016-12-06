@@ -1,23 +1,15 @@
 #include "SFML\Graphics.hpp"
-#include "NetworkManager.h"
-#include <iostream>
+ #include <iostream>
 #include "ServerController.h";
 #include "GameLogging.h"
 
-#include <cstdio>
-#include <iostream>
-#include <memory>
-#include <stdexcept>
-#include <string>
-#include <iostream>
-#include <sstream>
-
-void main()
+ void main()
 {  
 	
 
-	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH,SCREEN_HEIGHT ), "Pac Man Server");
+	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH,SCREEN_HEIGHT ), "Pong Server - ALAN YEATS 1402402");
 	ServerController serverController;
+
 	GameLogging::Log("----------- INIT STATED ----------");
 
 	serverController.Init();
