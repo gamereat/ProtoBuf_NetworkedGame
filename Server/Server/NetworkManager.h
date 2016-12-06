@@ -24,6 +24,11 @@ The starting position of the ball in the game
 const sf::Vector2f ballStartPos = sf::Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
 /*
+Default port server will use 
+*/
+const unsigned short SERVER_PORT = 7777;
+
+/*
 Client ip information used to send messsage for
 */
 struct clientUDPInfo

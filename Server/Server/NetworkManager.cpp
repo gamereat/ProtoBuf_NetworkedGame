@@ -7,7 +7,10 @@
 
 NetworkManager::NetworkManager()
 {
-	portNumber = 7777;
+	// set the deafult port
+	portNumber = SERVER_PORT;
+
+	// set the number of players connected to 0
 	playerConnected = 0;
 	
 	for (int i = 0; i < NUM_PLAYERS; i++)

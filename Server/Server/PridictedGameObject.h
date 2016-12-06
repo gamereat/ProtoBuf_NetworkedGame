@@ -7,7 +7,9 @@ const int PREVOUS_POS_TO_RECORD = 4;
 
 
 
-
+/*
+Stuct used to help predict future movment information
+*/
 struct predictionInfo
 {
 	int messageNumber;
@@ -23,8 +25,7 @@ class PridictedGameObject : public GameObject
 public:
 	PridictedGameObject();
 	~PridictedGameObject();
-
-	void Update();
+	 
 
 protected:
 

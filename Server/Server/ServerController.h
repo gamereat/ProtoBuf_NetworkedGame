@@ -4,11 +4,29 @@
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
 
+/*
+	The number of players that can join a game
+*/
 const int NUM_PLAYERS = 2;
 
+/*
+The height of the screen
+*/
 const int SCREEN_HEIGHT = 600;
+
+/*
+	The width of the screen
+*/
 const int SCREEN_WIDTH = 800;
+
+/*
+Max speed of a paddle
+*/
 const int PADDLE_SPEED = 100;
+
+/*
+Controls the server info 
+*/
 class ServerController
 {
 public:
@@ -22,7 +40,12 @@ public:
 
 	*/
 	bool Init();
+
+	/*
+	Renders 
+	*/
 	void Render(sf::RenderWindow * renderWindow);
+
 	/*
 	Updates the all the game information
 
@@ -31,6 +54,7 @@ public:
 	- False game is ended
 	*/
 	bool Update();
+
 private:
 	
 
@@ -49,6 +73,10 @@ private:
 	*/
 	class Ball* ball;
 
+
+	/*
+	Clock used to work out how often netwokr has to update
+	*/
 	sf::Clock networkUpdateTimer;
 
  

@@ -24,6 +24,7 @@ template<typename T>
 inline T StaticMathsLib::Clamp(const T & number, const T & lower, const T & upper)
 {
 
+	// Makes sure within range 
 	return (number <= lower) ? lower : (number >= upper) ? upper : number;
 
 }
