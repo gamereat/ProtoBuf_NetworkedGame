@@ -4,23 +4,25 @@
 #include "GameLogging.h"
 #include "../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 #include "ServerController.h"
+#include "NetworkManager.h"
+// include additonal window windsoc stuff
 #include <winsock2.h>
 #include <iphlpapi.h>
 #include <icmpapi.h>
 #pragma comment(lib, "Iphlpapi.lib")
 #pragma comment(lib, "Ws2_32.lib")
 
+// set up static var 
 std::vector<int> NetworkTimeLapse::clientLastPingResult = std::vector<int>(NUM_PLAYERS);
 int NetworkTimeLapse::  gameTime = 0;
+
 NetworkTimeLapse::NetworkTimeLapse()
 {
-	portNumber = 7778;
+	// set the default time sync port for server 
+	portNumber = DEFAULT_TIME_SYNC_PORT;
 
-	playerReciveTimeStamps = std::vector<std::vector<int>>(2);
-
-
-
-
+	playerReciveTimeStamps = std::vector<std::vector<int>>(NUM_PLAYERS);
+	 
 }
 
 
@@ -30,10 +32,12 @@ NetworkTimeLapse::~NetworkTimeLapse()
 
 void NetworkTimeLapse::Init()
 {
+	// bind to sync port
 	if (timeSyncSocket.bind(portNumber) != sf::Socket::Done)
 	{
 		GameLogging::LogError(" Failed to bind udp socket");
 	}
+	//set to non blocking mode 
 	timeSyncSocket.setBlocking(false);
 
 
@@ -41,20 +45,21 @@ void NetworkTimeLapse::Init()
 
 }
 
-void NetworkTimeLapse::Update()
+void NetworkTimeLapse::Update(std::vector<clientUDPInfo> clientsIPInfo)
 {
-
-
+	 
 	// recaculate the game time
 	gameTime = (clock.getElapsedTime().asMilliseconds());
 
-
-	std::cout << gameTime << std::endl;
-	sf::IpAddress sender;;
+	// check if reciving a new time sync message
+	GameLogging::Log(std::to_string( gameTime));
+ 	sf::IpAddress sender;;
 	std::size_t received = 0;
 	unsigned short port;
-	char buffer[1024];
-	timeSyncSocket.receive(buffer, 1024, received, sender, port);
+	char buffer[256];
+
+
+	timeSyncSocket.receive(buffer, 256, received, sender, port);
 
 
 
@@ -65,11 +70,25 @@ void NetworkTimeLapse::Update()
 
 		clientSync->ParseFromArray(buffer, sizeof(buffer));
 
+
+		// check if a valid message
 		if (clientSync->IsInitialized())
 		{
 
 			SentServerTimeSyncMessage(clientSync, sender);
 		}
+	}
+
+	// if need to redo ping test
+	if (pingTestClock.getElapsedTime().asMilliseconds >= TIME_BETWEEN_PING_TESTS)
+	{
+		for (int i = 0; i < clientsIPInfo.size(); i++)
+		{
+			clientLastPingResult[i] = RunPingTest(clientsIPInfo[i].getIP(), DEFAULT_PING_TIMEOUT);
+		}
+
+		// restart clock
+		pingTestClock.restart();
 	}
 }
 
@@ -106,6 +125,8 @@ void NetworkTimeLapse::SendServerConfirmMessage(int timestamp, int clientNumber,
 	if (timeSyncSocket.send(buffer, 256, clientIp, TIME_SYNC_PORT_CLIENT) != sf::Socket::Done)
 	{
 		// error...
+		GameLogging::LogError("Error sending time sync message ");
+
 	}
 	else
 	{ 
@@ -113,6 +134,7 @@ void NetworkTimeLapse::SendServerConfirmMessage(int timestamp, int clientNumber,
 
 	}
 
+	// complete a ping test to get esimate of lag between client and server 
 	clientLastPingResult[clientNumber] = RunPingTest(clientIp, DEFAULT_PING_TIMEOUT);
 }
 
@@ -120,11 +142,13 @@ float NetworkTimeLapse::getTimeSinceLastMessage(int lastMessageTime, int current
 {
 
 	// work out diffrence taken to send then recive message 
+
 	return (currentTime - lastMessageTime) / 2;
 }
 
 int NetworkTimeLapse::GetClientEsimateLag(int clientNumber)
 {
+	// contains the round time of lag so half it for a single trip lag 
 	return clientLastPingResult[clientNumber]  / 2 ;
 }
 
@@ -241,29 +265,30 @@ int NetworkTimeLapse::RunPingTest(sf::IpAddress ipToPing,int timeOut)
 		GameLogging::Log("Pinged " + ipToPing.toString() + "  round tip time " + std::to_string(pIcmpEchoReply->RoundTripTime));
  
 	}
-	else {
-		printf("Call to IcmpSendEcho() failed.\n");
-		printf("Error: %ld\n", GetLastError());
+	else
+	{
+
+		GameLogging::LogError("Error getting ping test Error: " + GetLastError());
+ 
 	}
 
 	IcmpCloseHandle(handle);
-
-
+	 
+	// return the ping results
 	return pIcmpEchoReply->RoundTripTime;
 }
 
 void NetworkTimeLapse::SentServerTimeSyncMessage(SyncTimeMessage::ClientConfirmConnect * clientSyncMess, sf::IpAddress clientIp)
 {
-	 
+	// send a time sync messsage to client 
 	SyncTimeMessage::ConnectTime* connectTime = new SyncTimeMessage::ConnectTime();
 
-
-
+	 
 	connectTime->set_clienttimesinceepoch(clock.getElapsedTime().asMilliseconds());
-
 
  
 	connectTime->set_gametimer(gameTime);
+
 	int lastMessagTime = playerReciveTimeStamps[clientSyncMess->clientnumber()].back();
 
 

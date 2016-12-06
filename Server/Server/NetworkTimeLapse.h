@@ -17,6 +17,8 @@ How log in game time between request a new ping test to rework out lag for game
 */
 const int TIME_BETWEEN_PING_TESTS = 5000;
 
+
+const unsigned short DEFAULT_TIME_SYNC_PORT = 7778;
 /*
 Manges time across game times 
 */
@@ -33,8 +35,10 @@ public:
 
 	/*
 	Updates network time 
-	*/
-	void Update();
+
+	@prama	clientsIPInfo	all the currently connect players
+	*/	
+	void Update(std::vector<class clientUDPInfo> clientsIPInfo);
 
 	/*
 	Sends a message to client after they connect to work out lag
@@ -114,6 +118,10 @@ private:
 	*/
 	sf::Clock clock;
 
+	/*
+	Clock used to work out when new lag test should be done 
+	*/
+	sf::Clock pingTestClock;
 
 };
 

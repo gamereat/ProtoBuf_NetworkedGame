@@ -173,11 +173,7 @@ private:
 	List all active clients ip info
 	*/
 	std::vector<clientUDPInfo> clientsIPInfo;
-
-	/*
-	Send information to client to sync up timings
-	*/
-	void WorkOutSyncTimingForClient();
+	 
 	/*
 	Number of messages sent to each client that's connected
 	*/
