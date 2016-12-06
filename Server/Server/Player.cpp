@@ -32,7 +32,7 @@ void Player::Init()
 		sprite.setOrigin(sprite.getTextureRect().width / 2, sprite.getTextureRect().height / 2);
 	}
 	perdictedPos = lasteUpdatePosition;
-
+	sprite.setPosition(perdictedPos);
 }
 
 void Player::Update(float deltaTime)

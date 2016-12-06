@@ -1,14 +1,14 @@
 #include "Ball.h"
 #include "GameLogging.h"
-
+#include "NetworkTimeStart.h"
+#include "ClientController.h"
 Ball::Ball()
 {
 }
 
-Ball::Ball(sf::Vector2f velocity, float angle, sf::Vector2f startPos)
+Ball::Ball(sf::Vector2f velocity, sf::Vector2f startPos)
 {
 	this->velocity = velocity;
-	this->angle = angle;
 
 	sprite.setPosition(startPos);
 }
@@ -36,34 +36,42 @@ void Ball::Init()
 
 void Ball::Update(float deltaTime)
 {
-	// Update super class
-	PerdictedGameObject::Update(deltaTime);
- }
+
+	if (messageData.end()[-1].pos == BALL_START_POS )
+	{
+
+		//set pos to new pridect pos 
+		sprite.setPosition(BALL_START_POS);
+	}
+	else
+	{
+		// work out new perdicted position
+		CacaulatePerdictedPos();
+
+		//set pos to new pridect pos 
+		sprite.setPosition(perdictedPos);
+	}
+	// get any update to estiamae lag
+//	estimateLag = ;
+}
 
 void Ball::Render(sf::RenderWindow * renderWindow)
 {
 	renderWindow->draw(sprite);
 
 }
-
-
-
-float Ball::getAngle()
-{
-	return angle;
-}
-
-
-
-void Ball::UpdateBallInfo(ServerMessage::BallInformation ballnfo)
-{
-	angle = ballnfo.angle();
-	velocity = sf::Vector2f( ballnfo.velocity().posx(), ballnfo.velocity().posy());
-	prevousPosition.push_back(sf::Vector2f(ballnfo.possition().posx(), ballnfo.possition().posy()));
  
 
-}
 
+void Ball::UpdateBallInfo(ServerMessage::BallInformation ballnfo,int messageNum)
+{
+ 
+	UpdateMessageInfo(sf::Vector2f(ballnfo.possition().posx(), ballnfo.possition().posy()), sf::Vector2f(ballnfo.velocity().posx(), ballnfo.velocity().posy()), messageNum);
+
+  
+
+}
+ 
 sf::Vector2f Ball::getVelocity()
 {
 	return velocity;

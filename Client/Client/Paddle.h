@@ -1,6 +1,10 @@
 #pragma once
 #include "PlayerObject.h"
 
+
+/*
+Paddle object controlled by player to hit ball around 
+*/
 class Paddle : public PlayerObject
 {
 public:
@@ -13,6 +17,9 @@ public:
 
 private:
 
+	/*
+	Texture for the paddle
+	*/
 	sf::Texture paddleTexture;
 
 };

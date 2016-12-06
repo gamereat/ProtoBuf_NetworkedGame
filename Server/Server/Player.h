@@ -3,7 +3,10 @@
 #include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include "PridictedGameObject.h"
 
-
+/*
+Default player class
+ inherists from predicted object so is networked 
+*/
  class Player : public PridictedGameObject
 {
 public:

@@ -35,8 +35,6 @@
     <ClCompile Include="GameLogging.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="NetworkTimeLapse.cpp" />
     <ClCompile Include="Player.cpp" />

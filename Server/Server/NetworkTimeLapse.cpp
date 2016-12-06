@@ -80,7 +80,7 @@ void NetworkTimeLapse::Update(std::vector<clientUDPInfo> clientsIPInfo)
 	}
 
 	// if need to redo ping test
-	if (pingTestClock.getElapsedTime().asMilliseconds >= TIME_BETWEEN_PING_TESTS)
+	if (pingTestClock.getElapsedTime().asMilliseconds() >= TIME_BETWEEN_PING_TESTS)
 	{
 		for (int i = 0; i < clientsIPInfo.size(); i++)
 		{

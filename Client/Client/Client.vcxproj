@@ -177,33 +177,17 @@
     <ClCompile Include="ClientController.cpp" />
     <ClCompile Include="GameLogging.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GhostPlayer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapObject.cpp" />
-    <ClCompile Include="MapPoint.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="NetworkTimeStar.cpp" />
-    <ClCompile Include="PacManPlayer.cpp" />
     <ClCompile Include="Paddle.cpp" />
-    <ClCompile Include="PerdictedGameObject.cpp" />
+    <ClCompile Include="PridictedGameObject.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
-    <ClCompile Include="PointObject.cpp" />
-    <ClCompile Include="TeleportBlock.cpp" />
+    <ClCompile Include="StaticMathsLib.cpp" />
     <ClCompile Include="UIButton.cpp" />
-    <ClCompile Include="WallBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\curl-master\include\curl\curl.h" />
-    <ClInclude Include="..\..\curl-master\include\curl\curlbuild.h" />
-    <ClInclude Include="..\..\curl-master\include\curl\curlrules.h" />
-    <ClInclude Include="..\..\curl-master\include\curl\curlver.h" />
-    <ClInclude Include="..\..\curl-master\include\curl\easy.h" />
-    <ClInclude Include="..\..\curl-master\include\curl\mprintf.h" />
-    <ClInclude Include="..\..\curl-master\include\curl\multi.h" />
-    <ClInclude Include="..\..\curl-master\include\curl\stdcheaders.h" />
-    <ClInclude Include="..\..\curl-master\include\curl\typecheck-gcc.h" />
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ClientMessage.pb.h" />
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\ServerMessage.pb.h" />
     <ClInclude Include="..\..\ProroBuferFiles\ProtroHeaders\SyncTimeMessage.pb.h" />
@@ -211,28 +195,14 @@
     <ClInclude Include="ClientController.h" />
     <ClInclude Include="GameLogging.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GhostPlayer.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="MapObject.h" />
-    <ClInclude Include="MapPoint.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="NetworkTimeStart.h" />
-    <ClInclude Include="PacManPlayer.h" />
     <ClInclude Include="Paddle.h" />
-    <ClInclude Include="PerdictedGameObject.h" />
+    <ClInclude Include="PridictedGameObject.h" />
     <ClInclude Include="PlayerObject.h" />
-    <ClInclude Include="PointObject.h" />
-    <ClInclude Include="TeleportBlock.h" />
+    <ClInclude Include="StaticMathsLib.h" />
     <ClInclude Include="UIButton.h" />
-    <ClInclude Include="WallBlock.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\curl-master\include\curl\.gitignore" />
-    <None Include="..\..\curl-master\include\curl\curlbuild.h.cmake" />
-    <None Include="..\..\curl-master\include\curl\curlbuild.h.dist" />
-    <None Include="..\..\curl-master\include\curl\curlbuild.h.in" />
-    <None Include="..\..\curl-master\include\curl\Makefile.am" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,32 +3,45 @@
 #include "../../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 #include "NetworkTimeStart.h"
-const sf::Vector2f playerOneStartingLocation = sf::Vector2f(0, 10);
-const sf::Vector2f playerTwoStartingLocation = sf::Vector2f(400, 10);
+ 
 
+const sf::IpAddress SERVER_LOCAL_IP = "127.0.0.1";
+const unsigned short SERVER_LOCAL_PORT = 7777;
+
+/*
+Network manager control all network controlling within the game
+*/
 class NetworkManager
 {
 public:
 	NetworkManager();
 	~NetworkManager();
 	
+	/*
+	Init the server network conection
+	*/
 	void Init();
-
+ 
 	/*
-	Will connect user to the server and get init Message
+	Update network events
+	Looks for new packages coming in
 	*/
-	void ConnectToServer();
-
-	/*
-	Works out when to start the game clock based off server timing 
-	*/
-	void WorkOutSyncTiming();
-	
 	void Update();
 
-	void GetPlayerTypeFromServer();
-
+ 
+	/*
+	Gets a new message from the server
+	*/
 	void ReciveMessageToServer();
+	
+	/*
+	Send a new message to the server
+
+	@param clientVersion		The client number
+
+	@param playerInfo			Information for the user controller player
+	@param additionalRequests	any additioanl requests from the server
+	*/
 	void SentMessageToServer(int clientVersion , ClientMessage::Playerinfromation* playerInfo, ClientMessage::ClientMessage_AdditioanlRequests additionalRequests);
 	
 	/*
@@ -40,12 +53,28 @@ public:
 	*/
 	void SentConnectionMessage(int clientVersion);
 
+	/*
+	Gets the latests message sent from the server
+	*/
 	ServerMessage::ServerMessage* getLastServerMessage();
 
+	/*
+	Gets the number of messages recived
+	*/
 	int getNumberMessageRecived();
+
+
+	/*
+	Gets the network time manger
+	*/
+	NetworkTimeStart* GetNetworkTimeManger();
+
 private:
 
-	NetworkTimeStart networkTimeStart;
+	/*
+	Netwokr time start controller deals with timing and the server
+	*/
+	NetworkTimeStart* networkTimeStart;
 
 	/*
 	Client number assigned by the server
@@ -58,7 +87,13 @@ private:
 	ServerMessage::ServerMessage* lastServerMessage;
 
 
-	void SendMessage(std::string );
+	/*
+	Sends data to the server
+
+	@param	data	data require to send 
+	*/
+	void SendMessage(std::string data);
+
 	/*
 	clock that is sycned up with other clients 
 	*/

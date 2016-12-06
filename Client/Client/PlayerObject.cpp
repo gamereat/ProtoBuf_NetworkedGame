@@ -111,7 +111,7 @@ void PlayerObject::playerMovement(float deltaTime)
 
 sf::Vector2f PlayerObject::getPosition()
 {
-	GameLogging::Log("sprite pos " + std::to_string(sprite.getPosition().y));
+	//GameLogging::Log("sprite pos " + std::to_string(sprite.getPosition().y));
 
 	return sprite.getPosition();
 

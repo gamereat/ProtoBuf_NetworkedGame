@@ -1,12 +1,23 @@
 #pragma once
-#include "PerdictedGameObject.h"
+#include "PridictedGameObject.h"
 
 #include "../ProtroHeaders/ServerMessage.pb.h"
-class Ball : public PerdictedGameObject
+
+/*
+Ball object inherits from pridected object as predicts pos.
+*/
+class Ball : public PridictedGameObject
 {
 public:
 	Ball();
-	Ball(sf::Vector2f velocity, float angle, sf::Vector2f startPos);
+
+	/*
+	Overload constructor
+
+	@param velocity		The velocity ball will start at
+	@param startPos		Starting position of the ball
+	*/
+	Ball(sf::Vector2f velocity, sf::Vector2f startPos);
 	~Ball();
 
 
@@ -14,14 +25,22 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render(sf::RenderWindow*);
 
-	float getAngle();
-
  
 	/*
 	Update ball based on ball info
 	*/
-	void UpdateBallInfo(ServerMessage::BallInformation ballnfo);
+	void UpdateBallInfo(ServerMessage::BallInformation ballnfo, int messageNumber);
+
+	/*
+	Gets velocty of the ball
+	*/
 	sf::Vector2f getVelocity();
+
+	/*
+	Restarts ball and starts at new velocity
+	*/
+	void Restart();
+
 private:
 
 
@@ -31,11 +50,7 @@ private:
 	*/
 	sf::Vector2f velocity;
 
-
-	/*
-	Angle the ball is cuurently at
-	*/
-	float angle;
+	 
 
 	/*
 	Texture applied to ball

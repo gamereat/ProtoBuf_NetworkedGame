@@ -81,8 +81,15 @@ public:
 	BallCollionResults CollisionDetection(Player* players[NUM_PLAYERS] );
 
 
+	/*
+	set the game to start
+	*/
+	void SetToStart();
+
 private:
 
+
+	
 	/*
 	Caculate a random velocity for the ball to start going at 
 

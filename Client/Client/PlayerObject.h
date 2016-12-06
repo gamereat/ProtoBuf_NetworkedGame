@@ -3,13 +3,17 @@
 #include ".././../ProroBuferFiles/ProtroHeaders/ClientMessage.pb.h"
 #include "../../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 
-const int PADDLE_SPEED = 100;
+const int PADDLE_SPEED = 350;
 
 // How the player will be able to move
 // Allows for rebuinding of keys if needed 
  struct playerControls
 {
 public:
+
+	/*
+	Set of default controls
+	*/
 	playerControls()
 	{
  
@@ -20,6 +24,12 @@ public:
 	 
 	}
 
+	/*
+	overload contructor to allow for 2 players
+	it will give each player diffrent controlls
+
+	@param isSecondPlayer	if the player is first or secodn player
+	*/
 	playerControls(bool isSecondPlayer)
 	{
 		if (!isSecondPlayer)
@@ -39,18 +49,26 @@ public:
 		}
 	}
 
+
+	// get key bound to up movement
 	inline sf::Keyboard::Key getUpMovementKey()
 	{
 		return upMovementKey;
 	}
+
+	// get key bound to down movement
 	inline sf::Keyboard::Key getDownpMovementKey()
 	{
 		return downMovementKey;
 	}
+
+	//get key bound to left moment 
 	inline sf::Keyboard::Key getLeftMovementKey()
 	{
 		return leftMovementKey;
 	}
+
+	//ge key bound to right movememnet 
 	inline sf::Keyboard::Key getRightMovementKey()
 	{
 		return rightMovementKey;
@@ -67,7 +85,9 @@ private:
 
 };
 
-
+ /*
+ Default player object 
+ */
 class PlayerObject :
 	public GameObject
 {
@@ -113,6 +133,10 @@ public:
 
 protected:
 
+
+	/*
+	Handles any input from the player 
+	*/
 	virtual void HandleInput(float deltaTime);
 
 	 

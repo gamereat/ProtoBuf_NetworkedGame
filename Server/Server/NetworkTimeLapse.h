@@ -17,8 +17,11 @@ How log in game time between request a new ping test to rework out lag for game
 */
 const int TIME_BETWEEN_PING_TESTS = 5000;
 
-
+/*
+Default port the time sync server will befound on
+*/
 const unsigned short DEFAULT_TIME_SYNC_PORT = 7778;
+
 /*
 Manges time across game times 
 */

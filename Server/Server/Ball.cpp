@@ -38,8 +38,6 @@ void Ball::Init()
 		sprite.setPosition(lasteUpdatePosition);
 
 	}
-	// get a random starting velocity
-	velocity = ChoiceRandomStartingVelocity();
 }
 
 void Ball::Update(float deltaTime)
@@ -116,6 +114,13 @@ BallCollionResults Ball::CollisionDetection(Player* players[NUM_PLAYERS])
 	}
 	return BallCollionResults::None;
 
+}
+
+void Ball::SetToStart()
+{
+
+	// get a random starting velocity
+	velocity = ChoiceRandomStartingVelocity();
 }
 
 sf::Vector2f Ball::ChoiceRandomStartingVelocity()

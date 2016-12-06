@@ -58,6 +58,11 @@ public:
 private:
 	
 
+
+	/*
+	if game has started yet
+	*/
+	bool gameStarted;
 	/*
 	The text for the user score 
 	*/

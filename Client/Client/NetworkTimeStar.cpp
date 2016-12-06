@@ -9,11 +9,12 @@
 #include <icmpapi.h>
 #pragma comment(lib, "Iphlpapi.lib")
 #pragma comment(lib, "Ws2_32.lib")
+
 int NetworkTimeStart::gameTime = 0;
 NetworkTimeStart::NetworkTimeStart()
 {
-	timeSyncServerPort = 7778;
-	serverIP = "127.0.0.1";
+	timeSyncServerPort = SERVER_TIME_SYNC_PORT_CLIENT;
+	serverIP =SERVER_LOCAL_IP;
 	expectingConfirmMessage = false;
  }
 
@@ -32,18 +33,24 @@ void NetworkTimeStart::Update()
 	gameTime  = (clock.getElapsedTime().asMilliseconds() + serverStartTime + lagTime);
 
 	std::cout << gameTime << '\n';
+
+	if (pingTestTimer.getElapsedTime().asMilliseconds() > TIME_BETWEEN_PING_TESTS)
+	{
+		lagTime = RunPingTest(serverIP, DEFAULT_PING_TIMEOUT);
+	}
 }
 
 void NetworkTimeStart::Init()
 {
-	if (timeSyncSocket.bind(TIME_SYNC_PORT_CLIENT, ClientController::IpAdress) != sf::Socket::Done)
+	if (timeSyncSocket.bind(CLIENT_TIME_SYNC_PORT_CLIENT, ClientController::IpAdress) != sf::Socket::Done)
 	{
 		// error...
 	}
 	else
 	{ 
+		timeSyncSocket.setBlocking(false);
+
 	} 
-	timeSyncSocket.setBlocking(false);
 
 }
 
@@ -60,19 +67,25 @@ void NetworkTimeStart::getServerConfirmMessage()
 
 	if (received > 0)
 	{
-		lagTime =  RunPingTest(sender, 1000);
+		lagTime = RunPingTest(sender, 1000);
 		SyncTimeMessage::ServerConnectConfirm* serverConfimMess = new SyncTimeMessage::ServerConnectConfirm();
-	clock.restart();
+
+		clock.restart();
 
 		serverConfimMess->ParseFromArray(buffer, sizeof(buffer));
 
-		clientNumber = serverConfimMess->playernumber();
+		// check for valid message
+		if (serverConfimMess->IsInitialized())
+		{
 
-		serverStartTime = serverConfimMess->serverstarttime() + serverConfimMess->gametimer();
+			clientNumber = serverConfimMess->playernumber();
 
-		SentClientTimeSyncMessage(serverConfimMess);
+			serverStartTime = serverConfimMess->serverstarttime() + serverConfimMess->gametimer();
 
-		expectingConfirmMessage = false;
+			SentClientTimeSyncMessage(serverConfimMess);
+
+			expectingConfirmMessage = false;
+		}
 	}
 }
 
@@ -103,6 +116,11 @@ void NetworkTimeStart::setExpectingConfirmMessage()
 	expectingConfirmMessage = true;
 }
 
+int NetworkTimeStart::getLagTime()
+{
+	return lagTime;
+}
+
 void NetworkTimeStart::SentClientTimeSyncMessage(SyncTimeMessage::ServerConnectConfirm * serverConfirmMess)
 {
 	SyncTimeMessage::ClientConfirmConnect* clientConfim = new SyncTimeMessage::ClientConfirmConnect();
@@ -123,7 +141,7 @@ void NetworkTimeStart::SentClientTimeSyncMessage(SyncTimeMessage::ServerConnectC
 	GameLogging::Log("Message Length " + std::to_string(size));
 
 
-	if (timeSyncSocket.send(buffer, 256, serverIP, timeSyncServerPort) != sf::Socket::Done)
+	if (timeSyncSocket.send(buffer, size, serverIP, timeSyncServerPort) != sf::Socket::Done)
 	{
 		// error...
 	}

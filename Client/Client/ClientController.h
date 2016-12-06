@@ -11,9 +11,23 @@
 #include ".././../ProroBuferFiles/ProtroHeaders/ServerMessage.pb.h"
 #include "Ball.h"
 #include "Menu.h"
+
+/*
+The number of player in the application
+*/
 const int NUM_PLAYERS = 2;
+/*
+Deafult screen size
+*/
 const sf::Vector2f SCREEN_SIZE = sf::Vector2f(800, 600);
- /**
+
+
+/*
+The starting position of the ball in the game
+*/
+const sf::Vector2f BALL_START_POS = sf::Vector2f(SCREEN_SIZE.x / 2, SCREEN_SIZE.y / 2);
+
+/**
 *	Controls the client interaction though the game 
 *	
 */
@@ -69,23 +83,29 @@ public:
 	void Disconect();
 
 	
+	/*
+	Set the window object controlling the sfml window
+	*/
 	void setWindow(sf::Window*);
 
-
+	/*
+	IP address this clinet can be found on
+	*/
 	static sf::IpAddress IpAdress;
 
 private: 
 	
-	sf::Window* window;
 
-	Menu* menu;
-
+	sf::Text currentLagText;
+	/*
+	Ball object
+	*/
 	Ball* ball;
 
 	/*
 	Updates ball from serverlocation
 	*/
-	void UpdateBall(ServerMessage::BallInformation ballInfo);
+	void UpdateBall(ServerMessage::BallInformation ballInfo, int messageNum);
 
 	/*
 		Will connect to game server and get data from it 
@@ -108,14 +128,25 @@ private:
 	Called to update game information from the server messages
 	*/
 	void UpdateGameFromServer();
- 
-
+  
 
 	/*
 	Update player location and data from the server
 	*/
 	void UpdatePlayers(ServerMessage::Playerinfromation players[NUM_PLAYERS]);
+	/*
+	sfml window
+	*/
+	sf::Window* window;
 
+	/*
+	Menu state used to dispaly menu
+	*/
+	Menu* menu;
+
+	/*
+	ball player hits
+	*/
 	/*
 	Controls network connections for game
 	*/
@@ -177,6 +208,9 @@ private:
 	*/
 	Paddle* paddle[NUM_PLAYERS];
 
+	/*
+	Clock used to check if client needs updated 
+	*/
 	sf::Clock networkUpdateTimer;
 
 

@@ -70,7 +70,7 @@ void NetworkManager::Init()
 void NetworkManager::Update()
 {
 	// Update game clock 
-	networkTimeLapse->Update();
+	networkTimeLapse->Update(clientsIPInfo);
 
 	// check for any new 
 	ReciveClientInfo();

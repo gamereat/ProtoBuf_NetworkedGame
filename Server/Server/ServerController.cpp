@@ -76,9 +76,11 @@ bool ServerController::Init()
 	players[1]->Init();
 
 	// load in ball
- 	ball = new Ball(sf::Vector2f(10, 0),  ballStartPos);
+ 	ball = new Ball(sf::Vector2f(0, 0),  ballStartPos);
 	ball->Init();
 	//aiPlayer->setBall(ball);
+
+	gameStarted = false;
 	return true;
 }
 void ServerController::Render(sf::RenderWindow* renderWindow)
@@ -128,6 +130,13 @@ bool ServerController::Update()
 	networkManger->Update();
 	
 	ball->Update(deltaTime);
+
+
+	if (playersInGame == 2 && !gameStarted)
+	{
+		ball->SetToStart();
+		gameStarted = true;
+	}
 
 	// get any collision with ball
 	switch (ball->CollisionDetection(players))

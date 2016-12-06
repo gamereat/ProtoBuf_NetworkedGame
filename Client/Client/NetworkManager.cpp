@@ -8,9 +8,10 @@ NetworkManager::NetworkManager()
 	// Varify protobuf settings
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-
-	serverPort = 7777;
-	serverAddress = "127.0.0.1";
+	// DEFAULT WHEN DOIN LOCAL HOSTS 
+	// CHANGE WHEN ON MULTI MACHINES
+	serverPort = SERVER_LOCAL_PORT;
+	serverAddress = SERVER_LOCAL_IP;
 	clientNumber = -1;
 }
 
@@ -22,15 +23,21 @@ NetworkManager::~NetworkManager()
 
 void NetworkManager::Init()
 {
+	networkTimeStart = new NetworkTimeStart();
+
 	numOfMessageSend = 0;
 	numOfMessageRecived = 0;
 
+	// bind server to the ip address gen by the client
 	if (updSocket.bind(sf::Socket::AnyPort, ClientController::IpAdress) != sf::Socket::Done)
 	{
 		// error...
+
+		GameLogging::LogError("UNABLE TO BIND UDP SOCKET");
 	}
 	else 
 	{
+		// set into non blocking mode
 		updSocket.setBlocking(false);
 		lastServerMessage = nullptr;
 
@@ -38,43 +45,29 @@ void NetworkManager::Init()
 		portNumber = updSocket.getLocalPort();
 
 	}
-	networkTimeStart.Init();
+	//init timeing netwokrer 
+	networkTimeStart->Init();
 }
-
-void NetworkManager::ConnectToServer()
-{
-}
-
-void NetworkManager::WorkOutSyncTiming()
-{
-	//Pesucode of planned syncing
-	// 1. Send time stamp to server
-	// 2. Get timestamp from server 
-
-
-
-}
-
+ 
 void NetworkManager::Update()
 {
-	networkTimeStart.Update();
+	networkTimeStart->Update();
 
 	ReciveMessageToServer();
 }
-
-void NetworkManager::GetPlayerTypeFromServer()
-{
-}
+ 
 
 void NetworkManager::ReciveMessageToServer()
 {
 	sf::IpAddress sender;;
 	std::size_t received = 0;
 	unsigned short port;
-	char buffer[1024];
-	updSocket.receive(buffer, 1024, received, sender, port);
 
+	//MAX PACKAGES COULD BE IS 256 SHOULD BE A CONSTANT 
+	char buffer[256];
+	updSocket.receive(buffer, 256, received, sender, port);
 
+	// if new message recived
 
 	if (received > 0)
 	{
@@ -83,19 +76,22 @@ void NetworkManager::ReciveMessageToServer()
 
 		newMessage->ParseFromArray(buffer, sizeof(buffer));
 
-		lastServerMessage = newMessage;
-
-		// if first message sent 
-		if (newMessage->serverinfo().messagenumber() == 0)
+		//check if valid message
+		if (newMessage->IsInitialized())
 		{
-			clientNumber = newMessage->playernumber();
+			lastServerMessage = newMessage;
+
+			// if first message sent 
+			if (newMessage->serverinfo().messagenumber() == 0)
+			{
+				clientNumber = newMessage->playernumber();
+			}
+
+			GameLogging::Log("Message Number" + std::to_string(newMessage->serverinfo().messagenumber()));
+			GameLogging::Log("Message Recived" + std::to_string(numOfMessageRecived));
+
+			numOfMessageRecived++;
 		}
-
-		GameLogging::Log("Message Number" +std::to_string( newMessage->serverinfo().messagenumber()));
-		GameLogging::Log("Message Recived" + std::to_string(numOfMessageRecived));
-
-		numOfMessageRecived++;
-
 		// Send a debug log of message to logging system when in debug mode 
 		//GameLogging::Log(newMessage->DebugString());
 	}
@@ -126,7 +122,7 @@ void NetworkManager::SentMessageToServer(int clientVersion, ClientMessage::Playe
 	ClientMessage::ClientInformation clientInfo;
 	clientInfo.set_clientversion(clientVersion);
 	clientInfo.set_messagenumber(numOfMessageSend);
-	clientInfo.set_timestamp(networkTimeStart.gameTime);
+	clientInfo.set_timestamp(networkTimeStart->gameTime);
 	newMessage->set_allocated_clientinfo(&clientInfo);
 
 	// Make sure message has got all valid feilds
@@ -175,7 +171,7 @@ void NetworkManager::SendDissconectMessage()
 	ClientMessage::ClientInformation clientInfo;
 	clientInfo.set_clientversion(-1);
 	clientInfo.set_messagenumber(numOfMessageSend);
-	clientInfo.set_timestamp(networkTimeStart.gameTime);
+	clientInfo.set_timestamp(networkTimeStart->gameTime);
 
 	newMessage->set_allocated_clientinfo(&clientInfo);
 
@@ -216,7 +212,7 @@ void NetworkManager::SentConnectionMessage(int clientVersion)
 	ClientMessage::ClientInformation clientInfo;
 	clientInfo.set_clientversion(clientVersion);
 	clientInfo.set_messagenumber(numOfMessageSend);
-	clientInfo.set_timestamp(networkTimeStart.gameTime);
+	clientInfo.set_timestamp(networkTimeStart->gameTime);
 
 	newMessage->set_clientnumber(clientNumber);
 	// increase the number of messaage sent
@@ -231,7 +227,7 @@ void NetworkManager::SentConnectionMessage(int clientVersion)
 
 	SendMessage(messageData);
 
-	networkTimeStart.setExpectingConfirmMessage();
+	networkTimeStart->setExpectingConfirmMessage();
 }
 
 ServerMessage::ServerMessage* NetworkManager::getLastServerMessage()
@@ -242,6 +238,11 @@ ServerMessage::ServerMessage* NetworkManager::getLastServerMessage()
 int NetworkManager::getNumberMessageRecived()
 {
 	return numOfMessageRecived;
+}
+
+NetworkTimeStart * NetworkManager::GetNetworkTimeManger()
+{
+	return networkTimeStart;
 }
 
 void NetworkManager::SendMessage(std::string data)
@@ -265,7 +266,8 @@ void NetworkManager::SendMessage(std::string data)
 	{
 		// error...
 	}
-	else {
+	else 
+	{
 		ClientMessage::ClientMessage* newMessages = new ClientMessage::ClientMessage();
 		newMessages->ParseFromArray(buffer, size);
 

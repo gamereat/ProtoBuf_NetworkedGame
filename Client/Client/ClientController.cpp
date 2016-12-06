@@ -59,12 +59,18 @@ bool ClientController::Init()
 	//HACK: CURRENT HARD CODED V NUMBER
 	clientVersionNumberText.setString("(0.0.1)");
 
-	clientVersionNumberText.setPosition(715,0);
+	clientVersionNumberText.setPosition(SCREEN_SIZE.x / 2,0);
 	clientVersionNumberText.setCharacterSize(24);
 
 	clientVersionNumberText.setFillColor(sf::Color::Red);
 	
+	currentLagText.setFont(standardFont);
 
+ 
+	currentLagText.setPosition(SCREEN_SIZE.x /2, SCREEN_SIZE.y - 50);
+	currentLagText.setCharacterSize(24);
+
+	currentLagText.setFillColor(sf::Color::Red);
 	// Init the players
 	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
@@ -95,7 +101,10 @@ bool ClientController::Update()
 {
 	deltaTime = deltaTimeClock.restart().asSeconds();
 	
-	
+				
+	networkManager.Update();
+
+	currentLagText.setString(std::to_string(networkManager.GetNetworkTimeManger()->getLagTime()) + "m/s");
 	
 	switch (currentClientGameState)
 	{
@@ -133,7 +142,6 @@ bool ClientController::Update()
 				UpdateGameToServer();
 			}
 
-			networkManager.Update();
 
 			// Init the players
 			for (int i = 0; i < NUM_PLAYERS; i++)
@@ -151,6 +159,8 @@ bool ClientController::Update()
 		{	break;
 		}
 	}
+
+
 
 
 	return true;
@@ -187,6 +197,8 @@ void ClientController::Render(sf::RenderWindow* renderWindow)
 			ball->Render(renderWindow);
 			renderWindow->draw(clientVersionNumberText);
 			renderWindow->draw(clientNumberText);
+			renderWindow->draw(currentLagText);
+
 
 			break;
 		}
@@ -231,7 +243,7 @@ void ClientController::connectToGameSever()
 	UpdatePlayers(updatePlayers);
 
 
-	UpdateBall(serverMessage.ballinformation());
+	UpdateBall(serverMessage.ballinformation(), serverMessage.serverinfo().messagenumber());
 
 	// get the player number
 	int playerNum = serverMessage.playernumber();
@@ -329,7 +341,7 @@ void ClientController::UpdateGameFromServer()
 			 clientNumberText.setString("Client Number " + std::to_string(playerNum + 1) + "/" + std::to_string(playerConncted));
 
 			 // Update ball location
-			 UpdateBall(newMessage->ballinformation());
+			 UpdateBall(newMessage->ballinformation(),serverInfo.messagenumber());
 	 }
 }
 
@@ -347,7 +359,7 @@ void ClientController::UpdatePlayers(ServerMessage::Playerinfromation players[NU
 
  }
 
-void ClientController::UpdateBall(ServerMessage::BallInformation ballInfo)
+void ClientController::UpdateBall(ServerMessage::BallInformation ballInfo, int messageNum)
 {
-	ball->UpdateBallInfo(ballInfo);
+	ball->UpdateBallInfo(ballInfo, messageNum);
 }
