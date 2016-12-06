@@ -11,6 +11,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		de-f|x64 = de-f|x64
+		de-f|x86 = de-f|x86
 		MinSizeRel|x64 = MinSizeRel|x64
 		MinSizeRel|x86 = MinSizeRel|x86
 		Release|x64 = Release|x64
@@ -23,6 +25,10 @@ Global
 		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.Debug|x64.Build.0 = Debug|x64
 		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.Debug|x86.ActiveCfg = Debug|Win32
 		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.Debug|x86.Build.0 = Debug|Win32
+		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.de-f|x64.ActiveCfg = de-f|x64
+		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.de-f|x64.Build.0 = de-f|x64
+		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.de-f|x86.ActiveCfg = de-f|Win32
+		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.de-f|x86.Build.0 = de-f|Win32
 		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.MinSizeRel|x64.ActiveCfg = Release|x64
 		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.MinSizeRel|x64.Build.0 = Release|x64
 		{C01335B5-2F9A-4AF9-94F7-FAF485666B23}.MinSizeRel|x86.ActiveCfg = Release|Win32

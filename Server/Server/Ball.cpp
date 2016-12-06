@@ -58,15 +58,7 @@ void Ball::Restart()
 
 }
 
-float Ball::getAngle()
-{
-	return angle;
-}
 
-void Ball::setAngle(float angle)
-{
-	this->angle = angle;
-}
 
 sf::Vector2f Ball::getVelocity()
 {
@@ -84,8 +76,8 @@ BallCollionResults Ball::CollisionDetection(Player* players[NUM_PLAYERS])
  	// check if ball is out bounds
 
 	//Check if hit the to bottom or top
-	if (sprite.getPosition().y + sprite.getTextureRect().height / 2 > SCREEN_HEIGHT ||
-		sprite.getPosition().y - sprite.getTextureRect().height / 2 < 0)
+	if (sprite.getPosition().y - sprite.getTextureRect().height / 2 > SCREEN_HEIGHT ||
+		sprite.getPosition().y + sprite.getTextureRect().height / 2 < 0)
 	{
 		velocity.y *= -1;
 

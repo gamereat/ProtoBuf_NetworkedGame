@@ -18,7 +18,7 @@ NetworkTimeLapse::NetworkTimeLapse()
 
 	playerReciveTimeStamps = std::vector<std::vector<int>>(2);
 
-	timeServerStarted = clock.getElapsedTime().asMilliseconds();
+
 
 
 }
@@ -46,7 +46,7 @@ void NetworkTimeLapse::Update()
 
 
 	// recaculate the game time
-	gameTime = (clock.getElapsedTime().asMilliseconds() - timeServerStarted);
+	gameTime = (clock.getElapsedTime().asMilliseconds());
 
 
 	std::cout << gameTime << std::endl;

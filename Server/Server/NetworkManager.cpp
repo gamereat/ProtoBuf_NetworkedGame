@@ -76,7 +76,7 @@ void NetworkManager::SendServerMessage(int serverVersionNum, Ball* ball,Player* 
 		ballVelocity->set_posx(ball->getVelocity().x);
 		ballVelocity->set_posy(ball->getVelocity().y);
 
-		ballInfo->set_angle(ball->getAngle());
+		ballInfo->set_angle(0);
 		ballInfo->set_allocated_possition(ballPos);
 		ballInfo->set_allocated_velocity(ballVelocity);
 
@@ -167,8 +167,8 @@ void NetworkManager::SendMessage(std::string data, clientUDPInfo clientUDPInfo)
 	ServerMessage::ServerMessage* newMessage = new ServerMessage::ServerMessage;
 	newMessage->ParseFromString(data);
 	// Send a debug log of message to logging system when in debug mode 
-	sf::IpAddress recipient = clientUDPInfo.ip;
-	unsigned short port = clientUDPInfo.port;
+	sf::IpAddress recipient = clientUDPInfo.getIP();
+	unsigned short port = clientUDPInfo.getPort();
 
 	int size = newMessage->ByteSize();
 	void *buffer = malloc(size);
@@ -201,11 +201,25 @@ int NetworkManager::getPlayersConnected()
 	return playerConnected;
 }
 
-void NetworkManager::SendInitConnectionInformation(clientUDPInfo newClient)
+bool NetworkManager::hasRecivedClientInfo(int clientNumber)
 {
 
-
+	if (clientNumber >= 0 && clientNumber < recivedClientInfo.size())
+	{
+		return recivedClientInfo[clientNumber];
+	}
+	return false;
 }
+
+void NetworkManager::setHasRecivedClientInfo(int clientNumber, bool value)
+{
+	if (clientNumber > 0 && clientNumber < recivedClientInfo.size())
+	{
+		 recivedClientInfo[clientNumber] = value;
+	}
+}
+
+ 
 
 void NetworkManager::ReciveClientInfo()
 {
@@ -235,7 +249,7 @@ void NetworkManager::ReciveClientInfo()
 		bool clientAlreadyFounds = false;
 		for each (auto client in clientsIPInfo)
 		{
-			if (client.port == clientRecived.port && client.ip == clientRecived.ip)
+			if (client.getPort() == clientRecived.getPort() && client.getIP() == clientRecived.getIP())
 			{
 				clientAlreadyFounds = true;
 			}
@@ -255,11 +269,10 @@ void NetworkManager::ReciveClientInfo()
 					// add the client to list of clients sending data to 
 					clientsIPInfo.push_back(clientRecived);
 
-					// sends data to a client so they know what player tehy will be 
-					SendInitConnectionInformation(clientRecived);
+
 					playerConnected++;		
 					
-					networkTimeLapse->SendServerConfirmMessage(newMessage->clientinfo().timestamp(),playerConnected - 1, playerConnected, clientRecived.ip);
+					networkTimeLapse->SendServerConfirmMessage(newMessage->clientinfo().timestamp(),playerConnected - 1, playerConnected, clientRecived.getIP());
 
 				}
 			}
@@ -273,7 +286,7 @@ void NetworkManager::ReciveClientInfo()
 				int clientIndex = 0;
 				for (; clientIndex < clientsIPInfo.size(); clientIndex++)
 				{
-					if (clientsIPInfo[clientIndex].port == clientRecived.port && clientsIPInfo[clientIndex].ip == clientRecived.ip)
+					if (clientsIPInfo[clientIndex].getPort() == clientRecived.getPort() && clientsIPInfo[clientIndex].getIP() == clientRecived.getIP())
 					{
 						clientsIPInfo.erase(clientsIPInfo.begin() + clientIndex);
 						numOfMessageSend[clientIndex] = 0;

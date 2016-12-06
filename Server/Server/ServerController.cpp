@@ -48,12 +48,15 @@ bool ServerController::Init()
 	players[0] =  new Player(0,  sf::Vector2f(0, 10));
 	players[0]->Init(); 
 	players[0]->setPosition(playerOneStartingLocation);
-	
+	players[0]->Init();
+
 	// Create AI player
 	players[1] = new Player(0, sf::Vector2f(0, 10));
 //	players[1] = aiPlayer;
 	players[1]->Init();
 	players[1]->setPosition(playerTwoStartingLocation);
+	players[1]->Init();
+
  	ball = new Ball(sf::Vector2f(10, 0), 90, ballStartPos);
 	ball->Init();
 	//aiPlayer->setBall(ball);
@@ -138,10 +141,10 @@ bool ServerController::Update()
 	{
 		players[i]->Update(deltaTime);
 		
-		if (networkManger->recivedClientInfo[i] == true)
+		if (networkManger->hasRecivedClientInfo(i) == true)
 		{
 			createClientMessage();
-			networkManger->recivedClientInfo[i] = false;
+			networkManger->setHasRecivedClientInfo(i, false);
 		}
 	}
 	return true;

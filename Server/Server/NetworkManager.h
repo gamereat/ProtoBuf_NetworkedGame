@@ -5,19 +5,31 @@
 #include <vector>
 #include "ServerController.h"
 #include "NetworkTimeLapse.h"
+
+
 /*
-Number of players within a game
+The starting position of the player one in the game
 */
 const sf::Vector2f playerOneStartingLocation = sf::Vector2f(50, SCREEN_HEIGHT / 2);
+
+
+/*
+The starting position of the player two in the game
+*/
 const sf::Vector2f playerTwoStartingLocation = sf::Vector2f(SCREEN_WIDTH -50, SCREEN_HEIGHT / 2 );
+
+/*
+The starting position of the ball in the game
+*/
 const sf::Vector2f ballStartPos = sf::Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
+/*
+Client ip information used to send messsage for
+*/
 struct clientUDPInfo
 {
 public:
-	sf::IpAddress ip;
-	unsigned short port;
-	int playerNum;
+
 	clientUDPInfo(sf::IpAddress ip, short port,int playerNum)
 	{
 		this->playerNum = playerNum;
@@ -33,7 +45,35 @@ public:
 		}
 		return false;
 	}
+
+	inline void setIp(sf::IpAddress ip) { this->ip = ip; }
+	inline void setPort(unsigned short port) { this->port = port; }
+	inline void setPlayerNum(int playerNum) { this->playerNum = playerNum; }
+
+
+	inline sf::IpAddress getIP() { return this->ip; }
+	inline unsigned short getPort(){ return port; }
+	inline  int getPlayerNum(){ return playerNum; }
+private:
+	/*
+	ip address for client
+	*/
+	sf::IpAddress ip;
+
+	/*
+	Port number for the player
+	*/
+	unsigned short port;
+
+	/*
+	player number of the client
+	*/
+	int playerNum;
 };
+
+/*
+Network manager control all network controlling within the game
+*/
 class NetworkManager
 {
 
@@ -49,20 +89,61 @@ public:
 	void Init();
 
 
+	/*
+	Update network events
+	Looks for new packages coming in 
+	*/
 	void Update();
+	/*
+	Send a server message
+
+	@param serverVersionNum			version number server is running 
+	@param ball						the ball object that is flying around world
+	@param playerData[NUM_PLAYERS]	information from all the players within the game
+	@param numConnectedPlayers		The number of connected players in the game 
+	*/
 	void  SendServerMessage(int serverVersionNum, class Ball* ball, Player* playerData[NUM_PLAYERS], int numConnectedPlayers);
 
+	/*
+	Sends a message to a given client 
 
+	@parma data			data that will be sent to the client
+	@param clientIp		the client information that the message should be sent to
+	*/
 	void SendMessage(std::string data, clientUDPInfo clientIp);
 
+
+	/*
+	Gets the last message recived from a given from clients
+
+	@return vector of messages from each client 
+	*/
 	std::vector<ClientMessage::ClientMessage*> lastMessageRecivedClients();
+
+	/*
+	Gets the number of players connected 
+
+	@return number of players
+	*/
 	int getPlayersConnected();
 
-	std::vector<bool> recivedClientInfo;
+	/*
+	Has a client connection infomration
+	*/
+	bool hasRecivedClientInfo(int clientNumber);
 
+
+	/*
+	Has a client connection infomration
+	*/
+	void setHasRecivedClientInfo(int clientNumber, bool value);
 private:
 
 
+	/*
+	has recived infomation about clients
+	*/
+	std::vector<bool> recivedClientInfo;
 
 	/*
 	Sends time syncing message
@@ -72,12 +153,7 @@ private:
 	/*
 	Number of player's current connect to game server
 	*/
-	int playerConnected;
-
-	/*
-	Sends a message with extra data to the client trying to connect with which player it will be and such 
-	*/
-	void SendInitConnectionInformation(clientUDPInfo newClient);
+	int playerConnected; 
 
 	/*
 	Holds the last server message recived from the server

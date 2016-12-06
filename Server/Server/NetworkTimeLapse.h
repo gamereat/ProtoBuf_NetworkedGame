@@ -6,16 +6,34 @@
 port number clients will listen for time sync messages on
 */
 const int TIME_SYNC_PORT_CLIENT = 7779;
+
+/*
+Default time before time out a being test
+*/
 const int DEFAULT_PING_TIMEOUT = 1000;
+
+/*
+How log in game time between request a new ping test to rework out lag for game
+*/
+const int TIME_BETWEEN_PING_TESTS = 5000;
+
+/*
+Manges time across game times 
+*/
 class NetworkTimeLapse
 {
 public:
 	NetworkTimeLapse();
 	~NetworkTimeLapse();
 	
-
+	/*
+	Init the network time manged
+	*/
 	void Init();
 
+	/*
+	Updates network time 
+	*/
 	void Update();
 
 	/*
@@ -27,7 +45,9 @@ public:
 	void SendServerConfirmMessage(int timestamp,int clientNumber,int playersConnected, sf::IpAddress clientIp);
 
 
-
+	/*
+	Gets
+	*/
 	float getTimeSinceLastMessage(int lastMessageTime, int currentTime);
 
 
@@ -51,32 +71,47 @@ private:
 	static std::vector<int> clientLastPingResult;
 
 	/*
+	Runs a ping test to a given ip adress to work out lag
+
 	@Returns	Advarge time in ms to ping ip
 	*/
 	int RunPingTest(sf::IpAddress ipToPing, int timeOut);
 
-	void SentServerTimeSyncMessage(SyncTimeMessage::ClientConfirmConnect* ,sf::IpAddress clientIp);
 
+	/*
+	Send A server time sync message to a client
+
+	@param clientConnectionMessage the message received from client stating it wants to connect
+
+	@pram clientIp ip address of client connecting
+	*/
+	void SentServerTimeSyncMessage(SyncTimeMessage::ClientConfirmConnect* clientConnectionMessage ,sf::IpAddress clientIp);
+
+	/*
+	UDP socket used to sync time up with client
+	*/
 	sf::UdpSocket timeSyncSocket;
 
+	/*
+	Port number time socket is bound to
+	*/
 	float portNumber;
+
+
 	/*
 	Gets the time since the server started 
 	*/
 	float getTimeSinceServerStarted();
 
-
 	/*
 	Record of time send points for each client 
 	*/
 	std::vector<std::vector<int>> playerReciveTimeStamps;
+ 
 
 	/*
-	the time staamp the server starated at
+	Clock used to work out gametime
 	*/
-	clock_t timeServerStarted;
-
-
 	sf::Clock clock;
 
 

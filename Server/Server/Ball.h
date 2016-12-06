@@ -2,8 +2,19 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "ServerController.h"
+
+/*
+Maxium valocity Ball can get 
+*/
 const float MAX_STARTING_VELOCITY = 250;
+/*
+Minimum ball speed 
+*/
 const float MIN_STARTING_VELOCITY = 75;
+
+/*
+Results of a ball collision detection
+*/
 enum BallCollionResults
 {
 	None,
@@ -23,22 +34,55 @@ public:
 	Ball(sf::Vector2f velocity, float angle, sf::Vector2f startPos);
 	~Ball();
 
+	/*
+	Init ball settings
+	*/
 	void Init();
+
+	/*
+	Update Ball state 
+
+	@param deltaTime	delta from from update
+	*/
 	void Update(float deltaTime);
 
+
+	/*
+	Restarts ball and starts at new velocity
+	*/
 	void Restart();
-	float getAngle();
-	void setAngle(float angle);
-
-
+	
+	/*
+	Get the velocity of the ball
+	@return		Current velocity of ball
+	*/
 	sf::Vector2f getVelocity();
+
+	/*
+	Sets a new velocity for the ball
+
+	@param velocity		New velocity for ball
+	*/
 	void setVelocity(sf::Vector2f velocity);
 
+
+	/*
+		Test collisions for the state
+
+		@param players[NUM_PLAYERS]		An array with all the playesr within the game
+	*/
 	BallCollionResults CollisionDetection(Player* players[NUM_PLAYERS] );
+
+
 private:
 
+	/*
+	Caculate a random velocity for the ball to start going at 
 
+	@returns	vector contraining velocity in x and y direction for ball to travel in
+	*/
 	sf::Vector2f ChoiceRandomStartingVelocity();
+	
 	/*
 	Velocity the ball is current firing at 
 	*/
